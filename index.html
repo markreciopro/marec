@@ -1,197 +1,222 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HR360Analytics | Precision in HR Data</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
-  <link rel="icon" href="https://i.ibb.co/ZpVpLd9x/copilot-image-1759695066071.png" type="image/png">
-  <style>
+<style>
     :root {
-      --primary: #003f5c;
-      --accent: #00b4d8;
-      --background: #f1f5f9;
-      --text: #1e293b;
-      --white: #ffffff;
+        --bg-black: #050505;
+        --card-bg: rgba(15, 5, 5, 0.95);
+        --border-color: #4d0000;
+        --terminal-red: #ff3131; 
+        --terminal-green: #4af626;
+        --terminal-blue: #58a6ff;
+        --terminal-purple: #bc8cff;
+        --terminal-gray: #7a7a7a;
+        --text-white: #f0f0f0;
+        --red-glow: 0 0 15px rgba(255, 49, 49, 0.6);
     }
 
-    body {
-      margin: 0;
-      font-family: 'Montserrat', sans-serif;
-      color: var(--text);
-      background: linear-gradient(-45deg, #00b4d8, #0077b6, #90e0ef, #caf0f8);
-      background-size: 400% 400%;
-      animation: gradientShift 15s ease infinite;
+    body { 
+        background-color: var(--bg-black); 
+        margin: 0; 
+        font-family: 'Consolas', 'Monaco', 'Courier New', monospace; 
+        color: var(--text-white);
+        scroll-behavior: smooth;
+        overflow-x: hidden;
     }
 
-    @keyframes gradientShift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    /* --- SCANLINE EFFECT --- */
+    body::before {
+        content: " ";
+        display: block;
+        position: fixed;
+        top: 0; left: 0; bottom: 0; right: 0;
+        background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                    linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+        z-index: 10;
+        background-size: 100% 2px, 3px 100%;
+        pointer-events: none;
     }
 
-    header {
-      background-color: var(--white);
-      padding: 2rem;
-      text-align: center;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    /* --- HERO SECTION --- */
+    .hero-container {
+        position: relative;
+        width: 100%;
+        height: 90vh; /* Increased to show more animation */
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
     }
 
-    .logo {
-      max-width: 300px;
-      height: auto;
-      animation: fadeZoom 1.2s ease-out;
-      transition: transform 0.3s ease, filter 0.3s ease;
+    .video-bg {
+        position: absolute;
+        top: 50%; left: 50%;
+        width: 100%; height: 100%;
+        object-fit: cover; /* Ensures the whole frame is filled */
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        z-index: -1;
+        filter: brightness(0.6) contrast(1.2);
     }
 
-    .logo:hover {
-      transform: scale(1.05);
-      filter: drop-shadow(0 0 6px var(--accent));
+    .hero-overlay {
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background: linear-gradient(to bottom, transparent 20%, var(--bg-black) 95%);
+        z-index: 1;
     }
 
-    @keyframes fadeZoom {
-      from {
-        opacity: 0;
-        transform: scale(0.8);
-      }
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
+    /* --- DOCKED LABEL & PORTFOLIO TAB --- */
+    .docked-status-bar {
+        position: relative;
+        z-index: 2;
+        background: rgba(5, 5, 5, 0.85);
+        padding: 40px 0;
+        border-top: 1px solid var(--terminal-red);
+        text-align: center;
+        backdrop-filter: blur(10px);
     }
 
-    .tagline {
-      font-size: 1.3rem;
-      color: var(--primary);
-      margin-top: 1rem;
-      height: 1.5rem;
-      white-space: nowrap;
-      overflow: hidden;
-      border-right: 2px solid var(--accent);
-      animation: typing 3s steps(30, end), blink 0.7s step-end infinite;
-      display: inline-block;
+    .portfolio-tab {
+        display: inline-block;
+        margin-bottom: 25px;
+        padding: 14px 35px;
+        border: 2px solid var(--terminal-red);
+        color: var(--terminal-red);
+        text-decoration: none;
+        text-transform: uppercase;
+        font-weight: bold;
+        letter-spacing: 3px;
+        border-radius: 4px;
+        transition: 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+        box-shadow: var(--red-glow);
+        background: rgba(255, 49, 49, 0.05);
     }
 
-    @keyframes typing {
-      from { width: 0 }
-      to { width: 100% }
+    .portfolio-tab:hover {
+        background: var(--terminal-red);
+        color: #000;
+        box-shadow: 0 0 30px var(--terminal-red);
+        transform: translateY(-5px) scale(1.05);
     }
 
-    @keyframes blink {
-      50% { border-color: transparent }
+    .status-text {
+        font-size: 2.5rem;
+        color: var(--terminal-red); 
+        margin: 0;
+        letter-spacing: 7px;
+        text-shadow: var(--red-glow);
     }
 
-    main {
-      padding: 2rem;
-      text-align: center;
+    /* --- MAREC FRAMEWORK CARDS --- */
+    .framework-section { padding: 80px 20px; max-width: 1300px; margin: auto; position: relative; z-index: 2;}
+    
+    .marec-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 30px;
     }
 
-    h1 {
-      font-size: 2rem;
-      color: var(--primary);
-      margin-bottom: 0.5rem;
+    .code-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 30px;
+        transition: 0.4s ease;
     }
 
-    h2 {
-      font-size: 1.5rem;
-      color: var(--accent);
-      margin-top: 2rem;
+    .code-card:hover {
+        border-color: var(--terminal-red);
+        box-shadow: 0 0 20px rgba(255, 49, 49, 0.15);
+        transform: translateY(-10px);
     }
 
-    p {
-      font-size: 1.1rem;
-      max-width: 800px;
-      margin: 0 auto 1.5rem;
-      line-height: 1.6;
+    .card-nav { display: flex; gap: 8px; margin-bottom: 20px; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .r { background: var(--terminal-red); } .y { background: #ffbd2e; } .g { background: #333; }
+
+    .comment { color: var(--terminal-gray); font-style: italic; }
+    .keyword { color: var(--terminal-purple); }
+    .function { color: var(--terminal-blue); }
+    .string { color: #d7da90; }
+
+    /* --- CONTACT SECTION --- */
+    .contact-section {
+        max-width: 900px;
+        margin: 100px auto;
+        padding: 50px;
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        text-align: center;
     }
 
-    .tech-section, .timeline-section, .why-section, .contact-section {
-      background-color: var(--white);
-      padding: 2rem;
-      margin: 2rem auto;
-      max-width: 900px;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-      text-align: left;
+    .cursor {
+        display: inline-block;
+        width: 12px; height: 26px;
+        background: var(--terminal-red);
+        animation: blink 1s infinite;
+        vertical-align: middle;
+        box-shadow: var(--red-glow);
     }
+    @keyframes blink { 0%, 100% { opacity: 0; } 50% { opacity: 1; } }
+</style>
 
-    .timeline-step {
-      margin-bottom: 1.5rem;
-    }
-
-    .timeline-step h3 {
-      margin-bottom: 0.3rem;
-      color: var(--primary);
-    }
-
-    .contact-info {
-      font-size: 1.1rem;
-      margin-top: 1rem;
-      line-height: 1.8;
-    }
-
-    footer {
-      background-color: var(--primary);
-      color: var(--white);
-      text-align: center;
-      padding: 1rem;
-      margin-top: 2rem;
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <img src="https://i.ibb.co/ZpVpLd9x/copilot-image-1759695066071.png" alt="HR360Analytics Logo" class="logo" />
-    <div class="tagline">Precision in HR Data</div>
-  </header>
-
-  <main>
-    <h1>Precision in HR Data</h1>
-    <p>Welcome to HR360Analytics—where human resources meets data-driven clarity. We specialize in compliance, workforce insights, and reproducible analytics workflows tailored for modern HR teams.</p>
-
-    <div class="tech-section">
-      <h2>Our Niche Expertise</h2>
-      <p><strong>Python for HR Automation:</strong> Scalable scripts for data cleaning, compliance checks, and predictive modeling.</p>
-      <p><strong>R Programming for Workforce Insights:</strong> Reproducible workflows for attrition modeling and equity audits.</p>
-      <p><strong>Power BI for Executive Dashboards:</strong> Interactive reports for headcount, diversity, and compliance KPIs.</p>
-      <p><strong>Tableau for Visual Storytelling:</strong> Dynamic visuals that reveal hiring, retention, and performance trends.</p>
+<div class="hero-container">
+    <div class="hero-overlay"></div>
+    <iframe class="video-bg" 
+        src="https://www.youtube.com/embed/osrFEJkhISo?autoplay=1&mute=1&loop=1&playlist=osrFEJkhISo&controls=0&modestbranding=1&rel=0&playsinline=1&showinfo=0" 
+        frameborder="0" allow="autoplay; encrypted-media">
+    </iframe>
+    
+    <div class="docked-status-bar">
+        <a href="https://markreciopro.github.io/Portfolio/" target="_blank" class="portfolio-tab">
+            [ EXECUTE_PORTFOLIO_VIEW.sh ]
+        </a>
+        
+        <h1 class="status-text">C:\> MAREC_INSIGHTS.exe<span class="cursor"></span></h1>
+        <p style="color: var(--terminal-blue); margin-top: 15px; letter-spacing: 3px; font-weight: bold;">DATA ANALYST // BUSINESS STRATEGIST</p>
     </div>
+</div>
 
-    <div class="timeline-section">
-      <h2>HR Analytics Service Steps</h2>
-      <div class="timeline-step"><h3>1. Data Audit & Validation</h3><p>Assess data quality, structure, and completeness across HRIS, ATS, and payroll systems.</p></div>
-      <div class="timeline-step"><h3>2. Compliance Mapping</h3><p>Align datasets with EEOC, OFCCP, GDPR, and internal audit requirements.</p></div>
-      <div class="timeline-step"><h3>3. Workforce Segmentation</h3><p>Break down headcount by department, tenure, diversity, and performance tiers.</p></div>
-      <div class="timeline-step"><h3>4. Attrition & Retention Modeling</h3><p>Use R and Python to forecast turnover risk and identify retention drivers.</p></div>
-      <div class="timeline-step"><h3>5. Equity & Pay Gap Analysis</h3><p>Audit compensation fairness across gender, ethnicity, and role levels.</p></div>
-      <div class="timeline-step"><h3>6. Predictive HR Metrics</h3><p>Model future hiring needs, promotion paths, and compliance risk zones.</p></div>
-      <div class="timeline-step"><h3>7. Dashboard & Report Creation</h3><p>Design Power BI and Tableau dashboards tailored for HR, leadership, and compliance teams.</p></div>
-      <div class="timeline-step"><h3>8. Stakeholder Alignment</h3><p>Translate analytics into executive summaries and action plans for HR strategy.</p></div>
+<section class="framework-section">
+    <div class="marec-grid">
+        <div class="code-card">
+            <div class="card-nav"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div></div>
+            <p class="comment"># Modeling</p>
+            <code>
+                <span class="keyword">def</span> <span class="function">architect_data</span>():<br>
+                &nbsp;&nbsp;models = [<span class="string">"Python"</span>, <span class="string">"R"</span>]<br>
+                &nbsp;&nbsp;<span class="keyword">return</span> <span class="function">predictive_staffing</span>()<br>
+            </code>
+        </div>
+
+        <div class="code-card" style="border-color: var(--terminal-red);">
+            <div class="card-nav"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div></div>
+            <p class="comment"># Efficiency & Business Analysis</p>
+            <code>
+                <span class="keyword">def</span> <span class="function">optimize_bottom_line</span>():<br>
+                &nbsp;&nbsp;opex = data.<span class="function">analyze_cost_centers</span>()<br>
+                &nbsp;&nbsp;<span class="keyword">return</span> <span class="string">"15%_Exp_Reduction"</span><br>
+                &nbsp;&nbsp;<span class="comment">// Result: Strategic Bottom-Line Growth</span>
+            </code>
+        </div>
+
+        <div class="code-card">
+            <div class="card-nav"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div></div>
+            <p class="comment"># Reporting</p>
+            <code>
+                <span class="keyword">deploy</span>(PowerBI, Tableau)<br>
+                <span class="function">visualize</span>(Executive_KPIs)<br>
+            </code>
+        </div>
     </div>
+</section>
 
-    <div class="why-section">
-      <h2>Why HR360Analytics?</h2>
-      <p><strong>Strategic Alignment:</strong> We bridge HR and business goals with data that drives decisions.</p>
-      <p><strong>Compliance Confidence:</strong> Our workflows ensure audit-readiness and regulatory clarity.</p>
-      <p><strong>Scalable Solutions:</strong> From startups to enterprise, our tools grow with your team.</p>
-      <p><strong>Visual Impact:</strong> We turn raw data into compelling stories that inspire action.</p>
-    </div>
+<section class="contact-section">
+    <h2 style="color: var(--terminal-blue); letter-spacing: 2px;">&gt; ESTABLISH_CONNECTION</h2>
+    <p style="margin-top: 20px;">Email: <a href="mailto:mark.recio.pro@gmail.com" style="color:var(--terminal-green)">mark.recio.pro@gmail.com</a></p>
+    <p>Phone: <span style="color:var(--terminal-green)">(702) 501-9385</span></p>
+    <p style="color: var(--terminal-gray); font-size: 0.8rem; margin-top: 20px;">LAS VEGAS, NV // REMOTE_READY: TRUE</p>
+</section>
 
-    <div class="contact-section">
-      <h2>Contact Us</h2>
-      <div class="contact-info">
-        <p><strong>Phone:</strong> (702) 714-7389</p>
-        <p><strong>Email:</strong> <a href="mailto:hr360analytics@protonmail.com">hr360analytics@protonmail.com</a></p>
-      </div>
-    </div>
-
-    <div class="cta">
-      Ready to transform your HR data into strategic insight? Let’s build your analytics story.
-    </div>
-  </main>
-
-  <footer>
-    &copy; 2025 HR360Analytics. All rights reserved.
-  </footer>
-</body>
-</html>
+<footer style="text-align: center; padding: 60px; color: var(--terminal-gray); font-size: 0.8rem; border-top: 1px solid #1a0000;">
+    &copy; 2026 MAREC Insights // Mark Anthony Recio // Developed for Strategic Innovation
+</footer>
