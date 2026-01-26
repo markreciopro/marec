@@ -1,223 +1,242 @@
-<style>
-    :root {
-        --bg-black: #050505;
-        --card-bg: rgba(15, 5, 5, 0.95);
-        --border-color: #4d0000;
-        --terminal-red: #ff3131; 
-        --terminal-green: #4af626;
-        --terminal-blue: #58a6ff;
-        --terminal-purple: #bc8cff;
-        --terminal-gray: #7a7a7a;
-        --text-white: #f0f0f0;
-        --red-glow: 0 0 15px rgba(255, 49, 49, 0.6);
-    }
-
-    body { 
-        background-color: var(--bg-black); 
-        margin: 0; 
-        font-family: 'Consolas', 'Monaco', 'Courier New', monospace; 
-        color: var(--text-white);
-        scroll-behavior: smooth;
-        overflow-x: hidden;
-    }
-
-    /* --- SCANLINE EFFECT --- */
-    body::before {
-        content: " ";
-        display: block;
-        position: fixed;
-        top: 0; left: 0; bottom: 0; right: 0;
-        background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
-                    linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
-        z-index: 10;
-        background-size: 100% 2px, 3px 100%;
-        pointer-events: none;
-    }
-
-    /* --- FULL VIDEO SHOWCASE (Unobstructed) --- */
-    .video-showcase {
-        width: 100%;
-        background: #000;
-        line-height: 0;
-    }
-
-    .video-frame {
-        width: 100%;
-        aspect-ratio: 16 / 9;
-        border-bottom: 2px solid var(--terminal-red);
-    }
-
-    /* --- DOCKED STATUS BAR --- */
-    .docked-status-bar {
-        position: relative;
-        z-index: 2;
-        background: rgba(10, 0, 0, 0.95);
-        padding: 50px 0;
-        text-align: center;
-        border-bottom: 1px solid var(--border-color);
-    }
-
-    .portfolio-tab {
-        display: inline-block;
-        margin-bottom: 25px;
-        padding: 14px 35px;
-        border: 2px solid var(--terminal-red);
-        color: var(--terminal-red);
-        text-decoration: none;
-        text-transform: uppercase;
-        font-weight: bold;
-        letter-spacing: 3px;
-        border-radius: 4px;
-        transition: 0.3s ease;
-        box-shadow: var(--red-glow);
-        background: rgba(255, 49, 49, 0.05);
-    }
-
-    .portfolio-tab:hover {
-        background: var(--terminal-red);
-        color: #000;
-        box-shadow: 0 0 40px var(--terminal-red);
-        transform: translateY(-3px);
-    }
-
-    .status-text {
-        font-size: 2.8rem;
-        color: var(--terminal-red); 
-        margin: 0;
-        letter-spacing: 8px;
-        text-shadow: var(--red-glow);
-    }
-
-    /* --- FRAMEWORK SECTION --- */
-    .framework-section { padding: 80px 20px; max-width: 1300px; margin: auto; }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    .marec-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-        gap: 30px;
-        margin-top: 40px;
-    }
+    <title>MAREC Insights | Mark Anthony Recio | Data & Strategy</title>
+    <meta name="description" content="MAREC Insights: Data Analyst & Business Strategist. Specializing in OPEX reduction and Predictive Modeling.">
+    
+    <style>
+        :root {
+            --bg-black: #050505;
+            --card-bg: rgba(15, 5, 5, 0.95);
+            --border-color: #4d0000;
+            --terminal-red: #ff3131; 
+            --terminal-green: #4af626;
+            --terminal-blue: #58a6ff;
+            --terminal-gray: #7a7a7a;
+            --text-white: #f0f0f0;
+            --red-glow: 0 0 15px rgba(255, 49, 49, 0.6);
+            --green-glow: 0 0 15px rgba(74, 246, 38, 0.4);
+            --blue-glow: 0 0 15px rgba(88, 166, 255, 0.3);
+        }
 
-    .code-card {
-        background: var(--card-bg);
-        border: 1px solid var(--border-color);
-        border-radius: 8px;
-        padding: 30px;
-        transition: 0.4s ease;
-    }
+        body { 
+            background-color: var(--bg-black); 
+            margin: 0; 
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace; 
+            color: var(--text-white);
+            scroll-behavior: smooth;
+            line-height: 1.6;
+        }
 
-    .code-card:hover {
-        border-color: var(--terminal-red);
-        transform: translateY(-10px);
-        box-shadow: 0 10px 20px rgba(255, 49, 49, 0.1);
-    }
+        /* --- HEADER VIDEO --- */
+        .header-showcase { width: 100%; background: #000; line-height: 0; }
+        .header-frame { width: 100%; aspect-ratio: 16 / 9; border-bottom: 2px solid var(--terminal-red); }
 
-    .card-title { color: var(--terminal-red); font-weight: bold; font-size: 1.2rem; margin-bottom: 15px; display: block; }
-    .comment { color: var(--terminal-gray); font-style: italic; display: block; margin-bottom: 10px; }
-    .keyword { color: var(--terminal-purple); }
-    .function { color: var(--terminal-blue); }
-    .string { color: #d7da90; }
+        /* --- STICKY STATUS BAR --- */
+        .status-bar {
+            background: rgba(10, 0, 0, 0.98);
+            padding: 50px 0;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .status-text { font-size: 2.8rem; color: var(--terminal-red); letter-spacing: 8px; text-shadow: var(--red-glow); margin: 0; }
+        
+        .btn-container { display: flex; justify-content: center; gap: 20px; margin-top: 30px; flex-wrap: wrap; }
+        .btn-main { padding: 12px 25px; border: 1px solid var(--terminal-blue); color: var(--terminal-blue); text-decoration: none; text-transform: uppercase; font-size: 0.8rem; transition: 0.3s; background: rgba(88, 166, 255, 0.05); }
+        .btn-main:hover { background: var(--terminal-blue); color: #000; box-shadow: var(--blue-glow); }
+        
+        .audio-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: transparent;
+            border: 1px solid var(--terminal-red);
+            color: var(--terminal-red);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: 0.4s;
+        }
+        .audio-active { border-color: var(--terminal-green); color: var(--terminal-green); box-shadow: var(--green-glow); }
 
-    /* --- CONTACT SECTION --- */
-    .contact-section {
-        max-width: 900px;
-        margin: 100px auto;
-        padding: 60px;
-        background: var(--card-bg);
-        border: 1px solid var(--border-color);
-        text-align: center;
-    }
+        /* --- MAREC FRAMEWORK GRID --- */
+        .framework-container { max-width: 1200px; margin: 80px auto; padding: 0 20px; }
+        .marec-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
+            gap: 25px; 
+            margin-top: 40px;
+        }
+        .marec-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: 0.4s ease;
+        }
+        .marec-card:hover {
+            border-color: var(--terminal-red);
+            box-shadow: var(--red-glow);
+            transform: translateY(-8px);
+        }
+        .card-letter { font-size: 2.5rem; color: var(--terminal-red); font-weight: bold; text-shadow: var(--red-glow); }
+        .card-title { color: var(--terminal-blue); font-weight: bold; text-transform: uppercase; margin: 15px 0; font-size: 1.1rem; }
+        .card-text { font-size: 0.9rem; color: #ccc; margin-bottom: 25px; }
 
-    .cursor {
-        display: inline-block;
-        width: 12px; height: 30px;
-        background: var(--terminal-red);
-        animation: blink 1s infinite;
-        vertical-align: middle;
-        box-shadow: var(--red-glow);
-    }
-    @keyframes blink { 0%, 100% { opacity: 0; } 50% { opacity: 1; } }
-</style>
+        .btn-inquire {
+            text-align: center;
+            padding: 10px;
+            border: 1px solid var(--terminal-gray);
+            color: var(--terminal-gray);
+            text-decoration: none;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+        .marec-card:hover .btn-inquire { border-color: var(--terminal-green); color: var(--terminal-green); }
+        .btn-inquire:hover { background: var(--terminal-green); color: #000 !important; }
 
-<div class="video-showcase">
-    <iframe class="video-frame" 
-        src="https://www.youtube.com/embed/osrFEJkhISo?autoplay=1&mute=1&loop=1&playlist=osrFEJkhISo&controls=0&modestbranding=1&rel=0&playsinline=1" 
+        /* --- HYPERFOCUS MODULE --- */
+        .ambience-box { max-width: 750px; margin: 60px auto; padding: 20px; border: 1px solid var(--border-color); background: #080808; position: relative; }
+        .label-text { font-size: 0.65rem; color: var(--terminal-gray); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+        .gamma-status { float: right; color: var(--terminal-green); font-size: 0.65rem; letter-spacing: 1px; }
+
+        /* --- SYSTEM LOG FEED --- */
+        .log-container {
+            max-width: 750px;
+            margin: 20px auto;
+            background: rgba(0,0,0,0.8);
+            border-left: 3px solid var(--terminal-green);
+            padding: 15px;
+            font-size: 0.8rem;
+            color: var(--terminal-green);
+            min-height: 25px;
+        }
+
+        /* --- CONTACT & FOOTER --- */
+        .contact-wrap { text-align: center; padding: 100px 20px; border-top: 1px solid var(--border-color); background: linear-gradient(to bottom, #050505, #100000); }
+        .cursor { display: inline-block; width: 10px; height: 25px; background: var(--terminal-red); animation: blink 1s infinite; vertical-align: middle; }
+        @keyframes blink { 0%, 100% { opacity: 0; } 50% { opacity: 1; } }
+        
+        a.email-link { color: var(--terminal-green); text-decoration: none; border-bottom: 1px dashed var(--terminal-green); }
+    </style>
+</head>
+<body>
+
+<audio id="bg-audio" loop>
+    <source src="https://cdn.pixabay.com/audio/2022/03/24/audio_32e3a1599f.mp3" type="audio/mpeg">
+</audio>
+
+<div class="header-showcase">
+    <iframe class="header-frame" 
+        src="https://www.youtube.com/embed/osrFEJkhISo?autoplay=1&mute=1&loop=1&playlist=osrFEJkhISo&controls=0&modestbranding=1&rel=0" 
         frameborder="0" allow="autoplay; encrypted-media">
     </iframe>
 </div>
 
-<div class="docked-status-bar">
-    <a href="https://markreciopro.github.io/Portfolio/" target="_blank" class="portfolio-tab">
-        [ EXECUTE_PORTFOLIO_VIEW.sh ]
-    </a>
-    
+<div class="status-bar">
     <h1 class="status-text">C:\> MAREC_INSIGHTS.exe<span class="cursor"></span></h1>
-    <p style="color: var(--terminal-blue); margin-top: 15px; letter-spacing: 4px; font-weight: bold;">DATA ANALYST // BUSINESS STRATEGIST</p>
+    <button id="audio-btn" class="audio-btn" onclick="toggleAudio()">[ INITIALIZE_STRATEGY_AUDIO ]</button>
+
+    <div class="btn-container">
+        <a href="https://www.linkedin.com/in/YOUR_PROFILE" target="_blank" class="btn-main">[ LINKEDIN_PROFILE ]</a>
+        <a href="https://github.com/markreciopro" target="_blank" class="btn-main">[ GITHUB_REPOS ]</a>
+        <a href="#" target="_blank" class="btn-main" style="border-color: var(--terminal-green); color: var(--terminal-green);">[ DOWNLOAD_RESUME.pdf ]</a>
+    </div>
 </div>
 
-<section class="framework-section">
-    <h2 style="color: var(--terminal-red); text-align: center; letter-spacing: 2px;">The MAREC Freelance Framework</h2>
+<section class="framework-container">
+    <h2 style="color: var(--terminal-red); text-align: center; text-transform: uppercase; letter-spacing: 5px;">The MAREC Freelance Framework</h2>
     
     <div class="marec-grid">
-        <div class="code-card">
-            <span class="card-title">M — Modeling</span>
-            <span class="comment">// Architecting Data Structures</span>
-            <code>
-                <span class="keyword">build</span>(<span class="function">predictive_recruitment_models</span>) {<br>
-                &nbsp;&nbsp;stack: [<span class="string">"Python"</span>, <span class="string">"R"</span>];<br>
-                }
-            </code>
+        <div class="marec-card">
+            <div><span class="card-letter">M</span><span class="card-title">Modeling</span><p class="card-text">Architecting data structures and building predictive recruitment models using Python and R.</p></div>
+            <a href="mailto:mark.recio.pro@gmail.com?subject=Inquiry: Modeling Services" class="btn-inquire">[ INQUIRE_SERVICE ]</a>
         </div>
-
-        <div class="code-card" style="border-color: var(--terminal-red);">
-            <span class="card-title">A — Analytics</span>
-            <span class="comment">// Performance & Cost Analysis</span>
-            <code>
-                <span class="keyword">analyze</span>(deep_dive_opex) {<br>
-                &nbsp;&nbsp;result: <span class="string">"15%_Exp_Reduction"</span>;<br>
-                }
-            </code>
+        <div class="marec-card">
+            <div><span class="card-letter">A</span><span class="card-title">Analytics</span><p class="card-text">Deep-dive performance and cost analyses, resulting in a 15% reduction in operating expenses.</p></div>
+            <a href="mailto:mark.recio.pro@gmail.com?subject=Inquiry: Analytics Services" class="btn-inquire">[ INQUIRE_SERVICE ]</a>
         </div>
-
-        <div class="code-card">
-            <span class="card-title">R — Reporting</span>
-            <span class="comment">// Executive Dashboards</span>
-            <code>
-                <span class="keyword">deploy</span>(<span class="function">visuals</span>) {<br>
-                &nbsp;&nbsp;tools: [<span class="string">"Power BI"</span>, <span class="string">"Tableau"</span>];<br>
-                }
-            </code>
+        <div class="marec-card">
+            <div><span class="card-letter">R</span><span class="card-title">Reporting</span><p class="card-text">Designing and deploying professional Power BI and Tableau dashboards for executive leadership.</p></div>
+            <a href="mailto:mark.recio.pro@gmail.com?subject=Inquiry: Reporting Services" class="btn-inquire">[ INQUIRE_SERVICE ]</a>
         </div>
-
-        <div class="code-card">
-            <span class="card-title">E — Efficiency</span>
-            <span class="comment">// Workforce & Process Optimization</span>
-            <code>
-                <span class="keyword">optimize</span>(<span class="function">staffing_allocation</span>) {<br>
-                &nbsp;&nbsp;focus: <span class="string">"Streamline_Resources"</span>;<br>
-                }
-            </code>
+        <div class="marec-card">
+            <div><span class="card-letter">E</span><span class="card-title">Efficiency</span><p class="card-text">Workforce planning and process improvement to streamline staffing and resource allocation.</p></div>
+            <a href="mailto:mark.recio.pro@gmail.com?subject=Inquiry: Efficiency Services" class="btn-inquire">[ INQUIRE_SERVICE ]</a>
         </div>
-
-        <div class="code-card">
-            <span class="card-title">C — Consultancy</span>
-            <span class="comment">// Technical/Business Alignment</span>
-            <code>
-                <span class="keyword">lead</span>(<span class="function">discovery_sessions</span>) {<br>
-                &nbsp;&nbsp;goal: <span class="string">"Targeted_Reporting"</span>;<br>
-                }
-            </code>
+        <div class="marec-card">
+            <div><span class="card-letter">C</span><span class="card-title">Consultancy</span><p class="card-text">Leading cross-functional sessions to align technical reporting with business discovery goals.</p></div>
+            <a href="mailto:mark.recio.pro@gmail.com?subject=Inquiry: Consultancy Services" class="btn-inquire">[ INQUIRE_SERVICE ]</a>
         </div>
     </div>
 </section>
 
-<section class="contact-section">
-    <h2 style="color: var(--terminal-blue); letter-spacing: 3px;">&gt; ESTABLISH_CONNECTION</h2>
-    <p style="margin-top: 30px;">Email: <a href="mailto:mark.recio.pro@gmail.com" style="color:var(--terminal-green); text-decoration: none;">mark.recio.pro@gmail.com</a></p>
-    <p>Phone: <span style="color:var(--terminal-green)">(702) 501-9385</span></p>
-    <p style="color: var(--terminal-gray); font-size: 0.8rem; margin-top: 25px;">LAS VEGAS, NV // REMOTE_READY: TRUE</p>
+<div class="ambience-box">
+    <span class="gamma-status">BRAINWAVE_SYNC: 40Hz_GAMMA [ACTIVE]</span>
+    <span class="label-text">> MODULE: HYPERFOCUS_DATA_PROTOCOL</span>
+    <iframe style="width:100%; aspect-ratio:16/9; border:none;"
+        src="https://www.youtube.com/embed/86WYHc5hhzg?autoplay=1&mute=1&loop=1&playlist=86WYHc5hhzg&controls=0&modestbranding=1" 
+        allow="autoplay; encrypted-media">
+    </iframe>
+</div>
+
+<div class="log-container">
+    <span id="system-log">Initializing data stream...</span>
+</div>
+
+<section class="contact-wrap">
+    <h2 style="color: var(--terminal-blue); letter-spacing: 4px;">&gt; ESTABLISH_CONNECTION</h2>
+    <p>Secure Channel: <a href="mailto:mark.recio.pro@gmail.com" class="email-link">mark.recio.pro@gmail.com</a></p>
+    <p>Direct Comms: <span style="color:var(--terminal-green)">(702) 501-9385</span></p>
+    <br>
+    <footer style="color: var(--terminal-gray); font-size: 0.75rem; letter-spacing: 1px;">
+        &copy; 2026 MAREC Insights // Mark Anthony Recio // Las Vegas, NV
+    </footer>
 </section>
 
-<footer style="text-align: center; padding: 60px; color: var(--terminal-gray); font-size: 0.8rem;">
-    &copy; 2026 MAREC Insights // Mark Anthony Recio // Developed for Strategic Innovation
-</footer>
+<script>
+    function toggleAudio() {
+        const audio = document.getElementById('bg-audio');
+        const btn = document.getElementById('audio-btn');
+        if (audio.paused) {
+            audio.play();
+            btn.innerText = "[ STRATEGY_AUDIO: ACTIVE ]";
+            btn.classList.add('audio-active');
+        } else {
+            audio.pause();
+            btn.innerText = "[ STRATEGY_AUDIO: PAUSED ]";
+            btn.classList.remove('audio-active');
+        }
+    }
+
+    // SYSTEM LOG ANIMATION
+    const logs = [
+        "SYSTEM: Optimized workforce allocation for Q1...",
+        "DATA: 15% OPEX reduction calculated and verified...",
+        "MODEL: Predictive recruitment algorithm at 94% accuracy...",
+        "BI: Dashboard deployment successful for executive lead...",
+        "STRATEGY: Cross-functional alignment synchronized..."
+    ];
+    let logIndex = 0;
+    function cycleLogs() {
+        const logElement = document.getElementById('system-log');
+        logElement.innerText = logs[logIndex];
+        logIndex = (logIndex + 1) % logs.length;
+    }
+    setInterval(cycleLogs, 4000);
+</script>
+
+</body>
+</html>
