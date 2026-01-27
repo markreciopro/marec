@@ -40,13 +40,22 @@
             background: #000; z-index: 9999; display: flex; 
             justify-content: center; align-items: center; flex-direction: column;
             transition: opacity 1s ease;
-            pointer-events: none; /* Allows clicks through if stuck */
+            cursor: pointer; /* Interaction required for audio */
         }
         #boot-log {
             width: 320px; height: 180px; font-size: 0.75rem; color: var(--terminal-green);
             overflow: hidden; text-align: left; padding: 20px;
             border-left: 2px solid var(--terminal-green);
         }
+        .audio-hint {
+            margin-top: 20px;
+            font-size: 0.6rem;
+            color: var(--terminal-gray);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse { 0%, 100% { opacity: 0.2; } 50% { opacity: 1; } }
 
         /* --- GLITCH --- */
         @keyframes glitch {
@@ -93,13 +102,13 @@
         .log-container { max-width: 750px; margin: 20px auto; border-left: 3px solid var(--terminal-green); padding: 15px; font-size: 0.8rem; color: var(--terminal-green); }
         .contact-wrap { text-align: center; padding: 100px 20px; border-top: 1px solid var(--border-color); background: linear-gradient(to bottom, #050505, #100000); }
         .cursor { display: inline-block; width: 10px; height: 25px; background: var(--terminal-red); animation: blink 1s infinite; vertical-align: middle; }
-        @keyframes blink { 0%, 100% { opacity: 0; } 50% { opacity: 1; } }
     </style>
 </head>
 <body onload="autoInit()">
 
-<div id="boot-overlay">
+<div id="boot-overlay" onclick="enableAudio()">
     <div id="boot-log"></div>
+    <div class="audio-hint">[ SYSTEM: CLICK ANYWHERE TO SYNC AUDIO ]</div>
 </div>
 
 <div id="main-wrapper">
@@ -136,7 +145,6 @@
                 <span style="font-size: 0.7rem; color: var(--terminal-gray); min-width: 90px;">GAIN_CONTROL:</span>
                 <input type="range" id="volume-slider" class="volume-slider" min="0" max="100" value="50">
             </div>
-            <p style="font-size:0.6rem; color:var(--terminal-red); margin-top:5px; text-align:center;">[ BROWSER NOTE: SLIDE VOLUME TO ENABLE AUDIO ]</p>
         </div>
     </div>
 
@@ -160,8 +168,7 @@
         "INITIALIZING KERNEL...",
         "CONNECTING TO LAS_VEGAS_NODE...",
         "LOADING PORTFOLIO_ASSETS...",
-        "BYPASSING BROWSER_RESTRICTIONS...",
-        "HYPERFOCUS_PROTOCOL: STANDBY",
+        "SYNCING AUDIO PROTOCOL...",
         "SYSTEM ONLINE."
     ];
 
@@ -174,9 +181,14 @@
 
     function onYouTubeIframeAPIReady() {
         player = new YT.Player('player', {
-            height: '0', width: '0', // Hidden player
+            height: '0', width: '0',
             videoId: '86WYHc5hhzg',
-            playerVars: { 'autoplay': 1, 'mute': 1, 'loop': 1, 'playlist': '86WYHc5hhzg' },
+            playerVars: { 
+                'autoplay': 1, 
+                'mute': 0, // Request unmuted
+                'loop': 1, 
+                'playlist': '86WYHc5hhzg' 
+            },
             events: { 'onReady': onPlayerReady }
         });
     }
@@ -191,6 +203,15 @@
             if (vol >= 100) { statusText.classList.add('glitch-active'); } 
             else { statusText.classList.remove('glitch-active'); }
         });
+    }
+
+    // This function unlocks audio on the first user click
+    function enableAudio() {
+        if (player && typeof player.unMute === 'function') {
+            player.unMute();
+            player.setVolume(50);
+            player.playVideo();
+        }
     }
 
     function autoInit() {
@@ -233,9 +254,9 @@
     }
 
     function startExperience() {
+        // Hero video (always muted to prevent block)
         document.getElementById('video1').src = "https://www.youtube.com/embed/osrFEJkhISo?autoplay=1&mute=1&loop=1&playlist=osrFEJkhISo&controls=0";
         if (player) {
-            player.playVideo();
             isPlaying = true;
             animateVisualizer();
         }
