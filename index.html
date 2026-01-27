@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MAREC Insights | Beat-Sync Service Framework</title>
+    <title>MAREC Insights | Mark Anthony Recio | Data & Strategy</title>
     <style>
         :root {
             --bg-black: #050505;
@@ -19,7 +19,7 @@
             --syntax-string: #f1fa8c;
             --text-white: #f0f0f0;
             --red-glow: 0 0 15px rgba(255, 49, 49, 0.6);
-            --pulse-scale: 1.0;
+            --blue-glow: 0 0 15px rgba(88, 166, 255, 0.3);
         }
 
         body { 
@@ -30,13 +30,7 @@
             overflow-x: hidden;
         }
 
-        /* --- BEAT SYNC TRANSFORM --- */
-        #main-content {
-            transition: transform 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            will-change: transform;
-        }
-
-        /* --- BOOT SEQUENCE --- */
+        /* --- BOOT SEQUENCE OVERLAY --- */
         #boot-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #000; z-index: 9999; display: flex; 
@@ -47,15 +41,10 @@
             width: 350px; height: 200px; font-size: 0.8rem; color: var(--terminal-green);
             border-left: 2px solid var(--terminal-green); padding: 20px;
         }
+        .audio-hint { margin-top: 20px; font-size: 0.65rem; color: var(--terminal-gray); letter-spacing: 2px; animation: pulse 1.5s infinite; }
 
         /* --- HEADER & STATUS --- */
-        .header-container { width: 100%; overflow: hidden; position: relative; }
-        .header-frame { 
-            width: 100%; aspect-ratio: 16 / 9; 
-            border-bottom: 2px solid var(--terminal-red);
-            transition: box-shadow 0.1s ease-in-out;
-        }
-        
+        .header-frame { width: 100%; aspect-ratio: 16 / 9; border-bottom: 2px solid var(--terminal-red); }
         .status-bar {
             background: rgba(10, 0, 0, 0.98); padding: 40px 0; text-align: center;
             border-bottom: 1px solid var(--border-color); position: sticky; top: 0; z-index: 100;
@@ -71,50 +60,51 @@
         
         .marec-card { 
             background: var(--card-bg); border: 1px solid var(--border-color); padding: 25px; 
-            min-height: 280px; transition: 0.3s ease; display: flex; flex-direction: column;
+            min-height: 280px; transition: 0.4s; display: flex; flex-direction: column;
         }
-        .marec-card:hover { border-color: var(--terminal-green); transform: scale(1.02); }
+        .marec-card:hover { border-color: var(--terminal-green); transform: translateY(-5px); box-shadow: 0 0 15px rgba(74, 246, 38, 0.3); }
         
         .card-header { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
         .card-letter { font-size: 2.2rem; color: var(--terminal-red); font-weight: bold; }
         .card-title { color: var(--terminal-blue); font-weight: bold; text-transform: uppercase; font-size: 1rem; }
+        
+        .card-content { font-size: 0.85rem; color: #ccc; flex-grow: 1; }
         
         .code-snippet { 
             display: none; font-size: 0.72rem; background: #000; padding: 12px; border-radius: 4px; 
             line-height: 1.4; overflow-x: auto; color: #f8f8f2; margin-top: 10px;
         }
         .tool-header { color: var(--terminal-gray); font-size: 0.6rem; border-bottom: 1px solid #222; margin-bottom: 8px; padding-bottom: 4px; display: flex; justify-content: space-between; }
-        .marec-card:hover .code-snippet { display: block; animation: fadeIn 0.5s; }
         .marec-card:hover .card-content { display: none; }
+        .marec-card:hover .code-snippet { display: block; animation: fadeIn 0.5s; }
 
         /* SYNTAX */
         .key { color: var(--syntax-keyword); } .fn { color: var(--syntax-func); }
         .vr { color: var(--syntax-var); } .st { color: var(--syntax-string); }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes pulse { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
         .cursor { display: inline-block; width: 8px; height: 20px; background: var(--terminal-red); animation: blink 1s infinite; vertical-align: middle; }
         @keyframes blink { 50% { opacity: 0; } }
 
-        #player { position: absolute; top: -9999px; left: -9999px; }
+        #player { position: absolute; top: -9999px; left: -9999px; } /* Hidden Player */
     </style>
 </head>
 <body onload="runBoot()">
 
 <div id="boot-overlay" onclick="startEngine()">
     <div id="boot-log"></div>
-    <div style="margin-top:20px; font-size:0.65rem; color:var(--terminal-gray); letter-spacing:2px;">[ CLICK TO SYNC BEAT & AUDIO ]</div>
+    <div class="audio-hint">[ CLICK TO INITIALIZE HYPERFOCUS AUDIO ]</div>
 </div>
 
 <div id="main-content">
-    <div class="header-container">
-        <iframe id="video-bg" class="header-frame" src="" frameborder="0" allow="autoplay; encrypted-media"></iframe>
-    </div>
+    <iframe id="video-bg" class="header-frame" src="" frameborder="0" allow="autoplay; encrypted-media"></iframe>
 
     <div class="status-bar">
-        <h1 class="status-text" id="status-title">SYSTEM.MAREC_SERVICES<span class="cursor"></span></h1>
+        <h1 class="status-text">SYSTEM.MAREC_INSIGHTS<span class="cursor"></span></h1>
         <div class="vol-control">
-            <span>BEAT_INTENSITY:</span>
-            <input type="range" id="vol-slider" min="0" max="100" value="50">
+            <span>HYPERFOCUS_VOLUME:</span>
+            <input type="range" id="vol-slider" min="0" max="100" value="40">
         </div>
     </div>
 
@@ -122,8 +112,9 @@
         <div class="marec-grid">
             <div class="marec-card">
                 <div class="card-header"><span class="card-letter">M</span><span class="card-title">Modeling</span></div>
+                <div class="card-content">Predictive hiring lag models and talent trend forecasting.</div>
                 <div class="code-snippet">
-                    <div class="tool-header"><span>TOOL: PYTHON</span><span>SYNCING...</span></div>
+                    <div class="tool-header"><span>TOOL: PYTHON</span><span>LIVE_SYNC</span></div>
                     <span class="key">from</span> marec_ai <span class="key">import</span> ForecastEngine<br>
                     <span class="vr">service</span> = <span class="fn">ForecastEngine</span>(tool=<span class="st">"Python"</span>)<br>
                     <span class="vr">service</span>.<span class="fn">deploy</span>(target=<span class="st">"Hiring_Lag"</span>)
@@ -132,8 +123,9 @@
 
             <div class="marec-card">
                 <div class="card-header"><span class="card-letter">A</span><span class="card-title">Analytics</span></div>
+                <div class="card-content">Financial audits and OPEX reduction strategy.</div>
                 <div class="code-snippet">
-                    <div class="tool-header"><span>TOOL: SQL</span><span>AUDITING...</span></div>
+                    <div class="tool-header"><span>TOOL: SQL</span><span>DB_ACTIVE</span></div>
                     <span class="key">SELECT</span> service_cost, <span class="fn">SUM</span>(savings)<br>
                     <span class="key">FROM</span> operational_audit<br>
                     <span class="key">WHERE</span> tech_stack = <span class="st">'SQL'</span>
@@ -142,8 +134,9 @@
 
             <div class="marec-card">
                 <div class="card-header"><span class="card-letter">R</span><span class="card-title">Reporting</span></div>
+                <div class="card-content">Automated visualization and interactive data storytelling.</div>
                 <div class="code-snippet">
-                    <div class="tool-header"><span>TOOL: R PROGRAMMING</span><span>RENDERING...</span></div>
+                    <div class="tool-header"><span>TOOL: R PROGRAMMING</span><span>RENDER_OK</span></div>
                     <span class="vr">library</span>(ggplot2)<br>
                     marec_services %>%<br>
                     &nbsp;&nbsp;<span class="fn">render_dashboard</span>(engine=<span class="st">"R_Prog"</span>)
@@ -152,8 +145,9 @@
 
             <div class="marec-card">
                 <div class="card-header"><span class="card-letter">E</span><span class="card-title">Efficiency</span></div>
+                <div class="card-content">Custom workflow automation and field staff synchronization.</div>
                 <div class="code-snippet">
-                    <div class="tool-header"><span>TOOL: PYTHON</span><span>AUTOMATING...</span></div>
+                    <div class="tool-header"><span>TOOL: PYTHON</span><span>AUTO_ON</span></div>
                     <span class="key">def</span> <span class="fn">liberate_workforce</span>():<br>
                     &nbsp;&nbsp;<span class="vr">bot</span> = <span class="fn">AutomationScript</span>()<br>
                     &nbsp;&nbsp;<span class="key">return</span> <span class="vr">bot</span>.<span class="fn">sync_ops</span>()
@@ -162,9 +156,10 @@
 
             <div class="marec-card">
                 <div class="card-header"><span class="card-letter">C</span><span class="card-title">Consultancy</span></div>
+                <div class="card-content">BI strategy, DAX optimization, and change management.</div>
                 <div class="code-snippet">
-                    <div class="tool-header"><span>TOOL: POWER BI (DAX)</span><span>STRATEGIZING...</span></div>
-                    <span class="vr">Consultancy_ROI</span> = <br>
+                    <div class="tool-header"><span>TOOL: POWER BI (DAX)</span><span>STRATEGY_VAL</span></div>
+                    <span class="vr">Service_ROI</span> = <br>
                     <span class="key">VAR</span> <span class="vr">Gain</span> = [<span class="fn">Total_Impact</span>]<br>
                     <span class="key">RETURN</span> <span class="fn">DIVIDE</span>(<span class="vr">Gain</span>, [<span class="fn">Cost</span>])
                 </div>
@@ -178,8 +173,7 @@
 <script src="https://www.youtube.com/iframe_api"></script>
 <script>
     let player;
-    let beatInterval;
-    const logs = ["> KERNEL_LOADED", "> PROTOCOL_HYPERFOCUS: ACTIVE", "> BEAT_SYNC: CALIBRATING...", "> SYSTEM_ONLINE"];
+    const logs = ["> KERNEL INIT...", "> LOADING TECH_STACK...", "> MOUNTING AUDIO_ENGINE...", "> HYPERFOCUS_PROTOCOL: READY"];
 
     function runBoot() {
         const logBox = document.getElementById('boot-log');
@@ -195,7 +189,7 @@
     function onYouTubeIframeAPIReady() {
         player = new YT.Player('player', {
             height: '0', width: '0',
-            videoId: '86WYHc5hhzg', 
+            videoId: '86WYHc5hhzg', // THE HYPERFOCUS SONG
             playerVars: { 'autoplay': 1, 'loop': 1, 'playlist': '86WYHc5hhzg' },
             events: { 'onReady': onPlayerReady }
         });
@@ -208,41 +202,17 @@
     }
 
     function startEngine() {
+        // Unmute and Play Audio
         if(player) {
             player.unMute();
-            player.setVolume(50);
+            player.setVolume(40);
             player.playVideo();
-            startBeatSync();
         }
+        // Load Visual Background
         document.getElementById('video-bg').src = "https://www.youtube.com/embed/osrFEJkhISo?autoplay=1&mute=1&loop=1&playlist=osrFEJkhISo&controls=0";
+        // Clear Overlay
         document.getElementById('boot-overlay').style.opacity = '0';
         setTimeout(() => { document.getElementById('boot-overlay').style.display = 'none'; }, 1000);
-    }
-
-    function startBeatSync() {
-        // Approximate BPM for Hyperfocus song (around 128 BPM)
-        const bpm = 128;
-        const interval = (60 / bpm) * 1000;
-
-        setInterval(() => {
-            const intensity = document.getElementById('vol-slider').value / 100;
-            const content = document.getElementById('main-content');
-            const header = document.querySelector('.header-frame');
-            
-            // Subtle Scale Pulse
-            const scale = 1 + (0.015 * intensity);
-            content.style.transform = `scale(${scale})`;
-            
-            // Glow Pulse
-            const glow = 15 + (30 * intensity);
-            header.style.boxShadow = `0 0 ${glow}px rgba(255, 49, 49, ${0.4 * intensity})`;
-
-            // Reset after half a beat
-            setTimeout(() => {
-                content.style.transform = `scale(1)`;
-            }, interval / 2);
-            
-        }, interval);
     }
 </script>
 </body>
