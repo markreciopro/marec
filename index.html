@@ -29,19 +29,43 @@
             overflow-x: hidden;
         }
 
-        /* --- BOOT SEQUENCE OVERLAY --- */
+        #main-wrapper {
+            transition: transform 0.05s linear;
+            will-change: transform;
+        }
+
+        /* --- AUTO-BOOT OVERLAY --- */
         #boot-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #000; z-index: 9999; display: flex; 
             justify-content: center; align-items: center; flex-direction: column;
             transition: opacity 1s ease;
+            cursor: pointer; /* Hint to user to click */
         }
         #boot-log {
-            width: 300px; height: 150px; font-size: 0.7rem; color: var(--terminal-green);
-            overflow: hidden; margin-bottom: 20px; text-align: left;
+            width: 320px; height: 180px; font-size: 0.75rem; color: var(--terminal-green);
+            overflow: hidden; text-align: left; padding: 20px;
+            border-left: 2px solid var(--terminal-green);
+            pointer-events: none;
         }
+        .click-hint {
+            margin-top: 20px; color: var(--terminal-gray); font-size: 0.6rem; 
+            text-transform: uppercase; letter-spacing: 2px; animate: pulse 2s infinite;
+        }
+        @keyframes pulse { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
 
-        /* --- HEADER --- */
+        /* --- GLITCH --- */
+        @keyframes glitch {
+            0% { transform: translate(0); text-shadow: -2px 0 red, 2px 0 blue; }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); text-shadow: 2px 0 red, -2px 0 blue; }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); text-shadow: -2px 0 red, 2px 0 blue; }
+            100% { transform: translate(0); }
+        }
+        .glitch-active { animation: glitch 0.2s infinite; color: #fff !important; }
+
+        /* --- UI COMPONENTS --- */
         .header-showcase { width: 100%; background: #000; line-height: 0; }
         .header-frame { width: 100%; aspect-ratio: 16 / 9; border-bottom: 2px solid var(--terminal-red); }
 
@@ -57,146 +81,93 @@
         .btn-container { display: flex; justify-content: center; gap: 15px; margin-top: 30px; flex-wrap: wrap; }
         .btn-main { padding: 12px 25px; border: 1px solid var(--terminal-blue); color: var(--terminal-blue); text-decoration: none; text-transform: uppercase; font-size: 0.75rem; transition: 0.3s; background: rgba(88, 166, 255, 0.05); cursor: pointer; }
         .btn-main:hover { background: var(--terminal-blue); color: #000; box-shadow: var(--blue-glow); }
-        .btn-highlight { border-color: var(--terminal-green); color: var(--terminal-green); }
-        .btn-highlight:hover { background: var(--terminal-green); color: #000; box-shadow: var(--green-glow); }
-
-        /* --- MAREC GRID --- */
+        
         .framework-container { max-width: 1200px; margin: 60px auto; padding: 0 20px; }
         .marec-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-top: 40px; }
         .marec-card { background: var(--card-bg); border: 1px solid var(--border-color); padding: 25px; display: flex; flex-direction: column; justify-content: space-between; transition: 0.4s ease; text-decoration: none; }
         .marec-card:hover { border-color: var(--terminal-blue); box-shadow: var(--blue-glow); transform: translateY(-5px); }
         .card-letter { font-size: 2.2rem; color: var(--terminal-red); font-weight: bold; }
-        .card-title { color: var(--terminal-blue); font-weight: bold; text-transform: uppercase; margin: 10px 0; font-size: 1rem; }
-        .card-text { font-size: 0.8rem; color: #ccc; }
-
-        /* --- PROJECTS --- */
-        .projects-section { max-width: 1000px; margin: 80px auto; padding: 0 20px; }
-        .project-row { display: flex; gap: 30px; margin-bottom: 40px; align-items: center; border-bottom: 1px solid #1a1a1a; padding-bottom: 25px; }
-        .project-img { width: 250px; height: 140px; border: 1px solid var(--terminal-gray); object-fit: cover; filter: grayscale(1); }
-        .project-info h3 { color: var(--terminal-blue); text-transform: uppercase; margin-top: 0; font-size: 1.1rem; }
-        .project-info p { font-size: 0.85rem; color: #aaa; }
-
-        /* --- MODULES --- */
+        
         .ambience-box { max-width: 750px; margin: 60px auto; padding: 20px; border: 1px solid var(--border-color); background: #080808; position: relative; }
-        .label-text { font-size: 0.65rem; color: var(--terminal-gray); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; display: block; }
-        
-        /* Volume & Visualizer UI */
-        .audio-controls-wrap { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; background: rgba(255, 255, 255, 0.05); padding: 15px; border: 1px dashed var(--border-color); }
-        .visualizer-container { display: flex; align-items: flex-end; gap: 3px; height: 50px; margin-bottom: 10px; padding-bottom: 5px; border-bottom: 1px solid #222; overflow: hidden; }
-        .v-bar { flex: 1; background: var(--terminal-green); height: 5%; transition: height 0.1s ease, background-color 0.3s ease; }
-        
-        .volume-control { display: flex; align-items: center; gap: 15px; }
+        .audio-controls-wrap { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; background: rgba(255, 255, 255, 0.05); padding: 15px; border: 1px dashed var(--border-color); transition: 0.3s; }
+        .visualizer-container { display: flex; align-items: flex-end; gap: 3px; height: 50px; margin-bottom: 10px; border-bottom: 1px solid #222; overflow: hidden; }
+        .v-bar { flex: 1; background: var(--terminal-green); height: 5%; transition: height 0.1s ease; }
         .volume-slider { flex-grow: 1; accent-color: var(--terminal-red); cursor: pointer; }
 
         .log-container { max-width: 750px; margin: 20px auto; border-left: 3px solid var(--terminal-green); padding: 15px; font-size: 0.8rem; color: var(--terminal-green); }
-
         .contact-wrap { text-align: center; padding: 100px 20px; border-top: 1px solid var(--border-color); background: linear-gradient(to bottom, #050505, #100000); }
         .cursor { display: inline-block; width: 10px; height: 25px; background: var(--terminal-red); animation: blink 1s infinite; vertical-align: middle; }
-        @keyframes blink { 0%, 100% { opacity: 0; } 50% { opacity: 1; } }
     </style>
 </head>
-<body>
+<body onload="autoInit()">
 
-<div id="boot-overlay">
+<div id="boot-overlay" onclick="triggerAudio()">
     <div id="boot-log"></div>
-    <button id="boot-btn" class="btn-main btn-highlight" onclick="initSystem()">[ RUN MAREC_INSIGHTS.EXE ]</button>
+    <div class="click-hint">Click anywhere to sync audio</div>
 </div>
 
-<div class="header-showcase">
-    <iframe id="video1" class="header-frame" src="" frameborder="0" allow="autoplay; encrypted-media"></iframe>
-</div>
-
-<div class="status-bar">
-    <h1 class="status-text">C:\> MAREC_INSIGHTS.exe<span class="cursor"></span></h1>
-    <div class="btn-container">
-        <a href="https://markreciopro.github.io/Portfolio/" target="_blank" class="btn-main btn-highlight">[ VIEW_FULL_PORTFOLIO ]</a>
-        <a href="https://www.linkedin.com/in/mark-anthony-recio/" target="_blank" class="btn-main">[ LINKEDIN_PROFILE ]</a>
-        <a href="https://github.com/markreciopro" target="_blank" class="btn-main">[ GITHUB_REPOS ]</a>
+<div id="main-wrapper">
+    <div class="header-showcase">
+        <iframe id="video1" class="header-frame" src="" frameborder="0" allow="autoplay; encrypted-media"></iframe>
     </div>
-</div>
 
-<section class="framework-container">
-    <h2 style="color: var(--terminal-red); text-align: center; text-transform: uppercase; letter-spacing: 5px;">The MAREC Freelance Framework</h2>
-    <div class="marec-grid">
-        <a href="https://github.com/markreciopro" target="_blank" class="marec-card">
-            <div><span class="card-letter">M</span><span class="card-title">Modeling</span><p class="card-text">Building predictive recruitment models to slash hiring lag.</p></div>
-        </a>
-        <a href="https://github.com/markreciopro" target="_blank" class="marec-card">
-            <div><span class="card-letter">A</span><span class="card-title">Analytics</span><p class="card-text">Performance analyses resulting in 15% reduction in OPEX.</p></div>
-        </a>
-        <a href="https://github.com/markreciopro" target="_blank" class="marec-card">
-            <div><span class="card-letter">R</span><span class="card-title">Reporting</span><p class="card-text">Power BI dashboards delivering 40% efficiency gains.</p></div>
-        </a>
-        <a href="https://github.com/markreciopro" target="_blank" class="marec-card">
-            <div><span class="card-letter">E</span><span class="card-title">Efficiency</span><p class="card-text">Workflow automation for 50+ field employees.</p></div>
-        </a>
-        <a href="https://github.com/markreciopro" target="_blank" class="marec-card">
-            <div><span class="card-letter">C</span><span class="card-title">Consultancy</span><p class="card-text">Strategic innovation and technical change management.</p></div>
-        </a>
-    </div>
-</section>
-
-<section class="projects-section">
-    <h2 style="color: var(--terminal-blue); text-transform: uppercase; letter-spacing: 3px; border-left: 4px solid var(--terminal-red); padding-left: 15px; margin-bottom: 50px;">Executed Projects</h2>
-    
-    <div class="project-row">
-        <img src="https://i.ibb.co/ZpWFC90X/Gemini-Generated-Image-cdrvdtcdrvdtcdrv.png" class="project-img">
-        <div class="project-info">
-            <h3>Avoxi Billing Analysis (Python)</h3>
-            <p>Financial solution analyzing complex billing data using Pandas and Seaborn.</p>
-            <a href="https://www.canva.com/design/DAG2oSq-RU8/Rab_1KlUjw-md_9wp7vcoA/view" target="_blank" style="color: var(--terminal-green); font-size: 0.7rem;">[ VIEW_PRESENTATION ]</a>
+    <div class="status-bar">
+        <h1 id="main-status" class="status-text">C:\> MAREC_INSIGHTS.exe<span class="cursor"></span></h1>
+        <div class="btn-container">
+            <a href="https://markreciopro.github.io/Portfolio/" target="_blank" class="btn-main">[ VIEW_FULL_PORTFOLIO ]</a>
+            <a href="https://www.linkedin.com/in/mark-anthony-recio/" target="_blank" class="btn-main">[ LINKEDIN_PROFILE ]</a>
+            <a href="https://github.com/markreciopro" target="_blank" class="btn-main">[ GITHUB_REPOS ]</a>
         </div>
     </div>
 
-    <div class="project-row">
-        <img src="https://i.ibb.co/ZpWFC90X/Gemini-Generated-Image-cdrvdtcdrvdtcdrv.png" class="project-img">
-        <div class="project-info">
-            <h3>Dynamic BI Dashboard</h3>
-            <p>Power BI solution optimizing real-time data flow with Power Query.</p>
-            <a href="https://www.canva.com/design/DAGxAueHJUU/LQQDcIK9_2qK8kzVdojmkg/edit" target="_blank" style="color: var(--terminal-green); font-size: 0.7rem;">[ LAUNCH_DASHBOARD ]</a>
+    <section class="framework-container">
+        <h2 style="color: var(--terminal-red); text-align: center; text-transform: uppercase; letter-spacing: 5px;">The MAREC Freelance Framework</h2>
+        <div class="marec-grid">
+            <a href="#" class="marec-card"><div><span class="card-letter">M</span><p style="color:var(--terminal-blue); font-weight:bold;">Modeling</p></div></a>
+            <a href="#" class="marec-card"><div><span class="card-letter">A</span><p style="color:var(--terminal-blue); font-weight:bold;">Analytics</p></div></a>
+            <a href="#" class="marec-card"><div><span class="card-letter">R</span><p style="color:var(--terminal-blue); font-weight:bold;">Reporting</p></div></a>
+            <a href="#" class="marec-card"><div><span class="card-letter">E</span><p style="color:var(--terminal-blue); font-weight:bold;">Efficiency</p></div></a>
+            <a href="#" class="marec-card"><div><span class="card-letter">C</span><p style="color:var(--terminal-blue); font-weight:bold;">Consultancy</p></div></a>
         </div>
-    </div>
-</section>
+    </section>
 
-<div class="ambience-box">
-    <span class="label-text">> MODULE: HYPERFOCUS_PROTOCOL</span>
-    <div id="player"></div>
-    <div class="audio-controls-wrap">
-        <div class="visualizer-container" id="visualizer">
+    <div class="ambience-box">
+        <span style="font-size: 0.65rem; color: var(--terminal-gray);">> MODULE: HYPERFOCUS_PROTOCOL</span>
+        <div id="player"></div>
+        <div class="audio-controls-wrap" id="audio-wrap">
+            <div class="visualizer-container" id="visualizer"></div>
+            <div class="volume-control" style="display:flex; align-items:center; gap:15px;">
+                <span style="font-size: 0.7rem; color: var(--terminal-gray); min-width: 90px;">GAIN_CONTROL:</span>
+                <input type="range" id="volume-slider" class="volume-slider" min="0" max="100" value="50">
             </div>
-        <div class="volume-control">
-            <span style="font-size: 0.7rem; color: var(--terminal-gray); min-width: 90px;">GAIN_CONTROL:</span>
-            <input type="range" id="volume-slider" class="volume-slider" min="0" max="100" value="50">
         </div>
     </div>
+
+    <div class="log-container"><span id="system-log">System: Scanning for targets...</span></div>
+
+    <section class="contact-wrap">
+        <h2 style="color: var(--terminal-blue); letter-spacing: 4px;">&gt; ESTABLISH_CONNECTION</h2>
+        <p>Channel: <a href="mailto:mark.recio.pro@gmail.com" style="color: var(--terminal-green); text-decoration: none;">mark.recio.pro@gmail.com</a></p>
+        <footer style="color: var(--terminal-gray); font-size: 0.7rem; margin-top:50px;">
+            &copy; 2026 MAREC Insights // Las Vegas, NV
+        </footer>
+    </section>
 </div>
-
-<div class="ambience-box" style="border-color: var(--terminal-green); text-align: center;">
-    <span class="label-text" style="color: var(--terminal-green);">> EXTERNAL_SYSTEM_LINK</span>
-    <p style="font-size: 0.85rem; margin-bottom: 20px;">Access the complete project documentation and deep-dive analytics portfolio.</p>
-    <a href="https://markreciopro.github.io/Portfolio/" target="_blank" class="btn-main btn-highlight" style="display: block; width: 80%; margin: 0 auto;">[ INITIALIZE PORTFOLIO_V2.0 ]</a>
-</div>
-
-<div class="log-container"><span id="system-log">Ready for connection...</span></div>
-
-<section class="contact-wrap">
-    <h2 style="color: var(--terminal-blue); letter-spacing: 4px;">&gt; ESTABLISH_CONNECTION</h2>
-    <p>Secure Channel: <a href="mailto:mark.recio.pro@gmail.com" style="color: var(--terminal-green); text-decoration: none;">mark.recio.pro@gmail.com</a></p>
-    <p>Direct Comms: <span style="color:var(--terminal-green)">(702) 501-9385</span></p>
-    <br>
-    <footer style="color: var(--terminal-gray); font-size: 0.7rem;">
-        &copy; 2026 MAREC Insights // Mark Anthony Recio // Las Vegas, NV
-    </footer>
-</section>
 
 <script src="https://www.youtube.com/iframe_api"></script>
 
 <script>
     let player;
     let isPlaying = false;
-    const bootLogs = ["INITIALIZING KERNEL...", "LOADING DATA_MODELS...", "HYPERFOCUS_PROTOCOL: ONLINE", "WELCOME, USER."];
+    const bootLogs = [
+        "INITIALIZING KERNEL...",
+        "CONNECTING TO LAS_VEGAS_NODE...",
+        "LOADING PORTFOLIO_ASSETS...",
+        "HYPERFOCUS_PROTOCOL: STANDBY",
+        "AUDIO_SYNC: PENDING CLICK...",
+        "SYSTEM ONLINE."
+    ];
 
-    // Create Visualizer Bars
     const visualizer = document.getElementById('visualizer');
     for (let i = 0; i < 40; i++) {
         const bar = document.createElement('div');
@@ -206,93 +177,4 @@
 
     function onYouTubeIframeAPIReady() {
         player = new YT.Player('player', {
-            height: '100%',
-            width: '100%',
-            videoId: '86WYHc5hhzg',
-            playerVars: {
-                'autoplay': 0,
-                'controls': 0,
-                'mute': 0,
-                'loop': 1,
-                'playlist': '86WYHc5hhzg',
-                'modestbranding': 1
-            },
-            events: {
-                'onReady': onPlayerReady
-            }
-        });
-    }
-
-    function onPlayerReady(event) {
-        document.getElementById('volume-slider').addEventListener('input', function(e) {
-            player.setVolume(e.target.value);
-        });
-    }
-
-    function animateVisualizer() {
-        if (!isPlaying) return;
-        const bars = document.querySelectorAll('.v-bar');
-        const vol = document.getElementById('volume-slider').value;
-        
-        // Calculate color based on volume (Green to Red)
-        // 0 vol = Green (120), 100 vol = Red (0)
-        const hue = 120 - (vol * 1.2); 
-        const color = `hsl(${hue}, 100%, 50%)`;
-        const glow = `0 0 10px hsl(${hue}, 100%, 40%)`;
-
-        bars.forEach(bar => {
-            const randomHeight = Math.random() * (vol / 1.2) + 5;
-            bar.style.height = randomHeight + "%";
-            bar.style.backgroundColor = color;
-            bar.style.boxShadow = glow;
-            bar.style.opacity = 0.3 + (vol / 150);
-        });
-        requestAnimationFrame(animateVisualizer);
-    }
-
-    function initSystem() {
-        const logBox = document.getElementById('boot-log');
-        const btn = document.getElementById('boot-btn');
-        btn.style.display = 'none';
-
-        bootLogs.forEach((text, index) => {
-            setTimeout(() => {
-                const line = document.createElement('div');
-                line.innerText = "> " + text;
-                logBox.appendChild(line);
-                if (index === bootLogs.length - 1) {
-                    setTimeout(() => {
-                        document.getElementById('boot-overlay').style.opacity = '0';
-                        setTimeout(() => {
-                            document.getElementById('boot-overlay').style.display = 'none';
-                            startExperience();
-                        }, 1000);
-                    }, 800);
-                }
-            }, index * 400);
-        });
-    }
-
-    function startExperience() {
-        document.getElementById('video1').src = "https://www.youtube.com/embed/osrFEJkhISo?autoplay=1&mute=1&loop=1&playlist=osrFEJkhISo&controls=0&modestbranding=1";
-        if (player) {
-            player.playVideo();
-            player.setVolume(50);
-            isPlaying = true;
-            animateVisualizer();
-        }
-    }
-
-    const systemLogs = ["SYSTEM: Ready for deployment...", "DATA: 15% OPEX reduction calculated...", "MODEL: Predictive algorithm active...", "BI: Dashboard synchronized..."];
-    let i = 0;
-    setInterval(() => {
-        const logEl = document.getElementById('system-log');
-        if(logEl) {
-            logEl.innerText = systemLogs[i];
-            i = (i + 1) % systemLogs.length;
-        }
-    }, 4000);
-</script>
-
-</body>
-</html>
+            height: '
