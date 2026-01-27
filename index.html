@@ -26,6 +26,19 @@
             color: var(--text-white);
             scroll-behavior: smooth;
             line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- BOOT SEQUENCE OVERLAY --- */
+        #boot-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #000; z-index: 9999; display: flex; 
+            justify-content: center; align-items: center; flex-direction: column;
+            transition: opacity 1s ease;
+        }
+        #boot-log {
+            width: 300px; height: 150px; font-size: 0.7rem; color: var(--terminal-green);
+            overflow: hidden; margin-bottom: 20px; text-align: left;
         }
 
         /* --- HEADER --- */
@@ -42,7 +55,7 @@
         .status-text { font-size: 2.8rem; color: var(--terminal-red); letter-spacing: 8px; text-shadow: var(--red-glow); margin: 0; }
         
         .btn-container { display: flex; justify-content: center; gap: 15px; margin-top: 30px; flex-wrap: wrap; }
-        .btn-main { padding: 12px 25px; border: 1px solid var(--terminal-blue); color: var(--terminal-blue); text-decoration: none; text-transform: uppercase; font-size: 0.75rem; transition: 0.3s; background: rgba(88, 166, 255, 0.05); }
+        .btn-main { padding: 12px 25px; border: 1px solid var(--terminal-blue); color: var(--terminal-blue); text-decoration: none; text-transform: uppercase; font-size: 0.75rem; transition: 0.3s; background: rgba(88, 166, 255, 0.05); cursor: pointer; }
         .btn-main:hover { background: var(--terminal-blue); color: #000; box-shadow: var(--blue-glow); }
         .btn-highlight { border-color: var(--terminal-green); color: var(--terminal-green); }
         .btn-highlight:hover { background: var(--terminal-green); color: #000; box-shadow: var(--green-glow); }
@@ -64,8 +77,17 @@
         .project-info p { font-size: 0.85rem; color: #aaa; }
 
         /* --- MODULES --- */
-        .ambience-box { max-width: 750px; margin: 60px auto; padding: 20px; border: 1px solid var(--border-color); background: #080808; }
+        .ambience-box { max-width: 750px; margin: 60px auto; padding: 20px; border: 1px solid var(--border-color); background: #080808; position: relative; }
         .label-text { font-size: 0.65rem; color: var(--terminal-gray); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+        
+        /* Volume & Visualizer UI */
+        .audio-controls-wrap { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; background: rgba(255, 255, 255, 0.05); padding: 15px; border: 1px dashed var(--border-color); }
+        .visualizer-container { display: flex; align-items: flex-end; gap: 3px; height: 50px; margin-bottom: 10px; padding-bottom: 5px; border-bottom: 1px solid #222; overflow: hidden; }
+        .v-bar { flex: 1; background: var(--terminal-green); height: 5%; transition: height 0.1s ease, background-color 0.3s ease; }
+        
+        .volume-control { display: flex; align-items: center; gap: 15px; }
+        .volume-slider { flex-grow: 1; accent-color: var(--terminal-red); cursor: pointer; }
+
         .log-container { max-width: 750px; margin: 20px auto; border-left: 3px solid var(--terminal-green); padding: 15px; font-size: 0.8rem; color: var(--terminal-green); }
 
         .contact-wrap { text-align: center; padding: 100px 20px; border-top: 1px solid var(--border-color); background: linear-gradient(to bottom, #050505, #100000); }
@@ -75,8 +97,13 @@
 </head>
 <body>
 
+<div id="boot-overlay">
+    <div id="boot-log"></div>
+    <button id="boot-btn" class="btn-main btn-highlight" onclick="initSystem()">[ RUN MAREC_INSIGHTS.EXE ]</button>
+</div>
+
 <div class="header-showcase">
-    <iframe class="header-frame" src="https://www.youtube.com/embed/osrFEJkhISo?autoplay=1&mute=1&loop=1&playlist=osrFEJkhISo&controls=0&modestbranding=1" frameborder="0" allow="autoplay; encrypted-media"></iframe>
+    <iframe id="video1" class="header-frame" src="" frameborder="0" allow="autoplay; encrypted-media"></iframe>
 </div>
 
 <div class="status-bar">
@@ -133,7 +160,15 @@
 
 <div class="ambience-box">
     <span class="label-text">> MODULE: HYPERFOCUS_PROTOCOL</span>
-    <iframe style="width:100%; aspect-ratio:16/9; border:none;" src="https://www.youtube.com/embed/86WYHc5hhzg?autoplay=1&mute=1&loop=1&playlist=86WYHc5hhzg&controls=0&modestbranding=1" allow="autoplay; encrypted-media"></iframe>
+    <div id="player"></div>
+    <div class="audio-controls-wrap">
+        <div class="visualizer-container" id="visualizer">
+            </div>
+        <div class="volume-control">
+            <span style="font-size: 0.7rem; color: var(--terminal-gray); min-width: 90px;">GAIN_CONTROL:</span>
+            <input type="range" id="volume-slider" class="volume-slider" min="0" max="100" value="50">
+        </div>
+    </div>
 </div>
 
 <div class="ambience-box" style="border-color: var(--terminal-green); text-align: center;">
@@ -154,12 +189,108 @@
     </footer>
 </section>
 
+<script src="https://www.youtube.com/iframe_api"></script>
+
 <script>
-    const logs = ["SYSTEM: Ready for deployment...", "DATA: 15% OPEX reduction calculated...", "MODEL: Predictive algorithm active...", "BI: Dashboard synchronized..."];
+    let player;
+    let isPlaying = false;
+    const bootLogs = ["INITIALIZING KERNEL...", "LOADING DATA_MODELS...", "HYPERFOCUS_PROTOCOL: ONLINE", "WELCOME, USER."];
+
+    // Create Visualizer Bars
+    const visualizer = document.getElementById('visualizer');
+    for (let i = 0; i < 40; i++) {
+        const bar = document.createElement('div');
+        bar.className = 'v-bar';
+        visualizer.appendChild(bar);
+    }
+
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+            height: '100%',
+            width: '100%',
+            videoId: '86WYHc5hhzg',
+            playerVars: {
+                'autoplay': 0,
+                'controls': 0,
+                'mute': 0,
+                'loop': 1,
+                'playlist': '86WYHc5hhzg',
+                'modestbranding': 1
+            },
+            events: {
+                'onReady': onPlayerReady
+            }
+        });
+    }
+
+    function onPlayerReady(event) {
+        document.getElementById('volume-slider').addEventListener('input', function(e) {
+            player.setVolume(e.target.value);
+        });
+    }
+
+    function animateVisualizer() {
+        if (!isPlaying) return;
+        const bars = document.querySelectorAll('.v-bar');
+        const vol = document.getElementById('volume-slider').value;
+        
+        // Calculate color based on volume (Green to Red)
+        // 0 vol = Green (120), 100 vol = Red (0)
+        const hue = 120 - (vol * 1.2); 
+        const color = `hsl(${hue}, 100%, 50%)`;
+        const glow = `0 0 10px hsl(${hue}, 100%, 40%)`;
+
+        bars.forEach(bar => {
+            const randomHeight = Math.random() * (vol / 1.2) + 5;
+            bar.style.height = randomHeight + "%";
+            bar.style.backgroundColor = color;
+            bar.style.boxShadow = glow;
+            bar.style.opacity = 0.3 + (vol / 150);
+        });
+        requestAnimationFrame(animateVisualizer);
+    }
+
+    function initSystem() {
+        const logBox = document.getElementById('boot-log');
+        const btn = document.getElementById('boot-btn');
+        btn.style.display = 'none';
+
+        bootLogs.forEach((text, index) => {
+            setTimeout(() => {
+                const line = document.createElement('div');
+                line.innerText = "> " + text;
+                logBox.appendChild(line);
+                if (index === bootLogs.length - 1) {
+                    setTimeout(() => {
+                        document.getElementById('boot-overlay').style.opacity = '0';
+                        setTimeout(() => {
+                            document.getElementById('boot-overlay').style.display = 'none';
+                            startExperience();
+                        }, 1000);
+                    }, 800);
+                }
+            }, index * 400);
+        });
+    }
+
+    function startExperience() {
+        document.getElementById('video1').src = "https://www.youtube.com/embed/osrFEJkhISo?autoplay=1&mute=1&loop=1&playlist=osrFEJkhISo&controls=0&modestbranding=1";
+        if (player) {
+            player.playVideo();
+            player.setVolume(50);
+            isPlaying = true;
+            animateVisualizer();
+        }
+    }
+
+    const systemLogs = ["SYSTEM: Ready for deployment...", "DATA: 15% OPEX reduction calculated...", "MODEL: Predictive algorithm active...", "BI: Dashboard synchronized..."];
     let i = 0;
     setInterval(() => {
-        document.getElementById('system-log').innerText = logs[i];
-        i = (i + 1) % logs.length;
+        const logEl = document.getElementById('system-log');
+        if(logEl) {
+            logEl.innerText = systemLogs[i];
+            i = (i + 1) % systemLogs.length;
+        }
     }, 4000);
 </script>
 
