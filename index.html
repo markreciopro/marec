@@ -3,307 +3,229 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MAREC Insights | Mark Anthony Recio | BI & Data Strategy</title>
+    <title>MAREC Insights | BI & Data Strategy</title>
     
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
     <style>
-        /* --- BRAND COLOR PALETTE --- */
         :root {
-            --bg-black: #050505;
+            --bg-black: #020202;
             --accent-cyan: #00f2ff; 
             --accent-blue: #3b82f6; 
             --terminal-red: #ff3131; 
-            --terminal-gray: #7a7a7a;
-            --text-white: #f0f0f0;
-            --border-color: #1a1a1a;
-            --cyan-glow: 0 0 15px rgba(0, 242, 255, 0.4);
-            --red-glow: 0 0 15px rgba(255, 49, 49, 0.5);
-            --blue-glow: 0 0 15px rgba(59, 130, 246, 0.3);
-
-            /* Syntax Highlighting */
-            --syntax-kw: #ff79c6;
-            --syntax-fn: #50fa7b;
-            --syntax-vr: #8be9fd;
-            --syntax-st: #f1fa8c;
-            --syntax-cm: #6272a4;
+            --cyan-glow: 0 0 20px rgba(0, 242, 255, 0.4);
         }
 
         body, html {
             margin: 0; padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #f0f0f0; scroll-behavior: smooth; background: #000;
+            background: var(--bg-black);
+            color: #f0f0f0;
+            font-family: 'Segoe UI', sans-serif;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
         }
 
-        /* --- SUCCESS OVERLAY --- */
-        #success-overlay {
+        #particle-canvas {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9); z-index: 10000; display: none;
-            justify-content: center; align-items: center; flex-direction: column;
-            transition: opacity 0.5s ease;
-        }
-        .alert-box {
-            width: 350px; padding: 30px; border: 1px solid var(--accent-blue);
-            background: #000; box-shadow: var(--blue-glow); text-align: center;
-            font-family: 'Consolas', monospace;
+            z-index: 0; pointer-events: none; opacity: 0.3;
         }
 
-        /* --- HERO: LAPTOP LEFT, TEXT RIGHT --- */
+        /* --- HERO SECTION --- */
         .hero-section {
-            position: relative; height: 90vh; min-height: 650px;
-            background: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=2426') no-repeat center center/cover;
-            display: flex; align-items: center; overflow: hidden;
-        }
-        .hero-overlay {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(225deg, rgba(5, 10, 20, 0.96) 35%, rgba(0, 0, 0, 0.5) 100%);
-            display: flex; align-items: center;
+            position: relative; height: 100vh; display: flex; align-items: center; z-index: 1;
+            background: linear-gradient(180deg, rgba(0,242,255,0.05) 0%, rgba(0,0,0,0) 100%);
         }
         .hero-container {
-            max-width: 1300px; margin: 0 auto; padding: 0 40px; z-index: 2;
-            display: grid; grid-template-columns: 1.1fr 0.9fr; align-items: center; gap: 60px; width: 100%;
+            max-width: 1300px; margin: 0 auto; padding: 0 40px;
+            display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 60px; align-items: center;
         }
 
-        /* --- LAPTOP MOCKUP --- */
-        .laptop-wrapper { position: relative; width: 100%; }
-        .laptop-container { position: relative; width: 100%; aspect-ratio: 16 / 10; filter: drop-shadow(0 0 25px rgba(0, 242, 255, 0.15)); }
+        /* --- THE LAPTOP (FIXED) --- */
+        .laptop-container {
+            position: relative; width: 100%; aspect-ratio: 16 / 10;
+            filter: drop-shadow(0 0 30px rgba(0, 242, 255, 0.2));
+            animation: float 5s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
         .laptop-image { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; pointer-events: none; }
         .laptop-screen-content {
             position: absolute; top: 7.5%; left: 12.1%; width: 75.8%; height: 78%;
-            z-index: 5; background: #000; overflow: hidden;
+            z-index: 5; background: #000; overflow: hidden; border-radius: 2px;
         }
-        .header-frame { width: 100%; height: 100%; border: none; }
 
         /* --- TEXT STYLES --- */
-        .hero-subtitle { text-transform: uppercase; letter-spacing: 3px; font-size: 0.8rem; color: var(--accent-cyan); font-weight: bold; }
-        .hero-title { font-size: 3.5rem; line-height: 1.1; margin: 15px 0; font-weight: 800; }
-        .hero-description { font-size: 1.15rem; margin-bottom: 30px; opacity: 0.8; line-height: 1.6; max-width: 500px; }
-
-        .btn { display: inline-block; padding: 12px 30px; border-radius: 4px; text-decoration: none; font-weight: bold; transition: 0.3s; margin-right: 15px; cursor: pointer; }
-        .btn-primary { background-color: var(--accent-cyan); color: #000; border: none; }
-        .btn-primary:hover { box-shadow: var(--cyan-glow); transform: translateY(-2px); }
-        .btn-secondary { border: 1px solid white; color: white; }
-
-        /* --- MISSION --- */
-        .mission-wrap { max-width: 900px; margin: 80px auto; padding: 0 40px; }
-        .mission-statement { 
-            font-style: italic; font-size: 1.4rem; color: #ddd; 
-            border-left: 6px solid var(--accent-cyan); padding: 25px 35px; 
-            background: rgba(0, 242, 255, 0.03); line-height: 1.5; 
+        .hero-title {
+            font-size: 3.5rem; line-height: 1.1; font-weight: 800; margin-bottom: 20px;
+            color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.2);
         }
+        .cyan-text { color: var(--accent-cyan); }
 
-        /* --- GRID --- */
-        .framework-section { background: var(--bg-black); padding: 80px 0; font-family: 'Consolas', monospace; }
+        /* --- MAREC FLASH CARDS --- */
+        .framework-section { padding: 100px 0; z-index: 1; position: relative; }
         .marec-grid { 
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
-            gap: 20px; max-width: 1300px; margin: 0 auto; padding: 0 40px; 
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 25px; max-width: 1300px; margin: 0 auto; padding: 0 40px; 
         }
         .marec-card { 
-            background: rgba(10, 10, 10, 0.95); border: 1px solid var(--border-color); padding: 30px; 
-            min-height: 320px; transition: 0.4s; position: relative; overflow: hidden;
-            display: flex; flex-direction: column;
+            background: rgba(15, 15, 15, 0.8); border: 1px solid #222; padding: 40px; 
+            transition: 0.4s; backdrop-filter: blur(10px);
         }
-        .marec-card:hover { border-color: var(--accent-cyan); box-shadow: var(--cyan-glow); transform: translateY(-5px); }
-        .card-letter { font-size: 2.5rem; color: var(--terminal-red); font-weight: bold; margin-bottom: 10px; display: block; }
-        .card-title { color: var(--accent-cyan); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; }
-        .card-content { font-size: 0.9rem; color: #aaa; line-height: 1.6; flex-grow: 1; }
-
-        .code-snippet { 
-            display: none; font-size: 0.75rem; background: #000; padding: 15px; 
-            border: 1px solid #222; border-radius: 4px; white-space: pre; color: #f8f8f2;
+        .marec-card:hover { 
+            border-color: var(--accent-cyan); box-shadow: var(--cyan-glow);
+            transform: translateY(-10px);
         }
-        .marec-card:hover .card-content { display: none; }
-        .marec-card:hover .code-snippet { display: block; animation: fadeIn 0.4s; }
+        .card-letter { font-size: 3rem; color: var(--terminal-red); font-weight: bold; display: block; margin-bottom: 10px; }
 
         /* --- CONTACT --- */
-        .contact-section { padding: 100px 0; background: #050505; }
-        .terminal-form { max-width: 600px; margin: 0 auto; background: #000; border: 1px solid var(--border-color); padding: 40px; }
-        .terminal-input { 
-            width: 100%; background: transparent; border: none; border-bottom: 1px solid #333; 
-            color: var(--accent-cyan); font-family: 'Consolas', monospace; padding: 10px 0; margin-bottom: 30px; outline: none; 
+        .contact-box {
+            max-width: 600px; margin: 80px auto; padding: 40px;
+            border: 1px solid #1a1a1a; background: rgba(5,5,5,0.8);
         }
-        .terminal-submit { 
-            background: transparent; border: 1px solid var(--accent-cyan); color: var(--accent-cyan); 
-            padding: 15px; cursor: pointer; text-transform: uppercase; font-size: 0.9rem; width: 100%; 
-            transition: 0.3s; font-family: 'Consolas', monospace; letter-spacing: 2px;
+        .btn { 
+            padding: 15px 30px; background: var(--accent-cyan); color: #000; 
+            font-weight: bold; text-decoration: none; display: inline-block; border: none;
+            cursor: pointer; transition: 0.3s;
         }
-        .terminal-submit:hover { background: var(--accent-cyan); color: #000; box-shadow: var(--cyan-glow); }
+        .btn:hover { transform: scale(1.05); box-shadow: var(--cyan-glow); }
 
-        .status-bar { background: #080808; padding: 40px 0; text-align: center; border-bottom: 1px solid #1a1a1a; }
-        .status-text { font-size: 2.2rem; color: var(--terminal-red); letter-spacing: 5px; text-shadow: var(--red-glow); margin: 0; }
-        .cursor { display: inline-block; width: 10px; height: 25px; background: var(--terminal-red); animation: blink 1s infinite; vertical-align: middle; }
-
-        #boot-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 9999; display: flex; justify-content: center; align-items: center; flex-direction: column; transition: 0.5s; }
-        #boot-log { width: 320px; padding: 25px; border: 1px solid var(--accent-cyan); background: #000; color: var(--accent-cyan); font-size: 0.8rem; }
-
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes blink { 50% { opacity: 0; } }
-        @media (max-width: 992px) { .hero-container { grid-template-columns: 1fr; text-align: center; } }
+        /* --- BOOT OVERLAY --- */
+        #boot-overlay {
+            position: fixed; inset: 0; background: #000; z-index: 1000;
+            display: flex; justify-content: center; align-items: center; flex-direction: column;
+        }
     </style>
 </head>
-<body onload="autoInit()">
+<body onload="initBoot()">
 
-<div id="success-overlay">
-    <div class="alert-box">
-        <h3 style="color: var(--accent-blue); margin-top:0;">[ UPLINK_COMPLETE ]</h3>
-        <p style="font-size: 0.8rem; color: var(--accent-cyan);">MESSAGE_ID: #<span id="msg-id"></span><br>DATA PACKET SUCCESSFULLY SENT.</p>
-        <button onclick="closeAlert()" class="terminal-submit" style="font-size: 0.7rem; padding: 8px;">[ REBOOT TERMINAL ]</button>
-    </div>
-</div>
+<canvas id="particle-canvas"></canvas>
 
-<div id="boot-overlay" onclick="startExperience()">
-    <div id="boot-log"></div>
-    <div style="margin-top:20px; font-size: 0.6rem; color: var(--terminal-gray); letter-spacing: 2px;">
-        [ SYSTEM READY: CLICK TO INITIALIZE ]
-    </div>
+<div id="boot-overlay" onclick="startSite()">
+    <div id="boot-log" style="font-family: monospace; color: var(--accent-cyan); margin-bottom: 20px;"></div>
+    <span style="font-size: 0.7rem; letter-spacing: 2px; color: #444;">[ CLICK TO ACCESS INTERFACE ]</span>
 </div>
 
 <header class="hero-section">
-    <div class="hero-overlay">
-        <div class="hero-container">
-            <div class="hero-visual-side">
-                <div class="laptop-wrapper">
-                    <div class="laptop-container">
-                        <img src="https://raw.githubusercontent.com/Pritam601/Laptop-Mockup/main/laptop-mockup.png" class="laptop-image" alt="Laptop Frame">
-                        <div class="laptop-screen-content">
-                            <iframe id="video1" class="header-frame" src="" frameborder="0" allow="autoplay; encrypted-media"></iframe>
-                        </div>
-                    </div>
+    <div class="hero-container">
+        <div class="hero-visual" data-aos="fade-right">
+            <div class="laptop-container">
+                <img src="https://raw.githubusercontent.com/Pritam601/Laptop-Mockup/main/laptop-mockup.png" class="laptop-image">
+                <div class="laptop-screen-content">
+                    <iframe id="hero-video" width="100%" height="100%" 
+                        src="https://www.youtube.com/embed/osrFEJkhISo?enablejsapi=1&autoplay=1&mute=1&loop=1&playlist=osrFEJkhISo&controls=0&showinfo=0" 
+                        frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
+                    </iframe>
                 </div>
             </div>
-            <div class="hero-text-side">
-                <span class="hero-subtitle">Strategic Data Foundations</span>
-                <h1 class="hero-title">Built for Strategy.<br>Rooted in Growth.</h1>
-                <p class="hero-description">Engineering high-fidelity data ecosystems to bridge the gap between human intuition and algorithmic precision.</p>
-                <div class="hero-buttons">
-                    <a href="#mission" class="btn btn-primary">Our Mission</a>
-                    <a href="#contact" class="btn btn-secondary">Connect</a>
-                </div>
-            </div>
+        </div>
+        <div class="hero-text" data-aos="fade-left">
+            <span style="color: var(--accent-cyan); font-weight: bold; letter-spacing: 3px;">MAREC INSIGHTS</span>
+            <h1 class="hero-title">Built for Strategy.<br><span class="cyan-text">Rooted in Growth.</span></h1>
+            <p style="opacity: 0.7; line-height: 1.6; margin-bottom: 30px;">Engineering data foundations that bridge the gap between intuition and precision.</p>
+            <a href="#contact" class="btn">Establish Uplink</a>
         </div>
     </div>
 </header>
 
-<section id="mission" class="mission-wrap">
-    <blockquote class="mission-statement">
-        "Derived from the Latin root for strategy and the linguistic term for the season of growth, 
-        MAREC reflects my mission: providing the strategic data foundations that allow businesses 
-        to innovate and grow with confidence."
-    </blockquote>
-</section>
-
-<div class="status-bar">
-    <h1 class="status-text">C:\> MAREC_FRAMEWORK.sys<span class="cursor"></span></h1>
-</div>
-
 <section class="framework-section">
     <div class="marec-grid">
-        <div class="marec-card">
-            <span class="card-letter">M</span><h3 class="card-title">Modeling</h3>
-            <div class="card-content">Predictive intelligence to forecast recruitment trends and optimize talent flow.</div>
-            <div class="code-snippet"><span style="color:var(--syntax-cm)"># Python: Forecast</span>
-<span style="color:var(--syntax-kw)">from</span> marec_ai <span style="color:var(--syntax-kw)">import</span> Forecast
-<span style="color:var(--syntax-vr)">model</span> = <span style="color:var(--syntax-fn)">Forecast</span>(engine=<span style="color:var(--syntax-st)">"XGBoost"</span>)</div>
+        <div class="marec-card" data-aos="fade-up">
+            <span class="card-letter">M</span>
+            <h3 class="cyan-text">Modeling</h3>
+            <p>Predictive intelligence to forecast recruitment trends and talent flow.</p>
         </div>
-        <div class="marec-card">
-            <span class="card-letter">A</span><h3 class="card-title">Analytics</h3>
-            <div class="card-content">Deep-dive financial and operational audits to eliminate waste and maximize ROI.</div>
-            <div class="code-snippet"><span style="color:var(--syntax-cm)">-- SQL: Audit</span>
-<span style="color:var(--syntax-kw)">SELECT</span> cost, <span style="color:var(--syntax-fn)">SUM</span>(savings)
-<span style="color:var(--syntax-kw)">FROM</span> operational_audit;</div>
+        <div class="marec-card" data-aos="fade-up" data-aos-delay="100">
+            <span class="card-letter">A</span>
+            <h3 class="cyan-text">Analytics</h3>
+            <p>Deep-dive operational audits to eliminate waste and maximize ROI.</p>
         </div>
-        <div class="marec-card">
-            <span class="card-letter">R</span><h3 class="card-title">Reporting</h3>
-            <div class="card-content">Dynamic Power BI and Tableau services transforming raw data into decision narratives.</div>
-            <div class="code-snippet"><span style="color:var(--syntax-cm)">// DAX: ROI</span>
-<span style="color:var(--syntax-vr)">ROI</span> = <span style="color:var(--syntax-fn)">DIVIDE</span>([Gain], [Cost])</div>
+        <div class="marec-card" data-aos="fade-up" data-aos-delay="200">
+            <span class="card-letter">R</span>
+            <h3 class="cyan-text">Reporting</h3>
+            <p>Dynamic BI narratives that turn data into decision-making fuel.</p>
         </div>
-        <div class="marec-card">
-            <span class="card-letter">E</span><h3 class="card-title">Efficiency</h3>
-            <div class="card-content">Custom automation scripts to liberate workforce capacity and streamline HR processes.</div>
-            <div class="code-snippet"><span style="color:var(--syntax-cm)"># Python: Automate</span>
-<span style="color:var(--syntax-kw)">def</span> <span style="color:var(--syntax-fn)">run_sync</span>():
-    <span style="color:var(--syntax-vr)">task</span> = <span style="color:var(--syntax-fn)">Automate</span>()</div>
+        <div class="marec-card" data-aos="fade-up" data-aos-delay="300">
+            <span class="card-letter">E</span>
+            <h3 class="cyan-text">Efficiency</h3>
+            <p>Custom automation to liberate workforce capacity and streamline flow.</p>
         </div>
-        <div class="marec-card">
-            <span class="card-letter">C</span><h3 class="card-title">Consultancy</h3>
-            <div class="card-content">High-level BI strategy and change management for technical scalability.</div>
-            <div class="code-snippet"><span style="color:var(--syntax-cm)">/* Change Management */</span>
-<span style="color:var(--syntax-kw)">Status</span>: <span style="color:var(--syntax-st)">"Optimized"</span></div>
+        <div class="marec-card" data-aos="fade-up" data-aos-delay="400">
+            <span class="card-letter">C</span>
+            <h3 class="cyan-text">Consultancy</h3>
+            <p>Strategic BI roadmap planning for high-growth technical scaling.</p>
         </div>
     </div>
 </section>
 
-<section id="contact" class="contact-section">
-    <div class="terminal-form">
-        <span style="font-size: 0.65rem; color: var(--terminal-red); margin-bottom: 25px; display: block;">&gt; SEND_ENCRYPTED_MESSAGE</span>
-        <form id="contact-form">
-            <label class="terminal-label">User_ID:</label>
-            <input type="text" required class="terminal-input" placeholder="...">
-            <label class="terminal-label">Return_Address:</label>
-            <input type="email" required class="terminal-input" placeholder="...">
-            <label class="terminal-label">Payload_Data:</label>
-            <textarea required class="terminal-input" rows="3" placeholder="..."></textarea>
-            <button type="submit" id="submit-btn" class="terminal-submit">Execute Transmission</button>
-        </form>
-    </div>
+<section id="contact" class="contact-box" data-aos="zoom-in">
+    <h2 style="font-family: monospace; color: var(--terminal-red);">> EXECUTE TRANSMISSION</h2>
+    <form onsubmit="event.preventDefault(); alert('Transmission Received. Message ID: ' + Math.floor(Math.random()*99999));">
+        <input type="text" placeholder="USER_ID" style="width:100%; background:transparent; border:none; border-bottom: 1px solid #333; color:var(--accent-cyan); margin: 20px 0; padding:10px; outline:none;" required>
+        <button type="submit" class="btn" style="width:100%;">Establish Connection</button>
+    </form>
 </section>
 
-<footer style="text-align: center; padding: 40px 0; color: #444; font-size: 0.7rem;">
-    &copy; 2026 MAREC Insights // BI & Data Strategy // Las Vegas, NV
-</footer>
-
-<script src="https://www.youtube.com/iframe_api"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
-    let player;
-    function onYouTubeIframeAPIReady() {
-        player = new YT.Player('video1', {
-            videoId: 'osrFEJkhISo',
-            playerVars: { 'autoplay': 0, 'mute': 1, 'loop': 1, 'playlist': 'osrFEJkhISo', 'controls': 0 }
+    AOS.init({ duration: 1000 });
+
+    // BOOT SEQUENCE
+    function initBoot() {
+        const log = document.getElementById('boot-log');
+        const lines = ["> INITIALIZING...", "> MOUNTING VIDEO_CORE...", "> SYSTEM READY."];
+        lines.forEach((line, i) => {
+            setTimeout(() => {
+                const d = document.createElement('div');
+                d.innerHTML = line;
+                log.appendChild(d);
+            }, i * 500);
         });
     }
 
-    function autoInit() {
-        const logs = ["KERNEL_BOOT...", "UPLINK_STABLE...", "GUI_RENDERED...", "SYSTEM_READY."];
-        const logBox = document.getElementById('boot-log');
-        logs.forEach((t, i) => setTimeout(() => {
-            const l = document.createElement('div');
-            l.innerText = "> " + t;
-            logBox.appendChild(l);
-        }, i * 300));
-    }
-
-    function startExperience() {
-        if (player) { player.playVideo(); }
+    function startSite() {
         document.getElementById('boot-overlay').style.opacity = '0';
         setTimeout(() => document.getElementById('boot-overlay').style.display = 'none', 500);
-    }
-
-    // FORM LOGIC
-    const form = document.getElementById('contact-form');
-    const btn = document.getElementById('submit-btn');
-    const success = document.getElementById('success-overlay');
-
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        btn.innerText = "UPLINKING...";
-        btn.disabled = true;
         
-        // Simulating Transmission Delay
-        setTimeout(() => {
-            document.getElementById('msg-id').innerText = Math.floor(Math.random() * 90000) + 10000;
-            success.style.display = "flex";
-            setTimeout(() => success.style.opacity = "1", 10);
-        }, 1500);
-    });
-
-    function closeAlert() {
-        success.style.opacity = "0";
-        setTimeout(() => {
-            success.style.display = "none";
-            form.reset();
-            btn.innerText = "Execute Transmission";
-            btn.disabled = false;
-        }, 500);
+        // Refresh video to ensure autoplay kicks in after user interaction
+        const iframe = document.getElementById('hero-video');
+        iframe.src = iframe.src; 
     }
+
+    // PARTICLE BACKGROUND
+    const canvas = document.getElementById('particle-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    class Particle {
+        constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.size = Math.random() * 1.5;
+            this.speedX = Math.random() * 0.4 - 0.2;
+            this.speedY = Math.random() * 0.4 - 0.2;
+        }
+        update() {
+            this.x += this.speedX; this.y += this.speedY;
+            if (this.x > canvas.width) this.x = 0; if (this.y > canvas.height) this.y = 0;
+        }
+        draw() {
+            ctx.fillStyle = '#00f2ff';
+            ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI*2); ctx.fill();
+        }
+    }
+    for(let i=0; i<80; i++) particles.push(new Particle());
+    function animate() {
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        particles.forEach(p => { p.update(); p.draw(); });
+        requestAnimationFrame(animate);
+    }
+    animate();
 </script>
+
 </body>
 </html>
