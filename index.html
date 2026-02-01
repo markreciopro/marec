@@ -3,25 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MAREC Insights | Mark Anthony Recio | BI & Data Strategy</title>
+    <title>MAREC Insights | BI & Data Strategy</title>
     
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <style>
-        /* --- BRAND COLOR PALETTE --- */
         :root {
             --bg-black: #050505;
             --accent-cyan: #00f2ff; 
             --accent-blue: #3b82f6; 
             --terminal-red: #ff3131; 
-            --terminal-gray: #7a7a7a;
-            --text-white: #f0f0f0;
+            --terminal-green: #4af626;
             --border-color: #1a1a1a;
             --cyan-glow: 0 0 15px rgba(0, 242, 255, 0.4);
-            --red-glow: 0 0 15px rgba(255, 49, 49, 0.5);
             --blue-glow: 0 0 15px rgba(59, 130, 246, 0.3);
-
-            /* Syntax Highlighting */
+            
             --syntax-kw: #ff79c6;
             --syntax-fn: #50fa7b;
             --syntax-vr: #8be9fd;
@@ -31,409 +27,280 @@
 
         body, html {
             margin: 0; padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #f0f0f0; scroll-behavior: smooth; background: #000;
-            overflow-x: hidden;
+            font-family: 'Consolas', monospace;
+            color: #f0f0f0; background: #000;
+            overflow-x: hidden; scroll-behavior: smooth;
         }
 
-        /* --- BACKGROUND PARTICLES --- */
         #particle-canvas {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 0; pointer-events: none; opacity: 0.3;
+            position: fixed; top: 0; left: 0; z-index: 0; opacity: 0.3; pointer-events: none;
         }
+
+        /* --- BOOT SYSTEM --- */
+        #boot-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #000; z-index: 9999; display: flex; 
+            justify-content: center; align-items: center; flex-direction: column;
+            cursor: pointer; transition: 0.8s ease-in-out;
+        }
+        #boot-log {
+            width: 300px; padding: 20px; border: 1px solid var(--accent-cyan);
+            color: var(--accent-cyan); font-size: 0.8rem; background: rgba(0,0,0,0.8);
+        }
+
+        /* --- HERO & LAPTOP --- */
+        .hero-section {
+            position: relative; height: 100vh; display: flex; align-items: center;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.8), #000), url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=2426');
+            background-size: cover; z-index: 1;
+        }
+        .hero-container {
+            max-width: 1200px; margin: 0 auto; display: grid; 
+            grid-template-columns: 1fr 1fr; gap: 40px; padding: 0 40px; align-items: center;
+        }
+        .laptop-container {
+            position: relative; width: 100%; aspect-ratio: 16/10;
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+        
+        .laptop-image { position: absolute; width: 100%; z-index: 10; pointer-events: none; }
+        .laptop-screen {
+            position: absolute; top: 7.5%; left: 12.1%; width: 75.8%; height: 78%;
+            background: #000; z-index: 5; overflow: hidden;
+        }
+
+        /* --- CARDS --- */
+        .marec-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px; padding: 100px 40px; max-width: 1200px; margin: 0 auto;
+        }
+        .marec-card {
+            background: rgba(10,10,10,0.8); border: 1px solid var(--border-color);
+            padding: 30px; transition: 0.3s; position: relative;
+        }
+        .marec-card:hover { border-color: var(--accent-cyan); box-shadow: var(--cyan-glow); }
+        .code-snippet { display: none; font-size: 0.7rem; color: #fff; margin-top: 15px; }
+        .marec-card:hover .card-content { display: none; }
+        .marec-card:hover .code-snippet { display: block; }
+
+        /* --- CONTACT FORM --- */
+        .terminal-form {
+            max-width: 600px; margin: 50px auto; border: 1px solid var(--border-color);
+            padding: 40px; background: #000;
+        }
+        .terminal-input {
+            width: 100%; background: transparent; border: none; 
+            border-bottom: 1px solid #333; color: var(--terminal-green);
+            padding: 10px 0; margin-bottom: 30px; outline: none; font-family: 'Consolas', monospace;
+        }
+        .terminal-submit {
+            width: 100%; padding: 15px; background: transparent; 
+            border: 1px solid var(--accent-cyan); color: var(--accent-cyan);
+            cursor: pointer; text-transform: uppercase; transition: 0.3s;
+        }
+        .terminal-submit:hover { background: var(--accent-cyan); color: #000; }
 
         /* --- SUCCESS OVERLAY --- */
         #success-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9); z-index: 10000; display: none;
+            background: rgba(0,0,0,0.95); z-index: 10000; display: none;
             justify-content: center; align-items: center; flex-direction: column;
-            transition: opacity 0.5s ease;
-        }
-        .alert-box {
-            width: 350px; padding: 30px; border: 1px solid var(--accent-blue);
-            background: #000; box-shadow: var(--blue-glow); text-align: center;
-            font-family: 'Consolas', monospace;
         }
 
-        /* --- HERO: LAPTOP LEFT, TEXT RIGHT --- */
-        .hero-section {
-            position: relative; height: 90vh; min-height: 650px;
-            background: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=2426') no-repeat center center/cover;
-            display: flex; align-items: center; overflow: hidden; z-index: 1;
-        }
-        .hero-overlay {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(225deg, rgba(5, 10, 20, 0.96) 35%, rgba(0, 0, 0, 0.5) 100%);
-            display: flex; align-items: center;
-        }
-        .hero-container {
-            max-width: 1300px; margin: 0 auto; padding: 0 40px; z-index: 2;
-            display: grid; grid-template-columns: 1.1fr 0.9fr; align-items: center; gap: 60px; width: 100%;
-        }
-
-        /* --- LAPTOP MOCKUP --- */
-        .laptop-wrapper { position: relative; width: 100%; }
-        .laptop-container { 
-            position: relative; width: 100%; aspect-ratio: 16 / 10; 
-            filter: drop-shadow(0 0 25px rgba(0, 242, 255, 0.15));
-            animation: floatHero 6s ease-in-out infinite;
-        }
-        @keyframes floatHero {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-        }
-        .laptop-image { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; pointer-events: none; }
-        .laptop-screen-content {
-            position: absolute; top: 7.5%; left: 12.1%; width: 75.8%; height: 78%;
-            z-index: 5; background: #000; overflow: hidden;
-        }
-        #video1 { width: 100%; height: 100%; border: none; }
-
-        /* --- TEXT STYLES --- */
-        .hero-subtitle { text-transform: uppercase; letter-spacing: 3px; font-size: 0.8rem; color: var(--accent-cyan); font-weight: bold; }
-        .hero-title { font-size: 3.5rem; line-height: 1.1; margin: 15px 0; font-weight: 800; }
-        .hero-description { font-size: 1.15rem; margin-bottom: 30px; opacity: 0.8; line-height: 1.6; max-width: 500px; }
-
-        .btn { display: inline-block; padding: 12px 30px; border-radius: 4px; text-decoration: none; font-weight: bold; transition: 0.3s; margin-right: 15px; cursor: pointer; }
-        .btn-primary { background-color: var(--accent-cyan); color: #000; border: none; }
-        .btn-primary:hover { box-shadow: var(--cyan-glow); transform: translateY(-2px); }
-        .btn-secondary { border: 1px solid white; color: white; }
-
-        /* --- MISSION --- */
-        .mission-wrap { max-width: 900px; margin: 80px auto; padding: 0 40px; position: relative; z-index: 1;}
-        .mission-statement { 
-            font-style: italic; font-size: 1.4rem; color: #ddd; 
-            border-left: 6px solid var(--accent-cyan); padding: 25px 35px; 
-            background: rgba(0, 242, 255, 0.03); line-height: 1.5; 
-        }
-
-        /* --- GRID --- */
-        .framework-section { background: var(--bg-black); padding: 80px 0; font-family: 'Consolas', monospace; position: relative; z-index: 1; }
-        .marec-grid { 
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
-            gap: 20px; max-width: 1300px; margin: 0 auto; padding: 0 40px; 
-        }
-        .marec-card { 
-            background: rgba(10, 10, 10, 0.95); border: 1px solid var(--border-color); padding: 30px; 
-            min-height: 320px; transition: 0.4s; position: relative; overflow: hidden;
-            display: flex; flex-direction: column; backdrop-filter: blur(5px);
-        }
-        .marec-card:hover { border-color: var(--accent-cyan); box-shadow: var(--cyan-glow); transform: scale(1.02); }
-        .card-letter { font-size: 2.5rem; color: var(--terminal-red); font-weight: bold; margin-bottom: 10px; display: block; }
-        .card-title { color: var(--accent-cyan); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; }
-        .card-content { font-size: 0.9rem; color: #aaa; line-height: 1.6; flex-grow: 1; }
-
-        .code-snippet { 
-            display: none; font-size: 0.75rem; background: #000; padding: 15px; 
-            border: 1px solid #222; border-radius: 4px; white-space: pre; color: #f8f8f2;
-        }
-        .marec-card:hover .card-content { display: none; }
-        .marec-card:hover .code-snippet { display: block; animation: fadeIn 0.4s; }
-
-        /* --- TELEMETRY TICKER --- */
         .telemetry-bar {
-            background: #080808; border-top: 1px solid #1a1a1a; padding: 10px 0;
-            overflow: hidden; white-space: nowrap; font-family: 'Consolas', monospace;
-            font-size: 0.7rem; color: var(--accent-cyan); opacity: 0.6;
+            background: #080808; padding: 10px 0; overflow: hidden; white-space: nowrap;
+            font-size: 0.7rem; color: var(--accent-cyan); border-top: 1px solid #111;
         }
-        .telemetry-scroll { display: inline-block; animation: scrollText 25s linear infinite; }
-        @keyframes scrollText { from { transform: translateX(100%); } to { transform: translateX(-100%); } }
+        .scroll { display: inline-block; animation: scroll 20s linear infinite; }
+        @keyframes scroll { from { transform: translateX(100%); } to { transform: translateX(-100%); } }
 
-        /* --- CONTACT --- */
-        .contact-section { padding: 100px 0; background: #050505; position: relative; z-index: 1;}
-        .terminal-form { max-width: 600px; margin: 0 auto; background: #000; border: 1px solid var(--border-color); padding: 40px; }
-        .terminal-input { 
-            width: 100%; background: transparent; border: none; border-bottom: 1px solid #333; 
-            color: var(--accent-cyan); font-family: 'Consolas', monospace; padding: 10px 0; margin-bottom: 30px; outline: none; 
+        @media (max-width: 900px) {
+            .hero-container { grid-template-columns: 1fr; text-align: center; }
         }
-        .terminal-submit { 
-            background: transparent; border: 1px solid var(--accent-cyan); color: var(--accent-cyan); 
-            padding: 15px; cursor: pointer; text-transform: uppercase; font-size: 0.9rem; width: 100%; 
-            transition: 0.3s; font-family: 'Consolas', monospace; letter-spacing: 2px;
-        }
-        .terminal-submit:hover { background: var(--accent-cyan); color: #000; box-shadow: var(--cyan-glow); }
-
-        .status-bar { background: #080808; padding: 40px 0; text-align: center; border-bottom: 1px solid #1a1a1a; }
-        .status-text { font-size: 2.2rem; color: var(--terminal-red); letter-spacing: 5px; text-shadow: var(--red-glow); margin: 0; }
-        .cursor { display: inline-block; width: 10px; height: 25px; background: var(--terminal-red); animation: blink 1s infinite; vertical-align: middle; }
-
-        #boot-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 9999; display: flex; justify-content: center; align-items: center; flex-direction: column; transition: 0.5s; cursor: pointer; }
-        #boot-log { width: 320px; padding: 25px; border: 1px solid var(--accent-cyan); background: #000; color: var(--accent-cyan); font-size: 0.8rem; }
-
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes blink { 50% { opacity: 0; } }
-        @media (max-width: 992px) { .hero-container { grid-template-columns: 1fr; text-align: center; } }
     </style>
 </head>
 <body onload="autoInit()">
 
 <canvas id="particle-canvas"></canvas>
 
-<div id="success-overlay">
-    <div class="alert-box">
-        <h3 id="uplink-status" style="color: var(--accent-blue); margin-top:0;">[ ENCRYPTING_DATA ]</h3>
-        <p style="font-size: 0.8rem; color: var(--accent-cyan);">
-            MSG_ID: #<span id="msg-id">----</span><br>
-            <span id="progress-text">INITIALIZING SECURE TUNNEL...</span>
-        </p>
-        <div id="reboot-btn-container" style="display:none;">
-            <button onclick="closeAlert()" class="terminal-submit" style="font-size: 0.7rem; padding: 8px;">[ REBOOT TERMINAL ]</button>
-        </div>
-    </div>
-</div>
-
 <div id="boot-overlay" onclick="startExperience()">
     <div id="boot-log"></div>
-    <div style="margin-top:20px; font-size: 0.6rem; color: var(--terminal-gray); letter-spacing: 2px;">
-        [ SYSTEM READY: CLICK TO INITIALIZE ]
+    <div style="margin-top:20px; font-size: 0.6rem; color: #555;">[ CLICK TO INITIALIZE SYSTEM ]</div>
+</div>
+
+<div id="success-overlay">
+    <div style="border: 1px solid var(--accent-blue); padding: 30px; text-align: center; background: #000;">
+        <h3 id="uplink-status" style="color: var(--accent-blue);">[ ENCRYPTING_DATA ]</h3>
+        <p id="progress-text" style="font-size: 0.8rem;">INITIALIZING...</p>
+        <button id="reboot-btn" onclick="location.reload()" style="display:none;" class="terminal-submit">REBOOT</button>
     </div>
 </div>
 
 <header class="hero-section">
-    <div class="hero-overlay">
-        <div class="hero-container">
-            <div class="hero-visual-side" data-aos="fade-right">
-                <div class="laptop-wrapper">
-                    <div class="laptop-container">
-                        <img src="https://raw.githubusercontent.com/Pritam601/Laptop-Mockup/main/laptop-mockup.png" class="laptop-image" alt="Laptop Frame">
-                        <div class="laptop-screen-content">
-                            <div id="video1"></div>
-                        </div>
-                    </div>
+    <div class="hero-container">
+        <div class="hero-visual" data-aos="fade-right">
+            <div class="laptop-container">
+                <img src="https://raw.githubusercontent.com/Pritam601/Laptop-Mockup/main/laptop-mockup.png" class="laptop-image">
+                <div class="laptop-screen">
+                    <div id="video1"></div>
                 </div>
             </div>
-            <div class="hero-text-side" data-aos="fade-left">
-                <span class="hero-subtitle">Strategic Data Foundations</span>
-                <h1 class="hero-title">Built for Strategy.<br>Rooted in Growth.</h1>
-                <p class="hero-description">Engineering high-fidelity data ecosystems to bridge the gap between human intuition and algorithmic precision.</p>
-                <div class="hero-buttons">
-                    <a href="#mission" class="btn btn-primary">Our Mission</a>
-                    <a href="#contact" class="btn btn-secondary">Connect</a>
-                </div>
-            </div>
+        </div>
+        <div class="hero-text" data-aos="fade-left">
+            <h1 style="font-size: 3rem; margin: 0;">STRATEGY.<br><span style="color: var(--accent-cyan);">GROWTH.</span></h1>
+            <p style="opacity: 0.7;">Engineering high-fidelity data ecosystems.</p>
+            <a href="#contact" class="terminal-submit" style="text-decoration: none; display: inline-block; width: auto; padding: 10px 30px;">CONNECT</a>
         </div>
     </div>
 </header>
 
-<section id="mission" class="mission-wrap" data-aos="fade-up">
-    <blockquote class="mission-statement">
-        "Derived from the Latin root for strategy and the linguistic term for the season of growth, 
-        MAREC reflects my mission: providing the strategic data foundations that allow businesses 
-        to innovate and grow with confidence."
-    </blockquote>
-</section>
-
-<div class="status-bar">
-    <h1 class="status-text">C:\> MAREC_FRAMEWORK.sys<span class="cursor"></span></h1>
-</div>
-
-<section class="framework-section">
-    <div class="marec-grid">
-        <div class="marec-card" data-aos="zoom-in-up" data-aos-delay="100">
-            <span class="card-letter">M</span><h3 class="card-title">Modeling</h3>
-            <div class="card-content">Predictive intelligence to forecast recruitment trends and optimize talent flow.</div>
-            <div class="code-snippet"><span style="color:var(--syntax-cm)"># Python: Forecast</span>
-<span style="color:var(--syntax-kw)">from</span> marec_ai <span style="color:var(--syntax-kw)">import</span> Forecast
-<span style="color:var(--syntax-vr)">model</span> = <span style="color:var(--syntax-fn)">Forecast</span>(engine=<span style="color:var(--syntax-st)">"XGBoost"</span>)</div>
-        </div>
-        <div class="marec-card" data-aos="zoom-in-up" data-aos-delay="200">
-            <span class="card-letter">A</span><h3 class="card-title">Analytics</h3>
-            <div class="card-content">Deep-dive financial and operational audits to eliminate waste and maximize ROI.</div>
-            <div class="code-snippet"><span style="color:var(--syntax-cm)">-- SQL: Audit</span>
-<span style="color:var(--syntax-kw)">SELECT</span> cost, <span style="color:var(--syntax-fn)">SUM</span>(savings)
-<span style="color:var(--syntax-kw)">FROM</span> operational_audit;</div>
-        </div>
-        <div class="marec-card" data-aos="zoom-in-up" data-aos-delay="300">
-            <span class="card-letter">R</span><h3 class="card-title">Reporting</h3>
-            <div class="card-content">Dynamic Power BI and Tableau services transforming raw data into decision narratives.</div>
-            <div class="code-snippet"><span style="color:var(--syntax-cm)">// DAX: ROI</span>
-<span style="color:var(--syntax-vr)">ROI</span> = <span style="color:var(--syntax-fn)">DIVIDE</span>([Gain], [Cost])</div>
-        </div>
-        <div class="marec-card" data-aos="zoom-in-up" data-aos-delay="400">
-            <span class="card-letter">E</span><h3 class="card-title">Efficiency</h3>
-            <div class="card-content">Custom automation scripts to liberate workforce capacity and streamline HR processes.</div>
-            <div class="code-snippet"><span style="color:var(--syntax-cm)"># Python: Automate</span>
-<span style="color:var(--syntax-kw)">def</span> <span style="color:var(--syntax-fn)">run_sync</span>():
-    <span style="color:var(--syntax-vr)">task</span> = <span style="color:var(--syntax-fn)">Automate</span>()</div>
-        </div>
-        <div class="marec-card" data-aos="zoom-in-up" data-aos-delay="500">
-            <span class="card-letter">C</span><h3 class="card-title">Consultancy</h3>
-            <div class="card-content">High-level BI strategy and change management for technical scalability.</div>
-            <div class="code-snippet"><span style="color:var(--syntax-cm)">/* Change Management */</span>
-<span style="color:var(--syntax-kw)">Status</span>: <span style="color:var(--syntax-st)">"Optimized"</span></div>
-        </div>
+<section class="marec-grid">
+    <div class="marec-card" data-aos="zoom-in">
+        <span style="color: var(--terminal-red); font-size: 2rem;">M</span>
+        <h3>Modeling</h3>
+        <div class="card-content">Predictive intelligence.</div>
+        <div class="code-snippet"><span style="color:var(--syntax-kw)">import</span> marec_ai</div>
+    </div>
+    <div class="marec-card" data-aos="zoom-in" data-aos-delay="100">
+        <span style="color: var(--terminal-red); font-size: 2rem;">A</span>
+        <h3>Analytics</h3>
+        <div class="card-content">Financial audits.</div>
+        <div class="code-snippet"><span style="color:var(--syntax-fn)">SELECT</span> * <span style="color:var(--syntax-kw)">FROM</span> roi</div>
+    </div>
+    <div class="marec-card" data-aos="zoom-in" data-aos-delay="200">
+        <span style="color: var(--terminal-red); font-size: 2rem;">R</span>
+        <h3>Reporting</h3>
+        <div class="card-content">Power BI narratives.</div>
+        <div class="code-snippet"><span style="color:var(--syntax-vr)">ROI</span> = <span style="color:var(--syntax-fn)">DIVIDE</span>(G, C)</div>
     </div>
 </section>
 
-<section id="contact" class="contact-section">
-    <div class="terminal-form" data-aos="flip-down">
-        <span style="font-size: 0.65rem; color: var(--terminal-red); margin-bottom: 25px; display: block;">&gt; SEND_ENCRYPTED_MESSAGE</span>
-        <form id="contact-form" action="https://formspree.io/f/your-email@example.com" method="POST">
-            <label class="terminal-label">User_ID (Name):</label>
-            <input type="text" name="name" required class="terminal-input" placeholder="...">
-            <label class="terminal-label">Return_Address (Email):</label>
-            <input type="email" name="email" required class="terminal-input" placeholder="...">
-            <label class="terminal-label">Payload_Data (Message):</label>
-            <textarea name="message" required class="terminal-input" rows="3" placeholder="..."></textarea>
-            <button type="submit" id="submit-btn" class="terminal-submit">Execute Transmission</button>
+<section id="contact">
+    <div class="terminal-form" data-aos="fade-up">
+        <span style="color: var(--terminal-red); font-size: 0.7rem;">> SEND_MESSAGE</span>
+        <form id="contact-form">
+            <input type="hidden" name="access_key" value="a95bf936-f0f8-4d9a-b377-cbdffbbece56">
+            <input type="text" name="name" placeholder="USER_ID" class="terminal-input" required>
+            <input type="email" name="email" placeholder="EMAIL_ADDRESS" class="terminal-input" required>
+            <textarea name="message" placeholder="MESSAGE_PAYLOAD" class="terminal-input" rows="3" required></textarea>
+            <button type="submit" id="submit-btn" class="terminal-submit">EXECUTE TRANSMISSION</button>
         </form>
     </div>
 </section>
 
 <div class="telemetry-bar">
-    <div class="telemetry-scroll">
-        SYSTEM_ACTIVE // ENCRYPTING_PACKETS... // SCANNING_HORIZON_2026 // BI_ENGINE_STABLE // ROI_OPTIMIZATION_RUNNING // LAS_VEGAS_NODE_ONLINE // 
-    </div>
+    <div class="scroll">SYSTEM_ACTIVE // ENCRYPTING_PACKETS... // BI_ENGINE_STABLE // LAS_VEGAS_NODE_ONLINE // 2026_READY</div>
 </div>
-
-<footer style="text-align: center; padding: 40px 0; color: #444; font-size: 0.7rem; border-top: 1px solid #111;">
-    &copy; 2026 MAREC Insights // BI & Data Strategy // Las Vegas, NV
-</footer>
 
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script src="https://www.youtube.com/iframe_api"></script>
 
 <script>
-    AOS.init({ duration: 1000, once: true });
+    AOS.init();
 
-    // 1. YouTube Logic - Starts immediately on boot clear
+    // 1. AUDIO ENGINE
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    function playSound(freq, type = 'square', duration = 0.1) {
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+    }
+
+    // 2. BOOT SEQUENCE
+    function autoInit() {
+        const log = document.getElementById('boot-log');
+        const lines = ["> KERNEL_LOAD", "> NET_SYNC", "> READY."];
+        lines.forEach((l, i) => {
+            setTimeout(() => {
+                const d = document.createElement('div');
+                d.innerText = l;
+                log.appendChild(d);
+                playSound(200 + (i * 100), 'sine');
+            }, i * 400);
+        });
+    }
+
     let player;
     function onYouTubeIframeAPIReady() {
         player = new YT.Player('video1', {
             videoId: 'osrFEJkhISo',
-            playerVars: { 
-                'autoplay': 1, 
-                'mute': 1, 
-                'loop': 1, 
-                'playlist': 'osrFEJkhISo', 
-                'controls': 0,
-                'rel': 0,
-                'showinfo': 0,
-                'enablejsapi': 1,
-                'origin': window.location.origin
-            },
-            events: {
-                'onReady': (event) => {
-                    // Pre-mute to ensure autoplay is allowed
-                    event.target.mute();
-                }
-            }
+            playerVars: { autoplay: 1, mute: 1, loop: 1, playlist: 'osrFEJkhISo', controls: 0 }
         });
     }
 
-    // 2. Boot Sequence
-    function autoInit() {
-        const logs = ["KERNEL_BOOT...", "UPLINK_STABLE...", "GUI_RENDERED...", "SYSTEM_READY."];
-        const logBox = document.getElementById('boot-log');
-        logs.forEach((t, i) => setTimeout(() => {
-            const l = document.createElement('div');
-            l.innerText = "> " + t;
-            logBox.appendChild(l);
-        }, i * 300));
-    }
-
     function startExperience() {
-        if (player && player.playVideo) { 
-            player.playVideo(); 
-        }
+        playSound(800, 'square', 0.2);
         document.getElementById('boot-overlay').style.opacity = '0';
-        setTimeout(() => document.getElementById('boot-overlay').style.display = 'none', 500);
+        setTimeout(() => {
+            document.getElementById('boot-overlay').style.display = 'none';
+            if(player) player.playVideo();
+        }, 800);
     }
 
-    // 3. Particle Background
+    // 3. FORM FEATURE (WEB3FORMS)
+    const form = document.getElementById('contact-form');
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        playSound(440, 'square', 0.5);
+        
+        const overlay = document.getElementById('success-overlay');
+        const progress = document.getElementById('progress-text');
+        overlay.style.display = 'flex';
+
+        const steps = ["CONNECTING...", "ENCRYPTING...", "UPLINKING..."];
+        steps.forEach((s, i) => {
+            setTimeout(() => {
+                progress.innerText = s;
+                playSound(600 + (i * 200), 'sine');
+            }, i * 800);
+        });
+
+        const formData = new FormData(form);
+        const object = Object.fromEntries(formData);
+        const json = JSON.stringify(object);
+
+        fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: json
+        }).then(() => {
+            setTimeout(() => {
+                document.getElementById('uplink-status').innerText = "[ COMPLETE ]";
+                document.getElementById('uplink-status').style.color = "var(--terminal-green)";
+                progress.innerText = "TRANSMISSION SUCCESSFUL.";
+                document.getElementById('reboot-btn').style.display = "block";
+                playSound(1200, 'sine', 0.4);
+            }, 2500);
+        });
+    });
+
+    // 4. PARTICLE FEATURE
     const canvas = document.getElementById('particle-canvas');
     const ctx = canvas.getContext('2d');
-    let particles = [];
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-
-    class Particle {
-        constructor() {
-            this.x = Math.random() * canvas.width;
-            this.y = Math.random() * canvas.height;
-            this.size = Math.random() * 1.5;
-            this.speedX = Math.random() * 0.5 - 0.25;
-            this.speedY = Math.random() * 0.5 - 0.25;
-        }
-        update() {
-            this.x += this.speedX; this.y += this.speedY;
-            if (this.x > canvas.width) this.x = 0; if (this.y > canvas.height) this.y = 0;
-            if (this.x < 0) this.x = canvas.width; if (this.y < 0) this.y = canvas.height;
-        }
-        draw() {
-            ctx.fillStyle = '#00f2ff';
-            ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill();
+    let parts = [];
+    class P {
+        constructor() { this.x = Math.random()*canvas.width; this.y = Math.random()*canvas.height; this.vx = Math.random()-0.5; this.vy = Math.random()-0.5; }
+        draw() { 
+            this.x += this.vx; this.y += this.vy;
+            if(this.x<0 || this.x>canvas.width) this.vx*=-1;
+            if(this.y<0 || this.y>canvas.height) this.vy*=-1;
+            ctx.fillStyle = '#00f2ff'; ctx.fillRect(this.x, this.y, 1.5, 1.5);
         }
     }
-
-    for (let i = 0; i < 80; i++) particles.push(new Particle());
-    function animateParticles() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        particles.forEach(p => { p.update(); p.draw(); });
-        requestAnimationFrame(animateParticles);
-    }
-    animateParticles();
-
-    // 4. Enhanced Encryption Messaging Logic
-    const form = document.getElementById('contact-form');
-    const btn = document.getElementById('submit-btn');
-    const success = document.getElementById('success-overlay');
-
-    form.addEventListener('submit', (e) => {
-        // We prevent default to show our cool animation first
-        e.preventDefault();
-        
-        btn.innerText = "EXECUTING...";
-        btn.disabled = true;
-
-        // Show overlay and start "transmission"
-        success.style.display = "flex";
-        setTimeout(() => success.style.opacity = "1", 10);
-
-        const msgId = Math.floor(Math.random() * 90000) + 10000;
-        document.getElementById('msg-id').innerText = msgId;
-
-        const progressSteps = [
-            "ESTABLISHING HANDSHAKE...",
-            "ENCRYPTING PAYLOAD...",
-            "BYPASSING FIREWALLS...",
-            "UPLINK SUCCESSFUL."
-        ];
-
-        let step = 0;
-        const interval = setInterval(() => {
-            document.getElementById('progress-text').innerText = progressSteps[step];
-            step++;
-            if(step >= progressSteps.length) {
-                clearInterval(interval);
-                document.getElementById('uplink-status').innerText = "[ UPLINK_COMPLETE ]";
-                document.getElementById('uplink-status').style.color = "var(--syntax-fn)";
-                document.getElementById('reboot-btn-container').style.display = "block";
-                
-                // At this point, you would typically submit the form to a real backend
-                // form.submit(); 
-            }
-        }, 800);
-    });
-
-    function closeAlert() {
-        success.style.opacity = "0";
-        setTimeout(() => {
-            success.style.display = "none";
-            form.reset();
-            btn.innerText = "Execute Transmission";
-            btn.disabled = false;
-            // Reset overlay for next time
-            document.getElementById('uplink-status').innerText = "[ ENCRYPTING_DATA ]";
-            document.getElementById('uplink-status').style.color = "var(--accent-blue)";
-            document.getElementById('reboot-btn-container').style.display = "none";
-        }, 500);
-    }
-
-    window.addEventListener('resize', () => {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    });
+    for(let i=0; i<60; i++) parts.push(new P());
+    function anim() { ctx.clearRect(0,0,canvas.width, canvas.height); parts.forEach(p=>p.draw()); requestAnimationFrame(anim); }
+    anim();
 </script>
 </body>
 </html>
