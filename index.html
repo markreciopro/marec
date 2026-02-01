@@ -71,7 +71,7 @@
             display: grid; grid-template-columns: 1.1fr 0.9fr; align-items: center; gap: 60px; width: 100%;
         }
 
-        /* --- LAPTOP MOCKUP (WITH FLOAT ANIMATION) --- */
+        /* --- LAPTOP MOCKUP --- */
         .laptop-wrapper { position: relative; width: 100%; }
         .laptop-container { 
             position: relative; width: 100%; aspect-ratio: 16 / 10; 
@@ -87,7 +87,8 @@
             position: absolute; top: 7.5%; left: 12.1%; width: 75.8%; height: 78%;
             z-index: 5; background: #000; overflow: hidden;
         }
-        .header-frame { width: 100%; height: 100%; border: none; }
+        /* Style for the injected YouTube iframe */
+        .laptop-screen-content iframe { width: 100%; height: 100%; border: none; }
 
         /* --- TEXT STYLES --- */
         .hero-subtitle { text-transform: uppercase; letter-spacing: 3px; font-size: 0.8rem; color: var(--accent-cyan); font-weight: bold; }
@@ -136,13 +137,8 @@
             overflow: hidden; white-space: nowrap; font-family: 'Consolas', monospace;
             font-size: 0.7rem; color: var(--accent-cyan); opacity: 0.6;
         }
-        .telemetry-scroll {
-            display: inline-block; animation: scrollText 25s linear infinite;
-        }
-        @keyframes scrollText {
-            from { transform: translateX(100%); }
-            to { transform: translateX(-100%); }
-        }
+        .telemetry-scroll { display: inline-block; animation: scrollText 25s linear infinite; }
+        @keyframes scrollText { from { transform: translateX(100%); } to { transform: translateX(-100%); } }
 
         /* --- CONTACT --- */
         .contact-section { padding: 100px 0; background: #050505; position: relative; z-index: 1;}
@@ -162,7 +158,7 @@
         .status-text { font-size: 2.2rem; color: var(--terminal-red); letter-spacing: 5px; text-shadow: var(--red-glow); margin: 0; }
         .cursor { display: inline-block; width: 10px; height: 25px; background: var(--terminal-red); animation: blink 1s infinite; vertical-align: middle; }
 
-        #boot-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 9999; display: flex; justify-content: center; align-items: center; flex-direction: column; transition: 0.5s; }
+        #boot-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 9999; display: flex; justify-content: center; align-items: center; flex-direction: column; transition: 0.5s; cursor: pointer; }
         #boot-log { width: 320px; padding: 25px; border: 1px solid var(--accent-cyan); background: #000; color: var(--accent-cyan); font-size: 0.8rem; }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -197,7 +193,7 @@
                     <div class="laptop-container">
                         <img src="https://raw.githubusercontent.com/Pritam601/Laptop-Mockup/main/laptop-mockup.png" class="laptop-image" alt="Laptop Frame">
                         <div class="laptop-screen-content">
-                            <iframe id="video1" class="header-frame" src="" frameborder="0" allow="autoplay; encrypted-media"></iframe>
+                            <div id="video1"></div>
                         </div>
                     </div>
                 </div>
@@ -297,12 +293,23 @@
     // 1. Initialize Scroll Animations
     AOS.init({ duration: 1000, once: true });
 
-    // 2. YouTube Logic
+    // 2. YouTube Logic - Corrected for API handshake
     let player;
     function onYouTubeIframeAPIReady() {
         player = new YT.Player('video1', {
             videoId: 'osrFEJkhISo',
-            playerVars: { 'autoplay': 0, 'mute': 1, 'loop': 1, 'playlist': 'osrFEJkhISo', 'controls': 0 }
+            playerVars: { 
+                'autoplay': 1, 
+                'mute': 1, 
+                'loop': 1, 
+                'playlist': 'osrFEJkhISo', 
+                'controls': 0,
+                'enablejsapi': 1,
+                'origin': window.location.origin 
+            },
+            events: {
+                'onReady': (event) => { event.target.mute(); }
+            }
         });
     }
 
@@ -318,12 +325,12 @@
     }
 
     function startExperience() {
-        if (player) { player.playVideo(); }
+        if (player && player.playVideo) { player.playVideo(); }
         document.getElementById('boot-overlay').style.opacity = '0';
         setTimeout(() => document.getElementById('boot-overlay').style.display = 'none', 500);
     }
 
-    // 4. Particle Background Logic
+    // 4. Particle Background Logic (Untouched as requested)
     const canvas = document.getElementById('particle-canvas');
     const ctx = canvas.getContext('2d');
     let particles = [];
