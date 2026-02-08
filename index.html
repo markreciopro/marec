@@ -3,252 +3,182 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MAREC Insights | Intelligence Architect</title>
+    <title>MAREC Insights | Data & Operations Consulting</title>
     
+    <link rel="icon" type="image/png" href="logo.png">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-black: #020202;
-            --card-bg: rgba(8, 8, 12, 0.95);
-            --border-color: #003366;
-            --terminal-red: #ff3131; 
-            --terminal-blue: #00d4ff;
-            --terminal-gray: #555555;
-            --text-main: #e0e0e0;
-            --accent-glow: 0 0 25px rgba(0, 212, 255, 0.3);
-            --red-glow: 0 0 20px rgba(255, 49, 49, 0.5);
-            /* Syntax Colors */
-            --s-kw: #ff79c6; --s-fn: #50fa7b; --s-st: #f1fa8c; --s-cm: #6272a4;
+            --primary: #1a2a6c;
+            --secondary: #b21f1f;
+            --code-bg: #1e1e1e;
+            --text: #333;
+            --light: #f4f7f6;
+        }
+        body { font-family: 'Inter', sans-serif; line-height: 1.6; color: var(--text); margin: 0; background: #fff; overflow-x: hidden; scroll-behavior: smooth; }
+        
+        /* Optimized Video Background */
+        .video-background {
+            position: fixed; right: 0; bottom: 0; min-width: 100%; min-height: 100%;
+            z-index: -1; filter: brightness(25%) contrast(110%);
+            object-fit: cover; background: #000;
         }
 
-        * { box-sizing: border-box; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-
-        body, html { 
-            margin: 0; padding: 0; width: 100%; height: 100%; 
-            background-color: var(--bg-black); 
-            font-family: 'Consolas', 'Monaco', monospace; 
-            color: var(--text-main);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* --- BOOT SCREEN --- */
-        #boot-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 10000; display: flex; justify-content: center; align-items: center;
-            background: #000; transition: transform 0.8s ease-in-out;
-        }
-
-        .boot-modal {
-            position: relative; z-index: 2; width: 90%; max-width: 550px;
-            background: rgba(0, 5, 10, 0.85); backdrop-filter: blur(15px);
-            border: 1px solid var(--terminal-blue); padding: 40px;
-            box-shadow: var(--accent-glow); text-align: center;
-        }
-
-        #boot-text { text-align: left; font-size: 0.75rem; color: var(--terminal-blue); height: 100px; margin-bottom: 20px; border-left: 1px solid #111; padding-left: 15px; }
-
-        .init-btn {
-            background: transparent; border: 1px solid var(--terminal-red);
-            color: var(--terminal-red); padding: 15px 45px; cursor: pointer;
-            text-transform: uppercase; letter-spacing: 4px; font-weight: bold;
-            box-shadow: var(--red-glow);
-        }
-
-        .init-btn:hover { background: var(--terminal-red); color: #000; transform: scale(1.05); }
-
-        /* --- MAIN CONTENT --- */
-        #main-site { opacity: 0; display: none; }
-
-        .nav-bar {
-            position: sticky; top: 0; width: 100%; z-index: 999;
-            background: rgba(2, 2, 2, 0.9); border-bottom: 1px solid var(--border-color);
-            padding: 10px 0; backdrop-filter: blur(10px);
-        }
-
-        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 25px; }
-        .nav-logo { height: 35px; }
-
-        /* --- VIDEO HERO SECTION --- */
-        .video-hero {
-            position: relative; width: 100%; height: 450px; overflow: hidden;
-            border-bottom: 1px solid var(--border-color);
+        header { 
+            height: 95vh; display: flex; flex-direction: column; 
+            justify-content: center; align-items: center; 
+            color: white; text-align: center; padding: 0 20px;
         }
         
-        .video-hero iframe {
-            width: 100vw; height: 56.25vw; min-height: 450px; min-width: 177.77vh;
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            pointer-events: none; opacity: 0.7;
+        .logo { max-width: 160px; margin-bottom: 20px; filter: drop-shadow(0px 0px 15px rgba(255,255,255,0.2)); }
+        h1 { font-size: 3.5rem; margin: 0; letter-spacing: 5px; font-weight: 700; text-transform: uppercase; }
+        .tagline { font-style: italic; color: #cbd5e0; font-weight: 300; margin-bottom: 30px; font-size: 1.2rem; }
+
+        .container { 
+            max-width: 1000px; margin: auto; padding: 60px 30px; 
+            background: white; border-radius: 25px; position: relative; 
+            top: -60px; box-shadow: 0 40px 80px rgba(0,0,0,0.2); 
         }
 
-        .video-overlay-text {
-            position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
-            text-align: center; z-index: 5; width: 100%;
+        .method-letter { font-weight: 700; color: var(--secondary); font-size: 1.4em; }
+        
+        .code-container {
+            background: var(--code-bg); color: #dcdcdc; padding: 20px;
+            border-radius: 8px; font-family: 'Fira Code', monospace;
+            font-size: 0.85em; margin: 15px 0; overflow-x: auto;
+            border-left: 4px solid var(--secondary);
         }
+        .code-label { font-size: 0.7em; text-transform: uppercase; color: #888; margin-bottom: 5px; display: block; }
+        .keyword { color: #569cd6; }
+        .string { color: #ce9178; }
 
-        /* --- MISSION & VISION --- */
-        .statement-container {
-            max-width: 1000px; margin: 40px auto; padding: 0 25px;
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 30px; }
+        .card { background: var(--light); padding: 35px; border-radius: 15px; transition: 0.4s; border: 1px solid transparent; }
+        .card:hover { transform: translateY(-8px); border-color: #ddd; box-shadow: 0 15px 30px rgba(0,0,0,0.05); }
+
+        .btn { 
+            display: inline-block; padding: 16px 32px; margin: 10px; 
+            text-decoration: none; border-radius: 8px; font-weight: bold; 
+            transition: 0.3s; cursor: pointer; border: none; font-size: 0.95rem;
         }
+        .btn-pdf { background: var(--secondary); color: white; box-shadow: 0 10px 20px rgba(178, 31, 31, 0.3); }
+        .btn-audio { background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.4); backdrop-filter: blur(5px); }
+        .btn:hover { opacity: 0.9; transform: translateY(-2px); }
 
-        .statement-box {
-            padding: 30px; border-left: 3px solid var(--terminal-red); background: var(--card-bg);
-            box-shadow: 10px 10px 0px rgba(255, 49, 49, 0.05);
-        }
-
-        .statement-box h2 { color: var(--terminal-blue); font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; margin-top: 0; }
-        .statement-box p { font-size: 1.1rem; color: #ccc; font-style: italic; }
-
-        /* --- MAREC GRID --- */
-        .framework-section { max-width: 1200px; margin: 40px auto; padding: 0 25px; }
-        .marec-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
-
-        .card {
-            background: var(--card-bg); border: 1px solid var(--border-color);
-            padding: 25px; height: 320px; position: relative; overflow: hidden;
-        }
-
-        .card:hover { border-color: var(--terminal-blue); box-shadow: var(--accent-glow); transform: translateY(-5px); }
-        .card-letter { font-size: 3.5rem; color: var(--terminal-red); font-weight: bold; line-height: 1; }
-        .card-title { color: var(--terminal-blue); margin: 5px 0 15px 0; text-transform: uppercase; letter-spacing: 1px; font-size: 1rem; }
-        .card-desc { color: #aaa; font-size: 0.85rem; }
-
-        .code-block { display: none; background: #000; padding: 15px; font-size: 0.75rem; border-radius: 4px; border: 1px solid #222; height: 60%; overflow: auto; color: #f8f8f2; }
-        .card:hover .card-desc { display: none; }
-        .card:hover .code-block { display: block; animation: fadeIn 0.4s; }
-
-        /* Syntax colors */
-        .kw { color: var(--s-kw); } .fn { color: var(--s-fn); } .st { color: var(--s-st); } .cm { color: var(--s-cm); }
-
-        /* --- CONTACT --- */
-        .terminal-form { max-width: 650px; margin: 80px auto; background: #000; border: 1px solid var(--terminal-red); padding: 40px; box-shadow: var(--red-glow); }
-        .input-line { margin-bottom: 20px; }
-        .input-line label { display: block; font-size: 0.6rem; color: var(--terminal-gray); text-transform: uppercase; }
-        .input-line input, .input-line textarea { width: 100%; background: transparent; border: none; border-bottom: 1px solid var(--border-color); color: var(--terminal-blue); padding: 10px 0; outline: none; font-family: inherit; }
-
-        footer { text-align: center; padding: 40px; color: var(--terminal-gray); font-size: 0.7rem; border-top: 1px solid #111; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        footer { text-align: center; padding: 100px 20px; background: #0a0a0a; color: #888; border-top: 1px solid #222; }
+        .sys-log { font-family: 'Fira Code', monospace; font-size: 0.7rem; color: #444; margin-top: 30px; }
     </style>
 </head>
+<body>
 
-<body onload="initBoot()">
+<video autoplay muted loop playsinline class="video-background">
+    <source src="your-video.mp4" type="video/mp4">
+</video>
 
-    <div id="boot-overlay">
-        <div class="boot-modal">
-            <img src="https://i.ibb.co/LLb254y/copilot-image-1770047201357.png" style="max-width:200px; margin-bottom:20px;" alt="Logo">
-            <div id="boot-text"></div>
-            <button class="init-btn" onclick="enterSite()">[ Initialize System ]</button>
+<audio id="bgMusic" autoplay loop muted>
+    <source src="https://www.bensound.com/bensound-music/bensound-slowmotion.mp3" type="audio/mpeg">
+</audio>
+
+<header>
+    <img src="logo.png" alt="MAREC Insights Logo" class="logo">
+    <h1>MAREC INSIGHTS</h1>
+    <p style="font-size: 1.5rem; margin: 10px 0; font-weight: 300; letter-spacing: 1px;">Mark Anthony Recio, MBA</p>
+    <p class="tagline">Bridging Human Intuition and Algorithmic Precision</p>
+    
+    <div>
+        <a href="MAREC_Flyer.pdf" class="btn btn-pdf" target="_blank">📄 Download Executive Flyer (PDF)</a>
+        <button onclick="toggleMute()" class="btn btn-audio" id="muteBtn">🔈 Enable Ambient Focus Audio</button>
+    </div>
+</header>
+
+<div class="container" id="methodology">
+    <section style="text-align: center; margin-bottom: 80px;">
+        <h2 style="font-size: 2.2rem; color: var(--primary);">The Mission</h2>
+        <p style="font-size: 1.3rem; color: #666; max-width: 850px; margin: auto; font-weight: 300; line-height: 1.8;">
+            I transform scattered data into professional architectures that move organizations from <span style="color:var(--secondary); font-weight:700;">Reactive to Predictive</span>, driving profit and operational excellence.
+        </p>
+    </section>
+
+    <h2 style="text-align: center; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 40px; font-size: 0.9rem; color: #999;">The MAREC Methodology</h2>
+    
+    <div class="grid">
+        <div class="card">
+            <h3><span class="method-letter">M</span>odeling</h3>
+            <p><strong>Predictive PVM:</strong> Protecting brand margins using Price-Volume-Mix modeling to isolate profit leaks.</p>
+            <div class="code-container">
+                <span class="code-label">Python / Profit Optimization</span>
+                <span class="keyword">def</span> calculate_pvm_bridge(df):<br>
+                &nbsp;&nbsp;df[<span class="string">'Price_Impact'</span>] = (df[<span class="string">'P2'</span>] - df[<span class="string">'P1'</span>]) * df[<span class="string">'V2'</span>]<br>
+                &nbsp;&nbsp;<span class="keyword">return</span> df.sum()
+            </div>
+        </div>
+
+        <div class="card">
+            <h3><span class="method-letter">A</span>nalytics</h3>
+            <p><strong>Scalable Infrastructure:</strong> Designing relational warehouses that replace chaotic, manual spreadsheet workflows.</p>
+            <div class="code-container">
+                <span class="code-label">SQL / Data Architecture</span>
+                <span class="keyword">SELECT</span> p.name, <span class="keyword">SUM</span>(s.revenue)<br>
+                <span class="keyword">FROM</span> sales s<br>
+                <span class="keyword">WHERE</span> s.status = <span class="string">'OPTIMIZED'</span>;
+            </div>
+        </div>
+
+        <div class="card">
+            <h3><span class="method-letter">R</span>eporting</h3>
+            <p><strong>Executive Narratives:</strong> High-impact Margin Bridges and interactive Power BI/Tableau narratives.</p>
+            <div class="code-container">
+                <span class="code-label">DAX / Margin Bridge</span>
+                Var % = <span class="keyword">DIVIDE</span>([CY] - [LY], [LY])
+            </div>
+        </div>
+
+        <div class="card">
+            <h3><span class="method-letter">E</span>fficiency</h3>
+            <p><strong>Workflow Automation:</strong> Engineering scripts to automate 10+ hours of weekly administrative tasks.</p>
+            <div class="code-container">
+                <span class="code-label">GitHub Actions / Python</span>
+                <span class="keyword">if</span> report_ready:<br>
+                &nbsp;&nbsp;ae.push_to_stakeholders()
+            </div>
+        </div>
+
+        <div class="card" style="grid-column: 1 / -1; text-align: center; background: var(--primary); color: white; padding: 50px;">
+            <h3 style="color: white; font-size: 1.8rem;"><span style="color:white" class="method-letter">C</span>onsulting: The MBA Edge</h3>
+            <p style="font-size: 1.2rem; max-width: 700px; margin: 20px auto; font-weight: 300; opacity: 0.9;">
+                Bridging the gap between <strong>Technical Precision</strong> and <strong>Executive Strategy</strong>. I don't just provide data; I provide the roadmap for what to do next.
+            </p>
+            <a href="mailto:mark.recio.pro@gmail.com" class="btn btn-pdf" style="margin-top: 20px;">Secure Consult Uplink</a>
         </div>
     </div>
+</div>
 
-    <div id="main-site">
-        <nav class="nav-bar">
-            <div class="nav-container">
-                <img src="https://i.ibb.co/LLb254y/copilot-image-1770047201357.png" class="nav-logo" alt="MAREC Logo">
-                <div style="font-size: 0.65rem; color: var(--terminal-blue); letter-spacing: 2px;">C:\> MAREC_INSIGHTS.exe</div>
-            </div>
-        </nav>
-
-        <section class="video-hero">
-            <iframe src="https://www.youtube.com/embed/qHwgrgWFl98?autoplay=1&mute=1&loop=1&playlist=qHwgrgWFl98&controls=0&showinfo=0&rel=0&modestbranding=1" frameborder="0"></iframe>
-            <div class="video-overlay-text">
-                <h1 style="color: var(--terminal-red); text-shadow: var(--red-glow); letter-spacing: 10px; margin:0;">MAREC INSIGHTS</h1>
-                <p style="color: white; font-size: 0.7rem; letter-spacing: 4px;">INTELLIGENCE ARCHITECTURE</p>
-            </div>
-        </section>
-
-        <section class="statement-container">
-            <div class="statement-box">
-                <h2>> Mission_Directive</h2>
-                <p>"To engineer high-fidelity data ecosystems that bridge the gap between human intuition and algorithmic precision."</p>
-            </div>
-            <div class="statement-box" style="border-color: var(--terminal-blue);">
-                <h2 style="color: var(--terminal-red);">> Strategic_Vision</h2>
-                <p>"To become the global standard for autonomous innovation, leading the shift from reactive management to proactive evolution."</p>
-            </div>
-        </section>
-
-        <section class="framework-section">
-            <div class="marec-grid">
-                <div class="card">
-                    <div class="card-letter">M</div>
-                    <h3 class="card-title">Modeling</h3>
-                    <div class="card-desc">Predictive intelligence to forecast recruitment trends and optimize talent flow cycles.</div>
-                    <div class="code-block"><span class="cm"># Python Forecast</span><br><span class="kw">from</span> sklearn <span class="kw">import</span> ensemble<br>model = ensemble.<span class="fn">RandomForestRegressor</span>()</div>
-                </div>
-                <div class="card">
-                    <div class="card-letter">A</div>
-                    <h3 class="card-title">Analytics</h3>
-                    <div class="card-desc">Deep-dive financial audits using SQL and Python to eliminate technical and operational debt.</div>
-                    <div class="code-block"><span class="cm">-- SQL Audit</span><br><span class="kw">SELECT</span> <span class="fn">AVG</span>(cost) <span class="kw">FROM</span> ops_audit<br><span class="kw">WHERE</span> inefficiency > 0.5;</div>
-                </div>
-                <div class="card">
-                    <div class="card-letter">R</div>
-                    <h3 class="card-title">Reporting</h3>
-                    <div class="card-desc">Architecting Power BI and Tableau narratives for executive-level clarity.</div>
-                    <div class="code-block"><span class="cm"># R Visualization</span><br>marec_data %>% <span class="fn">ggplot</span>(<span class="fn">aes</span>(x, y)) + <span class="fn">geom_point</span>()</div>
-                </div>
-                <div class="card">
-                    <div class="card-letter">E</div>
-                    <h3 class="card-title">Efficiency</h3>
-                    <div class="card-desc">Architecting custom automation scripts to liberate workforce capacity.</div>
-                    <div class="code-block"><span class="cm">// DAX Efficiency</span><br>ROI := <span class="fn">DIVIDE</span>([Total_Gain], [Cost], 0)</div>
-                </div>
-                <div class="card">
-                    <div class="card-letter">C</div>
-                    <h3 class="card-title">Consultancy</h3>
-                    <div class="card-desc">Strategic change management to scale technical infrastructure for modern enterprises.</div>
-                    <div class="code-block"><span class="cm">// Power BI Config</span><br>{<span class="st">"status"</span>: <span class="st">"SCALING_ACTIVE"</span>}</div>
-                </div>
-            </div>
-        </section>
-
-        <section class="terminal-form">
-            <h2 style="color: var(--terminal-red); font-size: 0.8rem; margin-top: 0;">> UPLINK_ENCRYPTED_MESSAGE</h2>
-            <form id="contact-form">
-                <input type="hidden" name="access_key" value="a95bf936-f0f8-4d9a-b377-cbdffbbece56">
-                <div class="input-line"><label>Operator</label><input type="text" name="name" required></div>
-                <div class="input-line"><label>Email_Address</label><input type="email" name="email" required></div>
-                <div class="input-line"><label>Payload</label><textarea name="message" rows="3" required></textarea></div>
-                <button type="submit" id="submit-btn" class="init-btn" style="width: 100%;">Execute Transmission</button>
-            </form>
-            <div style="margin-top: 30px; text-align: center;">
-                <p style="color: var(--terminal-blue); font-weight: bold;">mark.recio.pro@gmail.com</p>
-                <p style="color: var(--terminal-gray); font-size: 0.8rem;">(702) 501-9385</p>
-                <a href="https://song.do/play/3a917d19-1c9a-4792-a31a-e3c7a0470579" target="_blank" class="init-btn" style="display:inline-block; margin-top: 15px; text-decoration:none; font-size: 0.6rem;">▶ SYSTEM AUDIO</a>
-            </div>
-        </section>
-
-        <footer>&copy; 2026 MAREC INSIGHTS // LAS VEGAS, NV</footer>
+<footer>
+    <p style="color: white; letter-spacing: 2px;">MAREC INSIGHTS</p>
+    <p>Las Vegas, NV (Global Remote) | (702) 501-9385</p>
+    <div style="margin-top: 20px;">
+        <a href="https://linkedin.com/in/marecio" target="_blank" style="color: #666; text-decoration: none; margin: 0 10px;">LinkedIn</a> | 
+        <a href="https://marecinsights.com" style="color: #666; text-decoration: none; margin: 0 10px;">marecinsights.com</a>
     </div>
+    <div class="sys-log">
+        [SYSTEM STATUS: OPTIMIZED] [MBA_CORE: ACTIVE] [UPLINK: SECURE]
+    </div>
+</footer>
 
-    <script>
-        function initBoot() {
-            const container = document.getElementById('boot-text');
-            const messages = ["BOOTING_MAREC_CORE...", "SYNCING_VIDEO_STREAM...", "MISSION_DIRECTIVES_LOADED...", "SYSTEM_OPTIMIZED."];
-            messages.forEach((m, i) => {
-                setTimeout(() => {
-                    const d = document.createElement('div'); d.innerHTML = `> ${m}`; container.appendChild(d);
-                }, i * 500);
-            });
+<script>
+    function toggleMute() {
+        var audio = document.getElementById("bgMusic");
+        var btn = document.getElementById("muteBtn");
+        if (audio.muted) {
+            audio.muted = false;
+            btn.innerHTML = "🔊 Mute Audio";
+        } else {
+            audio.muted = true;
+            btn.innerHTML = "🔈 Enable Ambient Focus Audio";
         }
-        function enterSite() {
-            document.getElementById('boot-overlay').style.transform = "translateY(-100%)";
-            setTimeout(() => {
-                document.getElementById('boot-overlay').style.display = 'none';
-                document.getElementById('main-site').style.display = 'block';
-                setTimeout(() => document.getElementById('main-site').style.opacity = "1", 50);
-            }, 800);
-        }
-        document.getElementById('contact-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const b = document.getElementById('submit-btn'); b.innerText = "UPLINKING...";
-            fetch('https://api.web3forms.com/submit', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(Object.fromEntries(new FormData(this)))
-            }).then(() => { b.innerText = "TRANSMISSION SUCCESSFUL"; this.reset(); });
-        });
-    </script>
+    }
+</script>
+
 </body>
 </html>
