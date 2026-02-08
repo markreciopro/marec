@@ -7,111 +7,92 @@
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;700&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Programming Palette: Midnight Syntax */
-            --bg-dark: #0d1117;        /* GitHub Dark Background */
-            --bg-card: #161b22;        /* Dark Slate */
-            --accent-cyan: #58a6ff;    /* Function Blue */
-            --accent-green: #3fb950;   /* String Green */
-            --accent-purple: #bc8cff;  /* Keyword Purple */
-            --text-main: #c9d1d9;      /* Dim White */
-            --primary: var(--accent-cyan);
-            --secondary: #f85149;      /* Error/Variable Red */
+            --bg-dark: #0d1117;        
+            --bg-card: #161b22;        
+            --accent-cyan: #58a6ff;    
+            --accent-green: #3fb950;   
+            --accent-purple: #bc8cff;  
+            --text-main: #c9d1d9;      
+            --secondary: #f85149;      
         }
+
         body {
             font-family: 'Inter', sans-serif;
             line-height: 1.6;
             color: var(--text-main);
             margin: 0;
             background-color: var(--bg-dark);
-            overflow-x: hidden;
         }
 
-        .hero-video-container {
-            position: relative;
+        /* Video Container - Stacked at the top */
+        .video-header-container {
             width: 100%;
-            height: 85vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
             background: #000;
+            line-height: 0; /* Removes bottom gap */
+            border-bottom: 2px solid var(--accent-cyan);
         }
 
-        .video-foreground {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 100%;
-            height: 100%;
-            transform: translate(-50%, -50%);
-            pointer-events: none;
-            z-index: 1;
-            opacity: 0.25; /* Dimmed further for "Code" feel */
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        .video-foreground iframe {
-            width: 100vw;
-            height: 56.25vw;
-            min-height: 100vh;
-            min-width: 177.77vh;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        .video-overlay {
+        .video-wrapper iframe {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 2;
-            background: linear-gradient(
-                to bottom, 
-                rgba(13, 17, 23, 0.9) 0%, 
-                rgba(13, 17, 23, 0.4) 50%, 
-                rgba(13, 17, 23, 0.9) 100%
-            );
+            border: 0;
         }
 
+        /* Header Section - Now below the video */
         header {
-            position: relative;
-            z-index: 3;
-            color: white;
             text-align: center;
-            padding: 20px;
+            padding: 60px 20px;
+            background: linear-gradient(to bottom, #111b27, var(--bg-dark));
         }
 
         h1 { 
             margin: 0; 
-            font-size: 3.5em; 
-            letter-spacing: 6px; 
+            font-size: 3em; 
+            letter-spacing: 4px; 
             text-transform: uppercase; 
-            font-weight: 700;
-            font-family: 'Fira Code', monospace; /* Monospaced font for title */
+            font-family: 'Fira Code', monospace; 
             color: var(--accent-cyan);
         }
-        .tagline { font-style: italic; color: var(--accent-green); font-weight: 300; font-size: 1.2rem; margin-top: 10px; font-family: 'Fira Code', monospace; }
-        
+
+        .tagline { 
+            font-style: italic; 
+            color: var(--accent-green); 
+            font-size: 1.2rem; 
+            margin-top: 10px; 
+            font-family: 'Fira Code', monospace; 
+        }
+
         .cta-buttons { margin-top: 30px; }
+        
         .btn {
             display: inline-block;
-            padding: 14px 28px;
+            padding: 12px 24px;
             margin: 10px;
             text-decoration: none;
             border-radius: 6px;
             font-weight: bold;
             transition: 0.3s;
-            cursor: pointer;
-            border: none;
             font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
         }
-        .btn-pdf { background: var(--secondary); color: white; box-shadow: 0 4px 15px rgba(248, 81, 73, 0.3); }
-        .btn-primary { background: transparent; color: var(--accent-cyan); border: 1px solid var(--accent-cyan); }
-        .btn:hover { opacity: 0.8; transform: translateY(-2px); box-shadow: 0 0 15px var(--accent-cyan); }
 
-        .container { max-width: 1100px; margin: auto; padding: 60px 20px; }
+        .btn-pdf { background: var(--secondary); color: white; border: none; }
+        .btn-primary { background: transparent; color: var(--accent-cyan); border: 1px solid var(--accent-cyan); }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 0 15px rgba(88, 166, 255, 0.3); }
+
+        .container { max-width: 1100px; margin: auto; padding: 40px 20px; }
 
         .mission {
             text-align: center;
@@ -120,7 +101,6 @@
             border-bottom: 1px solid #30363d;
             max-width: 900px;
             margin: auto;
-            color: var(--text-main);
         }
 
         .grid {
@@ -129,24 +109,37 @@
             gap: 30px;
             margin-top: 50px;
         }
+
         .card {
             background: var(--bg-card);
             padding: 30px;
             border-radius: 12px;
             border: 1px solid #30363d;
-            border-top: 4px solid var(--accent-purple); /* Syntax color accent */
+            border-top: 4px solid var(--accent-purple);
             transition: 0.3s;
         }
-        .card:hover { border-color: var(--accent-cyan); transform: translateY(-5px); }
-        .card h3 { color: var(--accent-cyan); margin-top: 5px; font-size: 1.3rem; font-family: 'Fira Code', monospace; }
-        .problem-label { font-weight: bold; color: var(--secondary); text-transform: uppercase; font-size: 0.8em; letter-spacing: 1px; margin: 0; }
+
+        .card:hover { border-color: var(--accent-cyan); }
+        
+        .card h3 { 
+            color: var(--accent-cyan); 
+            font-family: 'Fira Code', monospace; 
+            margin-top: 5px; 
+        }
+
+        .problem-label { 
+            font-weight: bold; 
+            color: var(--secondary); 
+            text-transform: uppercase; 
+            font-size: 0.8em; 
+            font-family: 'Fira Code', monospace;
+        }
 
         .arsenal {
-            margin-top: 80px; 
+            margin-top: 60px; 
             text-align: center; 
             background: #161b22; 
-            color: var(--accent-green); 
-            padding: 50px; 
+            padding: 40px; 
             border-radius: 15px;
             border: 1px solid var(--accent-green);
             font-family: 'Fira Code', monospace;
@@ -154,92 +147,78 @@
 
         .footer {
             text-align: center;
-            padding: 80px 20px;
+            padding: 60px 20px;
             background: #010409;
-            color: #8b949e;
             border-top: 1px solid #30363d;
-        }
-
-        @media print {
-            .hero-video-container { background: #0d1117 !important; height: auto; padding: 40px 0; }
-            .video-foreground, .video-overlay, .cta-buttons { display: none; }
+            color: #8b949e;
         }
     </style>
 </head>
 <body>
 
-<div class="hero-video-container">
-    <div class="video-foreground">
-        <iframe src="https://www.youtube.com/embed/qHwgrgWFl98?autoplay=1&mute=1&loop=1&playlist=qHwgrgWFl98&controls=0&rel=0" frameborder="0" allow="autoplay; encrypted-media"></iframe>
+<div class="video-header-container">
+    <div class="video-wrapper">
+        <iframe src="https://www.youtube.com/embed/qHwgrgWFl98?autoplay=1&mute=1&loop=1&playlist=qHwgrgWFl98&controls=1&modestbranding=1" title="MAREC Insights Overview" allow="autoplay; encrypted-media" allowfullscreen></iframe>
     </div>
-    
-    <div class="video-overlay"></div>
-    
-    <header>
-        <h1>MAREC_INSIGHTS</h1>
-        <p style="font-size: 1.6em; font-weight: 300; margin: 10px 0; color: var(--text-main);">Mark Anthony Recio, MBA</p>
-        <p class="tagline">// Bridging Human Intuition and Algorithmic Precision</p>
-        
-        <div class="cta-buttons">
-            <a href="https://github.com/markreciopro/marec/raw/main/MAREC%20Flyer.pdf" class="btn btn-pdf">Download_Flyer</a>
-            <a href="https://linkedin.com/in/marecio" target="_blank" class="btn btn-primary">LinkedIn_Profile</a>
-        </div>
-    </header>
 </div>
+
+<header>
+    <h1>MAREC_INSIGHTS</h1>
+    <p style="font-size: 1.5em; font-weight: 300; margin: 10px 0;">Mark Anthony Recio, MBA</p>
+    <p class="tagline">// Bridging Human Intuition and Algorithmic Precision</p>
+    
+    <div class="cta-buttons">
+        <a href="https://github.com/markreciopro/marec/raw/main/MAREC%20Flyer.pdf" class="btn btn-pdf">EXEC.DOWNLOAD(pdf)</a>
+        <a href="https://linkedin.com/in/marecio" target="_blank" class="btn btn-primary">VIEW.LINKEDIN(profile)</a>
+    </div>
+</header>
 
 <div class="container">
     <section class="mission">
         <strong>The Mission:</strong> I transform scattered data into professional architectures that move organizations from <span style="color: var(--accent-purple); font-weight: 700;">Reactive to Predictive</span>, driving profit and operational excellence.
     </section>
 
-    <h2 style="text-align: center; margin-top: 60px; text-transform: uppercase; letter-spacing: 2px; color: var(--accent-cyan); font-family: 'Fira Code', monospace;">Consulting_Pillars</h2>
+    <h2 style="text-align: center; margin-top: 60px; color: var(--accent-cyan); font-family: 'Fira Code', monospace;">[Consulting_Pillars]</h2>
     
     <div class="grid">
         <div class="card">
-            <p class="problem-label">Error: Flat net income [cite: 10]</p>
+            <p class="problem-label">ERROR_DETECTED: Flat Net Income</p>
             <h3>Financial_Analytics</h3>
             <p><strong>Solution:</strong> Price-Volume-Mix (PVM) Models that isolate "profit leaks" in P&L and Balance Sheet data.</p>
         </div>
 
         <div class="card">
-            <p class="problem-label">Error: Inventory stockouts </p>
+            <p class="problem-label">ERROR_DETECTED: Stockouts/High Costs</p>
             <h3>Ops_Intelligence</h3>
             <p><strong>Solution:</strong> Demand Forecasting & Network Optimization to synchronize procurement with sales velocity.</p>
         </div>
 
         <div class="card">
-            <p class="problem-label">Error: Talent loss </p>
+            <p class="problem-label">ERROR_DETECTED: High Turnover</p>
             <h3>Workforce_Logic</h3>
             <p><strong>Solution:</strong> Predictive Attrition Models that identify "flight risks" before resignation.</p>
         </div>
 
         <div class="card">
-            <p class="problem-label">Error: Inefficient field ops </p>
+            <p class="problem-label">ERROR_DETECTED: Field Inefficiency</p>
             <h3>Political_Intel</h3>
             <p><strong>Solution:</strong> Geospatial "Walk-Lists" synced with Advantage data to engage high-probability voter segments.</p>
         </div>
     </div>
 
     <section class="arsenal">
-        <h3 style="letter-spacing: 3px; font-size: 1.5rem; margin-bottom: 20px;">TECHNICAL_ARSENAL</h3>
-        <p style="font-size: 1.2rem; opacity: 0.9; font-weight: 300;">
+        <h3 style="color: var(--accent-green);">// TECHNICAL_ARSENAL</h3>
+        <p style="font-size: 1.1rem; letter-spacing: 1px;">
             Python | R | SQL | DAX | Power BI | Tableau | GitHub | Advantage Excel
         </p>
-        <hr style="width: 60px; opacity: 0.3; margin: 25px auto; border-color: var(--accent-green);">
-        <p style="font-weight: 700; letter-spacing: 4px; font-size: 0.9rem;">MODELING | ANALYTICS | REPORTING | EFFICIENCY </p>
     </section>
 </div>
 
 <div class="footer">
-    <p style="color: var(--accent-cyan); letter-spacing: 3px; font-weight: 700; font-size: 1.2rem; font-family: 'Fira Code', monospace;">MAREC.INSIGHTS</p>
-    <p>Las Vegas, NV (Global Remote) | (702) [cite_start]501-9385 </p>
-    <p>
-        <a href="mailto:mark.recio.pro@gmail.com" style="color: var(--accent-purple); text-decoration: none; font-weight: 700;">mark.recio.pro@gmail.com</a> 
-    </p>
-    <p style="margin-top: 30px; font-size: 0.75rem; opacity: 0.5;">
-        // Let's build the architecture your mission deserves.<br>
-        © 2026 Intelligence Architecture Built by MAREC 
-    </p>
+    <p style="color: var(--accent-cyan); font-family: 'Fira Code', monospace; font-weight: 700;">MAREC.INSIGHTS.TERMINAL</p>
+    <p>Las Vegas, NV | (702) 501-9385</p>
+    <p><a href="mailto:mark.recio.pro@gmail.com" style="color: var(--accent-purple); text-decoration: none;">mark.recio.pro@gmail.com</a></p>
+    <p style="margin-top: 20px; font-size: 0.7rem; opacity: 0.5;">© 2026 Built for Operational Excellence</p>
 </div>
 
 </body>
