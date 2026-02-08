@@ -17,10 +17,7 @@
             --accent-glow: 0 0 25px rgba(0, 212, 255, 0.3);
             --red-glow: 0 0 20px rgba(255, 49, 49, 0.5);
             /* Syntax Colors */
-            --s-kw: #ff79c6; /* Keyword */
-            --s-fn: #50fa7b; /* Function */
-            --s-st: #f1fa8c; /* String */
-            --s-cm: #6272a4; /* Comment */
+            --s-kw: #ff79c6; --s-fn: #50fa7b; --s-st: #f1fa8c; --s-cm: #6272a4;
         }
 
         * { box-sizing: border-box; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
@@ -41,25 +38,12 @@
             background: #000; transition: transform 0.8s ease-in-out;
         }
 
-        .video-bg {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 1; overflow: hidden;
-        }
-        
-        .video-bg iframe {
-            width: 100vw; height: 56.25vw; min-height: 100vh; min-width: 177.77vh;
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            pointer-events: none; opacity: 0.35; filter: grayscale(50%);
-        }
-
         .boot-modal {
             position: relative; z-index: 2; width: 90%; max-width: 550px;
             background: rgba(0, 5, 10, 0.85); backdrop-filter: blur(15px);
             border: 1px solid var(--terminal-blue); padding: 40px;
             box-shadow: var(--accent-glow); text-align: center;
         }
-
-        .boot-logo { max-width: 250px; margin-bottom: 25px; filter: drop-shadow(0 0 10px var(--terminal-blue)); }
 
         #boot-text { text-align: left; font-size: 0.75rem; color: var(--terminal-blue); height: 100px; margin-bottom: 20px; border-left: 1px solid #111; padding-left: 15px; }
 
@@ -78,78 +62,71 @@
         .nav-bar {
             position: sticky; top: 0; width: 100%; z-index: 999;
             background: rgba(2, 2, 2, 0.9); border-bottom: 1px solid var(--border-color);
-            padding: 15px 0; backdrop-filter: blur(10px);
+            padding: 10px 0; backdrop-filter: blur(10px);
         }
 
         .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 25px; }
         .nav-logo { height: 35px; }
 
-        .hero { text-align: center; padding: 80px 20px; }
-        .hero h1 { font-size: 3rem; color: var(--terminal-red); text-shadow: var(--red-glow); margin: 0; letter-spacing: 8px; }
+        /* --- VIDEO HERO SECTION --- */
+        .video-hero {
+            position: relative; width: 100%; height: 450px; overflow: hidden;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .video-hero iframe {
+            width: 100vw; height: 56.25vw; min-height: 450px; min-width: 177.77vh;
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            pointer-events: none; opacity: 0.7;
+        }
+
+        .video-overlay-text {
+            position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
+            text-align: center; z-index: 5; width: 100%;
+        }
+
+        /* --- MISSION & VISION --- */
+        .statement-container {
+            max-width: 1000px; margin: 40px auto; padding: 0 25px;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;
+        }
+
+        .statement-box {
+            padding: 30px; border-left: 3px solid var(--terminal-red); background: var(--card-bg);
+            box-shadow: 10px 10px 0px rgba(255, 49, 49, 0.05);
+        }
+
+        .statement-box h2 { color: var(--terminal-blue); font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; margin-top: 0; }
+        .statement-box p { font-size: 1.1rem; color: #ccc; font-style: italic; }
 
         /* --- MAREC GRID --- */
         .framework-section { max-width: 1200px; margin: 40px auto; padding: 0 25px; }
-        
-        .marec-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 25px;
-        }
+        .marec-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
 
         .card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            padding: 30px;
-            height: 380px;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
+            background: var(--card-bg); border: 1px solid var(--border-color);
+            padding: 25px; height: 320px; position: relative; overflow: hidden;
         }
 
-        .card:hover { border-color: var(--terminal-blue); box-shadow: var(--accent-glow); transform: translateY(-8px); }
-        
-        .card-letter { font-size: 4rem; color: var(--terminal-red); font-weight: bold; line-height: 1; margin-bottom: 10px; }
-        .card-title { color: var(--terminal-blue); margin: 0 0 15px 0; text-transform: uppercase; letter-spacing: 2px; }
-        .card-desc { color: #aaa; font-size: 0.95rem; flex-grow: 1; }
+        .card:hover { border-color: var(--terminal-blue); box-shadow: var(--accent-glow); transform: translateY(-5px); }
+        .card-letter { font-size: 3.5rem; color: var(--terminal-red); font-weight: bold; line-height: 1; }
+        .card-title { color: var(--terminal-blue); margin: 5px 0 15px 0; text-transform: uppercase; letter-spacing: 1px; font-size: 1rem; }
+        .card-desc { color: #aaa; font-size: 0.85rem; }
 
-        /* IDE Style Code Block */
-        .code-block {
-            display: none;
-            background: #000;
-            padding: 20px;
-            font-size: 0.8rem;
-            border-radius: 4px;
-            border: 1px solid #222;
-            height: 100%;
-            overflow: auto;
-            color: #f8f8f2;
-        }
-
+        .code-block { display: none; background: #000; padding: 15px; font-size: 0.75rem; border-radius: 4px; border: 1px solid #222; height: 60%; overflow: auto; color: #f8f8f2; }
         .card:hover .card-desc { display: none; }
         .card:hover .code-block { display: block; animation: fadeIn 0.4s; }
 
-        /* Syntax Highlighting Classes */
-        .kw { color: var(--s-kw); } 
-        .fn { color: var(--s-fn); }
-        .st { color: var(--s-st); }
-        .cm { color: var(--s-cm); font-style: italic; }
+        /* Syntax colors */
+        .kw { color: var(--s-kw); } .fn { color: var(--s-fn); } .st { color: var(--s-st); } .cm { color: var(--s-cm); }
 
         /* --- CONTACT --- */
-        .terminal-form {
-            max-width: 650px; margin: 80px auto; background: #000;
-            border: 1px solid var(--terminal-red); padding: 40px; box-shadow: var(--red-glow);
-        }
+        .terminal-form { max-width: 650px; margin: 80px auto; background: #000; border: 1px solid var(--terminal-red); padding: 40px; box-shadow: var(--red-glow); }
+        .input-line { margin-bottom: 20px; }
+        .input-line label { display: block; font-size: 0.6rem; color: var(--terminal-gray); text-transform: uppercase; }
+        .input-line input, .input-line textarea { width: 100%; background: transparent; border: none; border-bottom: 1px solid var(--border-color); color: var(--terminal-blue); padding: 10px 0; outline: none; font-family: inherit; }
 
-        .input-line { margin-bottom: 25px; }
-        .input-line label { display: block; font-size: 0.7rem; color: var(--terminal-gray); text-transform: uppercase; margin-bottom: 8px; }
-        .input-line input, .input-line textarea {
-            width: 100%; background: transparent; border: none; border-bottom: 1px solid var(--border-color);
-            color: var(--terminal-blue); padding: 10px 0; outline: none; font-family: inherit; font-size: 1rem;
-        }
-
-        footer { text-align: center; padding: 40px; color: var(--terminal-gray); font-size: 0.75rem; border-top: 1px solid #111; }
-
+        footer { text-align: center; padding: 40px; color: var(--terminal-gray); font-size: 0.7rem; border-top: 1px solid #111; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
@@ -157,11 +134,8 @@
 <body onload="initBoot()">
 
     <div id="boot-overlay">
-        <div class="video-bg">
-            <iframe src="https://www.youtube.com/embed/qHwgrgWFl98?autoplay=1&mute=1&loop=1&playlist=qHwgrgWFl98&controls=0&showinfo=0&rel=0&modestbranding=1" frameborder="0"></iframe>
-        </div>
         <div class="boot-modal">
-            <img src="https://i.ibb.co/LLb254y/copilot-image-1770047201357.png" class="boot-logo" alt="MAREC Insights">
+            <img src="https://i.ibb.co/LLb254y/copilot-image-1770047201357.png" style="max-width:200px; margin-bottom:20px;" alt="Logo">
             <div id="boot-text"></div>
             <button class="init-btn" onclick="enterSite()">[ Initialize System ]</button>
         </div>
@@ -171,173 +145,109 @@
         <nav class="nav-bar">
             <div class="nav-container">
                 <img src="https://i.ibb.co/LLb254y/copilot-image-1770047201357.png" class="nav-logo" alt="MAREC Logo">
-                <div style="font-size: 0.7rem; color: var(--terminal-gray);">SYSTEM_STATUS: <span style="color: var(--terminal-blue);">OPTIMIZED</span></div>
+                <div style="font-size: 0.65rem; color: var(--terminal-blue); letter-spacing: 2px;">C:\> MAREC_INSIGHTS.exe</div>
             </div>
         </nav>
 
-        <header class="hero">
-            <h1>MAREC_INSIGHTS.exe</h1>
-            <p style="color: var(--terminal-gray); font-size: 0.8rem; letter-spacing: 2px;">STRATEGIC DATA ARCHITECTURE & WORKFORCE INTELLIGENCE</p>
-        </header>
+        <section class="video-hero">
+            <iframe src="https://www.youtube.com/embed/qHwgrgWFl98?autoplay=1&mute=1&loop=1&playlist=qHwgrgWFl98&controls=0&showinfo=0&rel=0&modestbranding=1" frameborder="0"></iframe>
+            <div class="video-overlay-text">
+                <h1 style="color: var(--terminal-red); text-shadow: var(--red-glow); letter-spacing: 10px; margin:0;">MAREC INSIGHTS</h1>
+                <p style="color: white; font-size: 0.7rem; letter-spacing: 4px;">INTELLIGENCE ARCHITECTURE</p>
+            </div>
+        </section>
+
+        <section class="statement-container">
+            <div class="statement-box">
+                <h2>> Mission_Directive</h2>
+                <p>"To engineer high-fidelity data ecosystems that bridge the gap between human intuition and algorithmic precision."</p>
+            </div>
+            <div class="statement-box" style="border-color: var(--terminal-blue);">
+                <h2 style="color: var(--terminal-red);">> Strategic_Vision</h2>
+                <p>"To become the global standard for autonomous innovation, leading the shift from reactive management to proactive evolution."</p>
+            </div>
+        </section>
 
         <section class="framework-section">
             <div class="marec-grid">
-                
                 <div class="card">
                     <div class="card-letter">M</div>
                     <h3 class="card-title">Modeling</h3>
-                    <div class="card-desc">Advanced predictive intelligence and machine learning pipelines to forecast workforce trends and attrition.</div>
-                    <div class="code-block">
-<span class="cm"># Python: Attrition Forecast</span>
-<span class="kw">import</span> pandas <span class="kw">as</span> pd
-<span class="kw">from</span> sklearn.ensemble <span class="kw">import</span> RandomForest
-<span class="kw">from</span> marec_core <span class="kw">import</span> Predictor
-
-<span class="kw">def</span> <span class="fn">analyze_flow</span>(data):
-    model = <span class="fn">RandomForest</span>(n_estimators=100)
-    <span class="kw">return</span> model.<span class="fn">predict</span>(data)
-                    </div>
+                    <div class="card-desc">Predictive intelligence to forecast recruitment trends and optimize talent flow cycles.</div>
+                    <div class="code-block"><span class="cm"># Python Forecast</span><br><span class="kw">from</span> sklearn <span class="kw">import</span> ensemble<br>model = ensemble.<span class="fn">RandomForestRegressor</span>()</div>
                 </div>
-
                 <div class="card">
                     <div class="card-letter">A</div>
                     <h3 class="card-title">Analytics</h3>
-                    <div class="card-desc">Deep-dive financial and operational audits. Scrubbing data lakes to eliminate technical and operational debt.</div>
-                    <div class="code-block">
-<span class="cm">-- SQL: Efficiency Audit</span>
-<span class="kw">SELECT</span> 
-    Employee_ID, 
-    <span class="fn">SUM</span>(Output) / <span class="fn">SUM</span>(Hours) <span class="kw">AS</span> ROI
-<span class="kw">FROM</span> Workforce_Lake
-<span class="kw">WHERE</span> Status = <span class="st">'Active'</span>
-<span class="kw">GROUP BY</span> 1
-<span class="kw">HAVING</span> ROI < <span class="st">0.75</span>;
-                    </div>
+                    <div class="card-desc">Deep-dive financial audits using SQL and Python to eliminate technical and operational debt.</div>
+                    <div class="code-block"><span class="cm">-- SQL Audit</span><br><span class="kw">SELECT</span> <span class="fn">AVG</span>(cost) <span class="kw">FROM</span> ops_audit<br><span class="kw">WHERE</span> inefficiency > 0.5;</div>
                 </div>
-
                 <div class="card">
                     <div class="card-letter">R</div>
                     <h3 class="card-title">Reporting</h3>
-                    <div class="card-desc">Complex statistical visualization and automated reporting engines built for executive clarity.</div>
-                    <div class="code-block">
-<span class="cm"># R: Variance Visualization</span>
-<span class="kw">library</span>(ggplot2)
-<span class="kw">library</span>(dplyr)
-
-marec_data %>%
-  <span class="fn">filter</span>(variance > 0.05) %>%
-  <span class="fn">ggplot</span>(<span class="fn">aes</span>(x=Date, y=Value)) +
-  <span class="fn">geom_line</span>(color=<span class="st">"#ff3131"</span>)
-                    </div>
+                    <div class="card-desc">Architecting Power BI and Tableau narratives for executive-level clarity.</div>
+                    <div class="code-block"><span class="cm"># R Visualization</span><br>marec_data %>% <span class="fn">ggplot</span>(<span class="fn">aes</span>(x, y)) + <span class="fn">geom_point</span>()</div>
                 </div>
-
                 <div class="card">
                     <div class="card-letter">E</div>
                     <h3 class="card-title">Efficiency</h3>
-                    <div class="card-desc">Optimizing data flow through custom calculation engines and automation scripts.</div>
-                    <div class="code-block">
-<span class="cm">// DAX: Weighted Productivity</span>
-Productivity_Index := 
-<span class="fn">DIVIDE</span>(
-    <span class="fn">SUMX</span>(Sales, Sales[Amount] * Sales[Weight]),
-    <span class="fn">COUNTROWS</span>(Staff),
-    <span class="st">0</span>
-)
-                    </div>
+                    <div class="card-desc">Architecting custom automation scripts to liberate workforce capacity.</div>
+                    <div class="code-block"><span class="cm">// DAX Efficiency</span><br>ROI := <span class="fn">DIVIDE</span>([Total_Gain], [Cost], 0)</div>
                 </div>
-
                 <div class="card">
                     <div class="card-letter">C</div>
                     <h3 class="card-title">Consultancy</h3>
-                    <div class="card-desc">Strategic change management and BI infrastructure scaling for modern enterprise environments.</div>
-                    <div class="code-block">
-<span class="cm">// Power BI: Strategic Uplink</span>
-{
-  <span class="kw">"service"</span>: <span class="st">"MAREC_Consulting"</span>,
-  <span class="kw">"framework"</span>: <span class="st">"Agile_BI"</span>,
-  <span class="kw">"scaling"</span>: <span class="fn">true</span>,
-  <span class="kw">"status"</span>: <span class="st">"READY"</span>
-}
-                    </div>
+                    <div class="card-desc">Strategic change management to scale technical infrastructure for modern enterprises.</div>
+                    <div class="code-block"><span class="cm">// Power BI Config</span><br>{<span class="st">"status"</span>: <span class="st">"SCALING_ACTIVE"</span>}</div>
                 </div>
-
             </div>
         </section>
 
         <section class="terminal-form">
-            <h2 style="color: var(--terminal-red); margin-top: 0; font-size: 0.9rem; letter-spacing: 3px;">> SEND_ENCRYPTED_UPLINK</h2>
+            <h2 style="color: var(--terminal-red); font-size: 0.8rem; margin-top: 0;">> UPLINK_ENCRYPTED_MESSAGE</h2>
             <form id="contact-form">
                 <input type="hidden" name="access_key" value="a95bf936-f0f8-4d9a-b377-cbdffbbece56">
-                <div class="input-line">
-                    <label>Operator_Name</label>
-                    <input type="text" name="name" placeholder="Waiting for input..." required>
-                </div>
-                <div class="input-line">
-                    <label>Uplink_Channel (Email)</label>
-                    <input type="email" name="email" placeholder="Waiting for connection..." required>
-                </div>
-                <div class="input-line">
-                    <label>Transmission_Payload</label>
-                    <textarea name="message" rows="3" placeholder="Enter message..." required></textarea>
-                </div>
+                <div class="input-line"><label>Operator</label><input type="text" name="name" required></div>
+                <div class="input-line"><label>Email_Address</label><input type="email" name="email" required></div>
+                <div class="input-line"><label>Payload</label><textarea name="message" rows="3" required></textarea></div>
                 <button type="submit" id="submit-btn" class="init-btn" style="width: 100%;">Execute Transmission</button>
             </form>
-            
-            <div style="margin-top: 40px; text-align: center; border-top: 1px solid #222; padding-top: 30px;">
-                <p style="font-size: 1.4rem; color: var(--terminal-blue); font-weight: bold; margin: 0;">mark.recio.pro@gmail.com</p>
-                <p style="color: var(--terminal-gray); letter-spacing: 2px;">(702) 501-9385</p>
-                <a href="https://song.do/play/3a917d19-1c9a-4792-a31a-e3c7a0470579" target="_blank" class="init-btn" style="display:inline-block; margin-top: 20px; font-size: 0.7rem; text-decoration:none;">▶ SYSTEM_AUDIO_STREAM</a>
+            <div style="margin-top: 30px; text-align: center;">
+                <p style="color: var(--terminal-blue); font-weight: bold;">mark.recio.pro@gmail.com</p>
+                <p style="color: var(--terminal-gray); font-size: 0.8rem;">(702) 501-9385</p>
+                <a href="https://song.do/play/3a917d19-1c9a-4792-a31a-e3c7a0470579" target="_blank" class="init-btn" style="display:inline-block; margin-top: 15px; text-decoration:none; font-size: 0.6rem;">▶ SYSTEM AUDIO</a>
             </div>
         </section>
 
-        <footer>
-            &copy; 2026 MAREC INSIGHTS // LAS VEGAS, NV // BUSINESS INTELLIGENCE ARCHITECTURE
-        </footer>
+        <footer>&copy; 2026 MAREC INSIGHTS // LAS VEGAS, NV</footer>
     </div>
 
     <script>
-        const logs = [
-            "ESTABLISHING_SECURE_LINK...",
-            "LOADING_MAREC_ASSETS...",
-            "VIDEO_STREAM_BUFFERED...",
-            "CODE_LIBRARIES_INITIALIZED...",
-            "WELCOME, ARCHITECT."
-        ];
-
         function initBoot() {
             const container = document.getElementById('boot-text');
-            logs.forEach((msg, i) => {
+            const messages = ["BOOTING_MAREC_CORE...", "SYNCING_VIDEO_STREAM...", "MISSION_DIRECTIVES_LOADED...", "SYSTEM_OPTIMIZED."];
+            messages.forEach((m, i) => {
                 setTimeout(() => {
-                    const div = document.createElement('div');
-                    div.innerHTML = `> ${msg}`;
-                    container.appendChild(div);
-                }, i * 450);
+                    const d = document.createElement('div'); d.innerHTML = `> ${m}`; container.appendChild(d);
+                }, i * 500);
             });
         }
-
         function enterSite() {
-            const overlay = document.getElementById('boot-overlay');
-            const site = document.getElementById('main-site');
-            overlay.style.transform = "translateY(-100%)";
+            document.getElementById('boot-overlay').style.transform = "translateY(-100%)";
             setTimeout(() => {
-                overlay.style.display = 'none';
-                site.style.display = 'block';
-                setTimeout(() => site.style.opacity = "1", 50);
+                document.getElementById('boot-overlay').style.display = 'none';
+                document.getElementById('main-site').style.display = 'block';
+                setTimeout(() => document.getElementById('main-site').style.opacity = "1", 50);
             }, 800);
         }
-
         document.getElementById('contact-form').addEventListener('submit', function(e) {
             e.preventDefault();
-            const btn = document.getElementById('submit-btn');
-            btn.innerText = "UPLINKING...";
+            const b = document.getElementById('submit-btn'); b.innerText = "UPLINKING...";
             fetch('https://api.web3forms.com/submit', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(Object.fromEntries(new FormData(this)))
-            }).then(() => {
-                btn.innerText = "TRANSMISSION SUCCESSFUL";
-                this.reset();
-            });
+            }).then(() => { b.innerText = "TRANSMISSION SUCCESSFUL"; this.reset(); });
         });
     </script>
 </body>
