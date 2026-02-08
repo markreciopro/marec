@@ -4,20 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MAREC Insights | Data & Operations Consulting</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;700&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #1a2a6c;
-            --secondary: #b21f1f;
-            --text: #333;
-            --light: #f4f7f6;
+            /* Programming Palette: Midnight Syntax */
+            --bg-dark: #0d1117;        /* GitHub Dark Background */
+            --bg-card: #161b22;        /* Dark Slate */
+            --accent-cyan: #58a6ff;    /* Function Blue */
+            --accent-green: #3fb950;   /* String Green */
+            --accent-purple: #bc8cff;  /* Keyword Purple */
+            --text-main: #c9d1d9;      /* Dim White */
+            --primary: var(--accent-cyan);
+            --secondary: #f85149;      /* Error/Variable Red */
         }
         body {
             font-family: 'Inter', sans-serif;
             line-height: 1.6;
-            color: var(--text);
+            color: var(--text-main);
             margin: 0;
-            background-color: white;
+            background-color: var(--bg-dark);
             overflow-x: hidden;
         }
 
@@ -41,7 +46,7 @@
             transform: translate(-50%, -50%);
             pointer-events: none;
             z-index: 1;
-            opacity: 0.4;
+            opacity: 0.25; /* Dimmed further for "Code" feel */
         }
 
         .video-foreground iframe {
@@ -55,16 +60,39 @@
             transform: translate(-50%, -50%);
         }
 
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            background: linear-gradient(
+                to bottom, 
+                rgba(13, 17, 23, 0.9) 0%, 
+                rgba(13, 17, 23, 0.4) 50%, 
+                rgba(13, 17, 23, 0.9) 100%
+            );
+        }
+
         header {
             position: relative;
-            z-index: 2;
+            z-index: 3;
             color: white;
             text-align: center;
             padding: 20px;
         }
 
-        h1 { margin: 0; font-size: 3.5em; letter-spacing: 6px; text-transform: uppercase; font-weight: 700; }
-        .tagline { font-style: italic; color: #cbd5e0; font-weight: 300; font-size: 1.2rem; margin-top: 10px; }
+        h1 { 
+            margin: 0; 
+            font-size: 3.5em; 
+            letter-spacing: 6px; 
+            text-transform: uppercase; 
+            font-weight: 700;
+            font-family: 'Fira Code', monospace; /* Monospaced font for title */
+            color: var(--accent-cyan);
+        }
+        .tagline { font-style: italic; color: var(--accent-green); font-weight: 300; font-size: 1.2rem; margin-top: 10px; font-family: 'Fira Code', monospace; }
         
         .cta-buttons { margin-top: 30px; }
         .btn {
@@ -72,15 +100,16 @@
             padding: 14px 28px;
             margin: 10px;
             text-decoration: none;
-            border-radius: 5px;
+            border-radius: 6px;
             font-weight: bold;
             transition: 0.3s;
             cursor: pointer;
             border: none;
+            font-family: 'Fira Code', monospace;
         }
-        .btn-pdf { background: var(--secondary); color: white; box-shadow: 0 4px 15px rgba(178, 31, 31, 0.4); }
-        .btn-primary { background: rgba(255, 255, 255, 0.1); color: white; border: 1px solid white; backdrop-filter: blur(5px); }
-        .btn:hover { opacity: 0.9; transform: translateY(-3px); }
+        .btn-pdf { background: var(--secondary); color: white; box-shadow: 0 4px 15px rgba(248, 81, 73, 0.3); }
+        .btn-primary { background: transparent; color: var(--accent-cyan); border: 1px solid var(--accent-cyan); }
+        .btn:hover { opacity: 0.8; transform: translateY(-2px); box-shadow: 0 0 15px var(--accent-cyan); }
 
         .container { max-width: 1100px; margin: auto; padding: 60px 20px; }
 
@@ -88,9 +117,10 @@
             text-align: center;
             padding: 40px 0;
             font-size: 1.4em;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid #30363d;
             max-width: 900px;
             margin: auto;
+            color: var(--text-main);
         }
 
         .grid {
@@ -100,35 +130,39 @@
             margin-top: 50px;
         }
         .card {
-            background: var(--light);
+            background: var(--bg-card);
             padding: 30px;
             border-radius: 12px;
-            border-left: 5px solid var(--primary);
+            border: 1px solid #30363d;
+            border-top: 4px solid var(--accent-purple); /* Syntax color accent */
             transition: 0.3s;
         }
-        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
-        .card h3 { color: var(--primary); margin-top: 5px; font-size: 1.3rem; }
+        .card:hover { border-color: var(--accent-cyan); transform: translateY(-5px); }
+        .card h3 { color: var(--accent-cyan); margin-top: 5px; font-size: 1.3rem; font-family: 'Fira Code', monospace; }
         .problem-label { font-weight: bold; color: var(--secondary); text-transform: uppercase; font-size: 0.8em; letter-spacing: 1px; margin: 0; }
 
         .arsenal {
             margin-top: 80px; 
             text-align: center; 
-            background: var(--primary); 
-            color: white; 
+            background: #161b22; 
+            color: var(--accent-green); 
             padding: 50px; 
             border-radius: 15px;
+            border: 1px solid var(--accent-green);
+            font-family: 'Fira Code', monospace;
         }
 
         .footer {
             text-align: center;
             padding: 80px 20px;
-            background: #0a0a0a;
-            color: #888;
+            background: #010409;
+            color: #8b949e;
+            border-top: 1px solid #30363d;
         }
 
         @media print {
-            .hero-video-container { background: #1a2a6c !important; height: auto; padding: 40px 0; }
-            .video-foreground, .cta-buttons { display: none; }
+            .hero-video-container { background: #0d1117 !important; height: auto; padding: 40px 0; }
+            .video-foreground, .video-overlay, .cta-buttons { display: none; }
         }
     </style>
 </head>
@@ -139,70 +173,72 @@
         <iframe src="https://www.youtube.com/embed/qHwgrgWFl98?autoplay=1&mute=1&loop=1&playlist=qHwgrgWFl98&controls=0&rel=0" frameborder="0" allow="autoplay; encrypted-media"></iframe>
     </div>
     
+    <div class="video-overlay"></div>
+    
     <header>
-        <h1>MAREC INSIGHTS</h1>
-        <p style="font-size: 1.6em; font-weight: 300; margin: 10px 0;">Mark Anthony Recio, MBA</p>
-        <p class="tagline">Bridging Human Intuition and Algorithmic Precision</p>
+        <h1>MAREC_INSIGHTS</h1>
+        <p style="font-size: 1.6em; font-weight: 300; margin: 10px 0; color: var(--text-main);">Mark Anthony Recio, MBA</p>
+        <p class="tagline">// Bridging Human Intuition and Algorithmic Precision</p>
         
         <div class="cta-buttons">
-            <a href="https://github.com/markreciopro/marec/raw/main/MAREC%20Flyer.pdf" class="btn btn-pdf">📄 Download Executive Flyer</a>
-            <a href="https://linkedin.com/in/marecio" target="_blank" class="btn btn-primary">LinkedIn Profile</a>
+            <a href="https://github.com/markreciopro/marec/raw/main/MAREC%20Flyer.pdf" class="btn btn-pdf">Download_Flyer</a>
+            <a href="https://linkedin.com/in/marecio" target="_blank" class="btn btn-primary">LinkedIn_Profile</a>
         </div>
     </header>
 </div>
 
 <div class="container">
     <section class="mission">
-        <strong>The Mission:</strong> I transform scattered data into professional architectures that move organizations from <span style="color: var(--secondary); font-weight: 700;">Reactive to Predictive</span>, driving profit and operational excellence.
+        <strong>The Mission:</strong> I transform scattered data into professional architectures that move organizations from <span style="color: var(--accent-purple); font-weight: 700;">Reactive to Predictive</span>, driving profit and operational excellence.
     </section>
 
-    <h2 style="text-align: center; margin-top: 60px; text-transform: uppercase; letter-spacing: 2px;">Core Consulting Pillars </h2>
+    <h2 style="text-align: center; margin-top: 60px; text-transform: uppercase; letter-spacing: 2px; color: var(--accent-cyan); font-family: 'Fira Code', monospace;">Consulting_Pillars</h2>
     
     <div class="grid">
         <div class="card">
-            <p class="problem-label">Problem: Flat net income despite record revenue </p>
-            <h3>Financial & Accounting Analytics </h3>
+            <p class="problem-label">Error: Flat net income [cite: 10]</p>
+            <h3>Financial_Analytics</h3>
             <p><strong>Solution:</strong> Price-Volume-Mix (PVM) Models that isolate "profit leaks" in P&L and Balance Sheet data.</p>
         </div>
 
         <div class="card">
-            <p class="problem-label">Problem: High inventory costs and frequent stockouts </p>
-            <h3>Supply Chain & Operations </h3>
+            <p class="problem-label">Error: Inventory stockouts </p>
+            <h3>Ops_Intelligence</h3>
             <p><strong>Solution:</strong> Demand Forecasting & Network Optimization to synchronize procurement with sales velocity.</p>
         </div>
 
         <div class="card">
-            <p class="problem-label">Problem: Excessive turnover costs and talent loss </p>
-            <h3>HR & Workforce Analytics </h3>
+            <p class="problem-label">Error: Talent loss </p>
+            <h3>Workforce_Logic</h3>
             <p><strong>Solution:</strong> Predictive Attrition Models that identify "flight risks" before resignation.</p>
         </div>
 
         <div class="card">
-            <p class="problem-label">Problem: Inefficient field operations </p>
-            <h3>Election & Political Intelligence </h3>
+            <p class="problem-label">Error: Inefficient field ops </p>
+            <h3>Political_Intel</h3>
             <p><strong>Solution:</strong> Geospatial "Walk-Lists" synced with Advantage data to engage high-probability voter segments.</p>
         </div>
     </div>
 
     <section class="arsenal">
-        <h3 style="letter-spacing: 3px; font-size: 1.5rem; margin-bottom: 20px;">TECHNICAL ARSENAL </h3>
+        <h3 style="letter-spacing: 3px; font-size: 1.5rem; margin-bottom: 20px;">TECHNICAL_ARSENAL</h3>
         <p style="font-size: 1.2rem; opacity: 0.9; font-weight: 300;">
-            Python | R | SQL | DAX | Power BI | Tableau | GitHub | Advantage Excel 
+            Python | R | SQL | DAX | Power BI | Tableau | GitHub | Advantage Excel
         </p>
-        <hr style="width: 60px; opacity: 0.3; margin: 25px auto;">
+        <hr style="width: 60px; opacity: 0.3; margin: 25px auto; border-color: var(--accent-green);">
         <p style="font-weight: 700; letter-spacing: 4px; font-size: 0.9rem;">MODELING | ANALYTICS | REPORTING | EFFICIENCY </p>
     </section>
 </div>
 
 <div class="footer">
-    <p style="color: white; letter-spacing: 3px; font-weight: 700; font-size: 1.2rem;">MAREC INSIGHTS </p>
-    <p>Las Vegas, NV (Global Remote) | (702) 501-9385 </p>
+    <p style="color: var(--accent-cyan); letter-spacing: 3px; font-weight: 700; font-size: 1.2rem; font-family: 'Fira Code', monospace;">MAREC.INSIGHTS</p>
+    <p>Las Vegas, NV (Global Remote) | (702) [cite_start]501-9385 </p>
     <p>
-        <a href="mailto:mark.recio.pro@gmail.com" style="color: var(--secondary); text-decoration: none; font-weight: 700;">mark.recio.pro@gmail.com </a>
+        <a href="mailto:mark.recio.pro@gmail.com" style="color: var(--accent-purple); text-decoration: none; font-weight: 700;">mark.recio.pro@gmail.com</a> 
     </p>
     <p style="margin-top: 30px; font-size: 0.75rem; opacity: 0.5;">
-        Let's build the architecture your mission deserves.<br>
-        © 2026 Intelligence Architecture Built by MAREC
+        // Let's build the architecture your mission deserves.<br>
+        © 2026 Intelligence Architecture Built by MAREC 
     </p>
 </div>
 
