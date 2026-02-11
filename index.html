@@ -22,44 +22,71 @@
             color: var(--text-main);
             margin: 0;
             background-color: var(--bg-dark);
+            scroll-behavior: smooth;
         }
 
-        /* Video Container - Stacked at the top */
-        .video-header-container {
-            width: 100%;
+        /* Hero Workstation Layout */
+        .hero-workstation {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 900px;
+            margin: 60px auto 20px auto;
+            padding: 0 20px;
+        }
+
+        /* The Floating Video Screen */
+        .video-monitor {
+            width: 50%; /* Compact size to fit above the lid */
+            aspect-ratio: 16 / 9;
             background: #000;
-            line-height: 0; /* Removes bottom gap */
-            border-bottom: 2px solid var(--accent-cyan);
-        }
-
-        .video-wrapper {
-            position: relative;
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-            height: 0;
+            border-radius: 8px;
             overflow: hidden;
-            max-width: 1200px;
-            margin: 0 auto;
+            z-index: 10;
+            border: 2px solid #30363d;
+            box-shadow: 0 0 30px rgba(88, 166, 255, 0.3), 0 10px 20px rgba(0,0,0,0.5);
+            
+            /* This margin pulls the laptop image up so they touch perfectly */
+            margin-bottom: -35px; 
+            
+            /* Slight perspective tilt */
+            transform: perspective(1000px) rotateX(2deg);
+            transition: transform 0.3s ease;
         }
 
-        .video-wrapper iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
+        .video-monitor:hover {
+            transform: perspective(1000px) rotateX(0deg) scale(1.02);
+            border-color: var(--accent-cyan);
+        }
+
+        .video-monitor iframe {
             width: 100%;
             height: 100%;
-            border: 0;
+            border: none;
         }
 
-        /* Header Section - Now below the video */
+        /* The Laptop Picture */
+        .laptop-base {
+            width: 100%;
+            line-height: 0;
+            z-index: 5;
+        }
+
+        .base-image {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+            border: 1px solid #30363d;
+        }
+
         header {
             text-align: center;
-            padding: 60px 20px;
-            background: linear-gradient(to bottom, #111b27, var(--bg-dark));
+            padding: 20px 20px 60px 20px;
         }
 
         h1 { 
             margin: 0; 
-            font-size: 3em; 
+            font-size: clamp(2.2rem, 8vw, 3.8rem); 
             letter-spacing: 4px; 
             text-transform: uppercase; 
             font-family: 'Fira Code', monospace; 
@@ -69,45 +96,36 @@
         .tagline { 
             font-style: italic; 
             color: var(--accent-green); 
-            font-size: 1.2rem; 
+            font-size: 1.1rem; 
             margin-top: 10px; 
             font-family: 'Fira Code', monospace; 
         }
 
-        .cta-buttons { margin-top: 30px; }
+        .cta-buttons { margin-top: 35px; }
         
         .btn {
             display: inline-block;
             padding: 12px 24px;
-            margin: 10px;
+            margin: 8px;
             text-decoration: none;
             border-radius: 6px;
             font-weight: bold;
             transition: 0.3s;
             font-family: 'Fira Code', monospace;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
-        .btn-pdf { background: var(--secondary); color: white; border: none; }
+        .btn-pdf { background: var(--secondary); color: white; }
+        .btn-cta { background: var(--accent-green); color: #000; border: none; }
         .btn-primary { background: transparent; color: var(--accent-cyan); border: 1px solid var(--accent-cyan); }
-        .btn:hover { transform: translateY(-2px); box-shadow: 0 0 15px rgba(88, 166, 255, 0.3); }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(88, 166, 255, 0.3); }
 
         .container { max-width: 1100px; margin: auto; padding: 40px 20px; }
-
-        .mission {
-            text-align: center;
-            padding: 40px 0;
-            font-size: 1.4em;
-            border-bottom: 1px solid #30363d;
-            max-width: 900px;
-            margin: auto;
-        }
 
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
+            gap: 25px;
         }
 
         .card {
@@ -116,23 +134,6 @@
             border-radius: 12px;
             border: 1px solid #30363d;
             border-top: 4px solid var(--accent-purple);
-            transition: 0.3s;
-        }
-
-        .card:hover { border-color: var(--accent-cyan); }
-        
-        .card h3 { 
-            color: var(--accent-cyan); 
-            font-family: 'Fira Code', monospace; 
-            margin-top: 5px; 
-        }
-
-        .problem-label { 
-            font-weight: bold; 
-            color: var(--secondary); 
-            text-transform: uppercase; 
-            font-size: 0.8em; 
-            font-family: 'Fira Code', monospace;
         }
 
         .arsenal {
@@ -145,84 +146,82 @@
             font-family: 'Fira Code', monospace;
         }
 
+        #contact {
+            text-align: center;
+            padding: 80px 20px;
+            background: linear-gradient(to top, #010409, var(--bg-dark));
+        }
+
         .footer {
             text-align: center;
-            padding: 60px 20px;
+            padding: 40px 20px;
             background: #010409;
-            border-top: 1px solid #30363d;
             color: #8b949e;
+        }
+
+        @media (max-width: 768px) {
+            .video-monitor { width: 80%; margin-bottom: -20px; }
         }
     </style>
 </head>
 <body>
 
-<div class="video-header-container">
-    <div class="video-wrapper">
-        <iframe src="https://www.youtube.com/embed/qHwgrgWFl98?autoplay=1&mute=1&loop=1&playlist=qHwgrgWFl98&controls=1&modestbranding=1" title="MAREC Insights Overview" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<section class="hero-workstation">
+    
+    <div class="video-monitor">
+        <iframe src="https://www.youtube.com/embed/qHwgrgWFl98?autoplay=1&mute=1&loop=1&playlist=qHwgrgWFl98&controls=0&modestbranding=1" allow="autoplay; encrypted-media"></iframe>
     </div>
-</div>
+    
+    <div class="laptop-base">
+        <img src="https://i.ibb.co/ZzCVqzH9/Gemini-Generated-Image-bn1v5kbn1v5kbn1v.png" alt="MAREC Terminal" class="base-image">
+    </div>
+
+</section>
 
 <header>
     <h1>MAREC_INSIGHTS</h1>
-    <p style="font-size: 1.5em; font-weight: 300; margin: 10px 0;">Mark Anthony Recio, MBA</p>
+    <p style="font-size: 1.4em; font-weight: 300; margin: 10px 0;">Mark Anthony Recio, MBA</p>
     <p class="tagline">// Bridging Human Intuition and Algorithmic Precision</p>
     
     <div class="cta-buttons">
-        <a href="https://github.com/markreciopro/marec/raw/main/MAREC%20Flyer.pdf" class="btn btn-pdf">EXEC.DOWNLOAD(pdf)</a>
-        <a href="https://linkedin.com/in/marecio" target="_blank" class="btn btn-primary">VIEW.LINKEDIN(profile)</a>
+        <a href="#contact" class="btn btn-cta">BOOK.CONSULTATION(now)</a>
+        <a href="https://github.com/markreciopro/marec/raw/main/MAREC%20Flyer.pdf" class="btn btn-pdf">DOWNLOAD.CV(pdf)</a>
+        <a href="https://linkedin.com/in/marecio" target="_blank" class="btn btn-primary">LINKEDIN</a>
     </div>
 </header>
 
 <div class="container">
-    <section class="mission">
-        <strong>The Mission:</strong> I transform scattered data into professional architectures that move organizations from <span style="color: var(--accent-purple); font-weight: 700;">Reactive to Predictive</span>, driving profit and operational excellence.
-    </section>
-
-    <h2 style="text-align: center; margin-top: 60px; color: var(--accent-cyan); font-family: 'Fira Code', monospace;">[Consulting_Pillars]</h2>
-    
     <div class="grid">
         <div class="card">
-            <p class="problem-label">ERROR_DETECTED: Flat Net Income</p>
-            <h3>Financial_Analytics</h3>
-            <p><strong>Solution:</strong> Price-Volume-Mix (PVM) Models that isolate "profit leaks" in P&L and Balance Sheet data.</p>
+            <h3 style="color: var(--accent-cyan); font-family: 'Fira Code', monospace;">Financial_Analytics</h3>
+            <p>PVM Models that isolate "profit leaks" in P&L data for immediate stakeholder visibility.</p>
         </div>
-
         <div class="card">
-            <p class="problem-label">ERROR_DETECTED: Stockouts/High Costs</p>
-            <h3>Ops_Intelligence</h3>
-            <p><strong>Solution:</strong> Demand Forecasting & Network Optimization to synchronize procurement with sales velocity.</p>
+            <h3 style="color: var(--accent-cyan); font-family: 'Fira Code', monospace;">Ops_Intelligence</h3>
+            <p>Demand Forecasting and Supply Chain logic to synchronize procurement with sales velocity.</p>
         </div>
-
         <div class="card">
-            <p class="problem-label">ERROR_DETECTED: High Turnover</p>
-            <h3>Workforce_Logic</h3>
-            <p><strong>Solution:</strong> Predictive Attrition Models that identify "flight risks" before resignation.</p>
-        </div>
-
-        <div class="card">
-            <p class="problem-label">ERROR_DETECTED: Field Inefficiency</p>
-            <h3>Political_Intel</h3>
-            <p><strong>Solution:</strong> Geospatial "Walk-Lists" synced with Advantage data to engage high-probability voter segments.</p>
+            <h3 style="color: var(--accent-cyan); font-family: 'Fira Code', monospace;">Workforce_Logic</h3>
+            <p>Predictive Attrition Models that identify "flight risks" using behavioral data trends.</p>
         </div>
     </div>
 
     <section class="arsenal">
         <h3 style="color: var(--accent-green);">// TECHNICAL_ARSENAL</h3>
-        <p style="font-size: 1.1rem; letter-spacing: 1px;">
-            Python | R | SQL | DAX | Power BI | Tableau | GitHub | Advantage Excel
-        </p>
+        <p>Python | R | SQL | DAX | Power BI | Tableau | GitHub | Advantage Excel</p>
     </section>
 </div>
+
+<section id="contact">
+    <h2 style="color: var(--accent-cyan); font-family: 'Fira Code', monospace;">[INITIATE_CONTACT]</h2>
+    <a href="mailto:mar@marec.site" class="btn btn-cta" style="font-size: 1.2rem; padding: 20px 40px;">SEND.MESSAGE(mar@marec.site)</a>
+</section>
 
 <div class="footer">
     <p style="color: var(--accent-cyan); font-family: 'Fira Code', monospace; font-weight: 700;">MAREC.INSIGHTS.TERMINAL</p>
     <p>Las Vegas, NV | (702) 501-9385</p>
-    <p><a href="mailto:mar@marec.site" style="color: var(--accent-purple); text-decoration: none;">mar@marec.site</a></p>
-    <p style="margin-top: 20px; font-size: 0.7rem; opacity: 0.5;">© 2026 Built for Operational Excellence</p>
+    <p>© 2026 Built for Operational Excellence</p>
 </div>
 
 </body>
 </html>
-
-
-
