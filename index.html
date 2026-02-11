@@ -14,6 +14,7 @@
             --accent-purple: #bc8cff;  
             --text-main: #c9d1d9;      
             --secondary: #f85149;      
+            --border: #30363d;
         }
 
         body {
@@ -31,32 +32,29 @@
             flex-direction: column;
             align-items: center;
             max-width: 850px;
-            margin: 60px auto 20px auto;
+            margin: 80px auto 20px auto;
             padding: 0 20px;
             position: relative;
         }
 
-        /* The Video Monitor positioned perfectly above laptop lid */
+        /* The Video Monitor */
         .video-monitor {
-            width: 50%; /* Compact size to fit above the lid */
+            width: 55%; 
             aspect-ratio: 16 / 9;
             background: #000;
             border-radius: 8px;
             overflow: hidden;
             z-index: 10;
-            border: 2px solid #30363d;
-            box-shadow: 0 0 35px rgba(88, 166, 255, 0.4);
-            
-            /* Overlaps the laptop image slightly for a physical look */
-            margin-bottom: -40px; 
-            
-            /* Slight perspective tilt to match the photo depth */
-            transform: perspective(1000px) rotateX(4deg);
-            transition: 0.3s ease;
+            border: 2px solid var(--border);
+            box-shadow: 0 0 40px rgba(88, 166, 255, 0.25);
+            margin-bottom: -45px; 
+            transform: perspective(1000px) rotateX(5deg);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .video-monitor:hover {
-            transform: perspective(1000px) rotateX(0deg) scale(1.03);
+            transform: perspective(1000px) rotateX(0deg) scale(1.05);
+            box-shadow: 0 0 50px rgba(88, 166, 255, 0.5);
             border-color: var(--accent-cyan);
         }
 
@@ -66,7 +64,6 @@
             border: none;
         }
 
-        /* The Laptop Base Picture */
         .laptop-base {
             width: 100%;
             line-height: 0;
@@ -76,38 +73,39 @@
         .base-image {
             width: 100%;
             border-radius: 15px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
-            border: 1px solid #30363d;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8);
+            border: 1px solid var(--border);
         }
 
         header {
             text-align: center;
-            padding: 20px 20px 60px 20px;
+            padding: 40px 20px 80px 20px;
         }
 
         h1 { 
             margin: 0; 
-            font-size: clamp(2.2rem, 8vw, 3.8rem); 
-            letter-spacing: 4px; 
+            font-size: clamp(2rem, 7vw, 3.5rem); 
+            letter-spacing: 2px; 
             text-transform: uppercase; 
             font-family: 'Fira Code', monospace; 
             color: var(--accent-cyan);
+            text-shadow: 0 0 15px rgba(88, 166, 255, 0.3);
         }
 
         .tagline { 
             font-style: italic; 
             color: var(--accent-green); 
             font-size: 1.1rem; 
-            margin-top: 10px; 
+            margin-top: 15px; 
             font-family: 'Fira Code', monospace; 
         }
 
-        .cta-buttons { margin-top: 35px; }
+        .cta-buttons { margin-top: 40px; }
         
         .btn {
             display: inline-block;
-            padding: 12px 24px;
-            margin: 8px;
+            padding: 14px 28px;
+            margin: 10px;
             text-decoration: none;
             border-radius: 6px;
             font-weight: bold;
@@ -116,83 +114,104 @@
             font-size: 0.85rem;
             border: none;
             cursor: pointer;
+            letter-spacing: 1px;
         }
 
         .btn-pdf { background: var(--secondary); color: white; }
         .btn-cta { background: var(--accent-green); color: #000; }
         .btn-primary { background: transparent; color: var(--accent-cyan); border: 1px solid var(--accent-cyan); }
-        .btn:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(88, 166, 255, 0.3); }
+        .btn:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0,0,0,0.4); }
 
         .container { max-width: 1100px; margin: auto; padding: 40px 20px; }
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
         }
 
         .card {
             background: var(--bg-card);
-            padding: 30px;
+            padding: 40px;
             border-radius: 12px;
-            border: 1px solid #30363d;
+            border: 1px solid var(--border);
             border-top: 4px solid var(--accent-purple);
+            transition: 0.3s ease;
         }
 
-        /* Contact Form Styles */
+        .card:hover {
+            border-color: var(--accent-purple);
+            transform: translateY(-5px);
+        }
+
+        /* Technical Arsenal Section */
+        .arsenal {
+            margin-top: 80px; 
+            text-align: center; 
+            background: #161b22; 
+            padding: 50px; 
+            border-radius: 15px;
+            border: 1px solid var(--accent-green);
+            font-family: 'Fira Code', monospace;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .arsenal::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-green), transparent);
+        }
+
+        /* Contact Form */
         #contact {
-            max-width: 600px;
-            margin: 80px auto;
-            padding: 40px 20px;
+            max-width: 650px;
+            margin: 100px auto;
+            padding: 50px 30px;
             background: var(--bg-card);
             border-radius: 12px;
-            border: 1px solid #30363d;
+            border: 1px solid var(--border);
             text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        .form-group { margin-bottom: 20px; text-align: left; }
-        label { display: block; font-family: 'Fira Code', monospace; color: var(--accent-cyan); margin-bottom: 5px; font-size: 0.8rem; }
+        .form-group { margin-bottom: 25px; text-align: left; }
+        label { display: block; font-family: 'Fira Code', monospace; color: var(--accent-cyan); margin-bottom: 8px; font-size: 0.85rem; }
         
         input, textarea {
             width: 100%;
-            padding: 12px;
+            padding: 14px;
             background: var(--bg-dark);
-            border: 1px solid #30363d;
+            border: 1px solid var(--border);
             border-radius: 6px;
             color: white;
             font-family: 'Inter', sans-serif;
             box-sizing: border-box;
+            font-size: 1rem;
         }
 
-        input:focus, textarea:focus { outline: none; border-color: var(--accent-green); }
-
-        .arsenal {
-            margin-top: 60px; 
-            text-align: center; 
-            background: #161b22; 
-            padding: 40px; 
-            border-radius: 15px;
-            border: 1px solid var(--accent-green);
-            font-family: 'Fira Code', monospace;
-        }
+        input:focus, textarea:focus { outline: none; border-color: var(--accent-green); box-shadow: 0 0 10px rgba(63, 185, 80, 0.2); }
 
         .footer {
             text-align: center;
-            padding: 40px 20px;
+            padding: 60px 20px;
             background: #010409;
             color: #8b949e;
+            border-top: 1px solid var(--border);
         }
 
+        .footer a { color: var(--accent-cyan); text-decoration: none; }
+
         @media (max-width: 768px) {
-            .video-monitor { width: 80%; margin-bottom: -25px; }
+            .video-monitor { width: 85%; margin-bottom: -30px; }
+            h1 { font-size: 2.2rem; }
+            .arsenal { padding: 30px; }
         }
     </style>
 </head>
 <body>
 
 <section class="hero-workstation">
-    
     <div class="video-monitor">
         <iframe src="https://www.youtube.com/embed/qHwgrgWFl98?autoplay=1&mute=1&loop=1&playlist=qHwgrgWFl98&controls=0&modestbranding=1" allow="autoplay; encrypted-media"></iframe>
     </div>
@@ -200,17 +219,16 @@
     <div class="laptop-base">
         <img src="https://i.ibb.co/ZzCVqzH9/Gemini-Generated-Image-bn1v5kbn1v5kbn1v.png" alt="MAREC Terminal" class="base-image">
     </div>
-
 </section>
 
 <header>
     <h1>MAREC_INSIGHTS</h1>
-    <p style="font-size: 1.4em; font-weight: 300; margin: 10px 0;">Mark Anthony Recio, MBA</p>
+    <p style="font-size: 1.5em; font-weight: 300; margin: 15px 0; color: #fff;">Mark Anthony Recio, MBA</p>
     <p class="tagline">// Bridging Human Intuition and Algorithmic Precision</p>
     
     <div class="cta-buttons">
         <a href="#contact" class="btn btn-cta">BOOK.CONSULTATION(now)</a>
-        <a href="https://github.com/markreciopro/marec/raw/main/MAREC%20Flyer.pdf" class="btn btn-pdf">DOWNLOAD.CV(pdf)</a>
+        <a href="https://github.com/markreciopro/marec/raw/main/MAREC%20Flyer.pdf" class="btn btn-pdf" target="_blank">DOWNLOAD.CV(pdf)</a>
         <a href="https://linkedin.com/in/marecio" target="_blank" class="btn btn-primary">LINKEDIN</a>
     </div>
 </header>
@@ -218,28 +236,28 @@
 <div class="container">
     <div class="grid">
         <div class="card">
-            <h3 style="color: var(--accent-cyan); font-family: 'Fira Code', monospace;">Financial_Analytics</h3>
-            <p>PVM Models that isolate "profit leaks" in P&L data for clear, predictive stakeholder visibility.</p>
+            <h3 style="color: var(--accent-cyan); font-family: 'Fira Code', monospace; margin-top: 0;">[01] Financial_Analytics</h3>
+            <p>PVM Models that isolate "profit leaks" in P&L data for clear, predictive stakeholder visibility and margin expansion.</p>
         </div>
         <div class="card">
-            <h3 style="color: var(--accent-cyan); font-family: 'Fira Code', monospace;">Ops_Intelligence</h3>
-            <p>Demand Forecasting and Network Optimization to synchronize procurement with sales velocity.</p>
+            <h3 style="color: var(--accent-cyan); font-family: 'Fira Code', monospace; margin-top: 0;">[02] Ops_Intelligence</h3>
+            <p>Demand Forecasting and Network Optimization to synchronize global procurement with real-time sales velocity.</p>
         </div>
         <div class="card">
-            <h3 style="color: var(--accent-cyan); font-family: 'Fira Code', monospace;">Workforce_Logic</h3>
-            <p>Predictive Attrition Models that identify turnover risks using advanced behavioral data trends.</p>
+            <h3 style="color: var(--accent-cyan); font-family: 'Fira Code', monospace; margin-top: 0;">[03] Workforce_Logic</h3>
+            <p>Predictive Attrition Models and labor productivity dashboards that identify turnover risks using behavioral data trends.</p>
         </div>
     </div>
 
     <section class="arsenal">
-        <h3 style="color: var(--accent-green);">// TECHNICAL_ARSENAL</h3>
-        <p>Python | R | SQL | DAX | Power BI | Tableau | GitHub | Advantage Excel</p>
+        <h3 style="color: var(--accent-green); margin-top: 0;">// TECHNICAL_ARSENAL</h3>
+        <p style="font-size: 1.1rem; letter-spacing: 1px;">Python | R | SQL | DAX | Power BI | Tableau | GitHub | Advantage Excel</p>
     </section>
 </div>
 
 <section id="contact">
     <h2 style="color: var(--accent-cyan); font-family: 'Fira Code', monospace; margin-bottom: 10px;">[INITIATE_CONTACT]</h2>
-    <p style="margin-bottom: 30px;">Direct form submission. No mail app required.</p>
+    <p style="margin-bottom: 30px; opacity: 0.8;">Secure transmission via FormSpree. Direct response guaranteed.</p>
     
     <form action="https://formspree.io/f/mreaeden" method="POST">
         <div class="form-group">
@@ -254,14 +272,15 @@
             <label>DATA_TRANSMISSION (MESSAGE):</label>
             <textarea name="message" rows="5" required placeholder="Describe your operational bottleneck..."></textarea>
         </div>
-        <button type="submit" class="btn btn-cta" style="width: 100%;">SEND.MESSAGE(to_marec_insights)</button>
+        <button type="submit" class="btn btn-cta" style="width: 100%; margin: 0;">SEND.MESSAGE(to_marec_insights)</button>
     </form>
 </section>
 
 <div class="footer">
-    <p style="color: var(--accent-cyan); font-family: 'Fira Code', monospace; font-weight: 700;">MAREC.INSIGHTS.TERMINAL</p>
+    <p style="color: var(--accent-cyan); font-family: 'Fira Code', monospace; font-weight: 700; margin-bottom: 5px;">MAREC.INSIGHTS.TERMINAL</p>
     <p>Las Vegas, NV | (702) 501-9385</p>
-    <p>© 2026 Built for Operational Excellence</p>
+    <p>Email: <a href="mailto:mar@marec.site">mar@marec.site</a></p>
+    <p style="font-size: 0.8rem; margin-top: 20px; opacity: 0.5;">© 2026 Built for Operational Excellence | Encrypted Connection</p>
 </div>
 
 </body>
