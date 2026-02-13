@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/markreciopro/marec/main/favicon.png">
+    
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-RWJXDQ05ET"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -14,27 +16,37 @@
       "@context": "https://schema.org",
       "@type": "Person",
       "name": "Mark Recio",
-      "jobTitle": "Data & Business Analyst",
+      "alternateName": "MAREC Insights",
+      "brand": {
+        "@type": "Brand",
+        "name": "MAREC Insights"
+      },
+      "jobTitle": "Strategic Data & Business Analyst",
       "url": "https://marec.site",
       "sameAs": [
-        "https://github.com/markreciopro"
+        "https://github.com/markreciopro",
+        "https://www.linkedin.com/in/marecio",
+        "https://markreciopro.github.io/Portfolio/"
       ],
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Las Vegas",
         "addressRegion": "NV"
       },
-      "knowsAbout": ["SQL", "Python", "Data Modeling", "Business Intelligence", "PVM Modeling", "Capital Efficiency"]
+      "knowsAbout": ["SQL", "Python", "Data Modeling", "Business Intelligence", "PVM Modeling", "Capital Efficiency", "Strategic Insights"]
     }
     </script>
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mark Recio | Strategic Data & Business Analyst | Las Vegas Strategy</title>
-    <meta name="description" content="Mark Recio, MBA - Strategic Data & Business Analyst. Specialized in Financial, HR, and Operations using SQL, Python, and Profitability Engineering.">
+    
+    <title>MAREC Insights | Mark Recio | Strategic Data & Business Analyst</title>
+    <meta name="description" content="MAREC Insights: Mark Recio, MBA. Strategic Data and Business Analytics in Las Vegas. Specialized in Finance, HR, and Operations using SQL and Python.">
+    <meta name="keywords" content="MAREC Insights, marec insights, Mark Recio, Data Analyst Las Vegas, Business Analyst MBA, SQL, Python, PVM Modeling, Profitability Engineering, marec.site">
     <link rel="canonical" href="https://marec.site/">
 
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;700&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    
     <style>
         :root {
             --bg-dark: #0d1117; --bg-card: #161b22; --accent-cyan: #58a6ff;    
@@ -42,35 +54,51 @@
             --secondary: #f85149; --border: #30363d;
         }
         body { font-family: 'Inter', sans-serif; line-height: 1.6; color: var(--text-main); margin: 0; background-color: var(--bg-dark); scroll-behavior: smooth; }
+        
+        /* Hero Section */
         .hero-workstation { display: flex; flex-direction: column; align-items: center; max-width: 850px; margin: 60px auto 20px auto; padding: 0 20px; }
         .video-monitor { width: 75%; aspect-ratio: 16 / 9; background: #000; border-radius: 8px; overflow: hidden; z-index: 10; border: 2px solid var(--border); box-shadow: 0 0 40px rgba(88, 166, 255, 0.2); margin-bottom: -45px; transform: perspective(1000px) rotateX(5deg); }
         .video-monitor iframe { width: 100%; height: 100%; border: none; }
         .laptop-base { width: 100%; line-height: 0; z-index: 5; }
         .base-image { width: 100%; border-radius: 15px; border: 1px solid var(--border); box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8); }
+        
+        /* Header */
         header { text-align: center; padding: 20px 20px 40px 20px; }
+        .brand-logo { font-family: 'Fira Code', monospace; color: var(--accent-green); font-size: 1rem; letter-spacing: 2px; margin-bottom: 5px; }
         h1 { margin: 0; font-size: clamp(2.5rem, 8vw, 4rem); font-family: 'Fira Code', monospace; color: var(--accent-cyan); text-transform: uppercase; font-weight: 700; }
         .job-title { font-size: 1.8rem; color: #fff; margin: 10px 0; font-weight: 700; }
-        .tagline { color: var(--accent-green); font-family: 'Fira Code', monospace; margin-bottom: 35px; }
+        .tagline { color: var(--accent-green); font-family: 'Fira Code', monospace; margin-bottom: 25px; }
+        
+        .nav-links { font-family: 'Fira Code', monospace; font-size: 0.9rem; margin-bottom: 35px; }
+        .nav-links a { color: var(--accent-cyan); text-decoration: none; margin: 0 10px; transition: 0.3s; border-bottom: 1px solid transparent; }
+        .nav-links a:hover { border-bottom: 1px solid var(--accent-cyan); }
+
         .tech-bar { background: var(--bg-card); border: 1px solid var(--border); padding: 20px; border-radius: 12px; margin: 0 auto 20px auto; max-width: 900px; display: flex; justify-content: space-around; flex-wrap: wrap; font-family: 'Fira Code', monospace; }
         .methods-bar { background: #000; border: 1px solid var(--accent-green); padding: 15px; border-radius: 8px; text-align: center; font-family: 'Fira Code', monospace; margin: 0 auto 40px auto; max-width: 900px; }
         .method-item { color: #fff; margin: 0 10px; font-weight: bold; }
+        
         .container { max-width: 1200px; margin: auto; padding: 0 20px 40px 20px; }
+        
         .exec-summary { background: linear-gradient(90deg, rgba(88, 166, 255, 0.1), transparent); border-left: 4px solid var(--accent-cyan); padding: 40px; border-radius: 0 12px 12px 0; margin-bottom: 60px; }
         .exec-summary h2 { font-family: 'Fira Code'; color: var(--accent-cyan); margin-top: 0; font-size: 1.2rem; }
         .exec-summary p { font-size: 1.1rem; line-height: 1.8; color: #fff; max-width: 950px; }
+        
         .roadmap-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 25px; margin-top: 40px; }
         .step { background: var(--bg-card); padding: 25px; border-radius: 10px; border: 1px solid var(--border); transition: 0.3s; }
-        .step:hover { border-color: var(--accent-cyan); }
+        .step:hover { border-color: var(--accent-cyan); transform: translateY(-5px); }
         .step h4 { color: #fff; margin: 0 0 15px 0; border-bottom: 1px solid var(--border); padding-bottom: 10px; font-family: 'Fira Code'; }
-        .step ul { padding-left: 18px; list-style-type: square; }
-        .step li { font-size: 0.85rem; margin-bottom: 8px; }
-        .btn { display: inline-block; padding: 14px 28px; margin: 8px; text-decoration: none; border-radius: 6px; font-weight: 700; transition: 0.3s; font-family: 'Fira Code', monospace; text-transform: uppercase; }
+        
+        .btn { display: inline-block; padding: 14px 28px; margin: 8px; text-decoration: none; border-radius: 6px; font-weight: 700; transition: 0.3s; font-family: 'Fira Code', monospace; text-transform: uppercase; border: none; cursor: pointer; }
         .btn-pdf { background: var(--secondary); color: white; }
         .btn-cta { background: var(--accent-green); color: #000; }
+        
         #contact { max-width: 750px; margin: 100px auto; padding: 50px; background: var(--bg-card); border-radius: 12px; border: 1px solid var(--border); }
         input, textarea { width: 100%; padding: 14px; background: var(--bg-dark); border: 1px solid var(--border); color: white; border-radius: 6px; margin-bottom: 20px; box-sizing: border-box; }
+        
         .footer { text-align: center; padding: 80px 20px; background: #010409; color: #8b949e; border-top: 1px solid var(--border); }
-        @media (max-width: 768px) { .roadmap-grid { grid-template-columns: 1fr; } }
+        .footer-links a { color: var(--accent-cyan); text-decoration: none; margin: 0 10px; font-size: 0.9rem; }
+
+        @media (max-width: 768px) { .roadmap-grid { grid-template-columns: 1fr; } .video-monitor { width: 90%; } }
     </style>
 </head>
 <body>
@@ -82,18 +110,24 @@
         </div>
         <div class="laptop-base">
             <img src="https://i.ibb.co/ZzCVqzH9/Gemini-Generated-Image-bn1v5kbn1v5kbn1v.png" 
-                 alt="Mark Recio MBA - Strategic Data and Business Analyst Portfolio Background" 
-                 title="Mark Recio - Data Strategy & Logic" 
+                 alt="Mark Recio MBA - MAREC Insights Portfolio" 
+                 title="MAREC Insights - Strategic Logic" 
                  class="base-image">
         </div>
     </section>
 
     <header>
-        <h1>marec insights</h1> 
+        <div class="brand-logo">[ MAREC_INSIGHTS ]</div>
         <h1>MARK_RECIO</h1>
         <p class="job-title">Data & Business Analyst</p>
         <p class="tagline">// Bridging Human Intuition and Algorithmic Precision</p>
         
+        <nav class="nav-links">
+            <a href="https://www.linkedin.com/in/marecio" target="_blank" rel="noopener noreferrer">LINKEDIN</a> • 
+            <a href="https://markreciopro.github.io/Portfolio/" target="_blank" rel="noopener noreferrer">PORTFOLIO</a> • 
+            <a href="https://github.com/markreciopro" target="_blank" rel="noopener noreferrer">GITHUB</a>
+        </nav>
+
         <div class="cta-buttons">
             <a href="#contact" class="btn btn-cta">HIRE.ANALYST(now)</a>
             <a href="https://github.com/markreciopro/marec/raw/main/MAREC.Flyer.pdf" class="btn btn-pdf" target="_blank">VIEW.FLYER(PDF)</a>
@@ -104,6 +138,7 @@
         <div class="tech-bar">
             <span><strong>TOOLS:</strong> SQL • Python • DAX • VBA • Power BI</span>
         </div>
+        
         <div class="methods-bar">
             <span class="method-item">Modeling</span> • 
             <span class="method-item">Analytics</span> • 
@@ -111,12 +146,14 @@
             <span class="method-item">Efficiency</span> • 
             <span class="method-item">Consulting</span>
         </div>
+
         <section class="exec-summary">
-            <h2>[EXECUTIVE_SUMMARY]</h2>
+            <h2>[MAREC_INSIGHT_SUMMARY]</h2>
             <p>
                 MBA-educated <strong>Strategic Analyst</strong> with a multidisciplinary focus on <strong>Finance, HR, and Operations</strong>. I specialize in translating complex raw data into surgical-grade business logic that drives <strong>Capital Efficiency</strong> and organizational scalability. From building automated <strong>SQL/Python pipelines</strong> to architecting <strong>PVM models</strong> and <strong>Predictive Attrition frameworks</strong>, I provide the analytical backbone required for high-stakes executive decision-making.
             </p>
         </section>
+
         <section class="roadmap-grid">
             <div class="step">
                 <h4>Finance & Accounting</h4>
@@ -169,11 +206,17 @@
 </main>
 
 <footer class="footer">
-    <p style="color: var(--accent-cyan); font-family: 'Fira Code'; font-weight: 700;">MARK RECIO | MBA | LAS VEGAS, NV</p>
-    <p>mar@marec.site | (702) 501-9385 | www.marec.site</p>
+    <p style="color: var(--accent-cyan); font-family: 'Fira Code'; font-weight: 700;">MAREC INSIGHTS | LAS VEGAS, NV</p>
+    <p>mar@marec.site | (702) 501-9385</p>
+    
+    <div class="footer-links">
+        <a href="https://www.linkedin.com/in/marecio" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://markreciopro.github.io/Portfolio/" target="_blank" rel="noopener noreferrer">Live Portfolio</a>
+        <a href="https://github.com/markreciopro" target="_blank" rel="noopener noreferrer">GitHub</a>
+    </div>
+
     <p style="font-size: 0.8rem; margin-top: 30px; opacity: 0.4;">© 2026 Mark Recio. Professional Data Strategy.</p>
 </footer>
+
 </body>
 </html>
-
-
