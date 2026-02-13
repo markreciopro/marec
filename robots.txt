@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Direct link to your sitemap
+Sitemap: https://marec.site/sitemap.xml
