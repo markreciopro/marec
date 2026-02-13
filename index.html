@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RWJXDQ05ET"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-RWJXDQ05ET');
+    </script>
+
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -9,24 +17,21 @@
       "jobTitle": "Data & Business Analyst",
       "url": "https://marec.site",
       "sameAs": [
-        "https://github.com/markreciopro",
-        "https://linkedin.com/in/YOUR_LINKEDIN_USERNAME" 
+        "https://github.com/markreciopro"
       ],
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Las Vegas",
         "addressRegion": "NV"
       },
-      "description": "Strategic Data & Business Analyst specialized in SQL, Python, and Profitability Engineering.",
-      "knowsAbout": ["SQL", "Python", "Data Modeling", "Business Intelligence", "PVM Modeling", "Capital Efficiency", "HR Analytics"]
+      "knowsAbout": ["SQL", "Python", "Data Modeling", "Business Intelligence", "PVM Modeling", "Capital Efficiency"]
     }
     </script>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <title>Mark Recio | Strategic Data & Business Analyst | Las Vegas Strategy</title>
     <meta name="description" content="Mark Recio, MBA - Strategic Data & Business Analyst. Specialized in Financial, HR, and Operations using SQL, Python, and Profitability Engineering.">
-    <meta name="keywords" content="Mark Recio, Data Analyst Las Vegas, Business Analyst MBA, SQL, Python, PVM Modeling, Profitability Engineering, Human Capital Alpha, Throughput Optimization">
     <link rel="canonical" href="https://marec.site/">
 
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;700&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
@@ -36,78 +41,35 @@
             --accent-green: #3fb950; --accent-purple: #bc8cff; --text-main: #c9d1d9;      
             --secondary: #f85149; --border: #30363d;
         }
-
         body { font-family: 'Inter', sans-serif; line-height: 1.6; color: var(--text-main); margin: 0; background-color: var(--bg-dark); scroll-behavior: smooth; }
-
-        /* Hero & Monitor */
         .hero-workstation { display: flex; flex-direction: column; align-items: center; max-width: 850px; margin: 60px auto 20px auto; padding: 0 20px; }
         .video-monitor { width: 75%; aspect-ratio: 16 / 9; background: #000; border-radius: 8px; overflow: hidden; z-index: 10; border: 2px solid var(--border); box-shadow: 0 0 40px rgba(88, 166, 255, 0.2); margin-bottom: -45px; transform: perspective(1000px) rotateX(5deg); }
         .video-monitor iframe { width: 100%; height: 100%; border: none; }
         .laptop-base { width: 100%; line-height: 0; z-index: 5; }
         .base-image { width: 100%; border-radius: 15px; border: 1px solid var(--border); box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8); }
-
         header { text-align: center; padding: 20px 20px 40px 20px; }
         h1 { margin: 0; font-size: clamp(2.5rem, 8vw, 4rem); font-family: 'Fira Code', monospace; color: var(--accent-cyan); text-transform: uppercase; font-weight: 700; }
         .job-title { font-size: 1.8rem; color: #fff; margin: 10px 0; font-weight: 700; }
         .tagline { color: var(--accent-green); font-family: 'Fira Code', monospace; margin-bottom: 35px; }
-
-        /* Technical Stack Bar */
-        .tech-bar { 
-            background: var(--bg-card); 
-            border: 1px solid var(--border); 
-            padding: 20px; 
-            border-radius: 12px; 
-            margin: 0 auto 20px auto;
-            max-width: 900px;
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            font-family: 'Fira Code', monospace;
-        }
-
-        /* Methods Bar */
-        .methods-bar {
-            background: #000;
-            border: 1px solid var(--accent-green);
-            padding: 15px;
-            border-radius: 8px;
-            text-align: center;
-            font-family: 'Fira Code', monospace;
-            margin: 0 auto 40px auto;
-            max-width: 900px;
-        }
+        .tech-bar { background: var(--bg-card); border: 1px solid var(--border); padding: 20px; border-radius: 12px; margin: 0 auto 20px auto; max-width: 900px; display: flex; justify-content: space-around; flex-wrap: wrap; font-family: 'Fira Code', monospace; }
+        .methods-bar { background: #000; border: 1px solid var(--accent-green); padding: 15px; border-radius: 8px; text-align: center; font-family: 'Fira Code', monospace; margin: 0 auto 40px auto; max-width: 900px; }
         .method-item { color: #fff; margin: 0 10px; font-weight: bold; }
-
         .container { max-width: 1200px; margin: auto; padding: 0 20px 40px 20px; }
-
-        /* EXECUTIVE SUMMARY */
-        .exec-summary {
-            background: linear-gradient(90deg, rgba(88, 166, 255, 0.1), transparent);
-            border-left: 4px solid var(--accent-cyan);
-            padding: 40px;
-            border-radius: 0 12px 12px 0;
-            margin-bottom: 60px;
-        }
+        .exec-summary { background: linear-gradient(90deg, rgba(88, 166, 255, 0.1), transparent); border-left: 4px solid var(--accent-cyan); padding: 40px; border-radius: 0 12px 12px 0; margin-bottom: 60px; }
         .exec-summary h2 { font-family: 'Fira Code'; color: var(--accent-cyan); margin-top: 0; font-size: 1.2rem; }
         .exec-summary p { font-size: 1.1rem; line-height: 1.8; color: #fff; max-width: 950px; }
-
-        /* Roadmap Grid */
         .roadmap-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 25px; margin-top: 40px; }
         .step { background: var(--bg-card); padding: 25px; border-radius: 10px; border: 1px solid var(--border); transition: 0.3s; }
         .step:hover { border-color: var(--accent-cyan); }
         .step h4 { color: #fff; margin: 0 0 15px 0; border-bottom: 1px solid var(--border); padding-bottom: 10px; font-family: 'Fira Code'; }
         .step ul { padding-left: 18px; list-style-type: square; }
         .step li { font-size: 0.85rem; margin-bottom: 8px; }
-
         .btn { display: inline-block; padding: 14px 28px; margin: 8px; text-decoration: none; border-radius: 6px; font-weight: 700; transition: 0.3s; font-family: 'Fira Code', monospace; text-transform: uppercase; }
         .btn-pdf { background: var(--secondary); color: white; }
         .btn-cta { background: var(--accent-green); color: #000; }
-
         #contact { max-width: 750px; margin: 100px auto; padding: 50px; background: var(--bg-card); border-radius: 12px; border: 1px solid var(--border); }
         input, textarea { width: 100%; padding: 14px; background: var(--bg-dark); border: 1px solid var(--border); color: white; border-radius: 6px; margin-bottom: 20px; box-sizing: border-box; }
-
         .footer { text-align: center; padding: 80px 20px; background: #010409; color: #8b949e; border-top: 1px solid var(--border); }
-
         @media (max-width: 768px) { .roadmap-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
@@ -141,7 +103,6 @@
         <div class="tech-bar">
             <span><strong>TOOLS:</strong> SQL • Python • DAX • VBA • Power BI</span>
         </div>
-
         <div class="methods-bar">
             <span class="method-item">Modeling</span> • 
             <span class="method-item">Analytics</span> • 
@@ -149,53 +110,48 @@
             <span class="method-item">Efficiency</span> • 
             <span class="method-item">Consulting</span>
         </div>
-
         <section class="exec-summary">
             <h2>[EXECUTIVE_SUMMARY]</h2>
             <p>
                 MBA-educated <strong>Strategic Analyst</strong> with a multidisciplinary focus on <strong>Finance, HR, and Operations</strong>. I specialize in translating complex raw data into surgical-grade business logic that drives <strong>Capital Efficiency</strong> and organizational scalability. From building automated <strong>SQL/Python pipelines</strong> to architecting <strong>PVM models</strong> and <strong>Predictive Attrition frameworks</strong>, I provide the analytical backbone required for high-stakes executive decision-making.
             </p>
         </section>
-
-        <section class="roadmap-section">
-            <h2 style="text-align: center; font-family: 'Fira Code'; color: var(--accent-cyan);">[STRATEGIC_ANALYTICS_FRAMEWORK]</h2>
-            <div class="roadmap-grid">
-                <div class="step">
-                    <h4>Finance & Accounting</h4>
-                    <ul>
-                        <li>PVM Modeling (Price-Volume-Mix)</li>
-                        <li>Variance Analysis & Budgeting</li>
-                        <li>Profitability Engineering</li>
-                        <li>Margin Integrity & Profit Audits</li>
-                    </ul>
-                </div>
-                <div class="step">
-                    <h4>HR & People Analytics</h4>
-                    <ul>
-                        <li>Predictive Attrition Modeling</li>
-                        <li>Labor Productivity Metrics</li>
-                        <li>Retention & Flight-Risk Logic</li>
-                        <li>Human Capital Alpha</li>
-                    </ul>
-                </div>
-                <div class="step">
-                    <h4>Marketing & Business</h4>
-                    <ul>
-                        <li>Customer Acquisition (CAC) ROI</li>
-                        <li>Competitive Benchmarking</li>
-                        <li>LTV (Lifetime Value) Modeling</li>
-                        <li>Strategic Growth Forecasting</li>
-                    </ul>
-                </div>
-                <div class="step">
-                    <h4>Ops & Data Science</h4>
-                    <ul>
-                        <li>Supply Chain Logic Automation</li>
-                        <li>Throughput Optimization</li>
-                        <li>SQL/Python Pipeline Integration</li>
-                        <li>Process Architecture & Mapping</li>
-                    </ul>
-                </div>
+        <section class="roadmap-grid">
+            <div class="step">
+                <h4>Finance & Accounting</h4>
+                <ul>
+                    <li>PVM Modeling (Price-Volume-Mix)</li>
+                    <li>Variance Analysis & Budgeting</li>
+                    <li>Profitability Engineering</li>
+                    <li>Margin Integrity & Profit Audits</li>
+                </ul>
+            </div>
+            <div class="step">
+                <h4>HR & People Analytics</h4>
+                <ul>
+                    <li>Predictive Attrition Modeling</li>
+                    <li>Labor Productivity Metrics</li>
+                    <li>Retention & Flight-Risk Logic</li>
+                    <li>Human Capital Alpha</li>
+                </ul>
+            </div>
+            <div class="step">
+                <h4>Marketing & Business</h4>
+                <ul>
+                    <li>Customer Acquisition (CAC) ROI</li>
+                    <li>Competitive Benchmarking</li>
+                    <li>LTV (Lifetime Value) Modeling</li>
+                    <li>Strategic Growth Forecasting</li>
+                </ul>
+            </div>
+            <div class="step">
+                <h4>Ops & Data Science</h4>
+                <ul>
+                    <li>Supply Chain Logic Automation</li>
+                    <li>Throughput Optimization</li>
+                    <li>SQL/Python Pipeline Integration</li>
+                    <li>Process Architecture & Mapping</li>
+                </ul>
             </div>
         </section>
     </div>
@@ -203,9 +159,9 @@
     <section id="contact">
         <h2 style="color: var(--accent-cyan); font-family: 'Fira Code'; text-align: center;">[INITIATE_CONTACT]</h2>
         <form action="https://formspree.io/f/mreaeden" method="POST">
-            <input type="text" name="name" required placeholder="Full Name or Company">
-            <input type="email" name="_replyto" required placeholder="return_node@email.com">
-            <textarea name="message" rows="5" required placeholder="Describe your data challenge or inquiry..."></textarea>
+            <input type="text" name="name" required placeholder="Full Name">
+            <input type="email" name="_replyto" required placeholder="email@address.com">
+            <textarea name="message" rows="5" required placeholder="Describe your data challenge..."></textarea>
             <button type="submit" class="btn btn-cta" style="width: 100%;">SEND.MESSAGE(to_mark_recio)</button>
         </form>
     </section>
@@ -214,8 +170,7 @@
 <footer class="footer">
     <p style="color: var(--accent-cyan); font-family: 'Fira Code'; font-weight: 700;">MARK RECIO | MBA | LAS VEGAS, NV</p>
     <p>mar@marec.site | (702) 501-9385</p>
-    <p style="font-size: 0.8rem; margin-top: 30px; opacity: 0.4;">© 2026 Mark Recio. Professional Data Strategy. All Logic Encrypted.</p>
+    <p style="font-size: 0.8rem; margin-top: 30px; opacity: 0.4;">© 2026 Mark Recio. Professional Data Strategy.</p>
 </footer>
-
 </body>
 </html>
