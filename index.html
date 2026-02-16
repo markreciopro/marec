@@ -5,7 +5,7 @@
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MAREC Insights | Strategic Data & Business Intelligence</title>
+    <title>MAREC Insights | Mark Recio | Strategic Data Architect</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;700&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
     
@@ -16,7 +16,7 @@
         }
         body { font-family: 'Inter', sans-serif; line-height: 1.6; color: var(--text-main); margin: 0; background-color: var(--bg-dark); scroll-behavior: smooth; }
         
-        /* WORKSTATION ENGINE: Integrates Video and Logo into the Photo */
+        /* WORKSTATION ENGINE: INTEGRATING VIDEO & LOGO INTO PHOTO */
         .workstation-container {
             position: relative;
             max-width: 950px;
@@ -31,78 +31,88 @@
             line-height: 0;
         }
 
-        /* The base laptop image provided in the screenshot */
         .base-image {
             width: 100%;
             height: auto;
             border-radius: 12px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7);
         }
 
-        /* YOUTUBE OVERLAY: Positions the video inside the physical laptop screen */
+        /* YOUTUBE OVERLAY: Adjusted to laptop screen perspective */
         .screen-content {
             position: absolute;
-            top: 13%;    /* Precise fit for laptop screen area */
-            left: 32%;   /* Precise fit for laptop screen area */
-            width: 32.5%; /* Covers only the screen glass area */
-            height: 27%;  /* Covers only the screen glass area */
+            top: 13.5%;    
+            left: 32.5%;   
+            width: 31.8%; 
+            height: 26.5%;  
             z-index: 10;
             background: #000;
             overflow: hidden;
-            transform: perspective(1000px) rotateX(2deg) rotateY(-1deg);
+            /* Suble perspective tilt to match the photo angle */
+            transform: perspective(1200px) rotateX(2.5deg) rotateY(-1.2deg);
+            border-radius: 2px;
         }
 
         .screen-content iframe {
             width: 100%;
             height: 100%;
             border: none;
-            opacity: 0.9;
+            opacity: 0.88; /* Blends with screen glass texture */
         }
 
-        /* PIXEL LOGO OVERLAY: Covers the sparkling light on the laptop chassis */
+        /* PIXEL LOGO OVERLAY: Targeted at the sparkling light/mouse point */
         .chassis-logo {
             position: absolute;
-            bottom: 23%; /* Targets the sparkle location */
-            right: 21%;  /* Targets the sparkle location */
-            width: 8%;   /* Scaled to fit naturally on the laptop surface */
+            bottom: 22.8%; 
+            right: 20.9%;  
+            width: 8.5%;   
             z-index: 15;
-            filter: drop-shadow(0 0 10px rgba(88, 166, 255, 0.6));
-            transition: all 0.3s ease;
+            filter: drop-shadow(0 0 15px rgba(88, 166, 255, 0.8));
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         
         .chassis-logo:hover {
-            transform: scale(1.15);
-            filter: drop-shadow(0 0 15px rgba(63, 185, 80, 0.8));
+            transform: scale(1.1) rotate(5deg);
+            filter: drop-shadow(0 0 20px rgba(63, 185, 80, 0.9));
         }
 
-        /* EXECUTIVE BRANDING & COPY */
+        /* EXECUTIVE BRANDING STYLES */
         header { text-align: center; padding: 20px 20px 60px 20px; }
-        h1 { margin: 0; font-size: clamp(2.2rem, 8vw, 3.8rem); font-family: 'Fira Code', monospace; color: #fff; font-weight: 700; letter-spacing: -1px; }
-        .executive-title { font-size: 1.3rem; color: var(--accent-cyan); margin: 10px 0; font-weight: 300; text-transform: uppercase; letter-spacing: 3px; }
-        .tagline { color: var(--accent-green); font-family: 'Fira Code', monospace; font-size: 0.95rem; margin-bottom: 30px; }
+        h1 { margin: 0; font-size: clamp(2.2rem, 8vw, 3.8rem); font-family: 'Fira Code', monospace; color: #fff; font-weight: 700; letter-spacing: -1.5px; }
+        .executive-title { font-size: 1.3rem; color: var(--accent-cyan); margin: 10px 0; font-weight: 300; text-transform: uppercase; letter-spacing: 4px; }
+        .tagline { color: var(--accent-green); font-family: 'Fira Code', monospace; font-size: 0.95rem; margin-bottom: 30px; opacity: 0.9; }
 
         .container { max-width: 1100px; margin: auto; padding: 0 20px; }
+
+        .section-header { font-family: 'Fira Code'; color: var(--accent-cyan); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 30px; display: block; }
 
         .value-proposition {
             background: linear-gradient(135deg, #161b22 0%, #0d1117 100%);
             border: 1px solid var(--border);
-            padding: 45px;
+            padding: 50px;
             border-radius: 16px;
-            margin-bottom: 50px;
-            box-shadow: inset 0 0 20px rgba(88, 166, 255, 0.05);
+            margin-bottom: 60px;
+            box-shadow: inset 0 0 30px rgba(88, 166, 255, 0.05);
         }
 
-        .value-proposition h2 { font-family: 'Fira Code'; color: var(--accent-cyan); font-size: 0.85rem; margin-top: 0; letter-spacing: 2px; }
-        .value-proposition p { font-size: 1.25rem; color: #e6edf3; line-height: 1.8; font-weight: 300; }
+        .value-proposition p { font-size: 1.3rem; color: #e6edf3; line-height: 1.9; font-weight: 300; margin: 0; }
         .highlight { color: #fff; font-weight: 700; border-bottom: 2px solid var(--accent-green); }
 
-        .btn { display: inline-block; padding: 18px 35px; background: var(--accent-cyan); color: #0d1117; text-decoration: none; border-radius: 4px; font-weight: 700; font-family: 'Fira Code'; transition: 0.3s; margin-top: 20px; }
-        .btn:hover { background: var(--accent-green); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
+        /* RECRUITER EXPERIENCE MODULES */
+        .experience-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin-bottom: 100px; }
+        .exp-card { background: var(--bg-card); border: 1px solid var(--border); padding: 40px; border-radius: 12px; transition: 0.4s ease; }
+        .exp-card:hover { border-color: var(--accent-cyan); transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0,0,0,0.4); }
+        .exp-card h3 { color: #fff; margin-top: 0; font-family: 'Fira Code'; font-size: 1.25rem; letter-spacing: -0.5px; }
+        .exp-card .metric-header { color: var(--accent-green); font-weight: 700; font-family: 'Fira Code'; font-size: 0.75rem; display: block; margin-bottom: 15px; letter-spacing: 2px; }
+        .exp-card p { color: #8b949e; font-size: 1.05rem; line-height: 1.7; }
 
-        .footer { text-align: center; padding: 80px 20px; border-top: 1px solid var(--border); opacity: 0.5; font-size: 0.8rem; }
+        .btn { display: inline-block; padding: 20px 40px; background: var(--accent-cyan); color: #0d1117; text-decoration: none; border-radius: 4px; font-weight: 700; font-family: 'Fira Code'; transition: 0.3s; margin-top: 20px; letter-spacing: 1px; }
+        .btn:hover { background: var(--accent-green); transform: translateY(-3px); box-shadow: 0 10px 25px rgba(88, 166, 255, 0.2); }
+
+        .footer { text-align: center; padding: 100px 20px; border-top: 1px solid var(--border); opacity: 0.5; font-size: 0.85rem; }
 
         @media (max-width: 768px) {
-            .screen-content { top: 12%; left: 30%; width: 35%; height: 25%; }
+            .screen-content { top: 12.5%; left: 31%; width: 34%; height: 26%; }
             .chassis-logo { width: 12%; bottom: 22%; right: 20%; }
         }
     </style>
@@ -112,7 +122,7 @@
 <main>
     <div class="workstation-container">
         <div class="laptop-wrapper">
-            <img src="https://i.ibb.co/ZzCVqzH9/Gemini-Generated-Image-bn1v5kbn1v5kbn1v.png" alt="MAREC Executive Workstation" class="base-image">
+            <img src="https://i.ibb.co/ZzCVqzH9/Gemini-Generated-Image-bn1v5kbn1v5kbn1v.png" alt="MAREC Insights Workstation" class="base-image">
             
             <div class="screen-content">
                 <iframe src="https://www.youtube.com/embed/qHwgrgWFl98?autoplay=1&mute=1&loop=1&playlist=qHwgrgWFl98&controls=0&modestbranding=1" allow="autoplay; encrypted-media"></iframe>
@@ -125,24 +135,43 @@
     <header>
         <h1>MARK RECIO, MBA</h1>
         <p class="executive-title">Strategic Data Architect</p>
-        <p class="tagline">// Solving High-Stakes Business Challenges Through Algorithmic Precision</p>
+        <p class="tagline">// Converting Technical Complexity into Measurable Capital Efficiency</p>
         
-        <a href="https://markreciopro.github.io/Portfolio/" class="btn">PORTFOLIO.LAUNCH()</a>
+        <a href="https://markreciopro.github.io/Portfolio/" class="btn">VIEW_STRATEGIC_SOLUTIONS</a>
     </header>
 
     <div class="container">
         <section class="value-proposition">
-            <h2>[ STRATEGIC_CAPABILITY ]</h2>
+            <span class="section-header">[ EXECUTIVE_VALUE_PROPOSITION ]</span>
             <p>
-                I translate <span class="highlight">technical complexity into executive clarity</span>. By architecting custom SQL and Python frameworks, I engineer the data pipelines that drive <strong>Capital Efficiency, Operational Alpha, and Strategic Growth</strong>. I don't just write code; I build the decision-engines that power modern business.
+                I specialize in <span class="highlight">engineering algorithmic intelligence</span> for high-stakes business environments. By bridging MBA-level strategy with deep technical proficiency in SQL and Python, I transform fragmented data into <span class="highlight">surgical-grade business logic</span> that drives <strong>Profitability, Operational Alpha, and Strategic Scalability</strong>.
             </p>
         </section>
+
+        <span class="section-header">[ CORE_STRATEGIC_IMPACT ]</span>
+        <div class="experience-grid">
+            <div class="exp-card">
+                <span class="metric-header">FINANCIAL_INTEGRITY</span>
+                <h3>PVM & Margin Architecture</h3>
+                <p>Architecting Price-Volume-Mix (PVM) models that eliminate financial blind spots, ensuring margin integrity and capital efficiency through automated SQL-driven audit pipelines.</p>
+            </div>
+            <div class="exp-card">
+                <span class="metric-header">OPERATIONAL_ALPHA</span>
+                <h3>Data Pipeline Engineering</h3>
+                <p>Translating operational chaos into unified Python architectures, providing executive leads with real-time visibility and the logic required for throughput optimization.</p>
+            </div>
+            <div class="exp-card">
+                <span class="metric-header">HUMAN_CAPITAL</span>
+                <h3>Predictive Attrition Modeling</h3>
+                <p>Developing algorithmic retention frameworks that align People Analytics with fiscal goals, identifying flight risks before they impact the bottom line.</p>
+            </div>
+        </div>
     </div>
 </main>
 
 <footer class="footer">
     <p>MAREC INSIGHTS | LAS VEGAS, NV | © 2026</p>
-    <p style="font-family: 'Fira Code'; margin-top: 10px;">Strategic Engine: ONLINE // Data Integrity: OPTIMAL</p>
+    <p style="font-family: 'Fira Code'; margin-top: 15px; letter-spacing: 1px;">Strategic Logic: OPTIMAL // Data Architecture: ACTIVE</p>
 </footer>
 
 </body>
