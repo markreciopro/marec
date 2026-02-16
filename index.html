@@ -6,234 +6,252 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MAREC Insights | Strategic Data Architect | Mark Recio, MBA</title>
     
+    <meta name="description" content="Mark Recio, MBA - Strategic Data Architect. Specializing in Financial Alpha, HR Logic, and Data Lake Engineering using Python, SQL, and R.">
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
             --bg-dark: #0d1117; 
-            --bg-card: rgba(22, 27, 34, 0.85); 
+            --bg-card: rgba(22, 27, 34, 0.92); 
             --accent-cyan: #58a6ff;    
             --accent-green: #3fb950; 
             --text-main: #c9d1d9; 
             --border: #30363d;
-            --grid-line: rgba(88, 166, 255, 0.05);
         }
 
         body { 
             font-family: 'Inter', sans-serif; 
-            line-height: 1.6; 
             color: var(--text-main); 
             margin: 0; 
             background-color: var(--bg-dark); 
             overflow-x: hidden;
+            scroll-behavior: smooth;
         }
 
-        /* --- DATA LAKE FLOATING GRID ANIMATION --- */
-        .data-lake-container {
+        /* --- BACKGROUND CODE STREAM --- */
+        #codeStream {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1;
-            overflow: hidden;
             background: radial-gradient(circle at 50% 50%, #161b22 0%, #0d1117 100%);
         }
 
-        /* The Spreadsheet Grid Visual */
-        .floating-grid {
+        .code-snippet {
             position: absolute;
-            width: 400px;
-            height: 300px;
-            border: 1px solid rgba(88, 166, 255, 0.1);
-            background-image: 
-                linear-gradient(var(--grid-line) 1px, transparent 1px),
-                linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
-            background-size: 20px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 4px;
-            opacity: 0.2;
-            animation: drift var(--duration) infinite linear;
-        }
-
-        .floating-grid::after {
-            content: "DATALAKE_NODE_0" attr(data-node);
             font-family: 'Fira Code', monospace;
-            font-size: 0.6rem;
+            font-size: 0.7rem;
             color: var(--accent-cyan);
+            opacity: 0;
+            white-space: nowrap;
+            pointer-events: none;
+            animation: flow var(--duration) linear infinite;
         }
 
-        @keyframes drift {
-            from { transform: translate(var(--x-start), var(--y-start)) rotate(0deg); }
-            to { transform: translate(var(--x-end), var(--y-end)) rotate(10deg); }
+        @keyframes flow {
+            0% { transform: translateY(110vh) scale(0.9); opacity: 0; }
+            15% { opacity: 0.35; }
+            85% { opacity: 0.35; }
+            100% { transform: translateY(-10vh) scale(1); opacity: 0; }
         }
 
-        /* --- HERO & IDENTITY --- */
-        header { text-align: center; padding: 100px 20px 40px 20px; position: relative; }
-        .contract-badge {
+        /* --- HERO & BRANDING --- */
+        header { text-align: center; padding: 100px 20px 20px 20px; }
+        
+        .badge {
             display: inline-block;
-            padding: 6px 18px;
+            padding: 6px 14px;
             background: rgba(63, 185, 80, 0.1);
             border: 1px solid var(--accent-green);
             color: var(--accent-green);
             border-radius: 4px;
             font-family: 'Fira Code', monospace;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             margin-bottom: 25px;
             letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
-        h1 { margin: 0; font-size: clamp(2.5rem, 8vw, 4.5rem); font-family: 'Fira Code', monospace; color: #fff; font-weight: 700; letter-spacing: -2px; }
-        .job-title { font-size: 1.5rem; color: var(--accent-cyan); margin: 10px 0; font-weight: 300; text-transform: uppercase; letter-spacing: 5px; }
+        h1 { margin: 0; font-size: clamp(2.5rem, 8vw, 4.2rem); font-family: 'Fira Code', monospace; color: #fff; font-weight: 700; letter-spacing: -2px; }
+        .executive-subtitle { font-size: 1.4rem; color: var(--accent-cyan); margin: 8px 0; font-weight: 300; text-transform: uppercase; letter-spacing: 6px; }
 
-        /* --- INTEGRATED WORKSTATION --- */
-        .workstation-container {
+        /* --- WORKSTATION ENGINE --- */
+        .workstation-wrapper {
             position: relative;
             max-width: 850px;
             margin: 40px auto;
             padding: 0 20px;
         }
-        .monitor-frame {
-            width: 75%; aspect-ratio: 16/9; background: #000; border-radius: 8px; margin: 0 auto -45px auto;
-            border: 2px solid var(--border); box-shadow: 0 0 50px rgba(88, 166, 255, 0.2);
-            position: relative; z-index: 10; transform: perspective(1000px) rotateX(4deg);
+        .screen-overlay {
+            position: absolute;
+            top: 13.5%; left: 32.5%; width: 32%; height: 26%;
+            z-index: 10;
+            background: #000;
+            transform: perspective(1000px) rotateX(3deg);
             overflow: hidden;
+            border-radius: 2px;
         }
-        .monitor-frame iframe { width: 100%; height: 100%; border: none; }
-        .laptop-base-img { width: 100%; border-radius: 12px; border: 1px solid var(--border); z-index: 5; position: relative; }
+        .screen-overlay iframe { width: 100%; height: 100%; border: none; opacity: 0.8; }
+        .base-img { width: 100%; border-radius: 12px; border: 1px solid var(--border); box-shadow: 0 20px 50px rgba(0,0,0,0.6); }
 
-        /* --- TECH STACK --- */
-        .tech-stack-bar {
-            background: rgba(22, 27, 34, 0.9);
+        /* --- TECH STACK STRIP --- */
+        .tech-strip {
+            background: rgba(13, 17, 23, 0.8);
             border-top: 1px solid var(--border);
             border-bottom: 1px solid var(--border);
-            padding: 25px 0;
+            padding: 22px 0;
             margin: 60px 0;
             backdrop-filter: blur(15px);
         }
-        .tech-grid {
+        .tech-container {
             max-width: 1100px;
             margin: auto;
             display: flex;
             justify-content: space-around;
             flex-wrap: wrap;
             font-family: 'Fira Code', monospace;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--accent-green);
+            font-weight: 700;
         }
-        .tech-item { margin: 10px 20px; font-weight: bold; }
 
-        /* --- CONTENT CARDS --- */
-        .container { max-width: 1100px; margin: auto; padding: 0 20px; position: relative; }
+        /* --- CONTENT MODULES --- */
+        .container { max-width: 1100px; margin: auto; padding: 0 20px 100px 20px; }
         
-        .value-card {
+        .mission-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
             padding: 50px;
             border-radius: 16px;
-            margin-bottom: 80px;
-            backdrop-filter: blur(10px);
+            margin-bottom: 60px;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
-        .value-card h2 { font-family: 'Fira Code'; color: var(--accent-cyan); margin-top: 0; font-size: 0.9rem; letter-spacing: 2px; }
-        .value-card p { font-size: 1.3rem; line-height: 1.8; color: #fff; font-weight: 300; }
-        .highlight { border-bottom: 2px solid var(--accent-green); }
+        .mission-card h2 { font-family: 'Fira Code'; color: var(--accent-cyan); margin-top: 0; font-size: 0.85rem; letter-spacing: 2px; }
+        .mission-card p { font-size: 1.3rem; line-height: 1.8; color: #fff; font-weight: 300; margin-bottom: 0; }
+        .highlight { border-bottom: 2px solid var(--accent-green); color: #fff; font-weight: 600; }
 
-        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-bottom: 100px; }
-        .service-box { 
+        .contract-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; }
+        .service-card { 
             background: var(--bg-card); padding: 40px; border-radius: 12px; border: 1px solid var(--border); 
-            transition: 0.3s; backdrop-filter: blur(10px);
+            transition: 0.4s ease; backdrop-filter: blur(10px);
         }
-        .service-box:hover { border-color: var(--accent-cyan); transform: translateY(-5px); }
+        .service-card:hover { border-color: var(--accent-cyan); transform: translateY(-8px); }
+        .service-card h3 { color: #fff; margin-top: 0; font-family: 'Fira Code'; font-size: 1.15rem; }
+        .service-card p { font-size: 0.95rem; color: #8b949e; line-height: 1.7; }
 
-        /* --- CTA --- */
+        /* --- CTA BUTTONS --- */
+        .cta-group { margin-top: 40px; }
         .btn { 
-            display: inline-block; padding: 18px 40px; border-radius: 4px; font-family: 'Fira Code', monospace; 
-            text-decoration: none; font-weight: 700; transition: 0.3s; cursor: pointer;
+            display: inline-block; padding: 18px 42px; border-radius: 4px; font-family: 'Fira Code', monospace; 
+            text-decoration: none; font-weight: 700; transition: 0.3s; cursor: pointer; border: none; font-size: 0.9rem;
         }
         .btn-main { background: var(--accent-cyan); color: #0d1117; }
         .btn-outline { border: 1px solid var(--border); color: #fff; margin-left: 15px; }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 12px 25px rgba(0,0,0,0.5); }
 
-        .footer { text-align: center; padding: 100px 20px; border-top: 1px solid var(--border); opacity: 0.6; font-size: 0.8rem; }
+        .footer { text-align: center; padding: 100px 20px; border-top: 1px solid var(--border); opacity: 0.5; font-size: 0.8rem; background: #010409; }
+
+        @media (max-width: 768px) { .screen-overlay { display: none; } .btn-outline { margin-left: 0; margin-top: 15px; width: 100%; box-sizing: border-box; } .btn-main { width: 100%; box-sizing: border-box; } }
     </style>
 </head>
 <body>
 
-    <div class="data-lake-container" id="datalake"></div>
+    <div id="codeStream"></div>
 
     <header>
-        <div class="contract-badge">AVAILABLE FOR STRATEGIC CONTRACTS // 2026</div>
+        <div class="badge">Available for Strategic Contracts // 2026</div>
         <h1>MARK RECIO, MBA</h1>
-        <p class="job-title">Strategic Data Architect</p>
-        <div style="margin-top: 30px;">
-            <a href="mailto:mar@marec.site" class="btn btn-main">INITIATE CONSULTATION</a>
-            <a href="https://markreciopro.github.io/Portfolio/" class="btn btn-outline">EXPLORE DATA LAKE</a>
+        <p class="executive-subtitle">Strategic Data Architect</p>
+        <div class="cta-group">
+            <a href="mailto:mar@marec.site" class="btn btn-main">INITIATE_CONSULTATION</a>
+            <a href="https://markreciopro.github.io/Portfolio/" class="btn btn-outline">PROJECT_REPOSITORY</a>
         </div>
     </header>
 
     <main class="container">
-        <section class="workstation-container">
-            <div class="monitor-frame">
+        <section class="workstation-wrapper">
+            <div class="screen-overlay">
                 <iframe src="https://www.youtube.com/embed/qHwgrgWFl98?autoplay=1&mute=1&loop=1&playlist=qHwgrgWFl98&controls=0&modestbranding=1" allow="autoplay; encrypted-media"></iframe>
             </div>
-            <img src="https://i.ibb.co/ZzCVqzH9/Gemini-Generated-Image-bn1v5kbn1v5kbn1v.png" alt="Mark Recio Workstation" class="laptop-base-img">
+            <img src="https://i.ibb.co/ZzCVqzH9/Gemini-Generated-Image-bn1v5kbn1v5kbn1v.png" alt="Mark Recio Workstation" class="base-img">
         </section>
 
-        <div class="tech-stack-bar">
-            <div class="tech-grid">
-                <span class="tech-item">PYTHON</span>
-                <span class="tech-item">R PROGRAMMING</span>
-                <span class="tech-item">SQL (T-SQL/PostgreSQL)</span>
-                <span class="tech-item">MS POWER BI</span>
-                <span class="tech-item">TABLEAU</span>
-                <span class="tech-item">ADVANCED EXCEL / VBA</span>
+        <div class="tech-strip">
+            <div class="tech-container">
+                <span>PYTHON</span>
+                <span>R_PROG</span>
+                <span>SQL_SERVER</span>
+                <span>POWER_BI</span>
+                <span>TABLEAU</span>
+                <span>ADVANCED_EXCEL</span>
             </div>
         </div>
 
-        <section class="value-card">
-            <h2>[ MISSION_LOGIC ]</h2>
+        <section class="mission-card">
+            <h2>[ STRATEGIC_MISSION ]</h2>
             <p>
-                I specialize in <span class="highlight">architecting data lakes into actionable intelligence</span>. By utilizing **Python, R, and SQL**, I help organizations unlock **Capital Efficiency** through advanced PVM modeling and predictive HR frameworks. My focus is delivering surgical business logic for high-stakes executive environments.
+                I specialize in <span class="highlight">engineering algorithmic intelligence</span> for executive-level decision making. By deploying custom Python, R, and SQL frameworks, I help organizations unlock <span class="highlight">Capital Efficiency</span> through surgical Price-Volume-Mix (PVM) modeling and predictive labor analytics. I don't just process data—I architect the logic that drives profitability.
             </p>
         </section>
 
-        <section class="services-grid">
-            <div class="service-box">
+        <section class="contract-grid">
+            <div class="service-card">
                 <h3>Financial Alpha</h3>
-                <p>Engineering automated variance pipelines and margin-protection models to audit profitability with surgical precision.</p>
+                <p>Developing automated Price-Volume-Mix (PVM) models and variance pipelines to audit margin integrity and protect the bottom line with surgical precision.</p>
             </div>
-            <div class="service-box">
+            <div class="service-card">
                 <h3>Human Capital Logic</h3>
-                <p>Deploying predictive attrition frameworks and labor-productivity optimization algorithms to protect the bottom line.</p>
+                <p>Architecting predictive attrition frameworks and labor productivity dashboards using R and Python to optimize organizational throughput.</p>
             </div>
-            <div class="service-box">
-                <h3>Operational Intelligence</h3>
-                <p>Designing full-stack reporting architectures in Power BI and Tableau to eliminate organizational blind spots.</p>
+            <div class="service-card">
+                <h3>Scalable BI Architecture</h3>
+                <p>Designing full-stack reporting ecosystems in Power BI and Tableau that translate technical complexity into executive strategic clarity.</p>
             </div>
         </section>
     </main>
 
     <footer class="footer">
         <p>MAREC INSIGHTS | LAS VEGAS, NV | © 2026</p>
-        <p style="font-family: 'Fira Code'; color: var(--accent-cyan);">Architecture: STABLE // Data Flow: OPTIMAL</p>
+        <p style="font-family: 'Fira Code'; color: var(--accent-cyan); margin-top: 10px; font-weight: bold;">STATUS: OPERATIONAL // DATA_LAKE: ACTIVE</p>
     </footer>
 
     <script>
-        const lake = document.getElementById('datalake');
-        const nodes = 8; // Number of floating spreadsheet nodes
+        const stream = document.getElementById('codeStream');
+        const snippets = [
+            'SELECT * FROM data_lake WHERE ROI > 1.0',
+            'df.groupby("margin").mean()',
+            'ggplot(data, aes(x=pvm)) + geom_line()',
+            'model.predict(attrition_risk_score)',
+            'UPDATE finance_ledger SET status = "optimized"',
+            'while cap_efficiency < threshold: iterate()',
+            'pip install strategic_intelligence',
+            'dplyr::filter(alpha_value > benchmark)',
+            'lambda x: x * capital_growth_factor',
+            'CREATE VIEW executive_clarity AS...',
+            'os.path.join("datalake", "margin_audit")',
+            'JOIN labor_metrics ON emp_id'
+        ];
 
-        for (let i = 0; i < nodes; i++) {
-            const grid = document.createElement('div');
-            grid.className = 'floating-grid';
-            grid.setAttribute('data-node', i + 1);
+        function createSnippet() {
+            const div = document.createElement('div');
+            div.className = 'code-snippet';
+            div.innerText = snippets[Math.floor(Math.random() * snippets.length)];
             
-            // Random start/end positions for the drift effect
-            grid.style.setProperty('--x-start', Math.random() * 100 + 'vw');
-            grid.style.setProperty('--y-start', Math.random() * 100 + 'vh');
-            grid.style.setProperty('--x-end', Math.random() * 100 + 'vw');
-            grid.style.setProperty('--y-end', Math.random() * 100 + 'vh');
-            grid.style.setProperty('--duration', (Math.random() * 30 + 30) + 's');
+            // Random horizontal positioning
+            div.style.left = Math.random() * 90 + 'vw';
             
-            lake.appendChild(grid);
+            // Random speed (duration) for depth effect
+            const duration = Math.random() * 12 + 10 + 's';
+            div.style.setProperty('--duration', duration);
+            
+            stream.appendChild(div);
+            
+            // Cleanup to keep DOM performance lean
+            setTimeout(() => { div.remove(); }, parseFloat(duration) * 1000);
         }
+
+        // Generate a new snippet every 800ms
+        setInterval(createSnippet, 800);
     </script>
 </body>
 </html>
