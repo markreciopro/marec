@@ -62,20 +62,23 @@
             100% { transform: translateY(-10vh); opacity: 0; }
         }
 
-        /* --- ENLARGED PIXEL LOGO --- */
-        .brand-header {
-            text-align: center;
-            padding: 60px 0 20px 0;
+        /* --- TOP LEFT PIXEL LOGO ANCHOR --- */
+        .top-left-brand {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 100;
         }
         .pixel-logo {
-            width: 120px; /* Increased for high readability */
+            width: 100px; 
             height: auto;
             image-rendering: pixelated; 
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            filter: drop-shadow(0 0 10px rgba(63, 185, 80, 0.3));
+            transition: 0.3s ease-in-out;
+            filter: drop-shadow(0 0 5px rgba(0,0,0,0.5));
         }
         .pixel-logo:hover {
-            transform: scale(1.15) rotate(2deg);
+            transform: scale(1.05);
+            filter: drop-shadow(0 0 15px var(--accent-green));
         }
 
         /* --- HERO & WORKSTATION ALIGNMENT --- */
@@ -84,7 +87,7 @@
             flex-direction: column; 
             align-items: center; 
             max-width: 950px; 
-            margin: 20px auto; 
+            margin: 80px auto 20px auto; 
             padding: 0 20px; 
             position: relative;
         }
@@ -100,7 +103,7 @@
             transform: perspective(800px) rotateX(8deg); 
             border-radius: 2px;
         }
-        .video-monitor iframe { width: 100%; height: 100%; border: none; opacity: 0.9; }
+        .video-monitor iframe { width: 100%; height: 100%; border: none; opacity: 0.95; }
 
         .laptop-base { width: 100%; line-height: 0; z-index: 5; position: relative; }
         .base-image { 
@@ -117,7 +120,7 @@
         
         .nav-links { font-family: 'Fira Code', monospace; font-size: 0.85rem; margin-bottom: 40px; }
         .nav-links a { color: var(--accent-cyan); text-decoration: none; margin: 0 15px; transition: 0.3s; opacity: 0.8; }
-        .nav-links a:hover { opacity: 1; color: var(--accent-green); text-shadow: 0 0 8px var(--accent-green); }
+        .nav-links a:hover { opacity: 1; color: var(--accent-green); }
 
         .container { max-width: 1100px; margin: auto; padding: 0 20px; }
 
@@ -130,24 +133,14 @@
             margin-bottom: 70px; 
             backdrop-filter: blur(12px); 
             border: 1px solid var(--border); 
-            border-left-width: 5px; 
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
-        .exec-summary h2 { 
-            font-family: 'Fira Code'; 
-            color: var(--accent-cyan); 
-            font-size: 0.9rem; 
-            text-transform: uppercase; 
-            margin-bottom: 25px; 
-            letter-spacing: 2px;
-        }
         .exec-summary p { font-size: 1.25rem; line-height: 1.85; color: #fff; font-weight: 300; }
-        .tech-highlight { color: var(--accent-green); font-weight: 700; border-bottom: 1px solid rgba(63, 185, 80, 0.3); }
+        .tech-highlight { color: var(--accent-green); font-weight: 700; }
 
         /* --- GRID --- */
         .roadmap-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; margin-bottom: 100px; }
-        .step { background: var(--bg-card); padding: 35px; border: 1px solid var(--border); border-radius: 6px; transition: 0.3s; }
-        .step:hover { border-color: var(--accent-cyan); background: #1c2128; }
+        .step { background: var(--bg-card); padding: 35px; border: 1px solid var(--border); border-radius: 6px; }
         .step h4 { color: #fff; margin: 0 0 15px 0; font-family: 'Fira Code'; font-size: 0.9rem; text-transform: uppercase; border-bottom: 1px solid var(--border); padding-bottom: 12px; }
         .step li { margin-bottom: 10px; font-size: 0.85rem; color: #8b949e; list-style-type: '→ '; }
 
@@ -155,21 +148,23 @@
         .btn { display: inline-block; padding: 18px 35px; margin: 10px; text-decoration: none; border-radius: 4px; font-weight: 700; transition: 0.3s; font-family: 'Fira Code', monospace; font-size: 0.85rem; text-transform: uppercase; border: none; cursor: pointer; }
         .btn-cta { background: var(--accent-cyan); color: #0d1117; }
         .btn-pdf { border: 1px solid var(--secondary); color: var(--secondary); }
-        .btn-cta:hover { background: var(--accent-green); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(88, 166, 255, 0.3); }
 
         #contact { max-width: 650px; margin: 100px auto; padding: 60px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; }
-        input, textarea { width: 100%; padding: 18px; background: var(--bg-dark); border: 1px solid var(--border); color: white; border-radius: 6px; margin-bottom: 25px; box-sizing: border-box; font-family: 'Inter'; }
+        input, textarea { width: 100%; padding: 18px; background: var(--bg-dark); border: 1px solid var(--border); color: white; border-radius: 6px; margin-bottom: 25px; box-sizing: border-box; }
         
         .footer { text-align: center; padding: 120px 20px; background: #010409; color: #8b949e; border-top: 1px solid var(--border); }
 
-        @media (max-width: 768px) { .video-monitor { display: none; } .exec-summary { padding: 35px; } .pixel-logo { width: 80px; } }
+        @media (max-width: 768px) { 
+            .video-monitor { display: none; } 
+            .top-left-brand { position: relative; top: 0; left: 0; text-align: center; padding-top: 20px; }
+        }
     </style>
 </head>
 <body>
 
 <div id="codeStream"></div>
 
-<div class="brand-header">
+<div class="top-left-brand">
     <a href="https://marec.site">
         <img src="https://raw.githubusercontent.com/markreciopro/marec/main/logo.png" 
              alt="MAREC Insights Strategic Logo" 
@@ -205,14 +200,9 @@
     </header>
 
     <div class="container">
-        <div class="tech-bar" style="background: rgba(13, 17, 23, 0.8); border: 1px solid var(--accent-green); padding: 20px; border-radius: 4px; margin: 0 auto 30px auto; max-width: 950px; text-align: center; font-family: 'Fira Code', monospace; font-size: 0.9rem; color: #fff; letter-spacing: 1px; backdrop-filter: blur(10px);">
-            CORE_STACK: <span style="color:var(--accent-green)">PYTHON • R • SQL • TABLEAU • ADVANCED_EXCEL • POWER_BI</span>
-        </div>
-
         <section class="exec-summary">
-            <h2>[SYSTEM_OBJECTIVE_SUMMARY]</h2>
             <p>
-                MBA-educated <strong>Strategic Architect</strong> specializing in the intersection of Finance, Human Capital, and Operational Intelligence. I engineer surgical-grade business logic that transforms fragmented raw data into high-fidelity decision frameworks. By deploying automated <span class="tech-highlight">SQL/Python/R pipelines</span> and leveraging <span class="tech-highlight">Tableau/Advanced Excel</span> for executive visualization, I architect advanced Price-Volume-Mix models that empower leadership to protect margins and drive organizational scalability.
+                MBA-educated <strong>Strategic Architect</strong> specializing in the intersection of Finance, Human Capital, and Operational Intelligence. I engineer surgical-grade business logic that transforms fragmented raw data into high-fidelity decision frameworks. By deploying automated <span class="tech-highlight">SQL, Python, and R programming pipelines</span> and leveraging <span class="tech-highlight">Power BI, Tableau, and Advanced Excel</span> for executive visualization, I architect advanced Price-Volume-Mix models that empower leadership to protect margins and drive organizational scalability.
             </p>
         </section>
 
@@ -270,16 +260,12 @@
 <footer class="footer">
     <p style="color: var(--accent-cyan); font-family: 'Fira Code'; font-weight: 700; font-size: 1.1rem; margin-bottom: 25px;">MAREC INSIGHTS | LAS VEGAS, NV</p>
     <p>mar@marec.site | (702) 501-9385</p>
-    <div style="margin-top: 30px; opacity: 0.5; font-size: 0.75rem;">
-        <a href="https://marec.site" style="color:#fff; text-decoration:none;">MAREC.SITE</a> • 
-        <a href="https://markreciopro.github.io/Portfolio/" style="color:#fff; text-decoration:none;">PORTFOLIO</a>
-    </div>
     <p style="font-size: 0.65rem; margin-top: 50px; opacity: 0.2; letter-spacing: 2px;">© 2026 MARK RECIO. STRATEGIC ARCHITECTURE. SYSTEM_STATUS: OPERATIONAL.</p>
 </footer>
 
 <script>
     const stream = document.getElementById('codeStream');
-    const snippets = ['SELECT * FROM data_lake','df.groupby("margin")','MBA_LOGIC = TRUE','ggplot(aes(x=pvm))','UPDATE ledger SET status="optimized"','lambda x: x.calculate_roi()'];
+    const snippets = ['SELECT * FROM data_lake','df.groupby("margin")','MBA_LOGIC = TRUE','ggplot(aes(x=pvm))','UPDATE ledger SET status="optimized"'];
     function createSnippet() {
         const div = document.createElement('div');
         div.className = 'code-snippet';
