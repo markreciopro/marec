@@ -3,175 +3,214 @@
 <head>
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/markreciopro/marec/main/logo.png">
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RWJXDQ05ET"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-RWJXDQ05ET');
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Mark Recio",
+      "alternateName": "MAREC Insights",
+      "brand": {
+        "@type": "Brand",
+        "name": "MAREC Insights"
+      },
+      "jobTitle": "Strategic Data & Business Analyst",
+      "url": "https://marec.site",
+      "sameAs": [
+        "https://www.linkedin.com/in/marecio",
+        "https://markreciopro.github.io/Portfolio/"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Las Vegas",
+        "addressRegion": "NV"
+      },
+      "knowsAbout": ["SQL", "Python", "Data Modeling", "Business Intelligence", "PVM Modeling", "Capital Efficiency", "Strategic Insights"]
+    }
+    </script>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MAREC Insights | Mark Recio | Strategic Data Architect</title>
     
+    <title>MAREC Insights | Mark Recio | Strategic Data & Business Analyst</title>
+    <meta name="description" content="MAREC Insights: Mark Recio, MBA. Strategic Data and Business Analytics in Las Vegas. Specialized in Finance, HR, and Operations using SQL and Python.">
+    <meta name="keywords" content="MAREC Insights, Mark Recio, Data Analyst Las Vegas, Business Analyst MBA, SQL, Python, PVM Modeling, Profitability Engineering">
+    <link rel="canonical" href="https://marec.site/">
+
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;700&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
             --bg-dark: #0d1117; --bg-card: #161b22; --accent-cyan: #58a6ff;    
             --accent-green: #3fb950; --text-main: #c9d1d9; --border: #30363d;
+            --secondary: #f85149;
         }
         body { font-family: 'Inter', sans-serif; line-height: 1.6; color: var(--text-main); margin: 0; background-color: var(--bg-dark); scroll-behavior: smooth; }
         
-        /* WORKSTATION ENGINE: INTEGRATING VIDEO & LOGO INTO PHOTO */
-        .workstation-container {
-            position: relative;
-            max-width: 950px;
-            margin: 60px auto 40px auto;
-            padding: 0 20px;
-        }
-
-        .laptop-wrapper {
-            position: relative;
-            width: 100%;
-            display: inline-block;
-            line-height: 0;
-        }
-
-        .base-image {
-            width: 100%;
-            height: auto;
-            border-radius: 12px;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7);
-        }
-
-        /* YOUTUBE OVERLAY: Adjusted to laptop screen perspective */
-        .screen-content {
-            position: absolute;
-            top: 13.5%;    
-            left: 32.5%;   
-            width: 31.8%; 
-            height: 26.5%;  
-            z-index: 10;
-            background: #000;
-            overflow: hidden;
-            /* Suble perspective tilt to match the photo angle */
-            transform: perspective(1200px) rotateX(2.5deg) rotateY(-1.2deg);
-            border-radius: 2px;
-        }
-
-        .screen-content iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            opacity: 0.88; /* Blends with screen glass texture */
-        }
-
-        /* PIXEL LOGO OVERLAY: Targeted at the sparkling light/mouse point */
-        .chassis-logo {
-            position: absolute;
-            bottom: 22.8%; 
-            right: 20.9%;  
-            width: 8.5%;   
-            z-index: 15;
-            filter: drop-shadow(0 0 15px rgba(88, 166, 255, 0.8));
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
+        /* Hero Section */
+        .hero-workstation { display: flex; flex-direction: column; align-items: center; max-width: 900px; margin: 60px auto 40px auto; padding: 0 20px; }
+        .video-monitor { width: 80%; aspect-ratio: 16 / 9; background: #000; border-radius: 8px; overflow: hidden; z-index: 10; border: 2px solid var(--border); box-shadow: 0 0 50px rgba(88, 166, 255, 0.15); margin-bottom: -45px; transform: perspective(1000px) rotateX(4deg); }
+        .video-monitor iframe { width: 100%; height: 100%; border: none; }
+        .laptop-base { width: 100%; line-height: 0; z-index: 5; }
+        .base-image { width: 100%; border-radius: 15px; border: 1px solid var(--border); box-shadow: 0 25px 50px rgba(0, 0, 0, 0.9); }
         
-        .chassis-logo:hover {
-            transform: scale(1.1) rotate(5deg);
-            filter: drop-shadow(0 0 20px rgba(63, 185, 80, 0.9));
-        }
+        /* Header & Identity */
+        header { text-align: center; padding: 40px 20px; }
+        h1 { margin: 0; font-size: clamp(2.5rem, 8vw, 4.5rem); font-family: 'Fira Code', monospace; color: #fff; font-weight: 700; letter-spacing: -2px; }
+        .executive-subtitle { font-size: 1.6rem; color: var(--accent-cyan); margin: 5px 0; font-weight: 300; letter-spacing: 2px; }
+        .tagline { color: var(--accent-green); font-family: 'Fira Code', monospace; margin-bottom: 35px; font-size: 1.1rem; }
+        
+        /* Navigation */
+        .nav-links { font-family: 'Fira Code', monospace; font-size: 0.9rem; margin-bottom: 40px; }
+        .nav-links a { color: var(--accent-cyan); text-decoration: none; margin: 0 15px; transition: 0.3s; border-bottom: 1px solid transparent; }
+        .nav-links a:hover { border-bottom: 1px solid var(--accent-cyan); }
 
-        /* EXECUTIVE BRANDING STYLES */
-        header { text-align: center; padding: 20px 20px 60px 20px; }
-        h1 { margin: 0; font-size: clamp(2.2rem, 8vw, 3.8rem); font-family: 'Fira Code', monospace; color: #fff; font-weight: 700; letter-spacing: -1.5px; }
-        .executive-title { font-size: 1.3rem; color: var(--accent-cyan); margin: 10px 0; font-weight: 300; text-transform: uppercase; letter-spacing: 4px; }
-        .tagline { color: var(--accent-green); font-family: 'Fira Code', monospace; font-size: 0.95rem; margin-bottom: 30px; opacity: 0.9; }
+        .container { max-width: 1100px; margin: auto; padding: 0 20px 60px 20px; }
 
-        .container { max-width: 1100px; margin: auto; padding: 0 20px; }
-
-        .section-header { font-family: 'Fira Code'; color: var(--accent-cyan); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 30px; display: block; }
-
-        .value-proposition {
-            background: linear-gradient(135deg, #161b22 0%, #0d1117 100%);
-            border: 1px solid var(--border);
-            padding: 50px;
-            border-radius: 16px;
+        /* Executive Summary Module */
+        .exec-summary { 
+            background: linear-gradient(135deg, #161b22 0%, #0d1117 100%); 
+            border-left: 4px solid var(--accent-cyan); 
+            padding: 50px; 
+            border-radius: 0 16px 16px 0; 
             margin-bottom: 60px;
-            box-shadow: inset 0 0 30px rgba(88, 166, 255, 0.05);
+            box-shadow: inset 0 0 20px rgba(88, 166, 255, 0.05);
         }
+        .exec-summary h2 { font-family: 'Fira Code'; color: var(--accent-cyan); margin-top: 0; font-size: 1rem; text-transform: uppercase; letter-spacing: 2px; }
+        .exec-summary p { font-size: 1.2rem; line-height: 1.8; color: #fff; font-weight: 300; }
+        .highlight { color: var(--accent-green); font-weight: 700; }
+        
+        /* Skills Roadmap Grid */
+        .roadmap-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 25px; margin-top: 40px; }
+        .step { background: var(--bg-card); padding: 30px; border-radius: 12px; border: 1px solid var(--border); transition: 0.3s; }
+        .step:hover { border-color: var(--accent-cyan); transform: translateY(-5px); }
+        .step h4 { color: #fff; margin: 0 0 15px 0; border-bottom: 1px solid var(--border); padding-bottom: 10px; font-family: 'Fira Code'; font-size: 1.1rem; }
+        .step ul { padding-left: 18px; color: #8b949e; font-size: 0.95rem; }
+        .step li { margin-bottom: 8px; }
+        
+        /* Buttons */
+        .btn { display: inline-block; padding: 16px 32px; margin: 8px; text-decoration: none; border-radius: 4px; font-weight: 700; transition: 0.3s; font-family: 'Fira Code', monospace; text-transform: uppercase; cursor: pointer; }
+        .btn-pdf { border: 1px solid var(--border); color: #fff; }
+        .btn-pdf:hover { background: var(--border); }
+        .btn-cta { background: var(--accent-cyan); color: #0d1117; }
+        .btn-cta:hover { background: var(--accent-green); }
+        
+        /* Contact Section */
+        #contact { max-width: 700px; margin: 80px auto; padding: 50px; background: var(--bg-card); border-radius: 16px; border: 1px solid var(--border); }
+        input, textarea { width: 100%; padding: 15px; background: var(--bg-dark); border: 1px solid var(--border); color: white; border-radius: 6px; margin-bottom: 20px; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        
+        .footer { text-align: center; padding: 80px 20px; background: #010409; color: #8b949e; border-top: 1px solid var(--border); }
+        .footer-links a { color: var(--accent-cyan); text-decoration: none; margin: 0 10px; font-size: 0.9rem; }
 
-        .value-proposition p { font-size: 1.3rem; color: #e6edf3; line-height: 1.9; font-weight: 300; margin: 0; }
-        .highlight { color: #fff; font-weight: 700; border-bottom: 2px solid var(--accent-green); }
-
-        /* RECRUITER EXPERIENCE MODULES */
-        .experience-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin-bottom: 100px; }
-        .exp-card { background: var(--bg-card); border: 1px solid var(--border); padding: 40px; border-radius: 12px; transition: 0.4s ease; }
-        .exp-card:hover { border-color: var(--accent-cyan); transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0,0,0,0.4); }
-        .exp-card h3 { color: #fff; margin-top: 0; font-family: 'Fira Code'; font-size: 1.25rem; letter-spacing: -0.5px; }
-        .exp-card .metric-header { color: var(--accent-green); font-weight: 700; font-family: 'Fira Code'; font-size: 0.75rem; display: block; margin-bottom: 15px; letter-spacing: 2px; }
-        .exp-card p { color: #8b949e; font-size: 1.05rem; line-height: 1.7; }
-
-        .btn { display: inline-block; padding: 20px 40px; background: var(--accent-cyan); color: #0d1117; text-decoration: none; border-radius: 4px; font-weight: 700; font-family: 'Fira Code'; transition: 0.3s; margin-top: 20px; letter-spacing: 1px; }
-        .btn:hover { background: var(--accent-green); transform: translateY(-3px); box-shadow: 0 10px 25px rgba(88, 166, 255, 0.2); }
-
-        .footer { text-align: center; padding: 100px 20px; border-top: 1px solid var(--border); opacity: 0.5; font-size: 0.85rem; }
-
-        @media (max-width: 768px) {
-            .screen-content { top: 12.5%; left: 31%; width: 34%; height: 26%; }
-            .chassis-logo { width: 12%; bottom: 22%; right: 20%; }
-        }
+        @media (max-width: 768px) { .roadmap-grid { grid-template-columns: 1fr; } .video-monitor { width: 90%; } }
     </style>
 </head>
 <body>
 
 <main>
-    <div class="workstation-container">
-        <div class="laptop-wrapper">
-            <img src="https://i.ibb.co/ZzCVqzH9/Gemini-Generated-Image-bn1v5kbn1v5kbn1v.png" alt="MAREC Insights Workstation" class="base-image">
-            
-            <div class="screen-content">
-                <iframe src="https://www.youtube.com/embed/qHwgrgWFl98?autoplay=1&mute=1&loop=1&playlist=qHwgrgWFl98&controls=0&modestbranding=1" allow="autoplay; encrypted-media"></iframe>
-            </div>
-
-            <img src="https://raw.githubusercontent.com/markreciopro/marec/main/logo.png" alt="MAREC Pixel Logo" class="chassis-logo">
+    <section class="hero-workstation">
+        <div class="video-monitor">
+            <iframe src="https://www.youtube.com/embed/qHwgrgWFl98?autoplay=1&mute=1&loop=1&playlist=qHwgrgWFl98&controls=0&modestbranding=1" title="Strategic Analytics" allow="autoplay; encrypted-media"></iframe>
         </div>
-    </div>
+        <div class="laptop-base">
+            <img src="https://i.ibb.co/ZzCVqzH9/Gemini-Generated-Image-bn1v5kbn1v5kbn1v.png" 
+                 alt="Mark Recio MBA - Professional Workstation" 
+                 class="base-image">
+        </div>
+    </section>
 
     <header>
         <h1>MARK RECIO, MBA</h1>
-        <p class="executive-title">Strategic Data Architect</p>
-        <p class="tagline">// Converting Technical Complexity into Measurable Capital Efficiency</p>
+        <p class="executive-subtitle">Strategic Data Architect</p>
+        <p class="tagline">// Converting Technical Complexity into Capital Efficiency</p>
         
-        <a href="https://markreciopro.github.io/Portfolio/" class="btn">VIEW_STRATEGIC_SOLUTIONS</a>
+        <nav class="nav-links">
+            <a href="https://www.linkedin.com/in/marecio" target="_blank" rel="noopener noreferrer">LINKEDIN</a>
+            <a href="https://markreciopro.github.io/Portfolio/" target="_blank" rel="noopener noreferrer">PROJECT_PORTFOLIO</a> 
+        </nav>
+
+        <div class="cta-buttons">
+            <a href="#contact" class="btn btn-cta">REQUEST STRATEGIC AUDIT</a>
+            <a href="https://github.com/markreciopro/marec/raw/main/MAREC.Flyer.pdf" class="btn btn-pdf" target="_blank">EXECUTIVE SUMMARY (PDF)</a>
+        </div>
     </header>
 
     <div class="container">
-        <section class="value-proposition">
-            <span class="section-header">[ EXECUTIVE_VALUE_PROPOSITION ]</span>
+        <section class="exec-summary">
+            <h2>[ MISSION_CRITICAL ]</h2>
             <p>
-                I specialize in <span class="highlight">engineering algorithmic intelligence</span> for high-stakes business environments. By bridging MBA-level strategy with deep technical proficiency in SQL and Python, I transform fragmented data into <span class="highlight">surgical-grade business logic</span> that drives <strong>Profitability, Operational Alpha, and Strategic Scalability</strong>.
+                I bridge the gap between <span class="highlight">complex data engineering</span> and <span class="highlight">executive leadership</span>. By architecting custom SQL and Python frameworks, I transform raw organizational data into surgical-grade business logic. My focus is the engineering of <span class="highlight">Capital Efficiency</span>—driving profitability and scalability through advanced PVM modeling and predictive people analytics.
             </p>
         </section>
 
-        <span class="section-header">[ CORE_STRATEGIC_IMPACT ]</span>
-        <div class="experience-grid">
-            <div class="exp-card">
-                <span class="metric-header">FINANCIAL_INTEGRITY</span>
-                <h3>PVM & Margin Architecture</h3>
-                <p>Architecting Price-Volume-Mix (PVM) models that eliminate financial blind spots, ensuring margin integrity and capital efficiency through automated SQL-driven audit pipelines.</p>
+        <section class="roadmap-grid">
+            <div class="step">
+                <h4>Financial Integrity</h4>
+                <ul>
+                    <li>PVM (Price-Volume-Mix) Modeling</li>
+                    <li>Automated Variance Analysis</li>
+                    <li>Margin Engineering</li>
+                    <li>Profitability Audits</li>
+                </ul>
             </div>
-            <div class="exp-card">
-                <span class="metric-header">OPERATIONAL_ALPHA</span>
-                <h3>Data Pipeline Engineering</h3>
-                <p>Translating operational chaos into unified Python architectures, providing executive leads with real-time visibility and the logic required for throughput optimization.</p>
+            <div class="step">
+                <h4>Human Capital Alpha</h4>
+                <ul>
+                    <li>Predictive Attrition Algorithms</li>
+                    <li>Labor Productivity Scaling</li>
+                    <li>Retention Logic Architectures</li>
+                    <li>Flight-Risk Mitigation</li>
+                </ul>
             </div>
-            <div class="exp-card">
-                <span class="metric-header">HUMAN_CAPITAL</span>
-                <h3>Predictive Attrition Modeling</h3>
-                <p>Developing algorithmic retention frameworks that align People Analytics with fiscal goals, identifying flight risks before they impact the bottom line.</p>
+            <div class="step">
+                <h4>Operational Logic</h4>
+                <ul>
+                    <li>SQL/Python Pipeline Design</li>
+                    <li>Supply Chain Automation</li>
+                    <li>Real-time BI Dashboards</li>
+                    <li>Process Architecture</li>
+                </ul>
             </div>
-        </div>
+            <div class="step">
+                <h4>Strategic Growth</h4>
+                <ul>
+                    <li>LTV & CAC ROI Modeling</li>
+                    <li>Competitive Benchmarking</li>
+                    <li>Market Expansion Forecasting</li>
+                    <li>Scale Management Logic</li>
+                </ul>
+            </div>
+        </section>
     </div>
+
+    <section id="contact">
+        <h2 style="color: var(--accent-cyan); font-family: 'Fira Code'; text-align: center; margin-bottom: 30px;">[ INITIALIZE_CONSULTATION ]</h2>
+        <form action="https://formspree.io/f/mreaeden" method="POST">
+            <input type="text" name="name" required placeholder="Full Name">
+            <input type="email" name="_replyto" required placeholder="Executive Email">
+            <textarea name="message" rows="5" required placeholder="Describe the business challenge..."></textarea>
+            <button type="submit" class="btn btn-cta" style="width: 100%;">TRANSMIT DATA</button>
+        </form>
+    </section>
 </main>
 
 <footer class="footer">
-    <p>MAREC INSIGHTS | LAS VEGAS, NV | © 2026</p>
-    <p style="font-family: 'Fira Code'; margin-top: 15px; letter-spacing: 1px;">Strategic Logic: OPTIMAL // Data Architecture: ACTIVE</p>
+    <p style="color: var(--accent-cyan); font-family: 'Fira Code'; font-weight: 700; letter-spacing: 2px;">MAREC INSIGHTS | LAS VEGAS, NV</p>
+    <p>mar@marec.site | (702) 501-9385</p>
+    
+    <div class="footer-links">
+        <a href="https://www.linkedin.com/in/marecio" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://markreciopro.github.io/Portfolio/" target="_blank" rel="noopener noreferrer">Portfolio</a>
+    </div>
+
+    <p style="font-size: 0.8rem; margin-top: 30px; opacity: 0.4;">© 2026 Mark Recio. Professional Data Strategy. <br>System Status: Operational // Strategic Logic: Enabled</p>
 </footer>
 
 </body>
