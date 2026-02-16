@@ -65,12 +65,7 @@
             left: 20px;
             z-index: 100;
         }
-        .pixel-logo {
-            width: 100px; 
-            height: auto;
-            image-rendering: pixelated; 
-            transition: 0.3s ease-in-out;
-        }
+        .pixel-logo { width: 100px; height: auto; image-rendering: pixelated; }
 
         /* --- HERO & WORKSTATION --- */
         .hero-workstation { 
@@ -122,7 +117,6 @@
 
         .container { max-width: 1100px; margin: auto; padding: 0 20px; }
 
-        /* --- EXECUTIVE SUMMARY --- */
         .exec-summary { 
             background: rgba(22, 27, 34, 0.75); 
             border-left: 5px solid var(--accent-green); 
@@ -131,12 +125,10 @@
             margin-bottom: 50px; 
             backdrop-filter: blur(15px); 
             border: 1px solid var(--border); 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
         .exec-summary p { font-size: 1.25rem; line-height: 1.85; color: #fff; font-weight: 300; margin: 0; }
         .tech-highlight { color: var(--accent-green); font-weight: 700; }
 
-        /* --- TECH STACK PILLS --- */
         .tech-arsenal {
             display: flex;
             justify-content: center;
@@ -152,42 +144,38 @@
             font-family: 'Fira Code', monospace;
             font-size: 0.75rem;
             color: var(--accent-cyan);
-            transition: 0.3s;
-        }
-        .tech-tag:hover {
-            border-color: var(--accent-green);
-            background: rgba(63, 185, 80, 0.1);
-            transform: translateY(-2px);
         }
 
-        /* --- ROADMAP CARDS --- */
-        .roadmap-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 25px; margin-bottom: 100px; }
-        .step { 
+        /* --- CONTACT HUB SECTION --- */
+        #contact { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 40px; 
+            margin: 100px auto; 
+            padding: 60px; 
             background: var(--bg-card); 
-            padding: 35px; 
             border: 1px solid var(--border); 
-            border-radius: 8px; 
-            transition: all 0.4s ease;
+            border-radius: 12px;
         }
-        .step:hover {
-            transform: translateY(-10px);
-            border-color: var(--accent-cyan);
-        }
-        .step h4 { color: #fff; margin: 0 0 15px 0; font-family: 'Fira Code'; font-size: 0.9rem; text-transform: uppercase; border-bottom: 1px solid var(--border); padding-bottom: 12px; }
-        .step ul { padding: 0; list-style: none; }
-        .step li { margin-bottom: 10px; font-size: 0.85rem; color: #8b949e; }
-        .step li::before { content: '→ '; color: var(--accent-green); }
+
+        .contact-info h3 { color: var(--accent-cyan); font-family: 'Fira Code'; margin-top: 0; }
+        .contact-list { list-style: none; padding: 0; }
+        .contact-list li { margin-bottom: 20px; font-family: 'Fira Code'; font-size: 0.9rem; display: flex; align-items: center; }
+        .contact-list span { color: var(--accent-green); margin-right: 15px; font-weight: bold; }
+        .contact-list a { color: var(--text-main); text-decoration: none; transition: 0.3s; }
+        .contact-list a:hover { color: var(--accent-cyan); }
 
         .btn { display: inline-block; padding: 18px 35px; margin: 10px; text-decoration: none; border-radius: 4px; font-weight: 700; transition: 0.3s; font-family: 'Fira Code', monospace; font-size: 0.85rem; text-transform: uppercase; border: none; cursor: pointer; }
         .btn-cta { background: var(--accent-cyan); color: #0d1117; }
-        .btn-pdf { border: 1px solid var(--secondary); color: var(--secondary); }
-
-        #contact { max-width: 650px; margin: 100px auto; padding: 60px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; }
-        input, textarea { width: 100%; padding: 18px; background: var(--bg-dark); border: 1px solid var(--border); color: white; border-radius: 6px; margin-bottom: 25px; box-sizing: border-box; }
         
-        .footer { text-align: center; padding: 120px 20px; background: #010409; color: #8b949e; border-top: 1px solid var(--border); }
+        input, textarea { width: 100%; padding: 15px; background: var(--bg-dark); border: 1px solid var(--border); color: white; border-radius: 4px; margin-bottom: 20px; box-sizing: border-box; }
+        
+        .footer { text-align: center; padding: 80px 20px; background: #010409; color: #8b949e; border-top: 1px solid var(--border); }
 
-        @media (max-width: 768px) { .video-monitor { display: none; } }
+        @media (max-width: 850px) { 
+            #contact { grid-template-columns: 1fr; padding: 30px; }
+            .video-monitor { display: none; }
+        }
     </style>
 </head>
 <body>
@@ -212,8 +200,8 @@
         <h1>MARK_RECIO, MBA</h1>
         <div class="job-title" id="typewriter"></div>
         <div style="margin-top: 30px;">
-            <a href="#contact" class="btn btn-cta">REQUEST.STRATEGIC.ENGAGEMENT()</a>
-            <a href="#" class="btn btn-pdf">VIEW.PROFILE(PDF)</a>
+            <a href="https://www.linkedin.com/in/marecio" target="_blank" class="btn btn-cta">LINKEDIN_CONNECT</a>
+            <a href="https://github.com/markreciopro/marec/raw/main/MAREC.Flyer.pdf" target="_blank" class="btn btn-cta" style="background: var(--secondary); color: white;">VIEW.PROFILE(PDF)</a>
         </div>
     </header>
 
@@ -228,48 +216,38 @@
             <div class="tech-tag">PYTHON</div>
             <div class="tech-tag">R_PROGRAMMING</div>
             <div class="tech-tag">SQL_SERVER</div>
-            <div class="tech-tag">MICROSOFT_POWER_BI</div>
+            <div class="tech-tag">POWER_BI</div>
             <div class="tech-tag">TABLEAU</div>
             <div class="tech-tag">ADVANCED_EXCEL</div>
         </section>
 
-        <section class="roadmap-grid">
-            <div class="step">
-                <h4>Capital Efficiency</h4>
-                <ul>
-                    <li>PVM Margin Integrity Audits</li>
-                    <li>Variance & Budget Forecasting</li>
-                    <li>Profitability Engineering</li>
+        <div id="contact">
+            <div class="contact-info">
+                <h3>[STRATEGIC_INTEL]</h3>
+                <ul class="contact-list">
+                    <li><span>EMAIL</span> <a href="mailto:mar@marec.site">mar@marec.site</a></li>
+                    <li><span>PHONE</span> <a href="tel:7025019385">(702) 501-9385</a></li>
+                    <li><span>PORTFOLIO</span> <a href="https://markreciopro.github.io/Portfolio/" target="_blank">markreciopro.github.io</a></li>
+                    <li><span>SOURCE</span> <a href="https://github.com/markreciopro" target="_blank">github.com/markreciopro</a></li>
+                    <li><span>NETWORK</span> <a href="https://www.linkedin.com/in/marecio" target="_blank">linkedin.com/in/marecio</a></li>
                 </ul>
+                <p style="font-size: 0.75rem; opacity: 0.5; margin-top: 40px; font-family: 'Fira Code';">NODE: LAS VEGAS, NV</p>
             </div>
-            <div class="step">
-                <h4>Human Capital Logic</h4>
-                <ul>
-                    <li>Predictive Flight-Risk Modeling</li>
-                    <li>Labor Throughput Optimization</li>
-                    <li>Total Rewards ROI Analysis</li>
-                </ul>
-            </div>
-            <div class="step">
-                <h4>Operational Intelligence</h4>
-                <ul>
-                    <li>Customer Lifetime Value (LTV)</li>
-                    <li>CAC Efficiency Benchmarking</li>
-                    <li>Strategic Growth Forecasting</li>
-                </ul>
-            </div>
-        </section>
-    </div>
 
-    <section id="contact">
-        <h2 style="color: var(--accent-cyan); font-family: 'Fira Code'; text-align: center; font-size: 1rem; margin-bottom: 30px;">[INITIATE_CONTACT]</h2>
-        <form>
-            <input type="text" placeholder="Full Name / Organization">
-            <input type="email" placeholder="executive@organization.com">
-            <textarea rows="6" placeholder="Outline your technical or strategic data requirement..."></textarea>
-            <button type="submit" class="btn btn-cta" style="width: 100%;">SEND.TRANSMISSION()</button>
-        </form>
-    </section>
+            <div class="contact-form">
+                <h3>[SEND_TRANSMISSION]</h3>
+                <form action="https://formspree.io/f/mreaeden" method="POST">
+                    <input type="hidden" name="_next" value="https://markreciopro.github.io/Portfolio/">
+                    
+                    <input type="text" name="name" placeholder="Name / Company" required>
+                    <input type="email" name="email" placeholder="Email Address" required>
+                    <textarea name="message" rows="4" placeholder="Request strategic engagement or project data..." required></textarea>
+                    
+                    <button type="submit" class="btn btn-cta" style="width: 100%; margin: 0;">SEND.MESSAGE()</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </main>
 
 <footer class="footer">
@@ -277,7 +255,6 @@
 </footer>
 
 <script>
-    // TYPEWRITER EFFECT
     const text = "Strategic Data Architect";
     let i = 0;
     function typeWriter() {
@@ -289,9 +266,8 @@
     }
     window.onload = typeWriter;
 
-    // BACKGROUND CODE STREAM
     const stream = document.getElementById('codeStream');
-    const snippets = ['SELECT * FROM intelligence','df.optimize()','MBA_LOGIC = TRUE','MARGIN_PROTECTION: 100%'];
+    const snippets = ['SELECT * FROM data','MBA_LOGIC = TRUE','df.optimize()','PVM_ANALYSIS: ACTIVE'];
     function createSnippet() {
         const div = document.createElement('div');
         div.className = 'code-snippet';
