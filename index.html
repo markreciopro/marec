@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/markreciopro/marec/main/favicon.png">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/markreciopro/marec/main/logo.png">
     
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-RWJXDQ05ET"></script>
     <script>
@@ -54,25 +54,50 @@
         }
         body { font-family: 'Inter', sans-serif; line-height: 1.6; color: var(--text-main); margin: 0; background-color: var(--bg-dark); scroll-behavior: smooth; }
         
-        /* Hero Section */
+        /* Hero & Monitor Styling */
         .hero-workstation { display: flex; flex-direction: column; align-items: center; max-width: 850px; margin: 60px auto 20px auto; padding: 0 20px; }
         .video-monitor { width: 75%; aspect-ratio: 16 / 9; background: #000; border-radius: 8px; overflow: hidden; z-index: 10; border: 2px solid var(--border); box-shadow: 0 0 40px rgba(88, 166, 255, 0.2); margin-bottom: -45px; transform: perspective(1000px) rotateX(5deg); }
         .video-monitor iframe { width: 100%; height: 100%; border: none; }
         .laptop-base { width: 100%; line-height: 0; z-index: 5; }
         .base-image { width: 100%; border-radius: 15px; border: 1px solid var(--border); box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8); }
         
-        /* Header & Logo */
+        /* Header & Brand Identity Update */
         header { text-align: center; padding: 20px 20px 40px 20px; }
-        .pixel-logo { 
-            max-width: 280px; 
-            height: auto; 
-            margin-bottom: 20px; 
-            filter: drop-shadow(0 0 10px rgba(63, 185, 80, 0.2)); /* Subtle green data glow */
+        
+        .header-logo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 25px;
         }
+
+        .pixel-logo { 
+            width: 140px; 
+            height: auto; 
+            filter: drop-shadow(0 0 12px rgba(88, 166, 255, 0.35));
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+        }
+
+        .pixel-logo:hover {
+            transform: scale(1.1);
+            filter: drop-shadow(0 0 20px rgba(63, 185, 80, 0.5));
+        }
+
+        .brand-logo-text { 
+            font-family: 'Fira Code', monospace; 
+            color: var(--accent-green); 
+            font-size: 0.85rem; 
+            letter-spacing: 3px; 
+            margin-top: 12px;
+            opacity: 0.8;
+        }
+
         h1 { margin: 0; font-size: clamp(2.5rem, 8vw, 4rem); font-family: 'Fira Code', monospace; color: var(--accent-cyan); text-transform: uppercase; font-weight: 700; }
         .job-title { font-size: 1.8rem; color: #fff; margin: 10px 0; font-weight: 700; }
         .tagline { color: var(--accent-green); font-family: 'Fira Code', monospace; margin-bottom: 25px; }
         
+        /* Navigation & Content */
         .nav-links { font-family: 'Fira Code', monospace; font-size: 0.9rem; margin-bottom: 35px; }
         .nav-links a { color: var(--accent-cyan); text-decoration: none; margin: 0 10px; transition: 0.3s; border-bottom: 1px solid transparent; }
         .nav-links a:hover { border-bottom: 1px solid var(--accent-cyan); }
@@ -96,13 +121,14 @@
         .btn-pdf { background: var(--secondary); color: white; }
         .btn-cta { background: var(--accent-green); color: #000; }
         
+        /* Forms & Footer */
         #contact { max-width: 750px; margin: 100px auto; padding: 50px; background: var(--bg-card); border-radius: 12px; border: 1px solid var(--border); }
         input, textarea { width: 100%; padding: 14px; background: var(--bg-dark); border: 1px solid var(--border); color: white; border-radius: 6px; margin-bottom: 20px; box-sizing: border-box; }
         
         .footer { text-align: center; padding: 80px 20px; background: #010409; color: #8b949e; border-top: 1px solid var(--border); }
         .footer-links a { color: var(--accent-cyan); text-decoration: none; margin: 0 10px; font-size: 0.9rem; }
 
-        @media (max-width: 768px) { .roadmap-grid { grid-template-columns: 1fr; } .video-monitor { width: 90%; } .pixel-logo { max-width: 200px; } }
+        @media (max-width: 768px) { .roadmap-grid { grid-template-columns: 1fr; } .video-monitor { width: 90%; } .pixel-logo { width: 100px; } }
     </style>
 </head>
 <body>
@@ -114,22 +140,29 @@
         </div>
         <div class="laptop-base">
             <img src="https://i.ibb.co/ZzCVqzH9/Gemini-Generated-Image-bn1v5kbn1v5kbn1v.png" 
-                 alt="Mark Recio MBA - MAREC Insights Portfolio" 
-                 title="MAREC Insights - Strategic Logic" 
+                 alt="Mark Recio MBA - Portfolio Workstation" 
                  class="base-image">
         </div>
     </section>
 
     <header>
-        <img src="https://raw.githubusercontent.com/markreciopro/marec/main/logo.png" alt="MAREC Insights Logo" class="pixel-logo">
-        
+        <div class="header-logo-container">
+            <a href="https://marec.site">
+                <img src="https://raw.githubusercontent.com/markreciopro/marec/main/logo.png" 
+                     alt="MAREC Insights Pixel Logo" 
+                     class="pixel-logo"
+                     onerror="this.src='https://raw.githubusercontent.com/markreciopro/marec/main/favicon.png'">
+            </a>
+            <div class="brand-logo-text">[ MAREC_INSIGHTS ]</div>
+        </div>
+
         <h1>MARK_RECIO</h1>
         <p class="job-title">Data & Business Analyst</p>
         <p class="tagline">// Bridging Human Intuition and Algorithmic Precision</p>
         
         <nav class="nav-links">
             <a href="https://www.linkedin.com/in/marecio" target="_blank" rel="noopener noreferrer">LINKEDIN</a> • 
-            <a href="https://markreciopro.github.io/Portfolio/" target="_blank" rel="noopener noreferrer">PORTFOLIO</a> 
+            <a href="https://markreciopro.github.io/Portfolio/" target="_blank" rel="noopener noreferrer">LIVE_PORTFOLIO</a> 
         </nav>
 
         <div class="cta-buttons">
@@ -140,7 +173,7 @@
 
     <div class="container">
         <div class="tech-bar">
-            <span><strong>TOOLS:</strong> SQL • Python • DAX • VBA • Power BI</span>
+            <span><strong>TECH_STACK:</strong> SQL • Python • DAX • VBA • Power BI</span>
         </div>
         
         <div class="methods-bar">
@@ -152,7 +185,7 @@
         </div>
 
         <section class="exec-summary">
-            <h2>[MAREC_INSIGHT_SUMMARY]</h2>
+            <h2>[STRATEGIC_SUMMARY]</h2>
             <p>
                 MBA-educated <strong>Strategic Analyst</strong> with a multidisciplinary focus on <strong>Finance, HR, and Operations</strong>. I specialize in translating complex raw data into surgical-grade business logic that drives <strong>Capital Efficiency</strong> and organizational scalability. From building automated <strong>SQL/Python pipelines</strong> to architecting <strong>PVM models</strong> and <strong>Predictive Attrition frameworks</strong>, I provide the analytical backbone required for high-stakes executive decision-making.
             </p>
