@@ -11,11 +11,12 @@
     <style>
         :root {
             --bg-dark: #0d1117; 
-            --bg-card: rgba(22, 27, 34, 0.8); 
+            --bg-card: rgba(22, 27, 34, 0.85); 
             --accent-cyan: #58a6ff;    
             --accent-green: #3fb950; 
             --text-main: #c9d1d9; 
             --border: #30363d;
+            --grid-line: rgba(88, 166, 255, 0.05);
         }
 
         body { 
@@ -27,32 +28,47 @@
             overflow-x: hidden;
         }
 
-        /* --- BACKGROUND ANIMATION ENGINE --- */
-        .bg-animation {
+        /* --- DATA LAKE FLOATING GRID ANIMATION --- */
+        .data-lake-container {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1;
+            overflow: hidden;
             background: radial-gradient(circle at 50% 50%, #161b22 0%, #0d1117 100%);
         }
 
-        .particle {
+        /* The Spreadsheet Grid Visual */
+        .floating-grid {
             position: absolute;
-            background: var(--accent-cyan);
-            border-radius: 50%;
-            opacity: 0.3;
-            filter: blur(1px);
-            animation: float 20s infinite linear;
+            width: 400px;
+            height: 300px;
+            border: 1px solid rgba(88, 166, 255, 0.1);
+            background-image: 
+                linear-gradient(var(--grid-line) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+            background-size: 20px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            opacity: 0.2;
+            animation: drift var(--duration) infinite linear;
         }
 
-        @keyframes float {
-            0% { transform: translateY(100vh) translateX(0); opacity: 0; }
-            50% { opacity: 0.3; }
-            100% { transform: translateY(-10vh) translateX(50px); opacity: 0; }
+        .floating-grid::after {
+            content: "DATALAKE_NODE_0" attr(data-node);
+            font-family: 'Fira Code', monospace;
+            font-size: 0.6rem;
+            color: var(--accent-cyan);
+        }
+
+        @keyframes drift {
+            from { transform: translate(var(--x-start), var(--y-start)) rotate(0deg); }
+            to { transform: translate(var(--x-end), var(--y-end)) rotate(10deg); }
         }
 
         /* --- HERO & IDENTITY --- */
-        header { text-align: center; padding: 100px 20px 40px 20px; }
-        
+        header { text-align: center; padding: 100px 20px 40px 20px; position: relative; }
         .contract-badge {
             display: inline-block;
             padding: 6px 18px;
@@ -69,7 +85,7 @@
         h1 { margin: 0; font-size: clamp(2.5rem, 8vw, 4.5rem); font-family: 'Fira Code', monospace; color: #fff; font-weight: 700; letter-spacing: -2px; }
         .job-title { font-size: 1.5rem; color: var(--accent-cyan); margin: 10px 0; font-weight: 300; text-transform: uppercase; letter-spacing: 5px; }
 
-        /* --- WORKSTATION VISUAL --- */
+        /* --- INTEGRATED WORKSTATION --- */
         .workstation-container {
             position: relative;
             max-width: 850px;
@@ -78,21 +94,21 @@
         }
         .monitor-frame {
             width: 75%; aspect-ratio: 16/9; background: #000; border-radius: 8px; margin: 0 auto -45px auto;
-            border: 2px solid var(--border); box-shadow: 0 0 50px rgba(88, 166, 255, 0.15);
+            border: 2px solid var(--border); box-shadow: 0 0 50px rgba(88, 166, 255, 0.2);
             position: relative; z-index: 10; transform: perspective(1000px) rotateX(4deg);
             overflow: hidden;
         }
         .monitor-frame iframe { width: 100%; height: 100%; border: none; }
         .laptop-base-img { width: 100%; border-radius: 12px; border: 1px solid var(--border); z-index: 5; position: relative; }
 
-        /* --- STRATEGIC TECH STACK --- */
+        /* --- TECH STACK --- */
         .tech-stack-bar {
             background: rgba(22, 27, 34, 0.9);
             border-top: 1px solid var(--border);
             border-bottom: 1px solid var(--border);
             padding: 25px 0;
             margin: 60px 0;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(15px);
         }
         .tech-grid {
             max-width: 1100px;
@@ -106,8 +122,8 @@
         }
         .tech-item { margin: 10px 20px; font-weight: bold; }
 
-        /* --- VALUE PROPOSITION --- */
-        .container { max-width: 1100px; margin: auto; padding: 0 20px; }
+        /* --- CONTENT CARDS --- */
+        .container { max-width: 1100px; margin: auto; padding: 0 20px; position: relative; }
         
         .value-card {
             background: var(--bg-card);
@@ -121,41 +137,35 @@
         .value-card p { font-size: 1.3rem; line-height: 1.8; color: #fff; font-weight: 300; }
         .highlight { border-bottom: 2px solid var(--accent-green); }
 
-        /* --- CONTRACT SERVICES --- */
         .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-bottom: 100px; }
         .service-box { 
             background: var(--bg-card); padding: 40px; border-radius: 12px; border: 1px solid var(--border); 
-            transition: 0.3s; backdrop-filter: blur(5px);
+            transition: 0.3s; backdrop-filter: blur(10px);
         }
         .service-box:hover { border-color: var(--accent-cyan); transform: translateY(-5px); }
-        .service-box h3 { color: #fff; margin-top: 0; font-family: 'Fira Code'; font-size: 1.2rem; }
-        .service-box p { font-size: 0.95rem; color: #8b949e; }
 
-        /* --- CALL TO ACTION --- */
+        /* --- CTA --- */
         .btn { 
             display: inline-block; padding: 18px 40px; border-radius: 4px; font-family: 'Fira Code', monospace; 
             text-decoration: none; font-weight: 700; transition: 0.3s; cursor: pointer;
         }
         .btn-main { background: var(--accent-cyan); color: #0d1117; }
         .btn-outline { border: 1px solid var(--border); color: #fff; margin-left: 15px; }
-        .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
 
         .footer { text-align: center; padding: 100px 20px; border-top: 1px solid var(--border); opacity: 0.6; font-size: 0.8rem; }
-
-        @media (max-width: 768px) { .monitor-frame { width: 95%; } .btn-outline { margin-left: 0; margin-top: 15px; width: 80%; } .btn-main { width: 80%; } }
     </style>
 </head>
 <body>
 
-    <div class="bg-animation" id="bg"></div>
+    <div class="data-lake-container" id="datalake"></div>
 
     <header>
-        <div class="contract-badge">OPEN FOR STRATEGIC CONTRACTS // 2026</div>
+        <div class="contract-badge">AVAILABLE FOR STRATEGIC CONTRACTS // 2026</div>
         <h1>MARK RECIO, MBA</h1>
         <p class="job-title">Strategic Data Architect</p>
         <div style="margin-top: 30px;">
             <a href="mailto:mar@marec.site" class="btn btn-main">INITIATE CONSULTATION</a>
-            <a href="https://markreciopro.github.io/Portfolio/" class="btn btn-outline">PROJECT PORTFOLIO</a>
+            <a href="https://markreciopro.github.io/Portfolio/" class="btn btn-outline">EXPLORE DATA LAKE</a>
         </div>
     </header>
 
@@ -164,62 +174,65 @@
             <div class="monitor-frame">
                 <iframe src="https://www.youtube.com/embed/qHwgrgWFl98?autoplay=1&mute=1&loop=1&playlist=qHwgrgWFl98&controls=0&modestbranding=1" allow="autoplay; encrypted-media"></iframe>
             </div>
-            <img src="https://i.ibb.co/ZzCVqzH9/Gemini-Generated-Image-bn1v5kbn1v5kbn1v.png" alt="Executive Console" class="laptop-base-img">
+            <img src="https://i.ibb.co/ZzCVqzH9/Gemini-Generated-Image-bn1v5kbn1v5kbn1v.png" alt="Mark Recio Workstation" class="laptop-base-img">
         </section>
 
         <div class="tech-stack-bar">
             <div class="tech-grid">
                 <span class="tech-item">PYTHON</span>
                 <span class="tech-item">R PROGRAMMING</span>
-                <span class="tech-item">SQL (PostgreSQL/T-SQL)</span>
-                <span class="tech-item">POWER BI</span>
+                <span class="tech-item">SQL (T-SQL/PostgreSQL)</span>
+                <span class="tech-item">MS POWER BI</span>
                 <span class="tech-item">TABLEAU</span>
                 <span class="tech-item">ADVANCED EXCEL / VBA</span>
             </div>
         </div>
 
         <section class="value-card">
-            <h2>[ STRATEGIC_SUMMARY ]</h2>
+            <h2>[ MISSION_LOGIC ]</h2>
             <p>
-                I specialize in <span class="highlight">converting technical complexity into capital efficiency</span>. For executives and organizations requiring surgical precision in their data, I engineer custom frameworks in **Python, R, and SQL** to drive **Profitability, Operational Alpha, and Strategic Scalability**. I don't just "program"—I architect the decision-engines that power modern business logic.
+                I specialize in <span class="highlight">architecting data lakes into actionable intelligence</span>. By utilizing **Python, R, and SQL**, I help organizations unlock **Capital Efficiency** through advanced PVM modeling and predictive HR frameworks. My focus is delivering surgical business logic for high-stakes executive environments.
             </p>
         </section>
 
         <section class="services-grid">
             <div class="service-box">
                 <h3>Financial Alpha</h3>
-                <p>Architecting PVM (Price-Volume-Mix) models and automated variance pipelines using Python and R to protect margin integrity and executive visibility.</p>
+                <p>Engineering automated variance pipelines and margin-protection models to audit profitability with surgical precision.</p>
             </div>
             <div class="service-box">
                 <h3>Human Capital Logic</h3>
-                <p>Engineering predictive attrition models and labor productivity dashboards to mitigate flight-risk and optimize human capital ROI.</p>
+                <p>Deploying predictive attrition frameworks and labor-productivity optimization algorithms to protect the bottom line.</p>
             </div>
             <div class="service-box">
-                <h3>BI Infrastructure</h3>
-                <p>Building scalable, automated reporting ecosystems in Power BI and Tableau that translate raw data into surgical-grade business intelligence.</p>
+                <h3>Operational Intelligence</h3>
+                <p>Designing full-stack reporting architectures in Power BI and Tableau to eliminate organizational blind spots.</p>
             </div>
         </section>
     </main>
 
     <footer class="footer">
         <p>MAREC INSIGHTS | LAS VEGAS, NV | © 2026</p>
-        <p style="font-family: 'Fira Code'; color: var(--accent-cyan);">System Status: Operational // Strategic Engine: ACTIVE</p>
+        <p style="font-family: 'Fira Code'; color: var(--accent-cyan);">Architecture: STABLE // Data Flow: OPTIMAL</p>
     </footer>
 
     <script>
-        // Simple JavaScript to generate random background particles
-        const bg = document.getElementById('bg');
-        for (let i = 0; i < 30; i++) {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            const size = Math.random() * 4 + 'px';
-            particle.style.width = size;
-            particle.style.height = size;
-            particle.style.left = Math.random() * 100 + 'vw';
-            particle.style.top = Math.random() * 100 + 'vh';
-            particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
-            particle.style.animationDelay = (Math.random() * 5) + 's';
-            bg.appendChild(particle);
+        const lake = document.getElementById('datalake');
+        const nodes = 8; // Number of floating spreadsheet nodes
+
+        for (let i = 0; i < nodes; i++) {
+            const grid = document.createElement('div');
+            grid.className = 'floating-grid';
+            grid.setAttribute('data-node', i + 1);
+            
+            // Random start/end positions for the drift effect
+            grid.style.setProperty('--x-start', Math.random() * 100 + 'vw');
+            grid.style.setProperty('--y-start', Math.random() * 100 + 'vh');
+            grid.style.setProperty('--x-end', Math.random() * 100 + 'vw');
+            grid.style.setProperty('--y-end', Math.random() * 100 + 'vh');
+            grid.style.setProperty('--duration', (Math.random() * 30 + 30) + 's');
+            
+            lake.appendChild(grid);
         }
     </script>
 </body>
