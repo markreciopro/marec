@@ -11,18 +11,6 @@
       gtag('config', 'G-RWJXDQ05ET');
     </script>
 
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Mark Recio",
-      "alternateName": "MAREC Insights",
-      "jobTitle": "Strategic Data & Business Analyst",
-      "url": "https://marec.site",
-      "knowsAbout": ["SQL", "Python", "PVM Modeling", "Capital Efficiency", "Strategic Insights"]
-    }
-    </script>
-    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MAREC Insights | Mark Recio | Strategic Data Architect</title>
@@ -74,64 +62,88 @@
             100% { transform: translateY(-10vh); opacity: 0; }
         }
 
-        /* --- HERO & WORKSTATION --- */
-        .hero-workstation { display: flex; flex-direction: column; align-items: center; max-width: 850px; margin: 60px auto 20px auto; padding: 0 20px; }
-        .video-monitor { 
-            width: 75%; aspect-ratio: 16 / 9; background: #000; border-radius: 8px; 
-            overflow: hidden; z-index: 10; border: 2px solid var(--border); 
-            box-shadow: 0 0 40px rgba(88, 166, 255, 0.15); margin-bottom: -45px; 
-            transform: perspective(1000px) rotateX(5deg); 
+        /* --- HERO & WORKSTATION ADJUSTMENT --- */
+        .hero-workstation { 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            max-width: 850px; 
+            margin: 60px auto 20px auto; 
+            padding: 0 20px; 
+            position: relative;
         }
-        .video-monitor iframe { width: 100%; height: 100%; border: none; }
-        .base-image { width: 100%; border-radius: 15px; border: 1px solid var(--border); box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8); }
+
+        /* Video positioned to fit precisely inside the laptop screen of your background image */
+        .video-monitor { 
+            position: absolute;
+            top: 15.2%; /* Adjusted to sit on top of the laptop screen */
+            width: 33.5%; /* Matches the screen width of the laptop in the image */
+            aspect-ratio: 16 / 10;
+            background: #000;
+            z-index: 10;
+            overflow: hidden;
+            transform: perspective(800px) rotateX(8deg); /* Matches the tilt of the laptop lid */
+            border-radius: 2px;
+            box-shadow: inset 0 0 10px rgba(88, 166, 255, 0.5);
+        }
+
+        .video-monitor iframe { 
+            width: 100%; 
+            height: 100%; 
+            border: none; 
+            opacity: 0.9;
+        }
+
+        .laptop-base { 
+            width: 100%; 
+            line-height: 0; 
+            z-index: 5; 
+            position: relative;
+        }
+
+        .base-image { 
+            width: 100%; 
+            border-radius: 15px; 
+            border: 1px solid var(--border); 
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8); 
+        }
         
-        /* --- HEADER --- */
+        /* --- HEADER & EXECUTIVE TONE --- */
         header { text-align: center; padding: 20px 20px 40px 20px; }
         .brand-logo { font-family: 'Fira Code', monospace; color: var(--accent-green); font-size: 0.85rem; letter-spacing: 3px; margin-bottom: 10px; text-transform: uppercase; }
         h1 { margin: 0; font-size: clamp(2.5rem, 8vw, 4rem); font-family: 'Fira Code', monospace; color: #fff; text-transform: uppercase; font-weight: 700; letter-spacing: -2px; }
         .job-title { font-size: 1.5rem; color: var(--accent-cyan); margin: 10px 0; font-weight: 300; text-transform: uppercase; letter-spacing: 4px; }
-        .tagline { color: #8b949e; font-family: 'Fira Code', monospace; margin-bottom: 30px; font-size: 0.9rem; }
         
         .nav-links { font-family: 'Fira Code', monospace; font-size: 0.8rem; margin-bottom: 35px; }
         .nav-links a { color: var(--accent-cyan); text-decoration: none; margin: 0 12px; transition: 0.3s; opacity: 0.7; }
         .nav-links a:hover { opacity: 1; color: var(--accent-green); }
 
-        /* --- EXECUTIVE BARS --- */
         .tech-bar { background: var(--bg-card); border: 1px solid var(--border); padding: 18px; border-radius: 8px; margin: 0 auto 20px auto; max-width: 900px; display: flex; justify-content: space-around; flex-wrap: wrap; font-family: 'Fira Code', monospace; font-size: 0.85rem; color: var(--accent-green); font-weight: 700; }
-        .methods-bar { background: transparent; border: 1px solid var(--accent-cyan); padding: 12px; border-radius: 4px; text-align: center; font-family: 'Fira Code', monospace; margin: 0 auto 50px auto; max-width: 900px; font-size: 0.8rem; text-transform: uppercase; }
-        .method-item { color: #fff; margin: 0 15px; letter-spacing: 1px; }
 
         .container { max-width: 1100px; margin: auto; padding: 0 20px; }
         
-        /* --- EXECUTIVE SUMMARY --- */
         .exec-summary { background: rgba(22, 27, 34, 0.8); border-left: 4px solid var(--accent-green); padding: 45px; border-radius: 4px; margin-bottom: 60px; backdrop-filter: blur(10px); border: 1px solid var(--border); border-left-width: 4px; }
-        .exec-summary h2 { font-family: 'Fira Code'; color: var(--accent-cyan); margin-top: 0; font-size: 1rem; text-transform: uppercase; margin-bottom: 20px; }
         .exec-summary p { font-size: 1.15rem; line-height: 1.8; color: #fff; font-weight: 300; }
         .highlight { color: var(--accent-green); font-weight: 700; }
 
-        /* --- COMPETENCY GRID --- */
         .roadmap-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 80px; }
-        .step { background: var(--bg-card); padding: 30px; border: 1px solid var(--border); border-radius: 4px; transition: 0.3s; }
-        .step:hover { border-color: var(--accent-cyan); background: #1c2128; }
+        .step { background: var(--bg-card); padding: 30px; border: 1px solid var(--border); border-radius: 4px; }
         .step h4 { color: #fff; margin: 0 0 15px 0; font-family: 'Fira Code'; font-size: 0.9rem; text-transform: uppercase; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
-        .step ul { padding-left: 18px; margin: 0; color: #8b949e; font-size: 0.85rem; }
-        .step li { margin-bottom: 8px; }
+        .step li { margin-bottom: 8px; font-size: 0.85rem; color: #8b949e; }
 
-        /* --- BUTTONS --- */
         .btn { display: inline-block; padding: 16px 30px; margin: 10px; text-decoration: none; border-radius: 4px; font-weight: 700; transition: 0.3s; font-family: 'Fira Code', monospace; font-size: 0.8rem; text-transform: uppercase; border: none; cursor: pointer; }
         .btn-pdf { background: transparent; border: 1px solid var(--secondary); color: var(--secondary); }
-        .btn-pdf:hover { background: var(--secondary); color: white; }
         .btn-cta { background: var(--accent-cyan); color: #0d1117; }
-        .btn-cta:hover { background: var(--accent-green); }
 
-        /* --- CONTACT --- */
         #contact { max-width: 600px; margin: 80px auto; padding: 50px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; }
-        input, textarea { width: 100%; padding: 15px; background: var(--bg-dark); border: 1px solid var(--border); color: white; border-radius: 4px; margin-bottom: 20px; box-sizing: border-box; font-family: 'Inter'; }
+        input, textarea { width: 100%; padding: 15px; background: var(--bg-dark); border: 1px solid var(--border); color: white; border-radius: 4px; margin-bottom: 20px; box-sizing: border-box; }
         
-        .footer { text-align: center; padding: 100px 20px; background: #010409; color: #8b949e; border-top: 1px solid var(--border); font-size: 0.85rem; }
-        .footer-links a { color: var(--accent-cyan); text-decoration: none; margin: 0 15px; }
+        .footer { text-align: center; padding: 100px 20px; background: #010409; color: #8b949e; border-top: 1px solid var(--border); }
 
-        @media (max-width: 768px) { .video-monitor { width: 90%; } .exec-summary { padding: 30px; } }
+        @media (max-width: 768px) { 
+            .video-monitor { display: none; } /* Hide video overlay on mobile to prevent alignment issues */
+            .exec-summary { padding: 30px; } 
+        }
     </style>
 </head>
 <body>
@@ -141,7 +153,7 @@
 <main>
     <section class="hero-workstation">
         <div class="video-monitor">
-            <iframe src="https://www.youtube.com/embed/qHwgrgWFl98?autoplay=1&mute=1&loop=1&playlist=qHwgrgWFl98&controls=0&modestbranding=1" title="Strategic Analytics" allow="autoplay; encrypted-media"></iframe>
+            <iframe src="https://www.youtube.com/embed/qHwgrgWFl98?autoplay=1&mute=1&loop=1&playlist=qHwgrgWFl98&controls=0&modestbranding=1" allow="autoplay; encrypted-media"></iframe>
         </div>
         <div class="laptop-base">
             <img src="https://i.ibb.co/ZzCVqzH9/Gemini-Generated-Image-bn1v5kbn1v5kbn1v.png" alt="Mark Recio Workstation" class="base-image">
@@ -152,7 +164,6 @@
         <div class="brand-logo">Strategic Intelligence // MAREC_INSIGHTS</div>
         <h1>MARK_RECIO</h1>
         <p class="job-title">Data & Business Architect</p>
-        <p class="tagline">// Converting Technical Complexity into Capital Efficiency</p>
         
         <nav class="nav-links">
             <a href="https://www.linkedin.com/in/marecio" target="_blank">LINKEDIN_CONNECT</a> • 
@@ -169,13 +180,6 @@
     <div class="container">
         <div class="tech-bar">
             <span>TECH_STACK: SQL • PYTHON • DAX • VBA • POWER_BI • TABLEAU</span>
-        </div>
-        
-        <div class="methods-bar">
-            <span class="method-item">PVM Modeling</span> • 
-            <span class="method-item">Predictive ROI</span> • 
-            <span class="method-item">Labor Alpha</span> • 
-            <span class="method-item">ETL Pipelines</span>
         </div>
 
         <section class="exec-summary">
@@ -230,7 +234,7 @@
         <form action="https://formspree.io/f/mreaeden" method="POST">
             <input type="text" name="name" required placeholder="Name / Organization">
             <input type="email" name="_replyto" required placeholder="professional@email.com">
-            <textarea name="message" rows="5" required placeholder="Detail your data challenge or scope of work..."></textarea>
+            <textarea name="message" rows="5" required placeholder="Detail your data challenge..."></textarea>
             <button type="submit" class="btn btn-cta" style="width: 100%;">SEND.TRANSMISSION()</button>
         </form>
     </section>
@@ -239,30 +243,17 @@
 <footer class="footer">
     <p style="color: var(--accent-cyan); font-family: 'Fira Code'; font-weight: 700; font-size: 1rem; margin-bottom: 20px;">MAREC INSIGHTS | LAS VEGAS, NV</p>
     <p>mar@marec.site | (702) 501-9385</p>
-    
     <div class="footer-links" style="margin: 20px 0;">
         <a href="https://www.linkedin.com/in/marecio" target="_blank">LinkedIn</a>
         <a href="https://markreciopro.github.io/Portfolio/" target="_blank">Portfolio</a>
         <a href="https://github.com/markreciopro" target="_blank">GitHub</a>
     </div>
-
     <p style="font-size: 0.7rem; margin-top: 40px; opacity: 0.3; letter-spacing: 1px;">© 2026 MARK RECIO. STRATEGIC ARCHITECTURE. SYSTEM_OPERATIONAL.</p>
 </footer>
 
 <script>
     const stream = document.getElementById('codeStream');
-    const snippets = [
-        'SELECT * FROM data_lake WHERE ROI > 1.0',
-        'df.groupby("margin").mean()',
-        'ggplot(data, aes(x=pvm))',
-        'MBA_LOGIC = TRUE',
-        'UPDATE finance_ledger SET status = "optimized"',
-        'while cap_efficiency < threshold: iterate()',
-        'CREATE VIEW executive_clarity AS...',
-        'JOIN labor_metrics ON emp_id',
-        'pip install strategic_logic'
-    ];
-
+    const snippets = ['SELECT * FROM data_lake','df.groupby("margin").mean()','MBA_LOGIC = TRUE','UPDATE finance_ledger','while cap_efficiency < threshold: iterate()','JOIN labor_metrics ON emp_id'];
     function createSnippet() {
         const div = document.createElement('div');
         div.className = 'code-snippet';
