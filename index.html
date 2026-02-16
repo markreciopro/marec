@@ -52,7 +52,7 @@
             100% { transform: translateY(-10vh); opacity: 0; } 
         }
 
-        /* --- HEADER & BRANDING --- */
+        /* --- HEADER --- */
         header { text-align: center; padding: 80px 20px 40px 20px; }
         .badge { 
             display: inline-block; 
@@ -83,13 +83,7 @@
             font-size: 0.85rem; 
         }
         .btn-main { background: var(--accent-cyan); color: #0d1117; }
-        .btn-linkedin { background: var(--linkedin-blue); color: white; animation: pulse-blue 3s infinite; }
-        
-        @keyframes pulse-blue { 
-            0% { box-shadow: 0 0 0 0 rgba(0, 119, 181, 0.5); } 
-            70% { box-shadow: 0 0 0 15px rgba(0, 119, 181, 0); } 
-            100% { box-shadow: 0 0 0 0 rgba(0, 119, 181, 0); } 
-        }
+        .btn-outline { border: 1px solid var(--border); color: #fff; }
 
         /* --- VISUAL CONSOLE --- */
         .workstation-wrapper { position: relative; max-width: 800px; margin: 40px auto; padding: 0 20px; }
@@ -104,51 +98,50 @@
         .screen-overlay iframe { width: 100%; height: 100%; border: none; opacity: 0.8; }
         .base-img { width: 100%; border-radius: 12px; border: 1px solid var(--border); box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
 
-        .tech-strip { 
-            background: rgba(13, 17, 23, 0.8); 
-            border-top: 1px solid var(--border); 
-            border-bottom: 1px solid var(--border); 
-            padding: 20px 0; margin: 40px 0; 
-            backdrop-filter: blur(15px); 
-        }
-        .tech-container { 
-            max-width: 1100px; 
-            margin: auto; 
-            display: flex; 
-            justify-content: space-around; 
-            flex-wrap: wrap; 
-            font-family: 'Fira Code', monospace; 
-            font-size: 0.8rem; 
-            color: var(--accent-green); 
-            font-weight: 700; 
-        }
-
-        /* --- CONTENT --- */
+        /* --- SKILLS & EDUCATION SECTIONS --- */
         .container { max-width: 1100px; margin: auto; padding: 0 20px 40px 20px; }
-        .mission-card { 
+        
+        .section-title { 
+            font-family: 'Fira Code'; 
+            color: var(--accent-cyan); 
+            font-size: 1.1rem; 
+            margin-bottom: 30px; 
+            border-left: 3px solid var(--accent-green); 
+            padding-left: 15px; 
+        }
+
+        .grid-container { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+            gap: 25px; 
+            margin-bottom: 60px; 
+        }
+
+        .info-card { 
             background: var(--bg-card); 
             border: 1px solid var(--border); 
-            padding: 45px; 
-            border-radius: 16px; 
-            margin-bottom: 40px; 
-            backdrop-filter: blur(20px); 
-        }
-        .mission-card p { font-size: 1.25rem; line-height: 1.7; margin: 0; }
-        .highlight { border-bottom: 2px solid var(--accent-green); color: #fff; font-weight: 600; }
-
-        .contract-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 60px; }
-        .service-card { 
-            background: var(--bg-card); 
             padding: 35px; 
-            border-radius: 10px; 
-            border: 1px solid var(--border); 
-            transition: 0.3s; 
+            border-radius: 12px; 
+            backdrop-filter: blur(10px); 
         }
-        .service-card:hover { border-color: var(--accent-cyan); transform: translateY(-5px); }
-        .service-card h3 { color: #fff; margin-top: 0; font-family: 'Fira Code'; font-size: 1.1rem; }
-        .service-card p { font-size: 0.9rem; color: #8b949e; line-height: 1.6; }
 
-        /* --- CONTACT SECTION --- */
+        .skill-tag {
+            display: inline-block;
+            background: rgba(88, 166, 255, 0.1);
+            color: var(--accent-cyan);
+            padding: 5px 12px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            margin: 4px;
+            font-family: 'Fira Code';
+            border: 1px solid rgba(88, 166, 255, 0.3);
+        }
+
+        .edu-item { margin-bottom: 20px; }
+        .edu-item h4 { color: #fff; margin: 0 0 5px 0; font-size: 1.1rem; }
+        .edu-item p { color: var(--accent-green); margin: 0; font-family: 'Fira Code'; font-size: 0.85rem; }
+
+        /* --- CONTACT --- */
         #contact { 
             max-width: 650px; 
             margin: 60px auto; 
@@ -156,9 +149,7 @@
             background: var(--bg-card); 
             border-radius: 12px; 
             border: 1px solid var(--border); 
-            backdrop-filter: blur(10px); 
         }
-        #contact h2 { color: var(--accent-cyan); font-family: 'Fira Code'; text-align: center; font-size: 1.2rem; margin-bottom: 25px; }
         input, textarea { 
             width: 100%; 
             padding: 12px; 
@@ -168,38 +159,26 @@
             border-radius: 4px; 
             margin-bottom: 15px; 
             box-sizing: border-box; 
-            font-family: 'Inter', sans-serif;
         }
-        .btn-cta { background: var(--accent-green); color: #0d1117; width: 100%; text-transform: uppercase; }
+        .btn-cta { background: var(--accent-green); color: #0d1117; width: 100%; }
 
         /* --- FOOTER --- */
-        .footer { 
-            text-align: center; 
-            padding: 80px 20px; 
-            background: #010409; 
-            color: #8b949e; 
-            border-top: 1px solid var(--border); 
-        }
-        .footer-links a { color: var(--accent-cyan); text-decoration: none; margin: 0 15px; font-size: 0.9rem; }
+        .footer { text-align: center; padding: 60px 20px; border-top: 1px solid var(--border); }
+        .footer-links a { color: var(--accent-cyan); text-decoration: none; margin: 0 15px; }
 
-        @media (max-width: 768px) { 
-            .screen-overlay { display: none; } 
-            .cta-group { flex-direction: column; align-items: center; } 
-            .btn { width: 100%; box-sizing: border-box; } 
-            #contact { padding: 25px; margin: 40px 10px; }
-        }
+        @media (max-width: 768px) { .screen-overlay { display: none; } .cta-group { flex-direction: column; } }
     </style>
 </head>
 <body>
     <div id="codeStream"></div>
 
     <header>
-        <div class="badge">Open for Strategic Engagements // 2026</div>
+        <div class="badge">MBA-Driven Data Engineering</div>
         <h1>MARK RECIO, MBA</h1>
         <p class="executive-subtitle">Strategic Data Architect</p>
         <div class="cta-group">
-            <a href="#contact" class="btn btn-main">INITIATE_CONTACT</a>
-            <a href="https://www.linkedin.com/in/marecio" target="_blank" class="btn btn-linkedin">LINKEDIN_CONNECT</a>
+            <a href="https://markreciopro.github.io/Portfolio/" target="_blank" class="btn btn-main">VIEW_FULL_PORTFOLIO</a>
+            <a href="#contact" class="btn btn-outline">CONTACT_OFFICE</a>
         </div>
     </header>
 
@@ -211,33 +190,53 @@
             <img src="https://i.ibb.co/ZzCVqzH9/Gemini-Generated-Image-bn1v5kbn1v5kbn1v.png" alt="Console" class="base-img">
         </section>
 
-        <div class="tech-strip">
-            <div class="tech-container">
-                <span>PYTHON</span><span>R_PROG</span><span>SQL_SERVER</span><span>POWER_BI</span><span>TABLEAU</span><span>ADV_EXCEL</span>
+        <div class="grid-container">
+            <div class="info-card">
+                <h3 class="section-title">CORE_COMPETENCIES</h3>
+                <div style="margin-top: 10px;">
+                    <span class="skill-tag">Python (Pandas/NumPy)</span>
+                    <span class="skill-tag">SQL Server</span>
+                    <span class="skill-tag">R Programming</span>
+                    <span class="skill-tag">Power BI</span>
+                    <span class="skill-tag">Tableau</span>
+                    <span class="skill-tag">PVM Modeling</span>
+                    <span class="skill-tag">Financial Variance</span>
+                    <span class="skill-tag">Predictive Analytics</span>
+                    <span class="skill-tag">ETL Pipelines</span>
+                    <span class="skill-tag">Advanced Excel</span>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <h3 class="section-title">ACADEMIC_FOUNDATION</h3>
+                <div class="edu-item">
+                    <h4>Master of Business Administration (MBA)</h4>
+                    <p>Focus: Strategic Management & Finance</p>
+                </div>
+                <div class="edu-item">
+                    <h4>B.S. Business Administration</h4>
+                    <p>Data-Driven Operational Excellence</p>
+                </div>
+                <div class="edu-item">
+                    <h4 style="font-size: 0.9rem; opacity: 0.8;">Technical Certifications</h4>
+                    <p style="font-size: 0.75rem;">Data Science & Advanced BI Frameworks</p>
+                </div>
             </div>
         </div>
 
-        <section class="mission-card">
-            <p>I architect <span class="highlight">algorithmic intelligence</span> for high-stakes environments. From <span class="highlight">Gaming ROI</span> to <span class="highlight">Logistics Alpha</span>, I deploy Python, R, and SQL frameworks to protect margins via surgical PVM modeling and predictive analytics.</p>
-        </section>
-
-        <section class="contract-grid">
-            <div class="service-card">
-                <h3>Financial Alpha</h3>
-                <p>Developing automated Price-Volume-Mix models to audit margin integrity and protect profitability in real-time.</p>
-            </div>
-            <div class="service-card">
-                <h3>Human Capital Logic</h3>
-                <p>Architecting predictive attrition and productivity dashboards to optimize organizational labor throughput.</p>
-            </div>
-            <div class="service-card">
-                <h3>BI Infrastructure</h3>
-                <p>Designing full-stack reporting ecosystems that translate complex data lakes into executive clarity.</p>
-            </div>
-        </section>
+        <div class="info-card" style="margin-bottom: 60px;">
+            <h3 class="section-title">INDUSTRY_FOCUS</h3>
+            <p style="line-height: 1.8; color: #fff; font-weight: 300;">
+                My work bridges the gap between raw data engineering and executive strategy. By leveraging **MBA-level financial logic** with **Python and R**, I architect solutions for:
+                <br><br>
+                • <strong>Gaming & Hospitality:</strong> Yield optimization and player reinvestment ROI.<br>
+                • <strong>Logistics:</strong> Throughput variance and supply chain data integrity.<br>
+                • <strong>Strategic Finance:</strong> Automated PVM (Price-Volume-Mix) auditing.
+            </p>
+        </div>
 
         <section id="contact">
-            <h2>[INITIATE_CONTACT]</h2>
+            <h2 style="color: var(--accent-cyan); font-family: 'Fira Code'; text-align: center;">[INITIATE_CONTACT]</h2>
             <form action="https://formspree.io/f/mreaeden" method="POST">
                 <input type="text" name="name" required placeholder="Full Name">
                 <input type="email" name="_replyto" required placeholder="email@address.com">
@@ -248,31 +247,17 @@
     </main>
 
     <footer class="footer">
-        <p style="color: var(--accent-cyan); font-family: 'Fira Code'; font-weight: 700; font-size: 1.1rem; margin-bottom: 10px;">MAREC INSIGHTS | LAS VEGAS, NV</p>
+        <p style="color: var(--accent-cyan); font-family: 'Fira Code'; font-weight: 700;">MAREC INSIGHTS | LAS VEGAS, NV</p>
         <p>mar@marec.site | (702) 501-9385</p>
-        <div class="footer-links" style="margin: 20px 0;">
+        <div class="footer-links" style="margin-top: 15px;">
             <a href="https://www.linkedin.com/in/marecio" target="_blank">LinkedIn</a>
-            <a href="https://markreciopro.github.io/Portfolio/" target="_blank">Live Portfolio</a>
+            <a href="https://markreciopro.github.io/Portfolio/" target="_blank">Full Portfolio</a>
         </div>
-        <p style="font-size: 0.75rem; opacity: 0.4; margin-top: 30px;">© 2026 Mark Recio. Professional Data Strategy. <br>System Status: Operational // Logic: Enabled</p>
     </footer>
 
     <script>
         const stream = document.getElementById('codeStream');
-        const snippets = [
-            'SELECT * FROM data_lake',
-            'df.groupby("margin").mean()',
-            'ggplot(data, aes(x=pvm))',
-            'model.predict(attrition)',
-            'UPDATE finance_ledger',
-            'while roi < goal: iterate()',
-            'dplyr::filter(alpha > 1)',
-            'lambda x: x * capital_growth',
-            'CREATE VIEW exec_clarity',
-            'JOIN logistics_metrics',
-            'pip install strategic_logic'
-        ];
-
+        const snippets = ['SELECT * FROM datalake','df.pivot_table()','ggplot(data, aes(x=yield))','MBA_STRATEGY = TRUE','PVM_AUDIT: START','JOIN finance_metrics','lambda x: x.growth()'];
         function createSnippet() {
             const div = document.createElement('div');
             div.className = 'code-snippet';
@@ -283,8 +268,7 @@
             stream.appendChild(div);
             setTimeout(() => { div.remove(); }, parseFloat(duration) * 1000);
         }
-
-        setInterval(createSnippet, 850);
+        setInterval(createSnippet, 900);
     </script>
 </body>
 </html>
