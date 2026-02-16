@@ -70,7 +70,6 @@
             height: auto;
             image-rendering: pixelated; 
             transition: 0.3s ease-in-out;
-            filter: drop-shadow(0 0 5px rgba(0,0,0,0.5));
         }
 
         /* --- HERO & WORKSTATION --- */
@@ -107,7 +106,7 @@
             box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9); 
         }
         
-        header { text-align: center; padding: 20px 20px 60px 20px; }
+        header { text-align: center; padding: 20px 20px 40px 20px; }
         h1 { margin: 0; font-size: clamp(2.2rem, 8vw, 4rem); font-family: 'Fira Code', monospace; color: #fff; text-transform: uppercase; font-weight: 700; letter-spacing: -2px; }
         
         .job-title { 
@@ -142,25 +141,23 @@
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 15px;
+            gap: 12px;
             margin-bottom: 80px;
         }
         .tech-tag {
             background: #0d1117;
             border: 1px solid var(--border);
-            padding: 10px 20px;
-            border-radius: 50px;
+            padding: 8px 18px;
+            border-radius: 4px;
             font-family: 'Fira Code', monospace;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             color: var(--accent-cyan);
             transition: 0.3s;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
         .tech-tag:hover {
             border-color: var(--accent-green);
-            color: #fff;
-            transform: translateY(-3px);
-            box-shadow: 0 0 15px rgba(63, 185, 80, 0.4);
+            background: rgba(63, 185, 80, 0.1);
+            transform: translateY(-2px);
         }
 
         /* --- ROADMAP CARDS --- */
@@ -223,7 +220,7 @@
     <div class="container">
         <section class="exec-summary">
             <p>
-                MBA-educated <strong>Strategic Architect</strong> specializing in the intersection of Finance, Human Capital, and Operational Intelligence. I engineer surgical-grade business logic that transforms fragmented raw data into high-fidelity decision frameworks. By deploying automated <span class="tech-highlight">pipelines</span> and leveraging executive visualization, I architect advanced Price-Volume-Mix models that empower leadership to protect margins and drive organizational scalability.
+                MBA-educated <strong>Strategic Architect</strong> specializing in the intersection of Finance, Human Capital, and Operational Intelligence. I engineer surgical-grade business logic that transforms fragmented raw data into high-fidelity decision frameworks. By deploying automated pipelines via <span class="tech-highlight">Python, R Programming, and SQL</span>, and leveraging advanced executive visualization through <span class="tech-highlight">Microsoft Power BI, Tableau, and Advanced Excel</span>, I architect sophisticated Price-Volume-Mix models that empower leadership to protect margins and drive organizational scalability.
             </p>
         </section>
 
@@ -231,6 +228,7 @@
             <div class="tech-tag">PYTHON</div>
             <div class="tech-tag">R_PROGRAMMING</div>
             <div class="tech-tag">SQL_SERVER</div>
+            <div class="tech-tag">MICROSOFT_POWER_BI</div>
             <div class="tech-tag">TABLEAU</div>
             <div class="tech-tag">ADVANCED_EXCEL</div>
         </section>
