@@ -94,13 +94,14 @@
 
         .video-monitor { 
             position: absolute;
-            top: 14.0%; /* Moved up more to clear the bottom bezel */
-            width: 33.6%; 
+            top: 13.5%; /* Higher placement */
+            left: 50%;
+            transform: translateX(-50%) perspective(800px) rotateX(8deg); /* Centered horizontally with perspective */
+            width: 33.8%; 
             aspect-ratio: 16 / 10;
             background: #000;
             z-index: 10;
             overflow: hidden;
-            transform: perspective(800px) rotateX(8deg); 
             border-radius: 2px;
         }
         .video-monitor iframe { width: 100%; height: 100%; border: none; opacity: 0.95; }
