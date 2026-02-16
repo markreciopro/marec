@@ -2,167 +2,225 @@
 <html lang="en">
 <head>
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/markreciopro/marec/main/logo.png">
-    
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RWJXDQ05ET"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-RWJXDQ05ET');
-    </script>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MAREC Insights | Strategic Data Contractor | Mark Recio, MBA</title>
-    <meta name="description" content="Strategic Data Analytics Contractor specializing in PVM modeling, Finance, and HR analytics. Expert in Python, R, SQL, and Power BI.">
-
+    <title>MAREC Insights | Strategic Data Architect | Mark Recio, MBA</title>
+    
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --bg-dark: #0d1117; --bg-card: #161b22; --accent-cyan: #58a6ff;    
-            --accent-green: #3fb950; --text-main: #c9d1d9; --border: #30363d;
-            --executive-gold: #d4af37;
+            --bg-dark: #0d1117; 
+            --bg-card: rgba(22, 27, 34, 0.8); 
+            --accent-cyan: #58a6ff;    
+            --accent-green: #3fb950; 
+            --text-main: #c9d1d9; 
+            --border: #30363d;
         }
-        body { font-family: 'Inter', sans-serif; line-height: 1.6; color: var(--text-main); margin: 0; background-color: var(--bg-dark); scroll-behavior: smooth; }
-        
-        /* Executive Header */
-        header { text-align: center; padding: 80px 20px 40px 20px; max-width: 1000px; margin: auto; }
-        h1 { margin: 0; font-size: clamp(2.5rem, 8vw, 4rem); font-family: 'Fira Code', monospace; color: #fff; font-weight: 700; letter-spacing: -2px; }
-        .job-title { font-size: 1.6rem; color: var(--accent-cyan); margin: 10px 0; font-weight: 300; text-transform: uppercase; letter-spacing: 4px; }
-        .contract-badge { display: inline-block; padding: 5px 15px; background: rgba(63, 185, 80, 0.1); border: 1px solid var(--accent-green); color: var(--accent-green); border-radius: 20px; font-size: 0.8rem; font-weight: 700; margin-bottom: 20px; }
-        
-        /* Hero: The Workstation */
-        .hero-workstation { display: flex; flex-direction: column; align-items: center; max-width: 850px; margin: 20px auto 60px auto; padding: 0 20px; }
-        .video-monitor { width: 75%; aspect-ratio: 16 / 9; background: #000; border-radius: 8px; overflow: hidden; z-index: 10; border: 2px solid var(--border); box-shadow: 0 0 40px rgba(88, 166, 255, 0.2); margin-bottom: -45px; transform: perspective(1000px) rotateX(5deg); }
-        .video-monitor iframe { width: 100%; height: 100%; border: none; }
-        .laptop-base { width: 100%; line-height: 0; z-index: 5; }
-        .base-image { width: 100%; border-radius: 15px; border: 1px solid var(--border); box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8); }
 
+        body { 
+            font-family: 'Inter', sans-serif; 
+            line-height: 1.6; 
+            color: var(--text-main); 
+            margin: 0; 
+            background-color: var(--bg-dark); 
+            overflow-x: hidden;
+        }
+
+        /* --- BACKGROUND ANIMATION ENGINE --- */
+        .bg-animation {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at 50% 50%, #161b22 0%, #0d1117 100%);
+        }
+
+        .particle {
+            position: absolute;
+            background: var(--accent-cyan);
+            border-radius: 50%;
+            opacity: 0.3;
+            filter: blur(1px);
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) translateX(0); opacity: 0; }
+            50% { opacity: 0.3; }
+            100% { transform: translateY(-10vh) translateX(50px); opacity: 0; }
+        }
+
+        /* --- HERO & IDENTITY --- */
+        header { text-align: center; padding: 100px 20px 40px 20px; }
+        
+        .contract-badge {
+            display: inline-block;
+            padding: 6px 18px;
+            background: rgba(63, 185, 80, 0.1);
+            border: 1px solid var(--accent-green);
+            color: var(--accent-green);
+            border-radius: 4px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.8rem;
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+        }
+
+        h1 { margin: 0; font-size: clamp(2.5rem, 8vw, 4.5rem); font-family: 'Fira Code', monospace; color: #fff; font-weight: 700; letter-spacing: -2px; }
+        .job-title { font-size: 1.5rem; color: var(--accent-cyan); margin: 10px 0; font-weight: 300; text-transform: uppercase; letter-spacing: 5px; }
+
+        /* --- WORKSTATION VISUAL --- */
+        .workstation-container {
+            position: relative;
+            max-width: 850px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        .monitor-frame {
+            width: 75%; aspect-ratio: 16/9; background: #000; border-radius: 8px; margin: 0 auto -45px auto;
+            border: 2px solid var(--border); box-shadow: 0 0 50px rgba(88, 166, 255, 0.15);
+            position: relative; z-index: 10; transform: perspective(1000px) rotateX(4deg);
+            overflow: hidden;
+        }
+        .monitor-frame iframe { width: 100%; height: 100%; border: none; }
+        .laptop-base-img { width: 100%; border-radius: 12px; border: 1px solid var(--border); z-index: 5; position: relative; }
+
+        /* --- STRATEGIC TECH STACK --- */
+        .tech-stack-bar {
+            background: rgba(22, 27, 34, 0.9);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 25px 0;
+            margin: 60px 0;
+            backdrop-filter: blur(10px);
+        }
+        .tech-grid {
+            max-width: 1100px;
+            margin: auto;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            color: var(--accent-green);
+        }
+        .tech-item { margin: 10px 20px; font-weight: bold; }
+
+        /* --- VALUE PROPOSITION --- */
         .container { max-width: 1100px; margin: auto; padding: 0 20px; }
-
-        /* Executive Summary & Value Prop */
-        .value-prop { 
-            background: linear-gradient(135deg, #161b22 0%, #0d1117 100%); 
-            border: 1px solid var(--border); 
-            padding: 40px; 
-            border-radius: 12px; 
-            margin-bottom: 60px;
-            border-left: 5px solid var(--accent-cyan);
-        }
-        .value-prop h2 { font-family: 'Fira Code'; color: var(--accent-cyan); margin-top: 0; font-size: 0.9rem; text-transform: uppercase; }
-        .value-prop p { font-size: 1.2rem; line-height: 1.8; color: #fff; font-weight: 300; }
-
-        /* Tool Stack Bar */
-        .tool-stack { 
-            display: flex; justify-content: space-around; flex-wrap: wrap; 
-            background: #000; padding: 25px; border-radius: 8px; 
-            border: 1px solid var(--border); margin-bottom: 60px;
-            font-family: 'Fira Code', monospace; font-size: 0.9rem;
-        }
-        .tool-item { color: var(--accent-green); margin: 5px 15px; }
-
-        /* Contract Services Grid */
-        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-bottom: 80px; }
-        .service-card { background: var(--bg-card); padding: 35px; border-radius: 10px; border: 1px solid var(--border); transition: 0.3s; }
-        .service-card:hover { border-color: var(--accent-cyan); transform: translateY(-5px); }
-        .service-card h3 { color: #fff; margin-top: 0; font-size: 1.2rem; font-family: 'Fira Code'; }
-        .service-card p { font-size: 0.95rem; color: #8b949e; }
-        .service-card ul { padding-left: 20px; color: var(--accent-cyan); font-size: 0.9rem; }
-
-        /* CTA Buttons */
-        .cta-container { text-align: center; margin: 40px 0; }
-        .btn { display: inline-block; padding: 18px 35px; text-decoration: none; border-radius: 4px; font-weight: 700; transition: 0.3s; font-family: 'Fira Code', monospace; letter-spacing: 1px; }
-        .btn-primary { background: var(--accent-cyan); color: #0d1117; }
-        .btn-secondary { border: 1px solid var(--border); color: #fff; margin-left: 15px; }
-        .btn:hover { opacity: 0.9; transform: translateY(-2px); }
-
-        /* Footer */
-        .footer { text-align: center; padding: 100px 20px; border-top: 1px solid var(--border); opacity: 0.6; }
         
-        @media (max-width: 768px) { .video-monitor { width: 90%; } .btn-secondary { margin-left: 0; margin-top: 15px; width: 80%; } .btn-primary { width: 80%; } }
+        .value-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 50px;
+            border-radius: 16px;
+            margin-bottom: 80px;
+            backdrop-filter: blur(10px);
+        }
+        .value-card h2 { font-family: 'Fira Code'; color: var(--accent-cyan); margin-top: 0; font-size: 0.9rem; letter-spacing: 2px; }
+        .value-card p { font-size: 1.3rem; line-height: 1.8; color: #fff; font-weight: 300; }
+        .highlight { border-bottom: 2px solid var(--accent-green); }
+
+        /* --- CONTRACT SERVICES --- */
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-bottom: 100px; }
+        .service-box { 
+            background: var(--bg-card); padding: 40px; border-radius: 12px; border: 1px solid var(--border); 
+            transition: 0.3s; backdrop-filter: blur(5px);
+        }
+        .service-box:hover { border-color: var(--accent-cyan); transform: translateY(-5px); }
+        .service-box h3 { color: #fff; margin-top: 0; font-family: 'Fira Code'; font-size: 1.2rem; }
+        .service-box p { font-size: 0.95rem; color: #8b949e; }
+
+        /* --- CALL TO ACTION --- */
+        .btn { 
+            display: inline-block; padding: 18px 40px; border-radius: 4px; font-family: 'Fira Code', monospace; 
+            text-decoration: none; font-weight: 700; transition: 0.3s; cursor: pointer;
+        }
+        .btn-main { background: var(--accent-cyan); color: #0d1117; }
+        .btn-outline { border: 1px solid var(--border); color: #fff; margin-left: 15px; }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
+
+        .footer { text-align: center; padding: 100px 20px; border-top: 1px solid var(--border); opacity: 0.6; font-size: 0.8rem; }
+
+        @media (max-width: 768px) { .monitor-frame { width: 95%; } .btn-outline { margin-left: 0; margin-top: 15px; width: 80%; } .btn-main { width: 80%; } }
     </style>
 </head>
 <body>
 
-<header>
-    <div class="contract-badge">AVAILABLE FOR CONTRACT & ADVISORY</div>
-    <h1>MARK RECIO, MBA</h1>
-    <p class="job-title">Strategic Data Architect</p>
-    <div class="cta-container">
-        <a href="#contact" class="btn btn-primary">BOOK CONSULTATION</a>
-        <a href="https://markreciopro.github.io/Portfolio/" class="btn btn-secondary">EXPLORE CASE STUDIES</a>
-    </div>
-</header>
+    <div class="bg-animation" id="bg"></div>
 
-<main class="container">
-    <section class="hero-workstation">
-        <div class="video-monitor">
-            <iframe src="https://www.youtube.com/embed/qHwgrgWFl98?autoplay=1&mute=1&loop=1&playlist=qHwgrgWFl98&controls=0&modestbranding=1" allow="autoplay; encrypted-media"></iframe>
+    <header>
+        <div class="contract-badge">OPEN FOR STRATEGIC CONTRACTS // 2026</div>
+        <h1>MARK RECIO, MBA</h1>
+        <p class="job-title">Strategic Data Architect</p>
+        <div style="margin-top: 30px;">
+            <a href="mailto:mar@marec.site" class="btn btn-main">INITIATE CONSULTATION</a>
+            <a href="https://markreciopro.github.io/Portfolio/" class="btn btn-outline">PROJECT PORTFOLIO</a>
         </div>
-        <div class="laptop-base">
-            <img src="https://i.ibb.co/ZzCVqzH9/Gemini-Generated-Image-bn1v5kbn1v5kbn1v.png" alt="Mark Recio Workstation" class="base-image">
+    </header>
+
+    <main class="container">
+        <section class="workstation-container">
+            <div class="monitor-frame">
+                <iframe src="https://www.youtube.com/embed/qHwgrgWFl98?autoplay=1&mute=1&loop=1&playlist=qHwgrgWFl98&controls=0&modestbranding=1" allow="autoplay; encrypted-media"></iframe>
+            </div>
+            <img src="https://i.ibb.co/ZzCVqzH9/Gemini-Generated-Image-bn1v5kbn1v5kbn1v.png" alt="Executive Console" class="laptop-base-img">
+        </section>
+
+        <div class="tech-stack-bar">
+            <div class="tech-grid">
+                <span class="tech-item">PYTHON</span>
+                <span class="tech-item">R PROGRAMMING</span>
+                <span class="tech-item">SQL (PostgreSQL/T-SQL)</span>
+                <span class="tech-item">POWER BI</span>
+                <span class="tech-item">TABLEAU</span>
+                <span class="tech-item">ADVANCED EXCEL / VBA</span>
+            </div>
         </div>
-    </section>
 
-    <div class="tool-stack">
-        <span class="tool-item">PYTHON</span>
-        <span class="tool-item">R PROGRAMMING</span>
-        <span class="tool-item">SQL</span>
-        <span class="tool-item">MS POWER BI</span>
-        <span class="tool-item">TABLEAU</span>
-        <span class="tool-item">ADVANCED EXCEL</span>
-    </div>
+        <section class="value-card">
+            <h2>[ STRATEGIC_SUMMARY ]</h2>
+            <p>
+                I specialize in <span class="highlight">converting technical complexity into capital efficiency</span>. For executives and organizations requiring surgical precision in their data, I engineer custom frameworks in **Python, R, and SQL** to drive **Profitability, Operational Alpha, and Strategic Scalability**. I don't just "program"—I architect the decision-engines that power modern business logic.
+            </p>
+        </section>
 
-    <section class="value-prop">
-        <h2>[ Executive_Value_Statement ]</h2>
-        <p>
-            I provide organizations with **surgical-grade business logic** designed to drive capital efficiency and operational alpha. By bridging the gap between deep technical engineering and MBA-level strategy, I deliver high-impact contract solutions in **Finance, HR, and Operations**. I don't just visualize data—I architect the decision-engines that power growth.
-        </p>
-    </section>
+        <section class="services-grid">
+            <div class="service-box">
+                <h3>Financial Alpha</h3>
+                <p>Architecting PVM (Price-Volume-Mix) models and automated variance pipelines using Python and R to protect margin integrity and executive visibility.</p>
+            </div>
+            <div class="service-box">
+                <h3>Human Capital Logic</h3>
+                <p>Engineering predictive attrition models and labor productivity dashboards to mitigate flight-risk and optimize human capital ROI.</p>
+            </div>
+            <div class="service-box">
+                <h3>BI Infrastructure</h3>
+                <p>Building scalable, automated reporting ecosystems in Power BI and Tableau that translate raw data into surgical-grade business intelligence.</p>
+            </div>
+        </section>
+    </main>
 
-    <section class="services-grid">
-        <div class="service-card">
-            <h3>Financial Engineering</h3>
-            <p>Developing custom PVM (Price-Volume-Mix) models and automated variance pipelines to protect margin integrity and audit profitability at scale.</p>
-            <ul>
-                <li>Profitability Audits</li>
-                <li>Budget Automation</li>
-            </ul>
-        </div>
-        <div class="service-card">
-            <h3>People Analytics</h3>
-            <p>Using R and Python to engineer predictive attrition frameworks and labor productivity metrics that identify flight risks before they impact the bottom line.</p>
-            <ul>
-                <li>Retention Modeling</li>
-                <li>FTE Optimization</li>
-            </ul>
-        </div>
-        <div class="service-card">
-            <h3>BI Architecture</h3>
-            <p>Deploying executive-level dashboards in Power BI and Tableau, backed by robust SQL pipelines and automated Python data-cleaning workflows.</p>
-            <ul>
-                <li>Real-time Dashboards</li>
-                <li>Automated Reporting</li>
-            </ul>
-        </div>
-    </section>
+    <footer class="footer">
+        <p>MAREC INSIGHTS | LAS VEGAS, NV | © 2026</p>
+        <p style="font-family: 'Fira Code'; color: var(--accent-cyan);">System Status: Operational // Strategic Engine: ACTIVE</p>
+    </footer>
 
-    <section id="contact" style="max-width: 600px; margin: 0 auto 100px auto; background: var(--bg-card); padding: 40px; border-radius: 12px; border: 1px solid var(--border);">
-        <h2 style="text-align: center; font-family: 'Fira Code'; color: var(--accent-cyan);">[ INITIALIZE_CONTRACT ]</h2>
-        <form action="https://formspree.io/f/mreaeden" method="POST">
-            <input type="text" name="name" required placeholder="Organization / Full Name" style="width:100%; padding:15px; margin-bottom:15px; background:var(--bg-dark); border:1px solid var(--border); color:#fff; border-radius:4px;">
-            <input type="email" name="email" required placeholder="Executive Email" style="width:100%; padding:15px; margin-bottom:15px; background:var(--bg-dark); border:1px solid var(--border); color:#fff; border-radius:4px;">
-            <textarea name="message" rows="4" placeholder="Briefly describe the business objective or contract scope..." style="width:100%; padding:15px; margin-bottom:15px; background:var(--bg-dark); border:1px solid var(--border); color:#fff; border-radius:4px;"></textarea>
-            <button type="submit" class="btn btn-primary" style="width:100%; border:none;">TRANSMIT INQUIRY</button>
-        </form>
-    </section>
-</main>
-
-<footer class="footer">
-    <p>MAREC INSIGHTS | LAS VEGAS, NV | © 2026</p>
-    <p style="font-family: 'Fira Code'; font-size: 0.8rem; margin-top: 10px;">Strategic Engine: OPTIMAL // Data Integrity: ACTIVE</p>
-</footer>
-
+    <script>
+        // Simple JavaScript to generate random background particles
+        const bg = document.getElementById('bg');
+        for (let i = 0; i < 30; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            const size = Math.random() * 4 + 'px';
+            particle.style.width = size;
+            particle.style.height = size;
+            particle.style.left = Math.random() * 100 + 'vw';
+            particle.style.top = Math.random() * 100 + 'vh';
+            particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            particle.style.animationDelay = (Math.random() * 5) + 's';
+            bg.appendChild(particle);
+        }
+    </script>
 </body>
 </html>
