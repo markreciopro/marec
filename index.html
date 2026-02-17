@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MAREC Insights | Strategic Analytics Portfolio</title>
+    <title>MAREC Insights | Mark Recio, MBA</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;700&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
     
@@ -24,6 +24,7 @@
             --pill-bg: rgba(88, 166, 255, 0.1);
         }
 
+        /* --- CUSTOM SCROLLBAR --- */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: var(--bg-dark); }
         ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
@@ -39,7 +40,7 @@
             scroll-behavior: smooth;
         }
 
-        /* --- BACKGROUND DATA STREAM --- */
+        /* --- DATA STREAM BACKGROUND --- */
         #codeStream {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -51,7 +52,7 @@
             font-family: 'Fira Code', monospace;
             font-size: 0.7rem;
             color: var(--accent-cyan);
-            opacity: 0.08;
+            opacity: 0.1;
             white-space: nowrap;
             pointer-events: none;
             animation: flow var(--duration) linear infinite;
@@ -63,44 +64,34 @@
             100% { transform: translateY(-10vh); opacity: 0; }
         }
 
-        /* --- REFINED NAVIGATION & LOGO --- */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(13, 17, 23, 0.95);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border);
+        /* --- LOGO REFINED --- */
+        .top-left-brand {
+            position: fixed; /* Fixed so it stays readable while scrolling */
+            top: 20px;
+            left: 20px;
             z-index: 1000;
-            padding: 12px 0;
-        }
-        .nav-container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .logo-link {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
+            background: rgba(13, 17, 23, 0.8); /* Slight backdrop for readability */
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(4px);
         }
         .pixel-logo { 
-            height: 42px; /* Precision scaling for readability */
-            width: auto; 
-            transition: transform 0.3s ease;
+            width: 140px; /* Scaled down for professional look */
+            height: auto; 
+            image-rendering: pixelated; 
+            display: block;
+            transition: transform 0.2s ease;
         }
-        .logo-link:hover .pixel-logo { transform: scale(1.02); }
+        .pixel-logo:hover { transform: scale(1.02); }
 
-        /* --- HERO SECTION --- */
+        /* --- HERO & WORKSTATION --- */
         .hero-workstation { 
             display: flex; 
             flex-direction: column; 
             align-items: center; 
-            max-width: 900px; 
-            margin: 140px auto 40px auto; 
+            max-width: 950px; 
+            margin: 120px auto 20px auto; 
             padding: 0 20px; 
             position: relative;
         }
@@ -115,69 +106,57 @@
             z-index: 10;
             overflow: hidden;
             border-radius: 1px;
-            box-shadow: 0 0 30px rgba(88, 166, 255, 0.15); 
+            box-shadow: 0 0 25px rgba(88, 166, 255, 0.2); 
         }
         .video-monitor iframe { width: 100%; height: 100%; border: none; }
         .laptop-base { width: 100%; line-height: 0; z-index: 5; position: relative; }
-        .base-image { width: 100%; border-radius: 12px; border: 1px solid var(--border); filter: drop-shadow(0 20px 50px rgba(0,0,0,0.8)); }
+        .base-image { width: 100%; border-radius: 12px; border: 1px solid var(--border); box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9); }
         
-        header { text-align: center; padding: 0 20px 60px 20px; }
-        h1 { margin: 0; font-size: clamp(2rem, 6vw, 3.5rem); font-family: 'Fira Code', monospace; color: #fff; font-weight: 700; letter-spacing: -1px; }
-        .job-title { font-size: 1rem; color: var(--accent-cyan); margin: 15px 0; font-family: 'Fira Code', monospace; text-transform: uppercase; letter-spacing: 4px; min-height: 1.5em;}
+        header { text-align: center; padding: 20px 20px 40px 20px; }
+        h1 { margin: 0; font-size: clamp(2.2rem, 8vw, 4rem); font-family: 'Fira Code', monospace; color: #fff; text-transform: uppercase; font-weight: 700; letter-spacing: -2px; }
+        .job-title { font-size: 1.2rem; color: var(--accent-cyan); margin: 10px 0; font-family: 'Fira Code', monospace; text-transform: uppercase; letter-spacing: 5px; min-height: 1.5em;}
 
         .container { max-width: 1100px; margin: auto; padding: 0 20px; }
 
-        /* --- PROFESSIONAL CARDS --- */
+        /* --- SECTION CARDS --- */
         .section-card {
             background: var(--bg-card);
             padding: 40px;
             border: 1px solid var(--border);
-            border-radius: 10px;
+            border-radius: 8px;
             margin-bottom: 30px;
-            transition: transform 0.3s ease, border-color 0.3s ease;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
         }
-        .section-card:hover { 
-            border-color: var(--accent-cyan);
-            transform: translateY(-2px);
-        }
+        .section-card:hover { border-color: var(--accent-cyan); }
+        .project-grid, .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-bottom: 60px; }
         
-        h2.section-title { font-family: 'Fira Code'; color: var(--accent-cyan); text-transform: uppercase; font-size: 1.3rem; margin: 60px 0 30px 0; border-bottom: 1px solid var(--border); padding-bottom: 10px;}
-
-        /* --- GRID LAYOUTS --- */
-        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-bottom: 40px; }
-
-        .competency-item { border-left: 2px solid var(--border); padding-left: 20px; margin-bottom: 20px; }
-        .competency-item h4 { color: var(--accent-green); margin: 0 0 10px 0; font-family: 'Fira Code'; font-size: 0.95rem; }
-        .competency-item p { font-size: 0.85rem; color: #8b949e; margin: 0; }
+        h2.section-title { font-family: 'Fira Code'; color: var(--accent-cyan); text-transform: uppercase; font-size: 1.5rem; margin-bottom: 30px; border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-top: 60px;}
 
         /* --- STACK TAGS --- */
-        .stack-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 20px 0; }
+        .stack-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 15px 0 25px 0; }
         .mini-tag { 
             font-family: 'Fira Code', monospace; 
             font-size: 0.65rem; 
-            padding: 5px 12px; 
+            padding: 4px 10px; 
             background: var(--pill-bg); 
             color: var(--accent-cyan); 
-            border: 1px solid rgba(88, 166, 255, 0.2);
-            border-radius: 20px;
+            border: 1px solid rgba(88, 166, 255, 0.3);
+            border-radius: 4px;
         }
 
         /* --- BUTTONS --- */
-        .btn { display: inline-block; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: 600; transition: 0.3s; font-family: 'Fira Code', monospace; font-size: 0.75rem; text-transform: uppercase; cursor: pointer; text-align: center;}
-        .btn-cta { background: var(--accent-cyan); color: #0d1117; border: none; }
-        .btn-cta:hover { background: #79c0ff; }
-        .btn-outline { border: 1px solid var(--border); color: var(--text-main); background: transparent; }
-        .btn-outline:hover { border-color: var(--accent-cyan); color: var(--accent-cyan); }
+        .btn { display: inline-block; padding: 14px 28px; text-decoration: none; border-radius: 4px; font-weight: 700; transition: 0.3s; font-family: 'Fira Code', monospace; font-size: 0.75rem; text-transform: uppercase; border: none; cursor: pointer; text-align: center;}
+        .btn-cta { background: var(--accent-cyan); color: #0d1117; }
+        .btn-outline { border: 1px solid var(--accent-cyan); color: var(--accent-cyan); background: transparent; }
+        .btn-outline:hover { background: var(--accent-cyan); color: #0d1117; }
 
-        /* --- CONTACT --- */
-        #contact { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin: 80px auto; padding: 50px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; }
-        input, textarea { width: 100%; padding: 14px; background: var(--bg-dark); border: 1px solid var(--border); color: white; border-radius: 6px; margin-bottom: 15px; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-
-        .footer { text-align: center; padding: 60px 20px; color: #8b949e; font-size: 0.8rem; border-top: 1px solid var(--border); background: #010409; }
+        .footer { text-align: center; padding: 80px 20px; background: #010409; color: #8b949e; border-top: 1px solid var(--border); }
 
         @media (max-width: 850px) { 
-            #contact { grid-template-columns: 1fr; padding: 30px; }
             .video-monitor { display: none; }
+            .top-left-brand { width: 110px; }
         }
     </style>
 </head>
@@ -185,16 +164,11 @@
 
 <div id="codeStream"></div>
 
-<nav>
-    <div class="nav-container">
-        <a href="https://marec.site" class="logo-link">
-            <img src="https://raw.githubusercontent.com/markreciopro/marec/main/logo.png" class="pixel-logo" alt="MAREC INSIGHTS">
-        </a>
-        <div class="nav-links">
-            <a href="https://www.linkedin.com/in/marecio" target="_blank" class="btn btn-outline" style="padding: 8px 16px; font-size: 0.65rem;">LinkedIn</a>
-        </div>
-    </div>
-</nav>
+<div class="top-left-brand">
+    <a href="https://marec.site">
+        <img src="https://raw.githubusercontent.com/markreciopro/marec/main/logo.png" class="pixel-logo" alt="MAREC INSIGHTS">
+    </a>
+</div>
 
 <main>
     <section class="hero-workstation">
@@ -202,88 +176,73 @@
             <iframe src="https://www.youtube.com/embed/qHwgrgWFl98?autoplay=1&mute=1&loop=1&playlist=qHwgrgWFl98&controls=0&modestbranding=1" allow="autoplay; encrypted-media"></iframe>
         </div>
         <div class="laptop-base">
-            <img src="https://i.ibb.co/ZzCVqzH9/Gemini-Generated-Image-bn1v5kbn1v5kbn1v.png" alt="Operational Console" class="base-image">
+            <img src="https://i.ibb.co/ZzCVqzH9/Gemini-Generated-Image-bn1v5kbn1v5kbn1v.png" alt="Console" class="base-image">
         </div>
     </section>
 
     <header>
-        <h1>MARK RECIO, MBA</h1>
+        <h1>MARK_RECIO, MBA</h1>
         <div class="job-title" id="typewriter"></div>
-        <div style="margin-top: 10px;">
-            <a href="https://github.com/markreciopro/marec/raw/main/MAREC.Flyer.pdf" target="_blank" class="btn btn-cta">Professional Profile (PDF)</a>
+        <div style="margin-top: 30px;">
+            <a href="https://www.linkedin.com/in/marecio" target="_blank" class="btn btn-cta">LINKEDIN_CONNECT</a>
+            <a href="https://github.com/markreciopro/marec/raw/main/MAREC.Flyer.pdf" target="_blank" class="btn btn-outline" style="border-color: var(--secondary); color: var(--secondary);">VIEW.PROFILE(PDF)</a>
         </div>
     </header>
 
     <div class="container">
-        <section class="section-card" style="border-left: 4px solid var(--accent-green);">
-            <p style="font-size: 1.2rem; line-height: 1.8; margin:0; font-weight: 300;">
-                Deploying high-fidelity analytics to solve complex business problems. I bridge <strong>Strategic MBA Decision-Making</strong> with technical execution in <span style="color:var(--accent-cyan)">Python, R Programming, and SQL</span> to optimize operational margins and protect long-term fiscal scalability.
+        <section class="section-card" style="border-left: 5px solid var(--accent-green);">
+            <p style="font-size: 1.25rem; line-height: 1.8; margin:0;">
+                MBA-educated <strong>Strategic Architect</strong> engineering surgical-grade business logic. I specialize in bridging financial modeling with technical execution, utilizing <span style="color:var(--accent-green)">Python, R Programming, and SQL</span> to engineer high-fidelity frameworks that optimize margins and protect organizational scalability.
             </p>
         </section>
 
-        <h2 class="section-title">MBA Core Competencies</h2>
-        <div class="section-card">
-            <div class="grid-3">
-                <div class="competency-item">
-                    <h4>Supply Chain Optimization</h4>
-                    <p>Streamlining logistical throughput via data-driven inventory management and bottleneck identification.</p>
+        <h2 class="section-title">Featured Projects</h2>
+        <div class="project-grid">
+            <div class="section-card" style="border-top: 4px solid var(--accent-r-blue); box-shadow: inset 0 0 15px rgba(39, 109, 195, 0.1);">
+                <img src="https://i.ibb.co/ZpWFC90X/Gemini-Generated-Image-cdrvdtcdrvdtcdrv.png" style="height: 35px; width: auto; align-self: flex-start; margin-bottom: 15px;" />
+                <h3 style="color:var(--accent-r-blue); margin-top:0;">AFM 2024: Financial & Logistical Optimization</h3>
+                <p style="font-size: 0.85rem; color:#8b949e; flex-grow: 1;">A multi-vector analysis utilizing <strong>R Programming</strong> to identify logistical bottlenecks and financial variance. This framework translates complex data into executive-level insights for operational cost reduction.</p>
+                <div class="stack-row">
+                    <span class="mini-tag">R Programming</span><span class="mini-tag">Variance Analysis</span><span class="mini-tag">Logistics Optimization</span>
                 </div>
-                <div class="competency-item">
-                    <h4>Corporate Finance & Strategy</h4>
-                    <p>Advanced variance analysis and capital budgeting to ensure maximum ROI on operational expenditures.</p>
+                <a href="https://www.canva.com/design/DAHBiAW48lQ/-_YGokTij4xwl-IOQyTqYQ/view" target="_blank" class="btn btn-outline" style="border-color:var(--accent-r-blue); color:var(--accent-r-blue);">View Case Study</a>
+            </div>
+
+            <div class="section-card" style="border-top: 4px solid var(--accent-gold);">
+                <img src="https://i.ibb.co/ZpWFC90X/Gemini-Generated-Image-cdrvdtcdrvdtcdrv.png" style="height: 35px; width: auto; align-self: flex-start; margin-bottom: 15px;" />
+                <h3 style="color:var(--accent-gold); margin-top:0;">Python: Avoxi Billing Analysis</h3>
+                <p style="font-size: 0.85rem; color:#8b949e; flex-grow: 1;">Financial insight solution identifying revenue leakage using Python/Pandas.</p>
+                <div class="stack-row">
+                    <span class="mini-tag">Python</span><span class="mini-tag">Pandas</span><span class="mini-tag">Seaborn</span>
                 </div>
-                <div class="competency-item">
-                    <h4>Organizational Leadership</h4>
-                    <p>Leveraging HR analytics and talent intelligence to build scalable, high-performance operational teams.</p>
+                <a href="https://www.canva.com/design/DAG2oSq-RU8/Rab_1KlUjw-md_9wp7vcoA/view" target="_blank" class="btn btn-outline" style="border-color:var(--accent-gold); color:var(--accent-gold);">View Presentation</a>
+            </div>
+
+            <div class="section-card" style="border-top: 4px solid var(--accent-cyan);">
+                <img src="https://i.ibb.co/ZpWFC90X/Gemini-Generated-Image-cdrvdtcdrvdtcdrv.png" style="height: 35px; width: auto; align-self: flex-start; margin-bottom: 15px;" />
+                <h3 style="color:var(--accent-cyan); margin-top:0;">Power BI Dashboard</h3>
+                <p style="font-size: 0.85rem; color:#8b949e; flex-grow: 1;">Dynamic multi-source integration for real-time decision tracking.</p>
+                <div class="stack-row">
+                    <span class="mini-tag">Power BI</span><span class="mini-tag">SQL</span><span class="mini-tag">DAX</span>
                 </div>
+                <a href="https://www.canva.com/design/DAGxAueHJUU/LQQDcIK9_2qK8kzVdojmkg/edit" target="_blank" class="btn btn-outline">Launch Dashboard</a>
             </div>
         </div>
 
-        <h2 class="section-title">Strategic Implementations</h2>
-        <div class="grid-3">
-            <div class="section-card" style="border-top: 3px solid var(--accent-r-blue);">
-                <h3 style="color:var(--accent-r-blue); margin-top:0; font-size: 1.1rem;">AFM 2024: Financial & Logistical Analysis</h3>
-                <p style="font-size: 0.85rem; color:#8b949e; flex-grow: 1;">A technical deep-dive using <strong>R Programming</strong> to synchronize financial reporting with logistical operations, identifying surgical cost-reduction opportunities.</p>
-                <div class="stack-row">
-                    <span class="mini-tag">R Programming</span><span class="mini-tag">Logistics</span><span class="mini-tag">MBA Strategy</span>
-                </div>
-                <a href="https://www.canva.com/design/DAHBiAW48lQ/-_YGokTij4xwl-IOQyTqYQ/view" target="_blank" class="btn btn-outline" style="width: 100%; box-sizing: border-box;">View Analysis</a>
-            </div>
-
-            <div class="section-card" style="border-top: 3px solid var(--accent-gold);">
-                <h3 style="color:var(--accent-gold); margin-top:0; font-size: 1.1rem;">Revenue Assurance Automation</h3>
-                <p style="font-size: 0.85rem; color:#8b949e; flex-grow: 1;">Automating billing integrity for Avoxi using <strong>Python</strong>, significantly reducing revenue leakage through algorithmic anomaly detection.</p>
-                <div class="stack-row">
-                    <span class="mini-tag">Python</span><span class="mini-tag">Pandas</span><span class="mini-tag">Fiscal Control</span>
-                </div>
-                <a href="https://www.canva.com/design/DAG2oSq-RU8/Rab_1KlUjw-md_9wp7vcoA/view" target="_blank" class="btn btn-outline" style="width: 100%; box-sizing: border-box;">View Report</a>
-            </div>
-
-            <div class="section-card" style="border-top: 3px solid var(--accent-cyan);">
-                <h3 style="color:var(--accent-cyan); margin-top:0; font-size: 1.1rem;">Executive KPI Dashboard</h3>
-                <p style="font-size: 0.85rem; color:#8b949e; flex-grow: 1;">Architecting high-fidelity Power BI environments to provide leadership with real-time visibility into organizational performance metrics.</p>
-                <div class="stack-row">
-                    <span class="mini-tag">Power BI</span><span class="mini-tag">SQL</span><span class="mini-tag">Business Intel</span>
-                </div>
-                <a href="https://www.canva.com/design/DAGxAueHJUU/LQQDcIK9_2qK8kzVdojmkg/edit" target="_blank" class="btn btn-outline" style="width: 100%; box-sizing: border-box;">Launch Dashboard</a>
-            </div>
-        </div>
-
-        <div id="contact">
+        <div id="contact" style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin: 100px auto; padding: 60px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px;">
             <div class="contact-info">
-                <h3 style="color:var(--accent-cyan); margin-top: 0;">Strategic Consultation</h3>
-                <p style="font-size: 0.9rem; color: #8b949e;">Ready to deploy MBA-level analytics for your organization.</p>
-                <ul style="list-style: none; padding: 0; font-family: 'Fira Code', monospace; font-size: 0.8rem;">
-                    <li style="margin-bottom: 12px;"><span style="color:var(--accent-green)">EMAIL:</span> <a href="mailto:mar@marec.site" style="color:var(--text-main); text-decoration:none;">mar@marec.site</a></li>
-                    <li><span style="color:var(--accent-green)">LOC:</span> Las Vegas, NV</li>
+                <h3 style="color:var(--accent-cyan);">[STRATEGIC_INTEL]</h3>
+                <p>Ready to deploy high-fidelity data solutions for your organization.</p>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="margin-bottom: 10px;"><span>EMAIL:</span> <a href="mailto:mar@marec.site" style="color:var(--text-main); text-decoration:none;">mar@marec.site</a></li>
+                    <li style="margin-bottom: 10px;"><span>LINKEDIN:</span> <a href="https://www.linkedin.com/in/marecio" style="color:var(--text-main); text-decoration:none;">in/marecio</a></li>
                 </ul>
             </div>
             <div class="contact-form">
                 <form action="https://formspree.io/f/mreaeden" method="POST">
-                    <input type="text" name="name" placeholder="Name" required>
-                    <input type="email" name="email" placeholder="Email" required>
-                    <textarea name="message" placeholder="Inquiry details..." required></textarea>
-                    <button type="submit" class="btn btn-cta" style="width: 100%;">Send Message</button>
+                    <input type="text" name="name" placeholder="Name" required style="width:100%; padding:10px; margin-bottom:10px; background:#0d1117; border:1px solid #30363d; color:white;">
+                    <textarea name="message" placeholder="Project Details" required style="width:100%; padding:10px; height:100px; margin-bottom:10px; background:#0d1117; border:1px solid #30363d; color:white;"></textarea>
+                    <button type="submit" class="btn btn-cta" style="width: 100%;">SEND.MESSAGE()</button>
                 </form>
             </div>
         </div>
@@ -295,29 +254,29 @@
 </footer>
 
 <script>
-    const text = "Strategic Business Architect";
+    const text = "Strategic Data Architect";
     let i = 0;
     function typeWriter() {
         if (i < text.length) {
             document.getElementById("typewriter").innerHTML += text.charAt(i);
             i++;
-            setTimeout(typeWriter, 80);
+            setTimeout(typeWriter, 100);
         }
     }
     window.onload = typeWriter;
 
     const stream = document.getElementById('codeStream');
-    const snippets = ['STRATEGY.DEPLOY()','MBA.ARCHITECT','SYSTEMS.OPTIMIZED'];
+    const snippets = ['SELECT * FROM data','df.optimize()','PVM_ANALYSIS: OK','R_MODEL: READY'];
     function createSnippet() {
         const div = document.createElement('div');
         div.className = 'code-snippet';
         div.innerText = snippets[Math.floor(Math.random() * snippets.length)];
         div.style.left = Math.random() * 95 + 'vw';
-        div.style.setProperty('--duration', (Math.random() * 8 + 12) + 's');
+        div.style.setProperty('--duration', (Math.random() * 5 + 10) + 's');
         stream.appendChild(div);
-        setTimeout(() => div.remove(), 20000);
+        setTimeout(() => div.remove(), 15000);
     }
-    setInterval(createSnippet, 2000);
+    setInterval(createSnippet, 1600);
 </script>
 
 </body>
