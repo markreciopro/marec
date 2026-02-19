@@ -158,6 +158,24 @@
             flex-direction: column;
         }
         .section-card:hover { border-color: var(--accent-cyan); }
+        
+        /* --- ELEVATOR PITCH SPECIAL STYLING --- */
+        .pitch-block {
+            border-left: 5px solid var(--accent-green);
+            background: linear-gradient(135deg, rgba(22, 27, 34, 1) 0%, rgba(13, 17, 23, 1) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .pitch-tag {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.7rem;
+            color: var(--accent-cyan);
+            margin-bottom: 15px;
+            display: block;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
         .project-grid, .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-bottom: 60px; }
         
         h2.section-title { font-family: 'Fira Code'; color: var(--accent-cyan); text-transform: uppercase; font-size: 1.5rem; margin-bottom: 30px; border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-top: 60px;}
@@ -238,10 +256,33 @@
     </header>
 
     <div class="container">
-        <section class="section-card" style="border-left: 5px solid var(--accent-green);">
-            <p style="font-size: 1.25rem; line-height: 1.8; margin:0;">
-                MBA-educated <strong>Strategic Architect</strong> engineering surgical-grade business logic. I transform fragmented data into high-fidelity decision frameworks using <span style="color:var(--accent-green)">Python, R Programming, SQL, Power BI, Tableau, Advance Excel</span> to protect margins and drive organizational scalability.
+        
+        <section class="section-card pitch-block">
+            <span class="pitch-tag">[SYSTEM_VALUATION_SUMMARY]</span>
+            <h2 style="color: #fff; font-family: 'Fira Code', monospace; margin-top: 0; font-size: 1.7rem; line-height: 1.3;">
+                Drowning in data, yet starving for answers? <br>
+                <span style="color: var(--accent-green);">I build the logic that bridges the gap.</span>
+            </h2>
+            <p style="font-size: 1.2rem; line-height: 1.8; margin: 15px 0;">
+                As a <strong>Strategic Architect</strong>, I don't just "analyze" data—I engineer high-fidelity decision frameworks. 
+                Leveraging my <strong>MBA background</strong> and technical precision in <span style="color:var(--accent-green)">Python, R, SQL, and BI tools</span>, 
+                I transform fragmented datasets into surgical business logic that protects margins and drives organizational scalability.
             </p>
+            <div style="display: flex; gap: 40px; margin-top: 20px; border-top: 1px solid var(--border); padding-top: 25px;">
+                <div>
+                    <span style="display: block; color: var(--accent-green); font-weight: bold; font-family: 'Fira Code';">STRATEGY</span>
+                    <span style="font-size: 0.7rem; color: #8b949e; text-transform: uppercase;">MBA Insight</span>
+                </div>
+                <div>
+                    <span style="display: block; color: var(--accent-green); font-weight: bold; font-family: 'Fira Code';">PRECISION</span>
+                    <span style="font-size: 0.7rem; color: #8b949e; text-transform: uppercase;">Technical Logic</span>
+                </div>
+                <div>
+                    <span style="display: block; color: var(--accent-green); font-weight: bold; font-family: 'Fira Code';">IMPACT</span>
+                    <span style="font-size: 0.7rem; color: #8b949e; text-transform: uppercase;">Scalable ROI</span>
+                </div>
+            </div>
+            <span class="pitch-tag" style="text-align: right; margin-top: 20px; margin-bottom: 0;">[STATUS: READY_FOR_DEPLOYMENT]</span>
         </section>
 
         <h2 class="section-title">Strategic Service Offerings</h2>
@@ -283,11 +324,11 @@
                 <div class="stack-row">
                     <span class="mini-tag">R Programming</span><span class="mini-tag">Financial Analysis</span><span class="mini-tag">Logistics</span>
                 </div>
-                <a href="https://www.canva.com/design/DAHBiAW48lQ/-_YGokTij4xwl-IOQyTqYQ/view?utm_content=DAHBiAW48lQ&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h3efe6a1bf1" target="_blank" class="btn btn-outline" style="border-color:var(--accent-r-blue); color:var(--accent-r-blue);">View Presentation</a>
+                <a href="https://www.canva.com/design/DAHBiAW48lQ/-_YGokTij4xwl-IOQyTqYQ/view" target="_blank" class="btn btn-outline" style="border-color:var(--accent-r-blue); color:var(--accent-r-blue);">View Presentation</a>
             </div>
 
             <div class="section-card" style="border-top: 4px solid var(--accent-gold);">
-               <h3 style="color:var(--accent-gold); margin-top:0;">Python: Avoxi Billing Analysis</h3>
+                <h3 style="color:var(--accent-gold); margin-top:0;">Python: Avoxi Billing Analysis</h3>
                 <p style="font-size: 0.85rem; color:#8b949e; flex-grow: 1;">Financial insight solution identifying revenue leakage using Python/Pandas.</p>
                 <div class="stack-row">
                     <span class="mini-tag">Python</span><span class="mini-tag">Pandas</span><span class="mini-tag">Seaborn</span>
@@ -354,7 +395,7 @@
 </footer>
 
 <script>
-    /* TYPEWRITER UPDATED TO MATCH OPTION A */
+    /* TYPEWRITER UPDATED */
     const text = "BI Specialist | Data Analyst";
     let i = 0;
     function typeWriter() {
