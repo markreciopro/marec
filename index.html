@@ -1,14 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>Data Analyst & Business Intelligence Specialist | Mark Recio</title>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="title" content="Data Analyst & Business Intelligence Specialist | Mark Recio">
+    <meta name="description" content="Mark Recio is a Business Intelligence Specialist and Strategic Data Analyst. MBA-educated expert in SQL, Python, Power BI, and Predictive Attrition modeling.">
+    <meta name="keywords" content="Data Analyst, Business Intelligence, SQL, Python, Power BI, MBA, Las Vegas, Mark Recio, Strategic Analyst">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://marec.site/">
+    <meta property="og:title" content="Data Analyst & Business Intelligence Specialist | Mark Recio">
+    <meta property="og:description" content="Bridging MBA-level strategy with technical data precision. Explore my portfolio of SQL, Python, and BI projects.">
+
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/markreciopro/marec/main/logo.png">
     <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/markreciopro/marec/main/logo.png">
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MAREC Insights | Mark Recio, MBA</title>
-    
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;700&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Mark Recio",
+      "url": "https://marec.site",
+      "jobTitle": "Data Analyst & Business Intelligence Specialist",
+      "alumniOf": {
+        "@type": "Organization",
+        "name": "MBA"
+      },
+      "knowsAbout": ["Business Intelligence", "SQL", "Python", "Tableau", "Power BI", "PVM Modeling"],
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Las Vegas",
+        "addressRegion": "NV"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/marecio",
+        "https://github.com/markreciopro"
+      ]
+    }
+    </script>
     
     <style>
         :root {
@@ -64,30 +97,21 @@
             100% { transform: translateY(-10vh); opacity: 0; }
         }
 
-        /* --- LOGO: REFINED & STATIC --- */
+        /* --- LOGO --- */
         .top-left-brand {
-            position: fixed; 
-            top: 25px;
-            left: 25px;
-            z-index: 1000;
-            background: rgba(13, 17, 23, 0.9); 
-            padding: 10px 14px;
-            border-radius: 4px;
-            border: 1px solid var(--border);
-            backdrop-filter: blur(8px);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            z-index: 100;
         }
         .pixel-logo { 
-            width: 105px; 
+            width: 140px; 
             height: auto; 
-            /* Multi-browser support for sharp pixel art */
-            image-rendering: -webkit-optimize-contrast;
-            image-rendering: crisp-edges;
             image-rendering: pixelated; 
-            display: block;
-            /* Animation/Transition REMOVED to keep it static */
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+            transition: transform 0.3s ease;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5));
         }
+        .pixel-logo:hover { transform: scale(1.05); }
 
         /* --- HERO & WORKSTATION --- */
         .hero-workstation { 
@@ -138,7 +162,7 @@
         
         h2.section-title { font-family: 'Fira Code'; color: var(--accent-cyan); text-transform: uppercase; font-size: 1.5rem; margin-bottom: 30px; border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-top: 60px;}
 
-        /* --- SERVICES --- */
+        /* --- SERVICES SPECIFIC --- */
         .service-item h3 { color: var(--accent-cyan); font-family: 'Fira Code'; font-size: 1.1rem; margin-top: 0; }
         .service-item ul { padding-left: 20px; font-size: 0.85rem; color: #8b949e; }
         .service-item ul li { margin-bottom: 8px; }
@@ -181,7 +205,6 @@
         @media (max-width: 850px) { 
             #contact { grid-template-columns: 1fr; padding: 30px; }
             .video-monitor { display: none; }
-            .top-left-brand { position: absolute; top: 15px; left: 15px; } 
         }
     </style>
 </head>
@@ -282,7 +305,7 @@
             </div>
 
             <div class="section-card" style="border-top: 4px solid var(--accent-green);">
-                <h3 style="color:var(--accent-green); margin-top:0;">HR Tech Recruiting Solution</h3>
+                <h3 style="color:var(--accent-green); margin-top:0;">HR Tec Recruiting Solution</h3>
                 <p style="font-size: 0.85rem; color:#8b949e; flex-grow: 1;">Automated parsing and attrition forecasting for skilled talent acquisition.</p>
                 <div class="stack-row">
                     <span class="mini-tag">Python</span><span class="mini-tag">NLP</span><span class="mini-tag">HR-Tech</span>
@@ -331,7 +354,8 @@
 </footer>
 
 <script>
-    const text = "Strategic Data Architect";
+    /* TYPEWRITER UPDATED TO MATCH OPTION A */
+    const text = "BI Specialist | Data Analyst";
     let i = 0;
     function typeWriter() {
         if (i < text.length) {
@@ -343,7 +367,7 @@
     window.onload = typeWriter;
 
     const stream = document.getElementById('codeStream');
-    const snippets = ['SELECT * FROM data','df.optimize()','PVM_ANALYSIS: OK','MBA_LOGIC: TRUE','HR_TECH_ACTIVE','R_MODEL: READY'];
+    const snippets = ['SELECT * FROM data','df.optimize()','PVM_ANALYSIS: OK','MBA_LOGIC: TRUE','HR_TECH_ACTIVE','BI_MODE: ENABLED'];
     function createSnippet() {
         const div = document.createElement('div');
         div.className = 'code-snippet';
