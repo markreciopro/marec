@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Mark Recio, MBA | Strategic Data Architect & BI Expert</title>
+    <title>Mark Recio, MBA | Strategic Data Architect & BI Specialist</title>
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="title" content="Mark Recio, MBA | Strategic Data Architect">
-    <meta name="description" content="MBA-educated expert engineering surgical-grade business logic. Specializing in Python, SQL, and Power BI to protect margins and drive scalability.">
+    <meta name="description" content="MBA-educated expert engineering surgical-grade business logic. Specialized in Python, SQL, and Power BI to drive organizational scalability.">
 
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/markreciopro/marec/main/logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;700&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
@@ -89,8 +89,8 @@
         h1 { margin: 0; font-size: clamp(2.2rem, 8vw, 4rem); font-family: 'Fira Code', monospace; color: #fff; letter-spacing: -2px; }
         .job-title { font-size: 1.2rem; color: var(--accent-cyan); margin: 10px 0; font-family: 'Fira Code', monospace; text-transform: uppercase; letter-spacing: 5px; min-height: 1.5em;}
 
-        /* --- ELEVATOR PITCH --- */
-        .elevator-pitch-card {
+        /* --- ELEVATOR PITCH SECTION --- */
+        .elevator-pitch-container {
             background: linear-gradient(135deg, #161b22 0%, #0d1117 100%);
             border: 1px solid var(--border);
             border-left: 5px solid var(--accent-green);
@@ -98,10 +98,12 @@
             border-radius: 8px;
             margin-bottom: 60px;
         }
-        .pitch-heading { font-size: 1.8rem; color: #fff; line-height: 1.3; margin-bottom: 20px; font-weight: 700; }
-        .pitch-stats { display: flex; gap: 50px; border-top: 1px solid var(--border); padding-top: 30px; }
-        .stat-box { font-family: 'Fira Code'; font-size: 0.8rem; color: #8b949e; }
-        .stat-box strong { display: block; color: var(--accent-green); font-size: 1.3rem; margin-bottom: 5px; }
+        .pitch-label { color: var(--accent-cyan); font-family: 'Fira Code'; font-size: 0.9rem; margin-bottom: 15px; display: block; }
+        .pitch-heading { font-size: 1.8rem; color: #fff; line-height: 1.3; margin-bottom: 25px; font-weight: 700; }
+        .pitch-text { font-size: 1.15rem; line-height: 1.8; color: #8b949e; margin-bottom: 30px; }
+        .pitch-stats { display: flex; gap: 40px; border-top: 1px solid var(--border); padding-top: 30px; }
+        .stat-item strong { display: block; color: var(--accent-green); font-size: 1.4rem; font-family: 'Fira Code'; }
+        .stat-item span { font-size: 0.8rem; text-transform: uppercase; color: #484f58; letter-spacing: 1px; }
 
         /* --- GRID LAYOUTS --- */
         .container { max-width: 1100px; margin: auto; padding: 0 20px; }
@@ -162,23 +164,32 @@
         <h1>MARK_RECIO, MBA</h1>
         <div class="job-title" id="typewriter"></div>
         <div style="margin-top: 35px;">
-            <a href="#contact" class="btn btn-cta">INITIATE_STRATEGY_SESSION</a>
+            <a href="#contact" class="btn btn-cta">START_TRANSMISSION</a>
             <a href="https://github.com/markreciopro/marec/raw/main/MAREC.Flyer.pdf" target="_blank" class="btn btn-outline" style="border-color: var(--secondary); color: var(--secondary);">VIEW.PROFILE(PDF)</a>
         </div>
     </header>
 
     <div class="container">
         
-        <section class="elevator-pitch-card">
-            <span style="color:var(--accent-cyan); font-family:'Fira Code'; font-size:0.9rem; margin-bottom:15px; display:block;">[THE_VALUE_PROPOSITION]</span>
-            <h2 class="pitch-heading">Drowning in data? Starving for answers? <br>I build the logic that bridges the gap.</h2>
-            <p style="color:#8b949e; font-size:1.2rem; margin-bottom:30px;">
-                As a <strong>Strategic Data Architect</strong>, I transform fragmented datasets into high-fidelity decision frameworks. Using <strong>MBA-level strategy</strong> and technical precision in <strong>Python, R, and SQL</strong>, I engineer logic that stops revenue leakage and drives scalability.
+        <section class="elevator-pitch-container">
+            <span class="pitch-label">[THE_VALUE_PROPOSITION]</span>
+            <h2 class="pitch-heading">Drowning in data, yet starving for answers? <br>I build the logic that bridges the gap.</h2>
+            <p class="pitch-text">
+                As a <strong>Strategic Architect</strong>, I don't just "analyze" data—I engineer high-fidelity decision frameworks. Leveraging my <strong>MBA background</strong> and technical precision in <strong>Python, R, and SQL</strong>, I help organizations protect their margins and scale through surgical business logic.
             </p>
             <div class="pitch-stats">
-                <div class="stat-box"><strong>MBA</strong> Strategy</div>
-                <div class="stat-box"><strong>ROI</strong> Focused</div>
-                <div class="stat-box"><strong>100%</strong> Integrity</div>
+                <div class="stat-item">
+                    <strong>MBA</strong>
+                    <span>Strategic Mindset</span>
+                </div>
+                <div class="stat-item">
+                    <strong>100%</strong>
+                    <span>Data Integrity</span>
+                </div>
+                <div class="stat-item">
+                    <strong>ROI</strong>
+                    <span>Driven Results</span>
+                </div>
             </div>
         </section>
 
@@ -186,66 +197,50 @@
         <div class="services-grid">
             <div class="section-card">
                 <h3 style="color:var(--accent-cyan); margin-top:0;">[01] Business Analysis</h3>
-                <p style="font-size:0.85rem; color:#8b949e;">Price-Volume-Mix (PVM) modeling and financial statement variance analysis to protect margins.</p>
+                <p style="font-size:0.85rem; color:#8b949e;">MBA-level advisory, Price-Volume-Mix modeling, and financial variance analysis to secure profitability.</p>
             </div>
             <div class="section-card">
                 <h3 style="color:var(--accent-green); margin-top:0;">[02] Data & HR Analytics</h3>
-                <p style="font-size:0.85rem; color:#8b949e;">Predictive attrition modeling and automated NLP talent pipelines for workforce optimization.</p>
+                <p style="font-size:0.85rem; color:#8b949e;">Predictive attrition modeling and automated NLP pipelines to optimize talent acquisition and retention.</p>
             </div>
             <div class="section-card">
                 <h3 style="color:var(--accent-gold); margin-top:0;">[03] Operations Analytics</h3>
-                <p style="font-size:0.85rem; color:#8b949e;">ETL pipeline automation and supply chain optimization through bottleneck identification.</p>
+                <p style="font-size:0.85rem; color:#8b949e;">ETL automation and process bottleneck identification to streamline complex supply chain workflows.</p>
             </div>
         </div>
 
-        <h2 class="section-title">Featured Case Library</h2>
+        <h2 class="section-title">Featured Projects</h2>
         <div class="project-grid">
             <div class="section-card" style="border-top: 4px solid var(--accent-r-blue);">
-                <h3 style="color:var(--accent-r-blue); margin-top:0;">AFM 2024 Financial Analysis</h3>
-                <p style="font-size: 0.85rem; color:#8b949e; flex-grow:1;">R-driven optimization framework for financial variance and logistical throughput.</p>
+                <h3 style="color:var(--accent-r-blue); margin-top:0;">AFM 2024 Analysis</h3>
+                <p style="font-size: 0.85rem; color:#8b949e; flex-grow:1;">R-driven framework for financial variance and logistical throughput optimization.</p>
                 <div class="stack-row"><span class="mini-tag">R Programming</span><span class="mini-tag">Logistics</span></div>
-                <a href="https://www.canva.com/design/DAHBiAW48lQ/-_YGokTij4xwl-IOQyTqYQ/view" target="_blank" class="btn btn-outline" style="border-color:var(--accent-r-blue); color:var(--accent-r-blue);">VIEW_PRESENTATION</a>
+                <a href="https://www.canva.com/design/DAHBiAW48lQ/-_YGokTij4xwl-IOQyTqYQ/view" target="_blank" class="btn btn-outline" style="border-color:var(--accent-r-blue); color:var(--accent-r-blue);">VIEW_CASE</a>
             </div>
             <div class="section-card" style="border-top: 4px solid var(--accent-gold);">
                 <h3 style="color:var(--accent-gold); margin-top:0;">Revenue Leakage Audit</h3>
-                <p style="font-size: 0.85rem; color:#8b949e; flex-grow:1;">Python/Pandas solution identifying unbilled revenue and pricing inconsistencies.</p>
+                <p style="font-size: 0.85rem; color:#8b949e; flex-grow:1;">Python/Pandas solution identifying unbilled revenue and billing inconsistencies.</p>
                 <div class="stack-row"><span class="mini-tag">Python</span><span class="mini-tag">Pandas</span></div>
-                <a href="https://www.canva.com/design/DAG2oSq-RU8/Rab_1KlUjw-md_9wp7vcoA/view" target="_blank" class="btn btn-outline" style="border-color:var(--accent-gold); color:var(--accent-gold);">DECODE_LOGIC</a>
+                <a href="https://www.canva.com/design/DAG2oSq-RU8/Rab_1KlUjw-md_9wp7vcoA/view" target="_blank" class="btn btn-outline" style="border-color:var(--accent-gold); color:var(--accent-gold);">VIEW_CASE</a>
             </div>
             <div class="section-card" style="border-top: 4px solid var(--accent-cyan);">
                 <h3 style="color:var(--accent-cyan); margin-top:0;">Power BI Dashboard</h3>
-                <p style="font-size: 0.85rem; color:#8b949e; flex-grow:1;">Executive KPI tracking with dynamic SQL and multi-source data integration.</p>
-                <div class="stack-row"><span class="mini-tag">Power BI</span><span class="mini-tag">SQL</span><span class="mini-tag">DAX</span></div>
+                <p style="font-size: 0.85rem; color:#8b949e; flex-grow:1;">Executive KPI tracking with dynamic SQL and real-time data integration.</p>
+                <div class="stack-row"><span class="mini-tag">Power BI</span><span class="mini-tag">SQL</span></div>
                 <a href="https://www.canva.com/design/DAGxAueHJUU/LQQDcIK9_2qK8kzVdojmkg/edit" target="_blank" class="btn btn-outline">LAUNCH_DASHBOARD</a>
             </div>
             <div class="section-card" style="border-top: 4px solid var(--accent-green);">
-                <h3 style="color:var(--accent-green); margin-top:0;">HR Tec Attrition Tool</h3>
-                <p style="font-size: 0.85rem; color:#8b949e; flex-grow:1;">Automated NLP parsing and attrition forecasting for skilled talent acquisition.</p>
-                <div class="stack-row"><span class="mini-tag">Python</span><span class="mini-tag">NLP</span><span class="mini-tag">HR-Tech</span></div>
+                <h3 style="color:var(--accent-green); margin-top:0;">HR Tec Solution</h3>
+                <p style="font-size: 0.85rem; color:#8b949e; flex-grow:1;">Automated talent parsing and attrition forecasting using NLP logic.</p>
+                <div class="stack-row"><span class="mini-tag">Python</span><span class="mini-tag">NLP</span></div>
                 <a href="https://markareciocareerpath.my.canva.site/dagywh-tzq" target="_blank" class="btn btn-outline" style="border-color:var(--accent-green); color:var(--accent-green);">VIEW_HR_TOOL</a>
-            </div>
-            <div class="section-card" style="border-top: 4px solid var(--secondary);">
-                <h3 style="color:var(--secondary); margin-top:0;">PVM Revenue Logic</h3>
-                <p style="font-size: 0.85rem; color:#8b949e; flex-grow:1;">Surgical Price-Volume-Mix modeling to dissect organic growth and margin drivers.</p>
-                <div class="stack-row"><span class="mini-tag">Excel</span><span class="mini-tag">MBA-Strategy</span></div>
-                <a href="#contact" class="btn btn-outline" style="border-color:var(--secondary); color:var(--secondary);">REQUEST_DEMO</a>
-            </div>
-            <div class="section-card" style="border-top: 4px solid #fff;">
-                <h3 style="color:#fff; margin-top:0;">Supply Chain Audit</h3>
-                <p style="font-size: 0.85rem; color:#8b949e; flex-grow:1;">Process mining to identify lean logic opportunities and operational bottlenecks.</p>
-                <div class="stack-row"><span class="mini-tag">Operations</span><span class="mini-tag">ETL</span></div>
-                <a href="#contact" class="btn btn-outline" style="border-color:#fff; color:#fff;">SYSTEM_AUDIT</a>
             </div>
         </div>
 
         <h2 class="section-title">Strategic Endorsements</h2>
         <div class="quote-card">
-            <p class="quote-text">"A total game-changer for our workflow. Mark bridged the gap between HR and Tech by building automated talent pipelines that surgically identify top-tier skill sets. His dual-threat capability in Python and R makes him an invaluable asset for any data-driven organization."</p>
+            <p class="quote-text">"A total game-changer for our workflow. Mark bridged the gap between HR and Tech by building automated talent pipelines that surgically identify top-tier skill sets. His dual-threat capability in Python and R makes him an invaluable asset."</p>
             <span class="quote-author">— Ken Arancibia, CEO Synergy Staffing Solutions</span>
-        </div>
-        <div class="quote-card">
-            <p class="quote-text">"Technical proficiency combined with an MBA mindset is rare. Mark delivers both surgical precision in data and high-level strategic context for leadership."</p>
-            <span class="quote-author">— Dr. Elena Vance, Director of Operations Analytics</span>
         </div>
 
         <div id="contact">
@@ -255,12 +250,13 @@
                     <li><span>EMAIL</span> mar@marec.site</li>
                     <li><span>PHONE</span> (702) 501-9385</li>
                     <li><span>LINKEDIN</span> in/marecio</li>
+                    <li><span>GITHUB</span> github.com/markreciopro</li>
                 </ul>
             </div>
             <form action="https://formspree.io/f/mreaeden" method="POST">
                 <input type="text" name="name" placeholder="Name / Organization" required>
                 <input type="email" name="email" placeholder="Email Address" required>
-                <textarea name="message" rows="4" placeholder="How can I solve your data problem?" required></textarea>
+                <textarea name="message" rows="4" placeholder="How can I solve your data challenge?" required></textarea>
                 <button type="submit" class="btn btn-cta" style="width: 100%;">SEND.MESSAGE()</button>
             </form>
         </div>
@@ -272,7 +268,7 @@
 </footer>
 
 <script>
-    const text = "Strategic Data Architect | BI Expert";
+    const text = "BI Specialist | Strategic Data Analyst";
     let i = 0;
     function typeWriter() {
         if (i < text.length) {
