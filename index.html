@@ -8,6 +8,7 @@
     <meta name="title" content="Mark Recio, MBA | Strategic Data Architect">
     <meta name="description" content="MBA-educated expert engineering surgical-grade business logic. Specializing in Python, SQL, and Power BI to protect margins and drive scalability.">
 
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/markreciopro/marec/main/logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;700&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
 
     <style>
@@ -24,12 +25,11 @@
             --pill-bg: rgba(88, 166, 255, 0.1);
         }
 
-        /* --- BASIC RESET & SCROLLBAR --- */
+        /* --- BASIC RESET --- */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: var(--bg-dark); }
         ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--accent-cyan); }
-
+        
         body { 
             font-family: 'Inter', sans-serif; 
             line-height: 1.6; 
@@ -40,13 +40,13 @@
             scroll-behavior: smooth;
         }
 
-        /* --- BACKGROUND DATA STREAM --- */
         #codeStream {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1;
             background: radial-gradient(circle at 50% 50%, #161b22 0%, #0d1117 100%);
         }
+
         .code-snippet {
             position: absolute;
             font-family: 'Fira Code', monospace;
@@ -57,6 +57,7 @@
             pointer-events: none;
             animation: flow var(--duration) linear infinite;
         }
+
         @keyframes flow {
             0% { transform: translateY(110vh); opacity: 0; }
             15% { opacity: 0.15; }
@@ -64,10 +65,12 @@
             100% { transform: translateY(-10vh); opacity: 0; }
         }
 
-        /* --- BRANDING & HERO --- */
+        /* --- BRANDING --- */
         .top-left-brand { position: absolute; top: 30px; left: 30px; z-index: 100; }
-        .pixel-logo { width: 140px; height: auto; image-rendering: pixelated; transition: 0.3s; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5)); }
-        
+        .pixel-logo { width: 140px; height: auto; image-rendering: pixelated; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5)); transition: 0.3s; }
+        .pixel-logo:hover { transform: scale(1.05); }
+
+        /* --- HERO --- */
         .hero-workstation { 
             display: flex; flex-direction: column; align-items: center; 
             max-width: 950px; margin: 100px auto 20px auto; padding: 0 20px; position: relative;
@@ -76,7 +79,7 @@
             position: absolute; top: 9.4%; left: 48.0%; 
             transform: translateX(-50%) perspective(1000px) rotateX(9.5deg); 
             width: 33.1%; aspect-ratio: 16 / 10; background: #000; z-index: 10; 
-            overflow: hidden; border-radius: 1px; box-shadow: 0 0 25px rgba(88, 166, 255, 0.2); 
+            overflow: hidden; border-radius: 1px;
         }
         .video-monitor iframe { width: 100%; height: 100%; border: none; }
         .laptop-base { width: 100%; line-height: 0; z-index: 5; position: relative; }
@@ -86,44 +89,51 @@
         h1 { margin: 0; font-size: clamp(2.2rem, 8vw, 4rem); font-family: 'Fira Code', monospace; color: #fff; letter-spacing: -2px; }
         .job-title { font-size: 1.2rem; color: var(--accent-cyan); margin: 10px 0; font-family: 'Fira Code', monospace; text-transform: uppercase; letter-spacing: 5px; min-height: 1.5em;}
 
-        /* --- ELEVATOR PITCH STYLES --- */
+        /* --- ELEVATOR PITCH --- */
         .elevator-pitch-card {
             background: linear-gradient(135deg, #161b22 0%, #0d1117 100%);
             border: 1px solid var(--border);
-            border-left: 5px solid var(--accent-cyan);
+            border-left: 5px solid var(--accent-green);
             padding: 50px;
             border-radius: 8px;
             margin-bottom: 60px;
         }
-        .pitch-tag { font-family: 'Fira Code'; color: var(--accent-cyan); font-size: 0.9rem; margin-bottom: 15px; display: block; }
         .pitch-heading { font-size: 1.8rem; color: #fff; line-height: 1.3; margin-bottom: 20px; font-weight: 700; }
-        .pitch-body { font-size: 1.1rem; color: #8b949e; max-width: 850px; margin-bottom: 30px; }
         .pitch-stats { display: flex; gap: 50px; border-top: 1px solid var(--border); padding-top: 30px; }
         .stat-box { font-family: 'Fira Code'; font-size: 0.8rem; color: #8b949e; }
         .stat-box strong { display: block; color: var(--accent-green); font-size: 1.3rem; margin-bottom: 5px; }
 
-        /* --- CONTAINERS & GRIDS --- */
+        /* --- GRID LAYOUTS --- */
         .container { max-width: 1100px; margin: auto; padding: 0 20px; }
-        .section-card { background: var(--bg-card); padding: 30px; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 30px; transition: 0.3s; }
-        .section-card:hover { border-color: var(--accent-cyan); }
-        .project-grid, .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-bottom: 60px; }
-        h2.section-title { font-family: 'Fira Code'; color: var(--accent-cyan); text-transform: uppercase; font-size: 1.3rem; margin-bottom: 30px; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+        .section-card { background: var(--bg-card); padding: 35px; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 30px; transition: 0.3s; display: flex; flex-direction: column; }
+        .section-card:hover { border-color: var(--accent-cyan); transform: translateY(-3px); }
+        .project-grid, .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; margin-bottom: 60px; }
+        h2.section-title { font-family: 'Fira Code'; color: var(--accent-cyan); text-transform: uppercase; font-size: 1.3rem; margin-bottom: 30px; border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-top: 60px;}
 
-        /* --- BUTTONS --- */
-        .btn { display: inline-block; padding: 14px 28px; text-decoration: none; border-radius: 4px; font-weight: 700; transition: 0.3s; font-family: 'Fira Code'; font-size: 0.75rem; text-transform: uppercase; cursor: pointer; text-align: center;}
-        .btn-cta { background: var(--accent-cyan); color: #0d1117; }
+        /* --- TAGS & BUTTONS --- */
+        .stack-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 15px 0 20px 0; }
+        .mini-tag { font-family: 'Fira Code'; font-size: 0.65rem; padding: 4px 10px; background: var(--pill-bg); color: var(--accent-cyan); border: 1px solid rgba(88, 166, 255, 0.3); border-radius: 4px; }
+        .btn { display: inline-block; padding: 12px 24px; text-decoration: none; border-radius: 4px; font-weight: 700; transition: 0.3s; font-family: 'Fira Code'; font-size: 0.7rem; text-transform: uppercase; text-align: center; cursor: pointer;}
+        .btn-cta { background: var(--accent-cyan); color: #0d1117; border: none; }
         .btn-outline { border: 1px solid var(--accent-cyan); color: var(--accent-cyan); background: transparent; }
         .btn-outline:hover { background: var(--accent-cyan); color: #0d1117; }
 
-        /* --- CONTACT & FOOTER --- */
+        /* --- TESTIMONIALS --- */
+        .quote-card { background: rgba(255,255,255,0.02); padding: 40px; border-radius: 8px; border-left: 4px solid var(--accent-green); margin-bottom: 25px; }
+        .quote-text { font-style: italic; font-size: 1.1rem; color: #c9d1d9; line-height: 1.7; }
+        .quote-author { display: block; margin-top: 20px; font-family: 'Fira Code'; color: var(--accent-cyan); font-weight: bold; font-size: 0.9rem; }
+
+        /* --- CONTACT --- */
         #contact { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin: 80px auto; padding: 50px; background: var(--bg-card); border-radius: 12px; border: 1px solid var(--border); }
+        .contact-list { list-style: none; padding: 0; }
+        .contact-list li { margin-bottom: 15px; font-family: 'Fira Code'; font-size: 0.85rem; }
+        .contact-list span { color: var(--accent-green); font-weight: bold; margin-right: 10px; }
         input, textarea { width: 100%; padding: 15px; background: var(--bg-dark); border: 1px solid var(--border); color: white; border-radius: 4px; margin-bottom: 20px; box-sizing: border-box; }
         .footer { text-align: center; padding: 60px 20px; color: #8b949e; border-top: 1px solid var(--border); font-size: 0.8rem; }
 
         @media (max-width: 850px) { 
-            #contact { grid-template-columns: 1fr; padding: 25px; }
+            #contact { grid-template-columns: 1fr; }
             .pitch-stats { flex-direction: column; gap: 20px; }
-            .elevator-pitch-card { padding: 30px; }
             .video-monitor { display: none; }
         }
     </style>
@@ -153,72 +163,104 @@
         <div class="job-title" id="typewriter"></div>
         <div style="margin-top: 35px;">
             <a href="#contact" class="btn btn-cta">INITIATE_STRATEGY_SESSION</a>
-            <a href="https://github.com/markreciopro/marec/raw/main/MAREC.Flyer.pdf" class="btn btn-outline" style="border-color: var(--secondary); color: var(--secondary);">DOWNLOAD_INTEL(PDF)</a>
+            <a href="https://github.com/markreciopro/marec/raw/main/MAREC.Flyer.pdf" target="_blank" class="btn btn-outline" style="border-color: var(--secondary); color: var(--secondary);">VIEW.PROFILE(PDF)</a>
         </div>
     </header>
 
     <div class="container">
         
-        
         <section class="elevator-pitch-card">
-            <span class="pitch-tag">[THE_VALUE_PROPOSITION]</span>
-            <h2 class="pitch-heading">
-                Most organizations are drowning in data but starving for answers. <br>
-                I bridge the gap.
-            </h2>
-            <p class="pitch-body">
-                As a <strong>Strategic Data Architect</strong>, I combine MBA-level business acumen with surgical technical precision in <strong>Python, SQL, and Power BI</strong>. I don't just build dashboards—I engineer high-fidelity logic that identifies revenue leakage, protects margins, and makes your next executive move obvious.
+            <span style="color:var(--accent-cyan); font-family:'Fira Code'; font-size:0.9rem; margin-bottom:15px; display:block;">[THE_VALUE_PROPOSITION]</span>
+            <h2 class="pitch-heading">Drowning in data? Starving for answers? <br>I build the logic that bridges the gap.</h2>
+            <p style="color:#8b949e; font-size:1.2rem; margin-bottom:30px;">
+                As a <strong>Strategic Data Architect</strong>, I transform fragmented datasets into high-fidelity decision frameworks. Using <strong>MBA-level strategy</strong> and technical precision in <strong>Python, R, and SQL</strong>, I engineer logic that stops revenue leakage and drives scalability.
             </p>
             <div class="pitch-stats">
-                <div class="stat-box"><strong>MBA</strong> Executive Strategy</div>
-                <div class="stat-box"><strong>ROI</strong> Focused Outcomes</div>
-                <div class="stat-box"><strong>100%</strong> Scalable Logic</div>
+                <div class="stat-box"><strong>MBA</strong> Strategy</div>
+                <div class="stat-box"><strong>ROI</strong> Focused</div>
+                <div class="stat-box"><strong>100%</strong> Integrity</div>
             </div>
         </section>
 
-        <h2 class="section-title">Strategic Solutions</h2>
+        <h2 class="section-title">Strategic Service Offerings</h2>
         <div class="services-grid">
             <div class="section-card">
-                <h3 style="color:var(--accent-cyan);">[01] Profit Intelligence</h3>
-                <p style="font-size:0.9rem; color:#8b949e;">Price-Volume-Mix modeling and financial variance audits to stop margin erosion.</p>
+                <h3 style="color:var(--accent-cyan); margin-top:0;">[01] Business Analysis</h3>
+                <p style="font-size:0.85rem; color:#8b949e;">Price-Volume-Mix (PVM) modeling and financial statement variance analysis to protect margins.</p>
             </div>
             <div class="section-card">
-                <h3 style="color:var(--accent-green);">[02] Workforce Logistics</h3>
-                <p style="font-size:0.9rem; color:#8b949e;">Predictive attrition modeling and automated talent pipelines using Python & NLP.</p>
+                <h3 style="color:var(--accent-green); margin-top:0;">[02] Data & HR Analytics</h3>
+                <p style="font-size:0.85rem; color:#8b949e;">Predictive attrition modeling and automated NLP talent pipelines for workforce optimization.</p>
             </div>
             <div class="section-card">
-                <h3 style="color:var(--accent-gold);">[03] Data Architecture</h3>
-                <p style="font-size:0.9rem; color:#8b949e;">End-to-end ETL automation and high-fidelity executive decision frameworks.</p>
+                <h3 style="color:var(--accent-gold); margin-top:0;">[03] Operations Analytics</h3>
+                <p style="font-size:0.85rem; color:#8b949e;">ETL pipeline automation and supply chain optimization through bottleneck identification.</p>
             </div>
         </div>
 
-        <h2 class="section-title">Case Library</h2>
+        <h2 class="section-title">Featured Case Library</h2>
         <div class="project-grid">
             <div class="section-card" style="border-top: 4px solid var(--accent-r-blue);">
-                <h3 style="color:var(--accent-r-blue); margin-top:0;">Revenue Leakage Audit</h3>
-                <p style="font-size: 0.85rem; color:#8b949e;">Identified thousands in lost revenue for a fintech billing analysis project.</p>
-                <a href="https://www.canva.com/design/DAG2oSq-RU8/Rab_1KlUjw-md_9wp7vcoA/view" target="_blank" class="btn btn-outline" style="font-size: 0.6rem; border-color: var(--accent-r-blue); color: var(--accent-r-blue);">DECODE_CASE</a>
+                <h3 style="color:var(--accent-r-blue); margin-top:0;">AFM 2024 Financial Analysis</h3>
+                <p style="font-size: 0.85rem; color:#8b949e; flex-grow:1;">R-driven optimization framework for financial variance and logistical throughput.</p>
+                <div class="stack-row"><span class="mini-tag">R Programming</span><span class="mini-tag">Logistics</span></div>
+                <a href="https://www.canva.com/design/DAHBiAW48lQ/-_YGokTij4xwl-IOQyTqYQ/view" target="_blank" class="btn btn-outline" style="border-color:var(--accent-r-blue); color:var(--accent-r-blue);">VIEW_PRESENTATION</a>
+            </div>
+            <div class="section-card" style="border-top: 4px solid var(--accent-gold);">
+                <h3 style="color:var(--accent-gold); margin-top:0;">Revenue Leakage Audit</h3>
+                <p style="font-size: 0.85rem; color:#8b949e; flex-grow:1;">Python/Pandas solution identifying unbilled revenue and pricing inconsistencies.</p>
+                <div class="stack-row"><span class="mini-tag">Python</span><span class="mini-tag">Pandas</span></div>
+                <a href="https://www.canva.com/design/DAG2oSq-RU8/Rab_1KlUjw-md_9wp7vcoA/view" target="_blank" class="btn btn-outline" style="border-color:var(--accent-gold); color:var(--accent-gold);">DECODE_LOGIC</a>
+            </div>
+            <div class="section-card" style="border-top: 4px solid var(--accent-cyan);">
+                <h3 style="color:var(--accent-cyan); margin-top:0;">Power BI Dashboard</h3>
+                <p style="font-size: 0.85rem; color:#8b949e; flex-grow:1;">Executive KPI tracking with dynamic SQL and multi-source data integration.</p>
+                <div class="stack-row"><span class="mini-tag">Power BI</span><span class="mini-tag">SQL</span><span class="mini-tag">DAX</span></div>
+                <a href="https://www.canva.com/design/DAGxAueHJUU/LQQDcIK9_2qK8kzVdojmkg/edit" target="_blank" class="btn btn-outline">LAUNCH_DASHBOARD</a>
             </div>
             <div class="section-card" style="border-top: 4px solid var(--accent-green);">
-                <h3 style="color:var(--accent-green); margin-top:0;">HR Attrition Model</h3>
-                <p style="font-size: 0.85rem; color:#8b949e;">Predictive tool reducing turnover costs through skilled talent parsing.</p>
-                <a href="https://markareciocareerpath.my.canva.site/dagywh-tzq" target="_blank" class="btn btn-outline" style="font-size: 0.6rem; border-color: var(--accent-green); color: var(--accent-green);">VIEW_LOGIC</a>
+                <h3 style="color:var(--accent-green); margin-top:0;">HR Tec Attrition Tool</h3>
+                <p style="font-size: 0.85rem; color:#8b949e; flex-grow:1;">Automated NLP parsing and attrition forecasting for skilled talent acquisition.</p>
+                <div class="stack-row"><span class="mini-tag">Python</span><span class="mini-tag">NLP</span><span class="mini-tag">HR-Tech</span></div>
+                <a href="https://markareciocareerpath.my.canva.site/dagywh-tzq" target="_blank" class="btn btn-outline" style="border-color:var(--accent-green); color:var(--accent-green);">VIEW_HR_TOOL</a>
             </div>
+            <div class="section-card" style="border-top: 4px solid var(--secondary);">
+                <h3 style="color:var(--secondary); margin-top:0;">PVM Revenue Logic</h3>
+                <p style="font-size: 0.85rem; color:#8b949e; flex-grow:1;">Surgical Price-Volume-Mix modeling to dissect organic growth and margin drivers.</p>
+                <div class="stack-row"><span class="mini-tag">Excel</span><span class="mini-tag">MBA-Strategy</span></div>
+                <a href="#contact" class="btn btn-outline" style="border-color:var(--secondary); color:var(--secondary);">REQUEST_DEMO</a>
+            </div>
+            <div class="section-card" style="border-top: 4px solid #fff;">
+                <h3 style="color:#fff; margin-top:0;">Supply Chain Audit</h3>
+                <p style="font-size: 0.85rem; color:#8b949e; flex-grow:1;">Process mining to identify lean logic opportunities and operational bottlenecks.</p>
+                <div class="stack-row"><span class="mini-tag">Operations</span><span class="mini-tag">ETL</span></div>
+                <a href="#contact" class="btn btn-outline" style="border-color:#fff; color:#fff;">SYSTEM_AUDIT</a>
+            </div>
+        </div>
+
+        <h2 class="section-title">Strategic Endorsements</h2>
+        <div class="quote-card">
+            <p class="quote-text">"A total game-changer for our workflow. Mark bridged the gap between HR and Tech by building automated talent pipelines that surgically identify top-tier skill sets. His dual-threat capability in Python and R makes him an invaluable asset for any data-driven organization."</p>
+            <span class="quote-author">— Ken Arancibia, CEO Synergy Staffing Solutions</span>
+        </div>
+        <div class="quote-card">
+            <p class="quote-text">"Technical proficiency combined with an MBA mindset is rare. Mark delivers both surgical precision in data and high-level strategic context for leadership."</p>
+            <span class="quote-author">— Dr. Elena Vance, Director of Operations Analytics</span>
         </div>
 
         <div id="contact">
             <div>
                 <h3 style="color:var(--accent-cyan);">[STRATEGIC_INTEL]</h3>
-                <p style="font-size: 0.9rem;">Ready to audit your data architecture? Send a transmission.</p>
-                <p style="font-family: 'Fira Code'; font-size: 0.85rem;">
-                    EMAIL: mar@marec.site<br>
-                    LOC: Las Vegas, NV
-                </p>
+                <ul class="contact-list">
+                    <li><span>EMAIL</span> mar@marec.site</li>
+                    <li><span>PHONE</span> (702) 501-9385</li>
+                    <li><span>LINKEDIN</span> in/marecio</li>
+                </ul>
             </div>
             <form action="https://formspree.io/f/mreaeden" method="POST">
                 <input type="text" name="name" placeholder="Name / Organization" required>
                 <input type="email" name="email" placeholder="Email Address" required>
-                <textarea name="message" rows="4" placeholder="What data problem can I solve for you?" required></textarea>
+                <textarea name="message" rows="4" placeholder="How can I solve your data problem?" required></textarea>
                 <button type="submit" class="btn btn-cta" style="width: 100%;">SEND.MESSAGE()</button>
             </form>
         </div>
@@ -242,4 +284,18 @@
     window.onload = typeWriter;
 
     const stream = document.getElementById('codeStream');
-    const snippets =
+    const snippets = ['ROI_DETECTED','df.optimize()','PVM_ANALYSIS: OK','MBA_LOGIC: TRUE','MARGIN_PROTECTED'];
+    function createSnippet() {
+        const div = document.createElement('div');
+        div.className = 'code-snippet';
+        div.innerText = snippets[Math.floor(Math.random() * snippets.length)];
+        div.style.left = Math.random() * 95 + 'vw';
+        div.style.setProperty('--duration', (Math.random() * 5 + 10) + 's');
+        stream.appendChild(div);
+        setTimeout(() => div.remove(), 15000);
+    }
+    setInterval(createSnippet, 1600);
+</script>
+
+</body>
+</html>
