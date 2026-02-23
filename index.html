@@ -18,9 +18,7 @@
             --accent-cyan: #58a6ff;    
             --accent-green: #3fb950; 
             --accent-gold: #d29922;
-            --accent-purple: #bc8cff;
             --text-main: #c9d1d9;      
-            --secondary: #f85149; 
             --border: #30363d;
             --pill-bg: rgba(88, 166, 255, 0.1);
         }
@@ -67,24 +65,38 @@
         .pixel-logo { width: 140px; height: auto; image-rendering: pixelated; transition: 0.3s; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5)); }
         .pixel-logo:hover { transform: scale(1.05); }
 
+        /* Modern Hero Styling */
         .hero-workstation { 
             display: flex; flex-direction: column; align-items: center; 
-            max-width: 950px; margin: 100px auto 20px auto; padding: 0 20px; position: relative;
+            max-width: 950px; margin: 100px auto 20px auto; padding: 0 20px;
         }
-        /* Tied monitor strictly to container for better responsiveness */
-        .monitor-container { position: relative; width: 100%; }
+        .monitor-wrapper { 
+            position: relative; 
+            width: 100%; 
+            line-height: 0;
+        }
         .video-monitor { 
-            position: absolute; top: 9.4%; left: 48.0%; 
+            position: absolute; 
+            top: 9.4%; 
+            left: 48.0%; 
             transform: translateX(-50%) perspective(1000px) rotateX(9.5deg); 
-            width: 33.1%; aspect-ratio: 16 / 10;
-            background: #000; z-index: 10; overflow: hidden; border-radius: 1px;
+            width: 33.1%; 
+            aspect-ratio: 16 / 10;
+            background: #000; 
+            z-index: 10; 
+            overflow: hidden; 
+            border-radius: 1px;
             box-shadow: 0 0 25px rgba(88, 166, 255, 0.2); 
         }
-        .video-monitor iframe { width: 100%; height: 100%; border: none; }
-        .laptop-base { width: 100%; line-height: 0; z-index: 5; position: relative; }
-        .base-image { width: 100%; border-radius: 12px; border: 1px solid var(--border); box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9); }
+        .video-monitor iframe { width: 100%; height: 100%; border: none; pointer-events: none; }
+        .base-image { 
+            width: 100%; 
+            border-radius: 12px; 
+            border: 1px solid var(--border); 
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9); 
+        }
         
-        header { text-align: center; padding: 20px 20px 40px 20px; }
+        header { text-align: center; padding: 40px 20px; }
         h1 { margin: 0; font-size: clamp(2.2rem, 8vw, 4rem); font-family: 'Fira Code', monospace; color: #fff; text-transform: uppercase; font-weight: 700; letter-spacing: -2px; }
         .job-title { font-size: 1.2rem; color: var(--accent-cyan); margin: 10px 0; font-family: 'Fira Code', monospace; text-transform: uppercase; letter-spacing: 5px; min-height: 1.5em;}
 
@@ -106,62 +118,32 @@
         
         h2.section-title { font-family: 'Fira Code'; color: var(--accent-cyan); text-transform: uppercase; font-size: 1.5rem; margin-bottom: 30px; border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-top: 60px;}
 
-        .service-item h3 { color: var(--accent-cyan); font-family: 'Fira Code'; font-size: 1.1rem; margin-top: 0; }
-        .service-item ul { padding-left: 20px; font-size: 0.85rem; color: #8b949e; }
-        
         .pricing-box { font-family: 'Fira Code'; padding: 12px; border-radius: 4px; text-align: center; margin-top: 15px; font-weight: bold; }
+        .pricing-footer { font-size: 0.65rem; text-align: center; margin-top: 10px; font-family: 'Fira Code'; text-transform: uppercase; opacity: 0.7; }
 
-        .testimonial-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); 
-            gap: 25px; 
-            margin-bottom: 60px; 
-        }
+        .testimonial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 25px; margin-bottom: 60px; }
         .quote-card {
-            background: var(--bg-card); 
-            padding: 30px; 
-            border: 1px solid var(--border);
-            border-left: 4px solid var(--accent-cyan);
-            border-radius: 4px; 
-            font-style: italic; 
-            color: #8b949e; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: space-between;
-            transition: 0.3s;
+            background: var(--bg-card); padding: 30px; border: 1px solid var(--border); border-left: 4px solid var(--accent-cyan);
+            border-radius: 4px; font-style: italic; color: #8b949e; display: flex; flex-direction: column; justify-content: space-between; transition: 0.3s;
         }
-        .quote-card:hover { border-color: var(--accent-cyan); transform: translateY(-3px); }
-        .quote-author {
-            display: block; 
-            margin-top: 20px; 
-            font-style: normal; 
-            font-weight: bold;
-            color: var(--accent-cyan); 
-            font-family: 'Fira Code', monospace; 
-            font-size: 0.8rem;
-            text-transform: uppercase;
-        }
+        .quote-author { display: block; margin-top: 20px; font-style: normal; font-weight: bold; color: var(--accent-cyan); font-family: 'Fira Code', monospace; font-size: 0.8rem; text-transform: uppercase; }
 
         .btn { display: inline-block; padding: 14px 28px; text-decoration: none; border-radius: 4px; font-weight: 700; transition: 0.3s; font-family: 'Fira Code', monospace; font-size: 0.75rem; text-transform: uppercase; border: none; cursor: pointer; text-align: center;}
         .btn-cta { background: var(--accent-cyan); color: #0d1117; }
         .btn-outline { border: 1px solid var(--accent-cyan); color: var(--accent-cyan); background: transparent; }
         .btn-outline:hover { background: var(--accent-cyan); color: #0d1117; }
 
-        .pricing-footer { font-size: 0.65rem; text-align: center; margin-top: 10px; font-family: 'Fira Code'; text-transform: uppercase; opacity: 0.7; }
-
         #contact { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin: 100px auto; padding: 60px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; }
         .contact-list { list-style: none; padding: 0; }
         .contact-list li { margin-bottom: 20px; font-family: 'Fira Code'; font-size: 0.9rem; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
         .contact-list span { color: var(--accent-green); margin-right: 15px; font-weight: bold; font-size: 0.75rem; display: block; margin-bottom: 5px; }
         .contact-list a { color: var(--text-main); text-decoration: none; transition: 0.2s; }
-        .contact-list a:hover { color: var(--accent-cyan); }
         
         input, textarea { width: 100%; padding: 15px; background: var(--bg-dark); border: 1px solid var(--border); color: white; border-radius: 4px; margin-bottom: 20px; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         
         .footer { text-align: center; padding: 60px 20px; background: #010409; color: #8b949e; border-top: 1px solid var(--border); }
         .footer-socials { margin-top: 20px; display: flex; justify-content: center; gap: 20px; }
         .footer-socials a { color: #8b949e; font-size: 0.8rem; text-decoration: none; font-family: 'Fira Code'; }
-        .footer-socials a:hover { color: var(--accent-cyan); }
 
         @media (max-width: 850px) { 
             #contact { grid-template-columns: 1fr; padding: 30px; }
@@ -182,13 +164,11 @@
 
 <main>
     <section class="hero-workstation">
-        <div class="monitor-container">
+        <div class="monitor-wrapper">
             <div class="video-monitor">
                 <iframe src="https://www.youtube.com/embed/qHwgrgWFl98?autoplay=1&mute=1&loop=1&playlist=qHwgrgWFl98&controls=0&modestbranding=1" allow="autoplay; encrypted-media"></iframe>
             </div>
-            <div class="laptop-base">
-                <img src="https://i.ibb.co/ZzCVqzH9/Gemini-Generated-Image-bn1v5kbn1v5kbn1v.png" alt="Console Interface" class="base-image">
-            </div>
+            <img src="https://i.ibb.co/ZzCVqzH9/Gemini-Generated-Image-bn1v5kbn1v5kbn1v.png" alt="Strategic Console" class="base-image">
         </div>
     </section>
 
@@ -197,7 +177,7 @@
         <div class="job-title" id="typewriter"></div>
         <div style="margin-top: 30px;">
             <a href="#contact" class="btn btn-cta">START_FREE_DIAGNOSTIC</a>
-            <a href="https://github.com/markreciopro" target="_blank" class="btn btn-outline">VIEW_GITHUB_ENGINE</a>
+            <a href="https://markreciopro.github.io/Portfolio/" target="_blank" class="btn btn-outline">EXPLORE_PORTFOLIO</a>
         </div>
     </header>
 
@@ -229,8 +209,8 @@
                     <li>Cost-Leakage Identification</li>
                     <li>KPI Feasibility Roadmap</li>
                 </ul>
-                <div class="pricing-box" style="color: var(--accent-green); background: rgba(63, 185, 80, 0.1);">FREE_CONSULT</div>
-                <div class="pricing-footer" style="color: var(--accent-cyan);">Timeline: 3-5 Days</div>
+                <div class="pricing-box" style="color: var(--accent-green); background: rgba(63, 185, 80, 0.1);">FREE_30MIN_DIAGNOSTIC</div>
+                <div class="pricing-footer" style="color: var(--accent-cyan);">Deliverable: Strategic Roadmap</div>
             </div>
 
             <div class="section-card" style="border-top: 2px solid var(--accent-gold);">
@@ -243,7 +223,7 @@
                     <li>1 Strategic BI Dashboard</li>
                 </ul>
                 <div class="pricing-box" style="color: #fff; background: rgba(210, 153, 34, 0.1);">EST: $1,800 - $3,500</div>
-                <div class="pricing-footer" style="color: var(--accent-gold);">Timeline: 2 Weeks</div>
+                <div class="pricing-footer" style="color: var(--accent-gold);">Timeline: 2-3 Weeks</div>
             </div>
 
             <div class="section-card" style="border-top: 2px solid var(--accent-green);">
@@ -256,16 +236,16 @@
                     <li>Automated Board Reporting</li>
                 </ul>
                 <div class="pricing-box" style="color: #fff; background: rgba(63, 185, 80, 0.1);">STARTS @ $4,500</div>
-                <div class="pricing-footer" style="color: var(--accent-green);">Timeline: 4-6 Weeks</div>
+                <div class="pricing-footer" style="color: var(--accent-green);">Scale: Monthly Retainer Available</div>
             </div>
         </div>
 
         <h2 class="section-title">Strategic Endorsements</h2>
         <div class="testimonial-grid">
             <div class="quote-card">
-                "As a mid-sized firm, we couldn't justify a full data team, but we were drowning in spreadsheets. Mark stepped in as a solo partner and built an automated ETL pipeline that gives me 15 hours of my week back. He’s the only specialist I’ve found who can bridge the gap between 'Year-over-Year margin' and 'Python logic'."
+                "As a mid-sized firm, we couldn't justify a full data team. Mark stepped in as a solo partner and built an automated ETL pipeline that gives me 15 hours of my week back. He's the only specialist I've found who can bridge the gap between margin and logic."
                 <span class="quote-author">
-                    — CEO. Ken Arancibia, Synergy Staffing Solutions
+                    — CEO. Ken Arancibia, Synergy Staffing
                     <small style="display:block; color: var(--accent-green); font-size: 0.6rem; margin-top: 5px;">[VERIFIED_PARTNERSHIP]</small>
                 </span>
             </div>
@@ -285,12 +265,9 @@
                     <li><span>DIRECT_COMM</span> <a href="tel:7025019385">(702) 201-4905</a></li>
                     <li><span>PRIMARY_EMAIL</span> <a href="mailto:mar@marec.site">mar@marec.site</a></li>
                     <li><span>LINKEDIN</span> <a href="https://www.linkedin.com/in/marecio" target="_blank">linkedin.com/in/marecio</a></li>
-                    <li><span>GITHUB</span> <a href="https://github.com/markreciopro" target="_blank">github.com/markreciopro</a></li>
+                    <li><span>PORTFOLIO_ENGINE</span> <a href="https://markreciopro.github.io/Portfolio/" target="_blank">View Live Case Studies</a></li>
                     <li><span>CURRENT_BASE</span> Las Vegas, NV</li>
                 </ul>
-                <p style="font-size: 0.85rem; color: #8b949e; margin-top: 30px; border-left: 2px solid var(--accent-cyan); padding-left: 15px;">
-                    <strong>Consultation Note:</strong> Describe your data bottleneck. I will respond with a secure protocol for a <strong>Free Diagnostic Audit</strong> within 24 hours.
-                </p>
             </div>
             <div class="contact-form">
                 <form action="https://formspree.io/f/mreaeden" method="POST">
@@ -307,10 +284,9 @@
 <footer class="footer">
     <p>© 2026 MARK_RECIO, MBA | SYSTEM_STATUS: <span style="color: var(--accent-green);">OPERATIONAL</span></p>
     <div class="footer-socials">
-        <a href="tel:7025019385">PHONE</a>
-        <a href="mailto:mar@marec.site">EMAIL</a>
         <a href="https://www.linkedin.com/in/marecio" target="_blank">LINKEDIN</a>
         <a href="https://github.com/markreciopro" target="_blank">GITHUB</a>
+        <a href="https://markreciopro.github.io/Portfolio/" target="_blank">PORTFOLIO</a>
     </div>
 </footer>
 
