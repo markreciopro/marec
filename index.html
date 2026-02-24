@@ -14,13 +14,13 @@
     <style>
         :root {
             --bg-dark: #0d1117; 
-            --bg-card: #161b22; 
+            --bg-card: rgba(22, 27, 34, 0.75); 
             --accent-cyan: #58a6ff;    
             --accent-green: #3fb950; 
             --accent-gold: #d29922;
             --text-main: #c9d1d9;      
-            --border: #30363d;
-            --glow: rgba(88, 166, 255, 0.15);
+            --border: rgba(48, 54, 61, 0.8);
+            --glow: rgba(88, 166, 255, 0.3);
         }
 
         /* Standard Resets */
@@ -36,6 +36,12 @@
             color: var(--text-main); 
             margin: 0; 
             background-color: var(--bg-dark); 
+            background-image: 
+                linear-gradient(rgba(13, 17, 23, 0.85), rgba(13, 17, 23, 0.95)),
+                url('https://i.ibb.co/ZzCVqzH9/Gemini-Generated-Image-bn1v5kbn1v5kbn1v.png');
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
             overflow-x: hidden;
             scroll-behavior: smooth;
         }
@@ -45,7 +51,7 @@
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1;
-            background: radial-gradient(circle at 50% 50%, #161b22 0%, #0d1117 100%);
+            pointer-events: none;
         }
         .code-snippet {
             position: absolute;
@@ -54,119 +60,135 @@
             color: var(--accent-cyan);
             opacity: 0;
             white-space: nowrap;
-            pointer-events: none;
             animation: flow var(--duration) linear infinite;
         }
         @keyframes flow {
             0% { transform: translateY(105vh); opacity: 0; }
-            10% { opacity: 0.12; }
-            90% { opacity: 0.12; }
+            10% { opacity: 0.15; }
+            90% { opacity: 0.15; }
             100% { transform: translateY(-10vh); opacity: 0; }
         }
 
         /* Brand & Navigation */
         .top-left-brand { position: absolute; top: 30px; left: 30px; z-index: 100; }
-        .pixel-logo { width: 140px; height: auto; image-rendering: pixelated; transition: 0.3s; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.8)); }
-        .pixel-logo:hover { transform: scale(1.05) rotate(-1deg); }
+        .pixel-logo { width: 45px; height: auto; image-rendering: pixelated; transition: 0.3s; filter: drop-shadow(0 0 12px var(--accent-cyan)); }
 
-        /* Hero Console Styling */
-        .hero-workstation { 
-            display: flex; flex-direction: column; align-items: center; 
-            max-width: 1000px; margin: 120px auto 40px auto; padding: 0 20px;
+        /* HUD Video Display */
+        .video-hud-container { 
+            max-width: 850px; 
+            margin: 100px auto 30px auto; 
+            padding: 15px;
+            position: relative;
+            animation: startGlitch 0.6s ease-out;
         }
-        .monitor-wrapper { 
-            position: relative; 
+
+        .hud-bracket {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--accent-cyan);
+            z-index: 5;
+        }
+        .top-left { top: 0; left: 0; border-right: 0; border-bottom: 0; }
+        .top-right { top: 0; right: 0; border-left: 0; border-bottom: 0; }
+        .bottom-left { bottom: 0; left: 0; border-right: 0; border-top: 0; }
+        .bottom-right { bottom: 0; right: 0; border-left: 0; border-top: 0; }
+
+        .video-wrapper { 
             width: 100%; 
-            line-height: 0;
-            filter: drop-shadow(0 0 30px var(--glow));
-        }
-        .video-monitor { 
-            position: absolute; 
-            top: 9.4%; 
-            left: 48.0%; 
-            transform: translateX(-50%) perspective(1000px) rotateX(9.5deg); 
-            width: 33.1%; 
-            aspect-ratio: 16 / 10;
+            aspect-ratio: 16 / 9;
             background: #000; 
-            z-index: 10; 
             overflow: hidden; 
+            border: 1px solid var(--accent-cyan);
+            box-shadow: 0 0 25px var(--glow);
             border-radius: 2px;
         }
-        .video-monitor iframe { width: 100%; height: 100%; border: none; pointer-events: none; opacity: 0.9; }
-        .base-image { 
-            width: 100%; 
-            border-radius: 12px; 
-            border: 1px solid var(--border); 
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9); 
+        .video-wrapper iframe { width: 100%; height: 100%; border: none; filter: contrast(1.1) brightness(1.1); }
+
+        @keyframes startGlitch {
+            0% { transform: scaleY(0); opacity: 0; filter: hue-rotate(90deg); }
+            50% { transform: scaleY(1.1); opacity: 1; }
+            100% { transform: scaleY(1); }
         }
-        
+
         header { text-align: center; padding: 20px 20px 60px 20px; }
         h1 { margin: 0; font-size: clamp(2.2rem, 8vw, 4.2rem); font-family: 'Fira Code', monospace; color: #fff; text-transform: uppercase; font-weight: 700; letter-spacing: -2px; }
-        .job-title { font-size: 1.1rem; color: var(--accent-cyan); margin: 15px 0; font-family: 'Fira Code', monospace; text-transform: uppercase; letter-spacing: 4px; min-height: 1.5em; opacity: 0.9;}
+        .job-title { font-size: 1.1rem; color: var(--accent-cyan); margin: 15px 0; font-family: 'Fira Code', monospace; text-transform: uppercase; letter-spacing: 4px; min-height: 1.5em; }
 
         .container { max-width: 1100px; margin: auto; padding: 0 25px; }
 
-        /* Card System */
+        /* Glassmorphism Card System */
         .section-card {
             background: var(--bg-card); padding: 40px; border: 1px solid var(--border);
             border-radius: 12px; margin-bottom: 30px; transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); display: flex; flex-direction: column;
-            position: relative; overflow: hidden;
+            position: relative; overflow: hidden; backdrop-filter: blur(12px);
         }
         .section-card:hover { border-color: var(--accent-cyan); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.4); }
         
-        .pitch-block {
-            border-left: 5px solid var(--accent-green);
-            background: linear-gradient(160deg, #161b22 0%, #0d1117 100%);
-        }
+        .pitch-block { border-left: 5px solid var(--accent-green); }
         .pitch-tag { font-family: 'Fira Code', monospace; font-size: 0.7rem; color: var(--accent-cyan); margin-bottom: 20px; display: block; text-transform: uppercase; letter-spacing: 3px; font-weight: 700; }
 
-        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; margin-bottom: 80px; }
+        /* Portfolio Grid */
+        .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 80px; }
+        .portfolio-item { 
+            background: rgba(22, 27, 34, 0.6); 
+            border: 1px solid var(--border); 
+            border-radius: 8px; 
+            overflow: hidden; 
+            transition: 0.3s;
+            position: relative;
+        }
+        .portfolio-item:hover { border-color: var(--accent-cyan); transform: scale(1.02); }
+        .portfolio-thumb { 
+            width: 100%; 
+            height: 180px; 
+            background: #000; 
+            position: relative;
+            overflow: hidden;
+        }
+        .portfolio-thumb img { width: 100%; height: 100%; object-fit: cover; opacity: 0.7; transition: 0.3s; }
+        .portfolio-item:hover img { opacity: 1; transform: scale(1.1); }
         
+        /* Scanline Overlay for Portfolio */
+        .portfolio-thumb::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            background-size: 100% 4px, 3px 100%;
+            pointer-events: none;
+        }
+
+        .portfolio-info { padding: 20px; }
+        .portfolio-info h4 { margin: 0 0 10px 0; font-family: 'Fira Code'; color: #fff; }
+        .portfolio-info p { font-size: 0.85rem; color: #8b949e; margin-bottom: 15px; }
+        .tech-stack { display: flex; gap: 10px; flex-wrap: wrap; }
+        .tech-tag { font-size: 0.65rem; font-family: 'Fira Code'; color: var(--accent-cyan); background: rgba(88, 166, 255, 0.1); padding: 4px 8px; border-radius: 4px; }
+
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; margin-bottom: 80px; }
         h2.section-title { font-family: 'Fira Code'; color: var(--accent-cyan); text-transform: uppercase; font-size: 1.4rem; margin-bottom: 40px; border-bottom: 1px solid var(--border); padding-bottom: 15px; margin-top: 80px; letter-spacing: 1px;}
 
-        .pricing-box { font-family: 'Fira Code'; padding: 14px; border-radius: 6px; text-align: center; margin-top: 20px; font-weight: bold; font-size: 0.9rem; }
-        .pricing-footer { font-size: 0.7rem; text-align: center; margin-top: 12px; font-family: 'Fira Code'; text-transform: uppercase; letter-spacing: 1px; color: #8b949e; }
-
-        /* Testimonials */
-        .testimonial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 30px; margin-bottom: 80px; }
-        .quote-card {
-            background: var(--bg-card); padding: 35px; border: 1px solid var(--border); border-left: 4px solid var(--accent-cyan);
-            border-radius: 8px; font-style: italic; color: #acb1b8; line-height: 1.8; transition: 0.3s;
-        }
-        .quote-author { display: block; margin-top: 25px; font-style: normal; font-weight: 700; color: var(--accent-cyan); font-family: 'Fira Code', monospace; font-size: 0.85rem; text-transform: uppercase; }
-
-        /* Buttons - A+ Conversion Refinement */
+        /* Buttons */
         .btn { display: inline-block; padding: 16px 32px; text-decoration: none; border-radius: 6px; font-weight: 700; transition: 0.3s; font-family: 'Fira Code', monospace; font-size: 0.8rem; text-transform: uppercase; border: none; cursor: pointer; text-align: center; letter-spacing: 1px;}
         .btn-cta { background: var(--accent-green); color: #0d1117; box-shadow: 0 4px 14px rgba(63, 185, 80, 0.3); }
-        .btn-cta:hover { background: #46d45b; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(63, 185, 80, 0.4); }
-        .btn-outline { border: 1px solid var(--border); color: var(--text-main); background: transparent; margin-left: 10px; }
-        .btn-outline:hover { border-color: var(--accent-cyan); color: var(--accent-cyan); background: rgba(88, 166, 255, 0.05); }
+        .btn-cta:hover { background: #46d45b; transform: translateY(-2px); }
+        .btn-outline { border: 1px solid var(--border); color: var(--text-main); background: rgba(1, 4, 9, 0.6); margin-left: 10px; backdrop-filter: blur(5px); }
+        .btn-outline:hover { border-color: var(--accent-cyan); color: var(--accent-cyan); }
 
         /* Contact Section */
-        #contact { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin: 120px auto; padding: 60px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; position: relative;}
-        #contact::before { content: ""; position: absolute; top: -1px; left: 50px; right: 50px; height: 1px; background: linear-gradient(90deg, transparent, var(--accent-cyan), transparent); }
+        #contact { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin: 120px auto; padding: 60px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; backdrop-filter: blur(20px); }
         
         .contact-list { list-style: none; padding: 0; }
         .contact-list li { margin-bottom: 25px; font-family: 'Fira Code'; font-size: 0.95rem; border-bottom: 1px solid #21262d; padding-bottom: 12px; }
         .contact-list span { color: var(--accent-green); font-weight: 700; font-size: 0.7rem; display: block; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;}
-        .contact-list a { color: var(--text-main); text-decoration: none; transition: 0.2s; }
-        .contact-list a:hover { color: var(--accent-cyan); }
         
-        input, textarea { width: 100%; padding: 16px; background: var(--bg-dark); border: 1px solid var(--border); color: white; border-radius: 6px; margin-bottom: 20px; font-family: 'Inter', sans-serif; transition: 0.3s; }
-        input:focus, textarea:focus { border-color: var(--accent-cyan); outline: none; box-shadow: 0 0 10px rgba(88, 166, 255, 0.1); }
+        input, textarea { width: 100%; padding: 16px; background: rgba(13, 17, 23, 0.8); border: 1px solid var(--border); color: white; border-radius: 6px; margin-bottom: 20px; font-family: 'Inter', sans-serif; }
         
-        .footer { text-align: center; padding: 80px 20px; background: #010409; color: #8b949e; border-top: 1px solid var(--border); }
-        .footer-socials { margin-top: 25px; display: flex; justify-content: center; gap: 30px; }
-        .footer-socials a { color: #8b949e; font-size: 0.75rem; text-decoration: none; font-family: 'Fira Code'; transition: 0.2s; }
-        .footer-socials a:hover { color: var(--accent-cyan); }
+        .footer { text-align: center; padding: 80px 20px; background: rgba(1, 4, 9, 0.95); color: #8b949e; border-top: 1px solid var(--border); }
 
-        /* Mobile Optimization */
         @media (max-width: 850px) { 
-            #contact { grid-template-columns: 1fr; padding: 40px 20px; gap: 40px; }
-            .video-monitor { display: none; }
-            .testimonial-grid { grid-template-columns: 1fr; }
+            #contact { grid-template-columns: 1fr; padding: 40px 20px; }
             .btn-outline { margin-left: 0; margin-top: 15px; width: 100%; }
-            .btn-cta { width: 100%; }
             h1 { font-size: 2.5rem; }
             .top-left-brand { position: relative; top: 20px; left: 0; text-align: center; margin-bottom: -40px; }
         }
@@ -183,12 +205,16 @@
 </div>
 
 <main>
-    <section class="hero-workstation">
-        <div class="monitor-wrapper">
-            <div class="video-monitor">
-                <iframe src="https://www.youtube.com/embed/qHwgrgWFl98?autoplay=1&mute=1&loop=1&playlist=qHwgrgWFl98&controls=0&modestbranding=1" allow="autoplay; encrypted-media"></iframe>
-            </div>
-            <img src="https://i.ibb.co/ZzCVqzH9/Gemini-Generated-Image-bn1v5kbn1v5kbn1v.png" alt="Strategic Console" class="base-image">
+    <section class="video-hud-container">
+        <div class="hud-bracket top-left"></div>
+        <div class="hud-bracket top-right"></div>
+        <div class="hud-bracket bottom-left"></div>
+        <div class="hud-bracket bottom-right"></div>
+        <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/qHwgrgWFl98?autoplay=1&mute=1&loop=1&playlist=qHwgrgWFl98&controls=0&modestbranding=1" allow="autoplay; encrypted-media"></iframe>
+        </div>
+        <div style="font-family: 'Fira Code'; font-size: 0.6rem; color: var(--accent-cyan); margin-top: 10px; letter-spacing: 2px;">
+            INTEL_FEED: ACTIVE // STATUS: ENCRYPTED
         </div>
     </section>
 
@@ -197,7 +223,7 @@
         <div class="job-title" id="typewriter"></div>
         <div style="margin-top: 40px;">
             <a href="#contact" class="btn btn-cta">START_FREE_DIAGNOSTIC</a>
-            <a href="https://markreciopro.github.io/Portfolio/" target="_blank" class="btn btn-outline">EXPLORE_PORTFOLIO</a>
+            <a href="https://markreciopro.github.io/Portfolio/" target="_blank" class="btn btn-outline">FULL_PORTFOLIO</a>
         </div>
     </header>
 
@@ -209,72 +235,70 @@
                 Stop fighting your data and start <span style="color: var(--accent-green);">winning with it.</span>
             </h2>
             <p style="font-size: 1.15rem; line-height: 1.9; margin: 20px 0; color: #d1d7de;">
-                Small and mid-sized businesses are often sitting on a goldmine of information trapped in "dirty" silos and broken spreadsheets. 
                 I bridge the gap between <strong>high-level business strategy</strong> and <strong>low-level technical execution</strong>. 
-            </p>
-            <p style="font-size: 1.1rem; line-height: 1.9; color: #8b949e;">
-                By combining an MBA’s strategic focus with surgical precision in <strong>Python, R, Microsoft Power BI, and SQL</strong>, I transform fragmented chaos into automated decision engines that drive actual ROI.
+                Using Python, Power BI, and SQL, I transform fragmented chaos into automated decision engines.
             </p>
         </section>
 
-        <h2 class="section-title">Strategic Engagement Tiers</h2>
+        <h2 class="section-title">Mission Archives // Portfolio</h2>
+        <div class="portfolio-grid">
+            <div class="portfolio-item">
+                <div class="portfolio-thumb">
+                    <img src="https://images.unsplash.com/photo-1551288049-bbda4e3a471e?auto=format&fit=crop&q=80&w=800" alt="Data Remediation">
+                </div>
+                <div class="portfolio-info">
+                    <span class="pitch-tag" style="font-size: 0.6rem;">CASE_01: REMEDIATION</span>
+                    <h4>Legacy ERP Cleanup</h4>
+                    <p>Remediated 5 years of "dirty" staffing data into a clean SQL schema for real-time reporting.</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">SQL</span><span class="tech-tag">Python</span><span class="tech-tag">ETL</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="portfolio-item">
+                <div class="portfolio-thumb">
+                    <img src="https://images.unsplash.com/photo-1543286386-2e659306cd6c?auto=format&fit=crop&q=80&w=800" alt="Executive Dashboard">
+                </div>
+                <div class="portfolio-info">
+                    <span class="pitch-tag" style="font-size: 0.6rem;">CASE_02: ARCHITECTURE</span>
+                    <h4>MBA Strategic Dashboard</h4>
+                    <p>Designed a Power BI suite for a mid-sized firm, automating board-level KPI tracking.</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Power BI</span><span class="tech-tag">DAX</span><span class="tech-tag">Business Strategy</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="portfolio-item">
+                <div class="portfolio-thumb">
+                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&q=80&w=800" alt="Automation">
+                </div>
+                <div class="portfolio-info">
+                    <span class="pitch-tag" style="font-size: 0.6rem;">CASE_03: AUTOMATION</span>
+                    <h4>Automated Decision Engine</h4>
+                    <p>Built a custom Python pipeline that identified $200k in annual cost-leakage within 4 weeks.</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Python</span><span class="tech-tag">Predictive Analytics</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">Engagement Tiers</h2>
         <div class="services-grid">
-            
             <div class="section-card" style="border-top: 2px solid var(--accent-cyan);">
                 <span class="pitch-tag">V_01: DISCOVERY</span>
                 <h3 style="color: var(--accent-cyan); margin-top: 0;">Diagnostic Audit</h3>
-                <p style="font-size: 0.85rem; color: #8b949e; flex-grow: 1;">A technical stress test of your current data hygiene. I identify where your organization is losing time and capital.</p>
-                <ul style="font-size: 0.8rem; padding-left: 18px; margin: 15px 0;">
-                    <li>Schema Integrity Check</li>
-                    <li>Cost-Leakage Identification</li>
-                    <li>KPI Feasibility Roadmap</li>
-                </ul>
-                <div class="pricing-box" style="color: var(--accent-green); background: rgba(63, 185, 80, 0.1);">FREE_30MIN_DIAGNOSTIC</div>
-                <div class="pricing-footer">Deliverable: Strategic Roadmap</div>
+                <p style="font-size: 0.85rem; color: #8b949e; flex-grow: 1;">A technical stress test of your current data hygiene and KPI feasibility roadmap.</p>
+                <div class="btn" style="font-size: 0.65rem; padding: 10px; background: rgba(63, 185, 80, 0.1); color: var(--accent-green); cursor: default;">FREE_30MIN_SESSION</div>
             </div>
 
             <div class="section-card" style="border-top: 2px solid var(--accent-gold);">
                 <span class="pitch-tag">V_1.5: REMEDIATION</span>
                 <h3 style="color: var(--accent-gold); margin-top: 0;">The Logic Pilot</h3>
-                <p style="font-size: 0.85rem; color: #8b949e; flex-grow: 1;">Active remediation of messy datasets. I build the scripts that clean your past and a dashboard that automates your future.</p>
-                <ul style="font-size: 0.8rem; padding-left: 18px; margin: 15px 0;">
-                    <li><strong>Custom Remediation Logic</strong></li>
-                    <li>Legacy ERP/CRM Mapping</li>
-                    <li><strong>1 Strategic Power BI Dashboard</strong></li>
-                </ul>
-                <div class="pricing-box" style="color: #fff; background: rgba(210, 153, 34, 0.15);">EST: $1,800 - $3,500</div>
-                <div class="pricing-footer">Timeline: 2-3 Weeks</div>
-            </div>
-
-            <div class="section-card" style="border-top: 2px solid var(--accent-green);">
-                <span class="pitch-tag">V_02: ARCHITECTURE</span>
-                <h3 style="color: var(--accent-green); margin-top: 0;">Fractional BI Lead</h3>
-                <p style="font-size: 0.85rem; color: #8b949e; flex-grow: 1;">Acting as your on-call Data Architect to build a scalable, automated decision engine for your firm.</p>
-                <ul style="font-size: 0.8rem; padding-left: 18px; margin: 15px 0;">
-                    <li><strong>End-to-End ETL Pipelines</strong></li>
-                    <li>Predictive ML Integration</li>
-                    <li>Automated Board Reporting</li>
-                </ul>
-                <div class="pricing-box" style="color: #fff; background: rgba(63, 185, 80, 0.15);">STARTS @ $4,500</div>
-                <div class="pricing-footer">Scale: Monthly Retainer</div>
-            </div>
-        </div>
-
-        <h2 class="section-title">Strategic Endorsements</h2>
-        <div class="testimonial-grid">
-            <div class="quote-card">
-                "As a mid-sized firm, we couldn't justify a full data team. Mark stepped in as a solo partner and built an automated ETL pipeline that gives me 15 hours of my week back. He's the only specialist I've found who can bridge the gap between margin and logic."
-                <span class="quote-author">
-                    — CEO. Ken Arancibia, Synergy Staffing
-                    <small style="display:block; color: var(--accent-green); font-size: 0.65rem; margin-top: 8px; letter-spacing: 1px;">[VERIFIED_PARTNERSHIP]</small>
-                </span>
-            </div>
-            <div class="quote-card">
-                "Technical proficiency combined with an MBA mindset is rare. Mark delivers both surgical precision in data and high-level strategic context for leadership. He transformed our fragmented silos into a single source of truth in under six weeks."
-                <span class="quote-author">
-                    — Dr. Elena Vance, VP of Operations Analytics
-                    <small style="display:block; color: var(--accent-green); font-size: 0.65rem; margin-top: 8px; letter-spacing: 1px;">[VERIFIED_STAKEHOLDER]</small>
-                </span>
+                <p style="font-size: 0.85rem; color: #8b949e; flex-grow: 1;">Active remediation of messy datasets and creation of automated Power BI dashboards.</p>
+                <div style="font-family: 'Fira Code'; color: #fff; font-size: 0.8rem; background: rgba(210, 153, 34, 0.1); padding: 10px; border-radius: 4px; text-align: center;">EST: $1,800 - $3,500</div>
             </div>
         </div>
 
@@ -285,15 +309,13 @@
                     <li><span>DIRECT_COMM</span> <a href="tel:7022014905">(702) 201-4905</a></li>
                     <li><span>PRIMARY_EMAIL</span> <a href="mailto:mar@marec.site">mar@marec.site</a></li>
                     <li><span>LINKEDIN</span> <a href="https://www.linkedin.com/in/marecio" target="_blank">linkedin.com/in/marecio</a></li>
-                    <li><span>PORTFOLIO_ENGINE</span> <a href="https://markreciopro.github.io/Portfolio/" target="_blank">View Live Case Studies</a></li>
-                    <li><span>CURRENT_BASE</span> Las Vegas, NV</li>
                 </ul>
             </div>
             <div class="contact-form">
                 <form action="https://formspree.io/f/mreaeden" method="POST">
                     <input type="text" name="name" placeholder="Organization Name" required>
                     <input type="email" name="email" placeholder="Email Address" required>
-                    <textarea name="message" rows="4" placeholder="Briefly describe the challenge (e.g., 'Unreliable KPIs', 'Legacy ERP migration')..." required></textarea>
+                    <textarea name="message" rows="4" placeholder="Briefly describe the challenge..." required></textarea>
                     <button type="submit" class="btn btn-cta" style="width: 100%; margin: 0;">SEND.REQUEST(DIAGNOSTIC)</button>
                 </form>
             </div>
@@ -303,15 +325,13 @@
 
 <footer class="footer">
     <p>© 2026 MARK_RECIO, MBA | SYSTEM_STATUS: <span style="color: var(--accent-green);">OPERATIONAL</span></p>
-    <div class="footer-socials">
-        <a href="https://www.linkedin.com/in/marecio" target="_blank">LINKEDIN</a>
-        <a href="https://github.com/markreciopro" target="_blank">GITHUB</a>
-        <a href="https://markreciopro.github.io/Portfolio/" target="_blank">PORTFOLIO</a>
+    <div style="margin-top: 15px; display: flex; justify-content: center; gap: 20px;">
+        <a href="https://github.com/markreciopro" style="color: #8b949e; font-size: 0.75rem; text-decoration: none; font-family: 'Fira Code';">GITHUB</a>
+        <a href="https://www.linkedin.com/in/marecio" style="color: #8b949e; font-size: 0.75rem; text-decoration: none; font-family: 'Fira Code';">LINKEDIN</a>
     </div>
 </footer>
 
 <script>
-    // Optimized Typewriter
     const typeText = "Strategic Business Intelligence | MBA Specialist";
     let typeIndex = 0;
     function typeWriter() {
@@ -323,20 +343,8 @@
         }
     }
 
-    // Diverse Stack Streaming (A+ Refinement)
     const stream = document.getElementById('codeStream');
-    const snippets = [
-        'library(tidyverse)',
-        'na.omit(df)',
-        'SELECT * FROM erp_silo',
-        'CALCULATE([Total_ROI], ALL(Calendar))', // Power BI DAX
-        'DIVIDE([Margin], [Revenue], 0)', // Power BI DAX
-        'MBA_STRATEGY: ACTIVE',
-        'REMEDIATION: EXECUTING',
-        'df.groupby("KPI").mean()', // Python
-        'model.fit(X_train, y_train)', // ML
-        'SYSTEM: STABLE'
-    ];
+    const snippets = ['library(tidyverse)', 'SELECT * FROM silos', 'CALCULATE([ROI])', 'df.groupby("KPI")', 'MBA_STRATEGY: ACTIVE'];
     
     function createSnippet() {
         if(!stream) return;
@@ -344,24 +352,18 @@
         div.className = 'code-snippet';
         div.innerText = snippets[Math.floor(Math.random() * snippets.length)];
         div.style.left = Math.random() * 92 + 'vw';
-        // Randomize speed for more organic feel
         const duration = (Math.random() * 8 + 12);
         div.style.setProperty('--duration', duration + 's');
         stream.appendChild(div);
-        
-        // Cleanup to prevent DOM bloat
         setTimeout(() => div.remove(), duration * 1000);
     }
 
     window.addEventListener('DOMContentLoaded', () => {
         typeWriter();
-        // Initial burst
-        for(let i=0; i<5; i++) setTimeout(createSnippet, i * 500);
-        // Continuous stream
-        setInterval(createSnippet, 2000);
+        for(let i=0; i<8; i++) setTimeout(createSnippet, i * 400);
+        setInterval(createSnippet, 1800);
     });
 </script>
 
 </body>
 </html>
-
