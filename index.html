@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mark Recio, MBA | Data Architecture & BI Remediation</title>
+    <title>Mark Recio | Strategic Data Architect & Decision Engines</title>
     
-    <meta name="title" content="Data Architect & BI Specialist | Mark Recio, MBA">
-    <meta name="description" content="Strategic Data Architect specializing in messy data remediation, Python/R logic, and MBA-level business intelligence. Fix your data silos and automate ROI.">
+    <meta name="title" content="Data Architect & BI Partner | Mark Recio">
+    <meta name="description" content="Strategic Data Partner for SMBs. Moving businesses from descriptive to prescriptive intelligence using Power BI, Python, and R.">
     
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/markreciopro/marec/main/logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;700&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
@@ -14,21 +14,22 @@
     <style>
         :root {
             --bg-dark: #0d1117; 
-            --bg-card: rgba(22, 27, 34, 0.9); 
+            --bg-card: rgba(22, 27, 34, 0.94); 
             --accent-cyan: #58a6ff;    
             --accent-green: #3fb950; 
-            --accent-gold: #d29922;
+            --accent-gold: #f2c811; 
             --accent-purple: #bc8cff;
             --text-main: #c9d1d9;      
             --border: #30363d;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
         
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: var(--bg-dark); }
         ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--accent-cyan); }
 
         body { 
             font-family: 'Inter', sans-serif; 
@@ -36,135 +37,90 @@
             color: var(--text-main); 
             margin: 0; 
             background-color: var(--bg-dark); 
-            /* Laptop Image as Fixed Background */
             background-image: 
-                linear-gradient(rgba(13, 17, 23, 0.8), rgba(13, 17, 23, 0.95)),
+                linear-gradient(rgba(13, 17, 23, 0.88), rgba(13, 17, 23, 0.96)),
                 url('https://i.ibb.co/ZzCVqzH9/Gemini-Generated-Image-bn1v5kbn1v5kbn1v.png');
             background-attachment: fixed;
             background-size: cover;
             background-position: center;
             overflow-x: hidden;
-            scroll-behavior: smooth;
         }
 
-        /* --- Branding --- */
-        .top-left-brand { 
-            position: absolute; 
-            top: 25px; 
-            left: 25px; 
-            z-index: 100; 
-        }
-        
-        .pixel-logo { 
-            width: 150px; 
-            height: auto; 
-            image-rendering: pixelated;
-            filter: drop-shadow(0 0 10px rgba(88, 166, 255, 0.3));
-            transition: transform 0.3s ease;
-        }
+        nav { padding: 30px; position: absolute; width: 100%; top: 0; z-index: 1000; display: flex; justify-content: space-between; align-items: center;}
+        .pixel-logo { width: 140px; image-rendering: pixelated; filter: drop-shadow(0 0 10px rgba(88, 166, 255, 0.2)); transition: var(--transition); }
+        .pixel-logo:hover { filter: drop-shadow(0 0 15px var(--accent-cyan)); transform: scale(1.05); }
 
-        .pixel-logo:hover { transform: scale(1.05); }
-
-        /* --- Code Stream --- */
-        #codeStream {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1;
-            overflow: hidden;
-            pointer-events: none;
-        }
-        .code-snippet {
-            position: absolute;
-            font-family: 'Fira Code', monospace;
-            font-size: 0.8rem;
-            color: var(--accent-cyan);
-            opacity: 0.1;
-            white-space: nowrap;
-            animation: flow var(--duration) linear infinite;
-        }
-        @keyframes flow {
-            0% { transform: translateY(110vh); }
-            100% { transform: translateY(-20vh); }
-        }
-
-        /* --- Hero Section (Video Only) --- */
-        .hero-video-container {
-            max-width: 500px;
-            margin: 120px auto 40px auto;
-            padding: 0 20px;
-            text-align: center;
-        }
-
+        .hero-video-container { max-width: 800px; margin: 130px auto 30px auto; padding: 0 20px; }
         .video-wrapper {
-            position: relative;
-            width: 100%;
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-            border: 2px solid var(--border);
-            border-radius: 8px;
-            overflow: hidden;
-            background: #000;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 20px rgba(88, 166, 255, 0.2);
+            position: relative; padding-bottom: 56.25%; border: 1px solid var(--border);
+            border-radius: 12px; overflow: hidden; background: #000;
+            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.8);
         }
-
-        .video-wrapper iframe {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            border: none;
-        }
+        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; opacity: 0.75; }
 
         .container { max-width: 1100px; margin: auto; padding: 0 20px; }
         
-        header { text-align: center; padding: 20px 20px 60px 20px; }
-        h1 { margin: 0; font-size: clamp(2.2rem, 8vw, 4rem); font-family: 'Fira Code', monospace; color: #fff; font-weight: 700; letter-spacing: -2px; }
-        .job-title { font-size: 1.1rem; color: var(--accent-cyan); margin: 10px 0; font-family: 'Fira Code', monospace; text-transform: uppercase; letter-spacing: 4px; min-height: 1.5em; }
+        header { text-align: center; padding: 40px 20px; }
+        h1 { margin: 0; font-size: clamp(2.2rem, 8vw, 3.8rem); font-family: 'Fira Code', monospace; color: #fff; letter-spacing: -2px; }
+        
+        .job-title { font-size: 1rem; color: var(--accent-cyan); margin: 15px 0; font-family: 'Fira Code', monospace; text-transform: uppercase; letter-spacing: 3px; min-height: 1.6em;}
+        #typewriter::after { content: '_'; animation: blink 1s infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
 
-        /* --- UI Elements --- */
         .btn-group { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-top: 35px; }
-        .btn { 
-            display: inline-block; padding: 14px 28px; text-decoration: none; border-radius: 4px; 
-            font-weight: 700; transition: 0.3s; font-family: 'Fira Code', monospace; 
-            font-size: 0.75rem; text-transform: uppercase; cursor: pointer;
-        }
-        .btn-cta { background: var(--accent-cyan); color: #0d1117; }
-        .btn-portfolio { background: rgba(188, 140, 255, 0.1); color: var(--accent-purple); border: 1px solid var(--accent-purple); }
-        .btn-outline { border: 1px solid var(--border); color: #8b949e; background: transparent; }
+        .btn { padding: 16px 32px; text-decoration: none; border-radius: 4px; font-weight: 700; font-family: 'Fira Code', monospace; font-size: 0.75rem; text-transform: uppercase; transition: var(--transition); cursor: pointer; }
+        .btn-cta { background: var(--accent-cyan); color: #0d1117; border: none; box-shadow: 0 4px 14px 0 rgba(88, 166, 255, 0.3); }
+        .btn-outline { border: 1px solid var(--border); color: #8b949e; background: rgba(255,255,255,0.02); }
+        .btn:hover { transform: translateY(-3px); filter: brightness(1.2); }
 
-        .section-card {
-            background: var(--bg-card); padding: 40px; border: 1px solid var(--border);
-            border-radius: 8px; margin-bottom: 30px; backdrop-filter: blur(12px);
-        }
-        .pitch-block { border-left: 5px solid var(--accent-green); }
-        .pitch-tag { font-family: 'Fira Code', monospace; font-size: 0.7rem; color: var(--accent-cyan); display: block; text-transform: uppercase; margin-bottom: 10px; }
+        .social-links { margin-top: 20px; display: flex; justify-content: center; gap: 20px; }
+        .social-link { color: #8b949e; text-decoration: none; font-family: 'Fira Code'; font-size: 0.7rem; transition: var(--transition); border-bottom: 1px solid transparent; }
+        .social-link:hover { color: var(--accent-cyan); border-bottom: 1px solid var(--accent-cyan); }
 
-        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-        h2.section-title { font-family: 'Fira Code'; color: var(--accent-cyan); text-transform: uppercase; font-size: 1.5rem; border-bottom: 1px solid var(--border); padding-bottom: 10px; margin: 60px 0 30px 0; }
+        .section-card { background: var(--bg-card); padding: 45px; border: 1px solid var(--border); border-radius: 12px; margin-bottom: 30px; backdrop-filter: blur(12px); transition: var(--transition); }
+        .pitch-block { border-left: 4px solid var(--accent-cyan); }
+        .pitch-tag { font-family: 'Fira Code', monospace; font-size: 0.7rem; color: var(--accent-cyan); display: block; text-transform: uppercase; margin-bottom: 12px; }
 
-        /* --- Contact --- */
-        #contact { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin: 80px auto; padding: 60px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; }
-        input, textarea { width: 100%; padding: 15px; background: rgba(13, 17, 23, 0.9); border: 1px solid var(--border); color: white; border-radius: 4px; margin-bottom: 20px; }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
+        h2.section-title { font-family: 'Fira Code'; color: var(--accent-cyan); text-transform: uppercase; font-size: 1.1rem; border-bottom: 1px solid var(--border); padding-bottom: 10px; margin: 80px 0 30px 0; letter-spacing: 2px; }
 
-        .footer { text-align: center; padding: 60px 20px; background: #010409; color: #8b949e; border-top: 1px solid var(--border); }
-        .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s; }
+        .price-box { font-family: 'Fira Code'; font-weight: bold; background: rgba(0,0,0,0.4); padding: 15px; border-radius: 6px; text-align: center; margin-top: 20px; border: 1px solid var(--border); }
+        .tech-stack { font-size: 0.7rem; color: var(--accent-purple); font-family: 'Fira Code'; margin-top: 10px; display: block; }
+
+        .table-container { overflow-x: auto; border-radius: 12px; border: 1px solid var(--border); margin-top: 20px; background: rgba(0,0,0,0.2);}
+        table { width: 100%; border-collapse: collapse; font-size: 0.85rem; min-width: 750px; }
+        th, td { padding: 18px; border-bottom: 1px solid var(--border); text-align: left;}
+        th { background: rgba(0,0,0,0.3); color: var(--accent-cyan); font-family: 'Fira Code'; text-transform: uppercase; font-size: 0.7rem; }
+        .highlight-col { color: #fff; font-weight: bold; background: rgba(88, 166, 255, 0.08); border-left: 1px solid var(--border); border-right: 1px solid var(--border); }
+        tr:last-child td { border-bottom: none; }
+
+        #contact { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin: 100px auto; padding: 50px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; }
+        input, textarea { width: 100%; padding: 15px; background: rgba(13, 17, 23, 0.8); border: 1px solid var(--border); color: white; border-radius: 4px; margin-bottom: 20px; font-family: 'Inter', sans-serif; }
+
+        #codeStream { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+        .code-snippet { position: absolute; font-family: 'Fira Code', monospace; font-size: 0.75rem; color: var(--accent-cyan); opacity: 0.06; animation: flow var(--duration) linear infinite; }
+        @keyframes flow { 0% { transform: translateY(110vh); } 100% { transform: translateY(-20vh); } }
+
+        .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s ease-out; }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        @media (max-width: 850px) { 
-            #contact { grid-template-columns: 1fr; padding: 30px; }
-            .top-left-brand { position: relative; top: 0; left: 0; padding: 20px; text-align: center; }
-        }
+        .footer { text-align: center; padding: 80px 20px; color: #8b949e; border-top: 1px solid var(--border); font-family: 'Fira Code'; font-size: 0.8rem; }
+
+        @media (max-width: 850px) { #contact { grid-template-columns: 1fr; padding: 30px; } nav { position: relative; justify-content: center; } }
     </style>
 </head>
 <body>
 
 <div id="codeStream"></div>
 
-<div class="top-left-brand">
+<nav>
     <a href="https://marec.site">
         <img src="https://raw.githubusercontent.com/markreciopro/marec/main/logo.png" class="pixel-logo" alt="MAREC Logo">
     </a>
-</div>
+</nav>
 
 <main>
-    <section class="hero-video-container">
+    <section class="hero-video-container reveal">
         <div class="video-wrapper">
             <iframe src="https://www.youtube.com/embed/qHwgrgWFl98?autoplay=1&mute=1&loop=1&playlist=qHwgrgWFl98&controls=0&modestbranding=1" allow="autoplay; encrypted-media"></iframe>
         </div>
@@ -174,85 +130,160 @@
         <h1>MARK_RECIO, MBA</h1>
         <div class="job-title" id="typewriter"></div>
         <div class="btn-group">
-            <a href="#contact" class="btn btn-cta">START_FREE_DIAGNOSTIC</a>
-            <a href="https://markreciopro.github.io/Portfolio/" target="_blank" class="btn btn-portfolio">VIEW_DEPLOYED_PORTFOLIO</a>
-            <a href="https://github.com/markreciopro" target="_blank" class="btn btn-outline">VIEW_GITHUB_ENGINE</a>
+            <a href="#contact" class="btn btn-cta">START_THE_ROADMAP</a>
+            <a href="https://github.com/markreciopro" target="_blank" class="btn btn-outline">VIEW_SYSTEM_LOGIC</a>
+        </div>
+        <div class="social-links">
+            <a href="https://markreciopro.github.io/Portfolio/" target="_blank" class="social-link">[DATA_PORTFOLIO]</a>
+            <a href="https://www.linkedin.com/in/marecio/" target="_blank" class="social-link">[LINKEDIN_PROFILE]</a>
         </div>
     </header>
 
     <div class="container">
         <section class="section-card pitch-block reveal">
-            <span class="pitch-tag">[MISSION_CRITICAL_OBJECTIVE]</span>
-            <h2 style="color: #fff; font-family: 'Fira Code', monospace; margin-top: 0;">Stop fighting data, start <span style="color: var(--accent-green);">winning.</span></h2>
-            <p style="font-size: 1.1rem;">
-                I bridge the gap between high-level business strategy and technical execution. 
-                I turn fragmented data into automated decision engines for SMBs.
+            <span class="pitch-tag">[THE_PARTNERSHIP]</span>
+            <h2 style="color: #fff; font-family: 'Fira Code'; margin-top: 0;">Statistical Rigor. <span style="color: var(--accent-cyan);">Business Logic.</span></h2>
+            <p>
+                As a solo contractor, I don't just hand over charts. I build <b>Decision Engines</b>. I bridge the gap between high-level MBA strategy and granular engineering, utilizing <b>Python</b> for scalable automation and <b>R</b> for deep statistical diagnostic modeling.
             </p>
         </section>
 
-        <h2 class="section-title">Strategic Engagement</h2>
+        <h2 class="section-title">The Data Maturity Roadmap</h2>
         <div class="services-grid">
+            
             <div class="section-card reveal">
-                <span class="pitch-tag">V_01: AUDIT</span>
-                <h3 style="color: var(--accent-cyan);">Diagnostic Audit</h3>
-                <p>Technical stress test of your data hygiene.</p>
-                <div style="color: var(--accent-green); font-family: 'Fira Code'; font-weight: bold;">FREE_CONSULT</div>
+                <span class="pitch-tag">STAGE 01: DESCRIPTIVE AUDIT</span>
+                <h3 style="color: var(--accent-cyan); font-family: 'Fira Code';">Strategic Mapping</h3>
+                <p>A non-invasive business logic audit. I identify data silos, security risks, and logic gaps to provide a high-level strategic roadmap.</p>
+                <div class="price-box" style="color: var(--accent-green);">FREE_DIAGNOSTIC</div>
+                <span class="tech-stack">FOCUS: MBA Strategy | Gap Analysis</span>
             </div>
+
             <div class="section-card reveal">
-                <span class="pitch-tag">V_1.5: LOGIC</span>
-                <h3 style="color: var(--accent-gold);">The Logic Pilot</h3>
-                <p>Python/R scripts to clean messy datasets.</p>
-                <div style="font-family: 'Fira Code'; color: #fff;">EST: $2.8K - $3.5K</div>
+                <span class="pitch-tag">STAGE 02: DIAGNOSTIC REMEDIATION</span>
+                <h3 style="color: var(--accent-cyan); font-family: 'Fira Code';">The Why?</h3>
+                <p>Engineering the core. Deploying custom <b>Python/R</b> scripts to clean data silos and delivery of <b>1 Core Power BI Dashboard</b> for root-cause analysis.</p>
+                <div class="price-box" style="color: #fff;">$1.8K - $2.5K</div>
+                <span class="tech-stack">STACK: Python | R | Power BI</span>
             </div>
-            <div class="section-card reveal">
-                <span class="pitch-tag">V_02: BUILD</span>
-                <h3 style="color: var(--accent-green);">Architecture</h3>
-                <p>Fully automated, scalable decision engines.</p>
-                <div style="font-family: 'Fira Code'; color: #fff;">FIXED_BID: $6K+</div>
+
+            <div class="section-card reveal" style="border-top: 3px solid var(--accent-gold);">
+                <span class="pitch-tag">STAGE 03: PREDICTIVE FORECASTING</span>
+                <h3 style="color: #fff; font-family: 'Fira Code';">The Future</h3>
+                <p>Scientific foresight. Deploying hybrid forecasting models using <b>Python (Scikit-Learn)</b> for ML scaling and <b>R (Fable)</b> for statistical validation.</p>
+                <div class="price-box" style="color: var(--accent-gold); border-color: var(--accent-gold);">$3.5K - $5.5K</div>
+                <span class="tech-stack">STACK: Python | R | Time-Series ML</span>
+            </div>
+
+            <div class="section-card reveal" style="border-top: 4px solid var(--accent-green);">
+                <span class="pitch-tag">STAGE 04: PRESCRIPTIVE ARCHITECTURE</span>
+                <h3 style="color: var(--accent-green); font-family: 'Fira Code';">Decision Engines</h3>
+                <p>Fully automated systems that recommend strategic actions based on real-time organizational data flows.</p>
+                <div class="price-box" style="color: #fff;">$8K+ FIXED_BID</div>
+                <span class="tech-stack">STACK: Shiny | Python | API Integrations</span>
             </div>
         </div>
 
+        <h2 class="section-title">The Strategic Advantage</h2>
+        <section class="section-card reveal" style="padding: 15px;">
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Platform Freelancer</th>
+                            <th>Big Agency</th>
+                            <th class="highlight-col">Mark Recio (Solo Partner)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><b>Strategy</b></td>
+                            <td>Task-based (Order taker)</td>
+                            <td>Fragmented (Junior staff)</td>
+                            <td class="highlight-col">MBA-led (Strategic Lead)</td>
+                        </tr>
+                        <tr>
+                            <td><b>Logic</b></td>
+                            <td>Basic Formulas</td>
+                            <td>Black Box</td>
+                            <td class="highlight-col">Custom Python/R (Transparent)</td>
+                        </tr>
+                        <tr>
+                            <td><b>Cost</b></td>
+                            <td>Hidden fees / Hourly</td>
+                            <td>High Overhead</td>
+                            <td class="highlight-col">Flat-Rate / Fair Market</td>
+                        </tr>
+                        <tr>
+                            <td><b>Speed</b></td>
+                            <td>Variable</td>
+                            <td>Months</td>
+                            <td class="highlight-col">Agile (Weeks)</td>
+                        </tr>
+                        <tr>
+                            <td><b>Outcome</b></td>
+                            <td>A Report</td>
+                            <td>A Project</td>
+                            <td class="highlight-col">A Decision Engine</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
         <div id="contact" class="reveal">
             <div>
-                <h3 style="color:var(--accent-cyan);">[STRATEGIC_INTEL]</h3>
-                <p><strong>Primary:</strong> mar@marec.site</p>
-                <p><strong>Direct:</strong> (702) 501-9385</p>
-                <p><strong>Base:</strong> Las Vegas / Remote</p>
+                <h3 style="color:var(--accent-cyan); font-family: 'Fira Code'; margin-top: 0;">[INITIATE_PROTOCOL]</h3>
+                <p><b>Partner:</b> Mark Recio, MBA</p>
+                <p><b>Email:</b> mar@marec.site</p>
+                <p><b>Links:</b> <a href="https://www.linkedin.com/in/marecio/" target="_blank" style="color:var(--accent-cyan); text-decoration:none;">LinkedIn</a> | <a href="https://markreciopro.github.io/Portfolio/" target="_blank" style="color:var(--accent-cyan); text-decoration:none;">Portfolio</a></p>
+                <p><b>Phone: </b>(702) 201-4905</p>
             </div>
             <form action="https://formspree.io/f/mreaeden" method="POST">
-                <input type="text" name="name" placeholder="Org Name" required>
-                <input type="email" name="email" placeholder="Email" required>
-                <textarea name="message" rows="4" placeholder="Briefly describe the challenge..." required></textarea>
-                <button type="submit" class="btn btn-cta" style="width: 100%;">SEND_REQUEST</button>
+                <input type="text" name="name" placeholder="Full Name / Company" required>
+                <input type="email" name="email" placeholder="Professional Email" required>
+                <textarea name="message" rows="4" placeholder="Stage 2 Remediation or Stage 4 Decision Engine?" required></textarea>
+                <button type="submit" class="btn btn-cta" style="width: 100%;">START_STRATEGY_SESSION</button>
             </form>
         </div>
     </div>
 </main>
 
 <footer class="footer">
-    <p>© 2026 MARK_RECIO, MBA | <span style="color: var(--accent-green);">SYSTEM_OPERATIONAL</span></p>
+    <p>© 2026 MARK_RECIO | <span style="color: var(--accent-green);">SYSTEM_OPERATIONAL</span></p>
 </footer>
 
 <script>
-    const typeText = "Data Architect | BI Specialist";
+    const typeText = "Strategic Data Architect | Decision Engine Expert";
     let typeIndex = 0;
     function typeWriter() {
         const target = document.getElementById("typewriter");
         if (target && typeIndex < typeText.length) {
-            target.innerHTML += typeText.charAt(typeIndex);
+            target.textContent += typeText.charAt(typeIndex);
             typeIndex++;
-            setTimeout(typeWriter, 80);
+            setTimeout(typeWriter, 60);
         }
     }
 
     const stream = document.getElementById('codeStream');
-    const snippets = ['library(tidyverse)', 'df %>% drop_na()', 'SELECT * FROM silos', 'MBA_STRATEGY: ACTIVE'];
+    const snippets = [
+        'library(tidyverse)', 
+        'df %>% filter(roi > 1.5)', 
+        'from sklearn.linear_model import LinearRegression', 
+        'ggplot(data, aes(x,y))', 
+        'MBA_Strategy_Active', 
+        'Decision_Engine: LOADED',
+        'model.predict(X_test)',
+        'predict(model, n=12)'
+    ];
+
     function createSnippet() {
         const div = document.createElement('div');
         div.className = 'code-snippet';
         div.innerText = snippets[Math.floor(Math.random() * snippets.length)];
         div.style.left = Math.random() * 95 + 'vw';
-        const duration = Math.random() * 5 + 10;
+        const duration = Math.random() * 8 + 12;
         div.style.setProperty('--duration', duration + 's');
         stream.appendChild(div);
         setTimeout(() => div.remove(), duration * 1000);
@@ -268,7 +299,7 @@
         typeWriter();
         window.addEventListener("scroll", reveal);
         reveal();
-        setInterval(createSnippet, 2000);
+        setInterval(createSnippet, 1000);
     });
 </script>
 
