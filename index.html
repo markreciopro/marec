@@ -14,14 +14,14 @@
     <style>
         :root {
             --bg-dark: #0d1117; 
-            --bg-card: rgba(22, 27, 34, 0.35); /* More transparent cards */
+            --bg-card: rgba(22, 27, 34, 0.3); 
             --accent-cyan: #58a6ff;    
             --accent-green: #3fb950; 
             --accent-gold: #f2c811; 
             --accent-purple: #bc8cff;
             --text-main: #c9d1d9;      
             --border: rgba(255, 255, 255, 0.1);
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         * { box-sizing: border-box; }
@@ -37,9 +37,8 @@
             color: var(--text-main); 
             margin: 0; 
             background-color: var(--bg-dark); 
-            /* LIGHTER OVERLAYS - Shows more of the Gemini background image */
             background-image: 
-                linear-gradient(rgba(13, 17, 23, 0.1), rgba(13, 17, 23, 0.3)),
+                linear-gradient(rgba(13, 17, 23, 0.1), rgba(13, 17, 23, 0.2)),
                 url('https://i.ibb.co/ZzCVqzH9/Gemini-Generated-Image-bn1v5kbn1v5kbn1v.png');
             background-attachment: fixed;
             background-size: cover;
@@ -59,7 +58,7 @@
         #typewriter::after { content: '_'; animation: blink 1s infinite; }
         @keyframes blink { 50% { opacity: 0; } }
 
-        .section-card { background: var(--bg-card); padding: 40px; border: 1px solid var(--border); border-radius: 12px; margin-bottom: 30px; backdrop-filter: blur(8px); transition: var(--transition); }
+        .section-card { background: var(--bg-card); padding: 40px; border: 1px solid var(--border); border-radius: 12px; margin-bottom: 30px; backdrop-filter: blur(10px); transition: var(--transition); }
         .pitch-block { border-left: 4px solid var(--accent-cyan); }
         .pitch-tag { font-family: 'Fira Code'; font-size: 0.7rem; color: var(--accent-cyan); display: block; text-transform: uppercase; margin-bottom: 12px; }
 
@@ -75,11 +74,35 @@
         th { background: rgba(0,0,0,0.2); color: var(--accent-cyan); font-family: 'Fira Code'; font-size: 0.7rem; text-transform: uppercase; }
         .highlight-col { background: rgba(88, 166, 255, 0.08); font-weight: bold; color: #fff; }
 
+        /* VIDEO WRAPPER - TRANSPARENT BUT POPPING */
         .engagement-zone { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-bottom: 60px; }
-        .video-wrapper { position: relative; padding-bottom: 56.25%; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; background: #000; box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
-        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; opacity: 0.85; }
         
-        /* NO GREEN - CLEAR GLASS EFFECT */
+        .video-wrapper { 
+            position: relative; 
+            padding-bottom: 56.25%; 
+            border: 1px solid var(--border); 
+            border-radius: 12px; 
+            overflow: hidden; 
+            background: transparent; /* Changed from black to transparent */
+            box-shadow: 0 0 20px rgba(88, 166, 255, 0.2); /* Neon cyan glow */
+            transition: var(--transition);
+        }
+        .video-wrapper:hover {
+            box-shadow: 0 0 40px rgba(88, 166, 255, 0.4); /* Glow increases on hover */
+            transform: scale(1.01);
+        }
+        .video-wrapper iframe { 
+            position: absolute; 
+            top: 0; left: 0; 
+            width: 100%; height: 100%; 
+            border: none; 
+            opacity: 0.8; /* Video is slightly transparent to show background */
+            transition: var(--transition);
+        }
+        .video-wrapper:hover iframe {
+            opacity: 1; /* Video goes solid when interacting */
+        }
+        
         .meeting-container { 
             background: transparent; 
             border: 1px solid var(--border); 
@@ -87,18 +110,18 @@
             overflow: hidden; 
             display: flex; 
             flex-direction: column; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: var(--transition);
         }
         .meeting-header { 
             padding: 10px 20px; 
-            background: rgba(13, 17, 23, 0.4); 
+            background: rgba(13, 17, 23, 0.6); 
             border-bottom: 1px solid var(--border); 
             font-family: 'Fira Code'; 
             font-size: 0.7rem; 
             display: flex; 
             justify-content: space-between; 
             align-items: center; 
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(8px);
         }
         .status-dot { height: 8px; width: 8px; background: var(--accent-green); border-radius: 50%; display: inline-block; margin-right: 5px; animation: pulse 2s infinite; }
         @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
