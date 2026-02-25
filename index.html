@@ -14,13 +14,13 @@
     <style>
         :root {
             --bg-dark: #0d1117; 
-            --bg-card: rgba(22, 27, 34, 0.5); /* Lowered for clarity */
+            --bg-card: rgba(22, 27, 34, 0.35); /* More transparent cards */
             --accent-cyan: #58a6ff;    
             --accent-green: #3fb950; 
             --accent-gold: #f2c811; 
             --accent-purple: #bc8cff;
             --text-main: #c9d1d9;      
-            --border: rgba(48, 54, 61, 0.4);
+            --border: rgba(255, 255, 255, 0.1);
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
@@ -37,8 +37,9 @@
             color: var(--text-main); 
             margin: 0; 
             background-color: var(--bg-dark); 
+            /* LIGHTER OVERLAYS - Shows more of the Gemini background image */
             background-image: 
-                linear-gradient(rgba(13, 17, 23, 0.3), rgba(13, 17, 23, 0.5)),
+                linear-gradient(rgba(13, 17, 23, 0.1), rgba(13, 17, 23, 0.3)),
                 url('https://i.ibb.co/ZzCVqzH9/Gemini-Generated-Image-bn1v5kbn1v5kbn1v.png');
             background-attachment: fixed;
             background-size: cover;
@@ -58,7 +59,7 @@
         #typewriter::after { content: '_'; animation: blink 1s infinite; }
         @keyframes blink { 50% { opacity: 0; } }
 
-        .section-card { background: var(--bg-card); padding: 40px; border: 1px solid var(--border); border-radius: 12px; margin-bottom: 30px; backdrop-filter: blur(10px); transition: var(--transition); }
+        .section-card { background: var(--bg-card); padding: 40px; border: 1px solid var(--border); border-radius: 12px; margin-bottom: 30px; backdrop-filter: blur(8px); transition: var(--transition); }
         .pitch-block { border-left: 4px solid var(--accent-cyan); }
         .pitch-tag { font-family: 'Fira Code'; font-size: 0.7rem; color: var(--accent-cyan); display: block; text-transform: uppercase; margin-bottom: 12px; }
 
@@ -68,44 +69,42 @@
         .price-box { font-family: 'Fira Code'; font-weight: bold; background: rgba(0,0,0,0.3); padding: 12px; border-radius: 6px; text-align: center; margin-top: 15px; border: 1px solid var(--border); font-size: 0.85rem; }
         .tech-stack { font-size: 0.65rem; color: var(--accent-purple); font-family: 'Fira Code'; margin-top: 8px; display: block; }
 
-        .table-container { overflow-x: auto; border-radius: 12px; border: 1px solid var(--border); background: rgba(0,0,0,0.2); margin-top: 20px; }
+        .table-container { overflow-x: auto; border-radius: 12px; border: 1px solid var(--border); background: rgba(0,0,0,0.1); margin-top: 20px; backdrop-filter: blur(4px); }
         table { width: 100%; border-collapse: collapse; font-size: 0.85rem; min-width: 700px; }
         th, td { padding: 18px; text-align: left; border-bottom: 1px solid var(--border); }
-        th { background: rgba(0,0,0,0.3); color: var(--accent-cyan); font-family: 'Fira Code'; font-size: 0.7rem; text-transform: uppercase; }
+        th { background: rgba(0,0,0,0.2); color: var(--accent-cyan); font-family: 'Fira Code'; font-size: 0.7rem; text-transform: uppercase; }
         .highlight-col { background: rgba(88, 166, 255, 0.08); font-weight: bold; color: #fff; }
 
-        /* Command Center - Bottom Engagement */
         .engagement-zone { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-bottom: 60px; }
         .video-wrapper { position: relative; padding-bottom: 56.25%; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; background: #000; box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
         .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; opacity: 0.85; }
         
-        /* Removed Green - Now Clear Transparent Glass */
+        /* NO GREEN - CLEAR GLASS EFFECT */
         .meeting-container { 
-            background: rgba(13, 17, 23, 0.3); 
+            background: transparent; 
             border: 1px solid var(--border); 
             border-radius: 12px; 
             overflow: hidden; 
             display: flex; 
             flex-direction: column; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            backdrop-filter: blur(5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
         .meeting-header { 
             padding: 10px 20px; 
-            background: rgba(255, 255, 255, 0.05); 
+            background: rgba(13, 17, 23, 0.4); 
             border-bottom: 1px solid var(--border); 
             font-family: 'Fira Code'; 
             font-size: 0.7rem; 
             display: flex; 
             justify-content: space-between; 
             align-items: center; 
+            backdrop-filter: blur(5px);
         }
         .status-dot { height: 8px; width: 8px; background: var(--accent-green); border-radius: 50%; display: inline-block; margin-right: 5px; animation: pulse 2s infinite; }
         @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
 
-        /* Contact Section */
         #contact { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin: 40px auto 100px auto; padding: 45px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; backdrop-filter: blur(15px); }
-        input, textarea { width: 100%; padding: 15px; background: rgba(13, 17, 23, 0.6); border: 1px solid var(--border); color: white; border-radius: 4px; margin-bottom: 20px; font-family: 'Inter', sans-serif; }
+        input, textarea { width: 100%; padding: 15px; background: rgba(13, 17, 23, 0.5); border: 1px solid var(--border); color: white; border-radius: 4px; margin-bottom: 20px; font-family: 'Inter', sans-serif; }
         
         .btn { padding: 16px 32px; text-decoration: none; border-radius: 4px; font-weight: 700; font-family: 'Fira Code'; font-size: 0.75rem; text-transform: uppercase; transition: var(--transition); cursor: pointer; border: none; display: inline-block; text-align: center; }
         .btn-cta { background: var(--accent-cyan); color: #0d1117; box-shadow: 0 4px 14px 0 rgba(88, 166, 255, 0.3); }
@@ -216,7 +215,7 @@
                 <span style="color: var(--accent-green);"><span class="status-dot"></span> SECURE_ACTIVE</span>
             </div>
             <iframe 
-                src="https://marec-insights.whereby.com/consultation-roomc77bea31-3b97-4a97-9572-af80884df820?embed" 
+                src="https://marec-insights.whereby.com/consultation-roomc77bea31-3b97-4a97-9572-af80884df820?embed&background=off" 
                 allow="camera; microphone; fullscreen; speaker; display-capture" 
                 style="width: 100%; height: 350px; border: none; background: transparent;">
             </iframe>
