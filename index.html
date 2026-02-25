@@ -14,13 +14,13 @@
     <style>
         :root {
             --bg-dark: #0d1117; 
-            --bg-card: rgba(22, 27, 34, 0.75); 
+            --bg-card: rgba(22, 27, 34, 0.5); /* Lowered for clarity */
             --accent-cyan: #58a6ff;    
             --accent-green: #3fb950; 
             --accent-gold: #f2c811; 
             --accent-purple: #bc8cff;
             --text-main: #c9d1d9;      
-            --border: rgba(48, 54, 61, 0.6);
+            --border: rgba(48, 54, 61, 0.4);
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
@@ -38,7 +38,7 @@
             margin: 0; 
             background-color: var(--bg-dark); 
             background-image: 
-                linear-gradient(rgba(13, 17, 23, 0.5), rgba(13, 17, 23, 0.7)),
+                linear-gradient(rgba(13, 17, 23, 0.3), rgba(13, 17, 23, 0.5)),
                 url('https://i.ibb.co/ZzCVqzH9/Gemini-Generated-Image-bn1v5kbn1v5kbn1v.png');
             background-attachment: fixed;
             background-size: cover;
@@ -79,8 +79,27 @@
         .video-wrapper { position: relative; padding-bottom: 56.25%; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; background: #000; box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
         .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; opacity: 0.85; }
         
-        .meeting-container { background: var(--bg-card); border: 1px solid var(--accent-cyan); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 0 20px rgba(88, 166, 255, 0.1); }
-        .meeting-header { padding: 10px 20px; background: rgba(88, 166, 255, 0.1); border-bottom: 1px solid var(--border); font-family: 'Fira Code'; font-size: 0.7rem; display: flex; justify-content: space-between; align-items: center; }
+        /* Removed Green - Now Clear Transparent Glass */
+        .meeting-container { 
+            background: rgba(13, 17, 23, 0.3); 
+            border: 1px solid var(--border); 
+            border-radius: 12px; 
+            overflow: hidden; 
+            display: flex; 
+            flex-direction: column; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            backdrop-filter: blur(5px);
+        }
+        .meeting-header { 
+            padding: 10px 20px; 
+            background: rgba(255, 255, 255, 0.05); 
+            border-bottom: 1px solid var(--border); 
+            font-family: 'Fira Code'; 
+            font-size: 0.7rem; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+        }
         .status-dot { height: 8px; width: 8px; background: var(--accent-green); border-radius: 50%; display: inline-block; margin-right: 5px; animation: pulse 2s infinite; }
         @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
 
@@ -95,7 +114,11 @@
         .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s ease-out; }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        @media (max-width: 850px) { .engagement-zone, #contact { grid-template-columns: 1fr; } header { padding-top: 40px; } }
+        @media (max-width: 850px) { 
+            .engagement-zone, #contact { grid-template-columns: 1fr; text-align: center; } 
+            header { padding-top: 40px; } 
+            .meeting-header { justify-content: center; gap: 10px; }
+        }
     </style>
 </head>
 <body>
@@ -189,13 +212,13 @@
         </div>
         <div class="meeting-container">
             <div class="meeting-header">
-                <span>SECURE_NODE: marec-insights</span>
-                <span style="color: var(--accent-green);"><span class="status-dot"></span> SYSTEM_ACTIVE</span>
+                <span>NODE_ID: marec-insights</span>
+                <span style="color: var(--accent-green);"><span class="status-dot"></span> SECURE_ACTIVE</span>
             </div>
             <iframe 
                 src="https://marec-insights.whereby.com/consultation-roomc77bea31-3b97-4a97-9572-af80884df820?embed" 
                 allow="camera; microphone; fullscreen; speaker; display-capture" 
-                style="width: 100%; height: 350px; border: none;">
+                style="width: 100%; height: 350px; border: none; background: transparent;">
             </iframe>
         </div>
     </div>
@@ -203,7 +226,7 @@
     <div id="contact" class="reveal">
         <div>
             <h3 style="color:var(--accent-cyan); font-family: 'Fira Code'; margin-top: 0;">[INITIATE_PROTOCOL]</h3>
-            <p style="font-size:0.9rem;">To join a scheduled strategy session, use the <b>Command Center</b> node above and click <b>'Knock'</b>. I will admit you at our start time.</p>
+            <p style="font-size:0.9rem;">To join a scheduled strategy session, use the <b>Command Center</b> node above and click <b>'Knock'</b>.</p>
             <p style="font-size:0.8rem; opacity:0.8; margin-top:20px;">
                 <b>Email:</b> mar@marec.site<br>
                 <b>Phone:</b> (702) 201-4905<br>
@@ -214,7 +237,7 @@
             <input type="text" name="name" placeholder="Full Name / Company" required>
             <input type="email" name="email" placeholder="Professional Email" required>
             <textarea name="message" rows="3" placeholder="Phase 2 Remediation or Phase 4 Decision Engine?" required></textarea>
-            <button type="submit" class="btn btn-cta">START_THE_ROADMAP</button>
+            <button type="submit" class="btn btn-cta" style="width: 100%;">START_THE_ROADMAP</button>
         </form>
     </div>
 </div>
@@ -224,7 +247,6 @@
 </footer>
 
 <script>
-    // Typewriter Effect
     const typeText = "Strategic Data Architect | Decision Engine Expert";
     let typeIndex = 0;
     function typeWriter() {
@@ -236,7 +258,6 @@
         }
     }
 
-    // Scroll Reveal Effect
     function reveal() {
         document.querySelectorAll(".reveal").forEach(el => {
             if (el.getBoundingClientRect().top < window.innerHeight - 50) el.classList.add("active");
@@ -246,7 +267,7 @@
     window.addEventListener('DOMContentLoaded', () => {
         typeWriter();
         window.addEventListener("scroll", reveal);
-        reveal(); // Initial check
+        reveal();
     });
 </script>
 
