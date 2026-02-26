@@ -16,7 +16,7 @@
     <style>
         :root {
             --bg-dark: #0d1117; 
-            --bg-card: rgba(22, 27, 34, 0.3); 
+            --bg-card: rgba(22, 27, 34, 0.4); 
             --accent-cyan: #58a6ff;    
             --accent-green: #3fb950; 
             --accent-gold: #f2c811; 
@@ -40,7 +40,7 @@
             margin: 0; 
             background-color: var(--bg-dark); 
             background-image: 
-                linear-gradient(rgba(13, 17, 23, 0.1), rgba(13, 17, 23, 0.2)),
+                linear-gradient(rgba(13, 17, 23, 0.8), rgba(13, 17, 23, 0.8)),
                 url('https://i.ibb.co/ZzCVqzH9/Gemini-Generated-Image-bn1v5kbn1v5kbn1v.png');
             background-attachment: fixed;
             background-size: cover;
@@ -80,59 +80,39 @@
         
         .video-wrapper { 
             position: relative; 
-            padding-bottom: 56.25%; 
+            aspect-ratio: 16/9;
             border: 1px solid var(--border); 
             border-radius: 12px; 
             overflow: hidden; 
-            background: transparent; 
+            background: #000; 
             box-shadow: 0 0 20px rgba(88, 166, 255, 0.2); 
             transition: var(--transition);
         }
-        .video-wrapper:hover {
-            box-shadow: 0 0 40px rgba(88, 166, 255, 0.4); 
-            transform: scale(1.01);
-        }
-        .video-wrapper iframe { 
-            position: absolute; 
-            top: 0; left: 0; 
-            width: 100%; height: 100%; 
-            border: none; 
-            opacity: 0.8; 
-            transition: var(--transition);
-        }
-        .video-wrapper:hover iframe { opacity: 1; }
         
         .meeting-container { 
-            background: rgba(255, 255, 255, 0.01); 
-            border: 1px solid rgba(255, 255, 255, 0.1); 
+            background: rgba(0, 0, 0, 0.3); 
+            border: 1px solid var(--border); 
             border-radius: 12px; 
             overflow: hidden; 
             display: flex; 
             flex-direction: column; 
             transition: var(--transition);
-            min-height: 400px;
+            aspect-ratio: 16/9; /* Forces Jitsi to match video size and fit perfectly */
             backdrop-filter: blur(30px); 
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
-        }
-        .meeting-container:hover {
-            box-shadow: 0 0 30px rgba(88, 166, 255, 0.15);
-            background: rgba(255, 255, 255, 0.04);
-            border-color: rgba(88, 166, 255, 0.4);
         }
 
-        #jaas-container { flex-grow: 1; width: 100%; height: 100%; background: transparent; }
+        #jaas-container { flex-grow: 1; width: 100%; height: 100%; }
 
         .meeting-header { 
-            padding: 12px 20px; 
-            background: rgba(0, 0, 0, 0.1); 
+            padding: 10px 15px; 
+            background: rgba(0, 0, 0, 0.4); 
             border-bottom: 1px solid var(--border); 
             font-family: 'Fira Code'; 
-            font-size: 0.7rem; 
+            font-size: 0.65rem; 
             display: flex; 
             justify-content: space-between; 
             align-items: center; 
             color: #fff;
-            text-shadow: 0 1px 8px rgba(0,0,0,1), 0 0 2px rgba(0,0,0,1); 
         }
         .status-dot { height: 8px; width: 8px; background: var(--accent-green); border-radius: 50%; display: inline-block; margin-right: 5px; animation: pulse 2s infinite; }
         @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
@@ -158,18 +138,14 @@
             transition: var(--transition);
             background: rgba(88, 166, 255, 0.05);
         }
-        .contact-link-btn:hover {
-            background: rgba(88, 166, 255, 0.15);
-            border-color: var(--accent-cyan);
-        }
 
         .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s ease-out; }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
         @media (max-width: 850px) { 
             .engagement-zone, #contact { grid-template-columns: 1fr; text-align: center; } 
+            .meeting-container, .video-wrapper { aspect-ratio: auto; min-height: 350px; }
             header { padding-top: 40px; } 
-            .meeting-header { justify-content: center; gap: 10px; }
         }
     </style>
 </head>
@@ -195,8 +171,8 @@
 
     <section class="section-card pitch-block reveal">
         <span class="pitch-tag">[THE_PARTNERSHIP]</span>
-        <h2 style="color: #fff; font-family: 'Fira Code'; margin-top: 0;">Statistical Rigor. <span style="color: var(--accent-cyan);">Business Logic.</span></h2>
-        <p>As a solo contractor, I don't just hand over charts. I build <b>Decision Engines</b>. I bridge the gap between high-level MBA strategy and granular engineering, utilizing <b>Python</b> for scalable automation and <b>R</b> for deep statistical diagnostic modeling.</p>
+        <h2 style="color: #fff; font-family: 'Fira Code'; margin-top: 0;">Think of me as your <span style="color: var(--accent-cyan);">On-Call Data Partner.</span></h2>
+        <p>You don't need a massive agency or a "black box" solution; you need a partner who understands both your P&L and your Python scripts. I work directly with SMB owners to turn messy spreadsheets into <b>automated decision engines</b>. No fluff, no jargon—just clean code, MBA-level strategy, and data that finally makes sense for your bottom line.</p>
     </section>
 
     <h2 class="section-title">The Data Maturity Roadmap</h2>
@@ -269,6 +245,7 @@
         <div class="video-wrapper">
             <iframe 
                 src="https://www.youtube.com/embed/qHwgrgWFl98?autoplay=1&mute=1&loop=1&playlist=qHwgrgWFl98&controls=0&modestbranding=1" 
+                style="position:absolute; top:0; left:0; width:100%; height:100%; border:none;"
                 allow="autoplay; encrypted-media" 
                 allowfullscreen>
             </iframe>
@@ -279,8 +256,8 @@
                 <span style="color: var(--accent-green);"><span class="status-dot"></span> ENCRYPTED_LINK_ACTIVE</span>
             </div>
             <div id="jaas-container"></div>
-            <div style="padding: 10px; background: rgba(0, 0, 0, 0.2); border-top: 1px solid var(--border); font-size: 0.7rem; text-align: center; font-family: 'Fira Code'; color: #fff; text-shadow: 0 1px 3px #000;">
-                <span style="color: var(--accent-cyan);">[SYSTEM_NOTE]:</span> Powered by JaaS. No software download required.
+            <div style="padding: 10px; background: rgba(0, 0, 0, 0.4); border-top: 1px solid var(--border); font-size: 0.7rem; text-align: center; font-family: 'Fira Code'; color: #fff;">
+                <span style="color: var(--accent-cyan);">[SYSTEM_NOTE]:</span> No software download required.
             </div>
         </div>
     </div>
@@ -335,7 +312,6 @@
     function initJitsi() {
         if (window.JitsiMeetExternalAPI) {
             const api = new JitsiMeetExternalAPI("8x8.vc", {
-                // Using your specific AppID and generating a room name
                 roomName: "vpaas-magic-cookie-0df9147ea04144c194c704c4538286ea/StrategicConsultationRoom",
                 parentNode: document.querySelector('#jaas-container'),
                 width: '100%',
@@ -348,19 +324,10 @@
                     BRAND_WATERMARK_LINK: '',
                     SHOW_JITSI_WATERMARK: false,
                     HIDE_DEEP_LINKING_LOGO: true,
-                    DEFAULT_BACKGROUND: 'transparent',
-                    DISABLE_VIDEO_BACKGROUND: true
-                }
-            });
-
-            api.addEventListener('videoConferenceJoined', () => {
-                const iframe = api.getIFrame();
-                if (iframe) {
-                    iframe.style.background = "transparent";
+                    DEFAULT_BACKGROUND: '#0d1117'
                 }
             });
         } else {
-            // Retry if API isn't loaded yet
             setTimeout(initJitsi, 500);
         }
     }
