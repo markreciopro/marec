@@ -76,36 +76,35 @@
         th { background: rgba(0,0,0,0.2); color: var(--accent-cyan); font-family: 'Fira Code'; font-size: 0.7rem; text-transform: uppercase; }
         .highlight-col { background: rgba(88, 166, 255, 0.08); font-weight: bold; color: #fff; }
 
-        .engagement-zone { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-bottom: 60px; }
+        .engagement-zone { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-bottom: 60px; align-items: stretch; }
         
-        .video-wrapper { 
+        .video-wrapper, .meeting-container { 
             position: relative; 
-            aspect-ratio: 16/9;
+            height: 480px; 
             border: 1px solid var(--border); 
             border-radius: 12px; 
             overflow: hidden; 
             background: #000; 
-            box-shadow: 0 0 20px rgba(88, 166, 255, 0.2); 
             transition: var(--transition);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .video-wrapper:hover, .meeting-container:hover {
+            border-color: rgba(88, 166, 255, 0.4);
         }
         
         .meeting-container { 
-            background: rgba(0, 0, 0, 0.3); 
-            border: 1px solid var(--border); 
-            border-radius: 12px; 
-            overflow: hidden; 
             display: flex; 
             flex-direction: column; 
-            transition: var(--transition);
-            aspect-ratio: 16/9; /* Forces Jitsi to match video size and fit perfectly */
-            backdrop-filter: blur(30px); 
+            background: rgba(13, 17, 23, 0.8);
+            backdrop-filter: blur(20px); 
         }
 
-        #jaas-container { flex-grow: 1; width: 100%; height: 100%; }
+        #jaas-container { flex-grow: 1; width: 100%; height: 100%; background: #0d1117; }
 
         .meeting-header { 
-            padding: 10px 15px; 
-            background: rgba(0, 0, 0, 0.4); 
+            padding: 12px 15px; 
+            background: rgba(0, 0, 0, 0.5); 
             border-bottom: 1px solid var(--border); 
             font-family: 'Fira Code'; 
             font-size: 0.65rem; 
@@ -144,7 +143,7 @@
 
         @media (max-width: 850px) { 
             .engagement-zone, #contact { grid-template-columns: 1fr; text-align: center; } 
-            .meeting-container, .video-wrapper { aspect-ratio: auto; min-height: 350px; }
+            .meeting-container, .video-wrapper { height: 400px; }
             header { padding-top: 40px; } 
         }
     </style>
@@ -319,6 +318,8 @@
                 configOverwrite: {
                     disableDeepLinking: true,
                     setPrejoinPageWebcamVisibility: true,
+                    backgroundColor: '#0d1117',
+                    defaultBackground: '#0d1117',
                 },
                 interfaceConfigOverwrite: {
                     BRAND_WATERMARK_LINK: '',
