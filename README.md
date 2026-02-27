@@ -1,20 +1,42 @@
-# Project: Automated Data Pipeline & ETL for SMBs | Marec Insights
+# Mark Recio, MBA | Strategic Data Architect
 
-**Case Study:** Strategic Data Remediation for [Industry]
+> **Transforming messy data into mission-critical intelligence.**
 
-This project demonstrates a full-scale **Automated Decision Engine** built by **Mark Anthony Recio**. It addresses the common SMB challenge of data silos and manual reporting.
+Building data ecosystems for small-to-midsized businesses (SMBs) and nonprofits that turn "information overload" into a competitive advantage. I bridge the gap between high-level MBA strategy and granular Python/Power BI execution.
 
-### 💰 ROI & Business Value
-* **Efficiency:** Automated 15+ hours of manual data consolidation per week.
-* **Visibility:** Real-time **Power BI Decision Suite** for 24/7 executive oversight.
-* **Scalability:** Built using **Python and SQL** to grow without increasing licensing costs.
-
-### 🧩 System Architecture
-![Marec Insights ETL Diagram](ETL.ELT.png)
-
-1. **Extraction:** Secure API connections to CRM and ERP data.
-2. **Transformation:** Data normalization using **Pandas (Python)** and **R**.
-3. **Visualization:** Interactive dashboards hosted on **marec.site**.
+[🌐 Visit marec.site](https://marec.site) | [📊 Data Portfolio](https://markreciopro.github.io/Portfolio/) | [💼 LinkedIn](https://www.linkedin.com/in/marecio/)
 
 ---
-*For the full strategic roadmap, visit [marec.site](https://marec.site).*
+
+### 🛠️ The Intelligence Stack
+I specialize in deploying lean, high-impact data pipelines and visualization suites:
+
+* **Languages:** Python (Pandas, NumPy, Scikit-learn), R (Tidyverse, Shiny), SQL.
+* **BI & Visualization:** Power BI (DAX, Power Query), Tableau, Custom Dashboards.
+* **Strategy:** MBA-led ROI analysis, KPI Framework Design, Data Audits.
+* **Automation:** ETL Pipelines, API Integrations, Predictive Forecasting.
+
+---
+
+### 🚀 Strategic Maturity Roadmap
+I partner with organizations across four distinct stages of growth:
+
+1.  **Discovery (Intelligence Audit):** Breaking down silos and identifying logic gaps.
+2.  **Visualization (Insight Dashboards):** Converting raw data into a unified "Decision-Ready" suite.
+3.  **Foresight (Predictive Analytics):** Using ML to forecast revenue, demand, and mission-impact.
+4.  **Automation (Intelligence Engines):** Building custom systems that automate complex business decisions.
+
+---
+
+### 🎯 Mission Focus
+While most agencies focus on big-budget enterprise projects, I am dedicated to:
+* **SMBs:** Providing the "Big Data" advantages of a large corporation without the overhead.
+* **Nonprofits:** Scaling impact through data-driven storytelling and resource optimization.
+
+---
+
+### 📬 Connect Node
+* **Location:** Las Vegas, NV (Available for US-wide remote partnership)
+* **Email:** [mar@marec.site](mailto:mar@marec.site)
+* **Phone:** (702) 201-4905
+* **GitHub:** [markreciopro](https://github.com/markreciopro)
