@@ -128,19 +128,20 @@
         th { background: rgba(0,0,0,0.2); color: var(--accent-cyan); font-family: 'Fira Code'; font-size: 0.7rem; text-transform: uppercase; }
         .highlight-col { background: rgba(88, 166, 255, 0.08); font-weight: bold; color: #fff; }
 
-        /* Presentation Styling */
-        .presentation-container {
-            position: relative;
-            width: 100%;
+        /* Presentation Container */
+        .presentation-wrapper { 
+            position: relative; 
+            width: 100%; 
+            height: 0; 
             padding-top: 56.25%; /* 16:9 Aspect Ratio */
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            overflow: hidden;
-            background: #000;
+            border: 1px solid var(--border); 
+            border-radius: 12px; 
+            overflow: hidden; 
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             margin-bottom: 60px;
+            background: #000;
         }
-        .presentation-container iframe {
+        .presentation-wrapper iframe {
             position: absolute;
             top: 0;
             left: 0;
@@ -176,7 +177,6 @@
             .roadmap-wrapper::before, .roadmap-progress, .roadmap-dot { left: 20px; transform: none; }
             .roadmap-content { width: calc(100% - 50px); margin-left: 50px; }
             .roadmap-step, .roadmap-step:nth-child(odd) { flex-direction: row; }
-            .presentation-container { padding-top: 75%; /* Slightly taller on mobile for easier viewing */ }
         }
     </style>
 </head>
@@ -188,6 +188,7 @@
             <img src="https://raw.githubusercontent.com/markreciopro/marec/main/logo.png" class="pixel-logo" alt="Mark Recio MBA - Strategic Data Consulting Logo">
         </a>
         <div class="social-links">
+            <a href="#presentation" style="color:var(--accent-gold); text-decoration:none; font-family:'Fira Code'; font-size:0.7rem; margin-right:15px;">[VIEW_PRESENTATION]</a>
             <a href="https://markreciopro.github.io/Portfolio/" target="_blank" style="color:var(--accent-cyan); text-decoration:none; font-family:'Fira Code'; font-size:0.7rem;">[DATA_PORTFOLIO]</a>
         </div>
     </nav>
@@ -258,9 +259,37 @@
         </div>
     </div>
 
-    <h2 class="section-title">Strategic BI Methodology</h2>
-    <div class="presentation-container reveal">
-        <iframe loading="lazy" src="https://www.canva.com/design/DAHCeFLjI5I/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen"></iframe>
+    <div class="section-card reveal" style="border: 1px dashed var(--accent-cyan); background: rgba(88, 166, 255, 0.05);" id="philosophy">
+        <span class="pitch-tag">[ENGAGEMENT_PHILOSOPHY]</span>
+        <h3 style="color: #fff; font-family: 'Fira Code'; font-size: 1.2rem; margin-top: 10px;">Flexible <span style="color: var(--accent-cyan);">SMB Solutions</span></h3>
+        <p style="font-size: 0.95rem;">The roadmap above is a blueprint for <b>Small and Midsized Business growth</b>. I remain flexible and curious regarding your unique operational nuances and budget requirements to ensure maximum strategic value.</p>
+    </div>
+
+    <h2 class="section-title">The Strategic Advantage for SMBs</h2>
+    <div class="table-container reveal">
+        <table>
+            <thead>
+                <tr>
+                    <th>Feature</th>
+                    <th>Platform Freelancer</th>
+                    <th>Big Agency</th>
+                    <th class="highlight-col">Mark Recio (Solo Partner)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td><b>Data Strategy</b></td><td>Task-based</td><td>Fragmented</td><td class="highlight-col">MBA-led (Strategic Lead)</td></tr>
+                <tr><td><b>Logic Transparency</b></td><td>Basic Formulas</td><td>Black Box</td><td class="highlight-col">Custom Python/R (Transparent)</td></tr>
+                <tr><td><b>Business Model</b></td><td>Rigid Scope</td><td>Bureaucratic</td><td class="highlight-col">Flexible & Focused</td></tr>
+                <tr><td><b>Pricing</b></td><td>Hourly/Hidden Fees</td><td>High Overhead</td><td class="highlight-col">Fixed-Rate SMB Pricing</td></tr>
+                <tr><td><b>Outcome</b></td><td>A Report</td><td>A Project</td><td class="highlight-col">An Automated Decision Engine</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h2 class="section-title" id="presentation">Strategic Insights Brief</h2>
+    <div class="presentation-wrapper reveal">
+        <iframe loading="lazy" src="https://www.canva.com/design/DAHCeFLjI5I/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen">
+        </iframe>
     </div>
 
     <h2 class="section-title" id="command-center">Live Strategic Command Center</h2>
@@ -287,6 +316,7 @@
         <div>
             <h3 style="color:var(--accent-cyan); font-family: 'Fira Code'; margin-top: 0;">[INITIATE_PROTOCOL]</h3>
             <div style="margin: 20px 0;">
+                <a href="#presentation" class="contact-link-btn">> VIEW_PRESENTATION</a>
                 <a href="https://markreciopro.github.io/Portfolio/" target="_blank" class="contact-link-btn">> VIEW_DATA_PORTFOLIO</a>
                 <a href="https://www.linkedin.com/in/marecio/" target="_blank" class="contact-link-btn">> LINKEDIN_NODE</a>
             </div>
@@ -335,16 +365,21 @@
                 activeSteps = index + 1;
             }
         });
-        if (roadmapLine) roadmapLine.style.height = (activeSteps / roadmapSteps.length) * 100 + "%";
+        if(roadmapLine) {
+            roadmapLine.style.height = (activeSteps / roadmapSteps.length) * 100 + "%";
+        }
     }
 
     function initJitsi() {
         const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
         if (isMobile) {
-            document.getElementById('mobile-cta').style.display = 'block';
-            document.getElementById('desktop-loading').style.display = 'none';
+            const mobileCta = document.getElementById('mobile-cta');
+            const desktopLoading = document.getElementById('desktop-loading');
+            if(mobileCta) mobileCta.style.display = 'block';
+            if(desktopLoading) desktopLoading.style.display = 'none';
         } else if (window.JitsiMeetExternalAPI) {
-            document.getElementById('desktop-loading').style.display = 'none';
+            const desktopLoading = document.getElementById('desktop-loading');
+            if(desktopLoading) desktopLoading.style.display = 'none';
             new JitsiMeetExternalAPI("8x8.vc", {
                 roomName: "vpaas-magic-cookie-0df9147ea04144c194c704c4538286ea/StrategicConsultationRoom",
                 parentNode: document.querySelector('#jaas-container'),
