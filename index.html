@@ -272,7 +272,7 @@
                rel="noopener" 
                class="btn btn-cta" 
                style="display: inline-block; min-width: 250px;">
-               OPEN_INSIGHTS_FULLSCREEN
+                OPEN_INSIGHTS_FULLSCREEN
             </a>
             <p style="font-family: 'Fira Code'; font-size: 0.65rem; color: var(--text-main); margin-top: 15px; opacity: 0.6;">
                 MAREC INSIGHT BY MARK RECIO
@@ -366,11 +366,21 @@
         } else if (window.JitsiMeetExternalAPI) {
             const desktopLoading = document.getElementById('desktop-loading');
             if(desktopLoading) desktopLoading.style.display = 'none';
-            new JitsiMeetExternalAPI("8x8.vc", {
+            
+            // Configuration to ensure Camera and Mic are OFF by default
+            const options = {
                 roomName: "vpaas-magic-cookie-0df9147ea04144c194c704c4538286ea/StrategicConsultationRoom",
                 parentNode: document.querySelector('#jaas-container'),
-                width: '100%', height: '100%'
-            });
+                width: '100%', 
+                height: '100%',
+                configOverwrite: {
+                    startWithAudioMuted: true,
+                    startWithVideoMuted: true,
+                    prejoinPageEnabled: false
+                }
+            };
+            
+            new JitsiMeetExternalAPI("8x8.vc", options);
         } else { setTimeout(initJitsi, 500); }
     }
 
