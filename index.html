@@ -63,7 +63,7 @@
             margin: 0; 
             background-color: var(--bg-dark); 
             background-image: 
-                linear-gradient(rgba(13, 17, 23, 0.88), rgba(13, 17, 23, 0.88)),
+                linear-gradient(rgba(13, 17, 23, 0.9), rgba(13, 17, 23, 0.9)),
                 url('https://i.ibb.co/ZzCVqzH9/Gemini-Generated-Image-bn1v5kbn1v5kbn1v.png');
             background-attachment: fixed;
             background-size: cover;
@@ -77,7 +77,7 @@
         .pixel-logo { width: 130px; image-rendering: pixelated; filter: drop-shadow(0 0 5px rgba(88, 166, 255, 0.2)); transition: var(--transition); }
         .pixel-logo:hover { filter: drop-shadow(0 0 15px var(--accent-cyan)); transform: scale(1.05); }
 
-        header { text-align: center; padding: 80px 20px 40px 20px; }
+        header { text-align: center; padding: 100px 20px 60px 20px; }
         h1 { margin: 0; font-size: clamp(2.2rem, 8vw, 3.8rem); font-family: 'Fira Code', monospace; color: #fff; letter-spacing: -2px; }
         .job-title { font-size: 1rem; color: var(--accent-cyan); margin: 15px 0; font-family: 'Fira Code'; text-transform: uppercase; letter-spacing: 3px; min-height: 1.6em;}
         #typewriter::after { content: '_'; animation: blink 1s infinite; }
@@ -113,9 +113,37 @@
 
         .engagement-zone { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-bottom: 60px; align-items: stretch; }
         .video-wrapper, .meeting-container { position: relative; height: 520px; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; background: #000; transition: var(--transition); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        .meeting-container { display: flex; flex-direction: column; background: var(--bg-dark); backdrop-filter: blur(20px); }
-        #jaas-container { flex-grow: 1; width: 100%; height: 100%; background: #0d1117; overflow: hidden; }
-        .meeting-header { padding: 12px 15px; background: rgba(0, 0, 0, 0.5); border-bottom: 1px solid var(--border); font-family: 'Fira Code'; font-size: 0.65rem; display: flex; justify-content: space-between; align-items: center; color: #fff; }
+        .meeting-container { display: flex; flex-direction: column; background: var(--bg-dark); }
+        
+        /* UPDATED CROP & MASK ENGINE */
+        .jitsi-viewport {
+            flex-grow: 1;
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+        
+        /* This layer sits on top of the iframe to specifically block the top-center circle area */
+        .jitsi-mask {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 120px; /* Covers the area where the circle appears */
+            background: #000;
+            z-index: 10;
+            pointer-events: none; /* Allows clicks to pass through to the 'Join' button below */
+        }
+
+        #jaas-container { 
+            width: 100%; 
+            height: 100%; 
+            transform: scale(1.15); 
+            transform-origin: center center;
+        }
+
+        .meeting-header { padding: 12px 15px; background: rgba(0, 0, 0, 0.8); border-bottom: 1px solid var(--border); font-family: 'Fira Code'; font-size: 0.65rem; display: flex; justify-content: space-between; align-items: center; color: #fff; z-index: 20; position: relative; }
         .status-dot { height: 8px; width: 8px; background: var(--accent-green); border-radius: 50%; display: inline-block; margin-right: 5px; animation: pulse 2s infinite; }
 
         #contact { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin: 40px auto 100px auto; padding: 45px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; backdrop-filter: blur(15px); }
@@ -137,6 +165,7 @@
             .roadmap-wrapper::before, .roadmap-progress, .roadmap-dot { left: 20px; transform: none; }
             .roadmap-content { width: calc(100% - 50px); margin-left: 50px; }
             .roadmap-step, .roadmap-step:nth-child(odd) { flex-direction: row; }
+            #jaas-container { transform: scale(1.2); }
         }
     </style>
 </head>
@@ -191,7 +220,7 @@
                 
                 <div style="margin-top: 15px; padding: 12px; border: 1px dashed rgba(88, 166, 255, 0.3); border-radius: 8px; background: rgba(0,0,0,0.2);">
                     <h4 style="color: #fff; font-family: 'Fira Code'; font-size: 0.8rem; margin: 0 0 5px 0;">CORE_DELIVERABLE: Operational Alpha Dashboard</h4>
-                    <p style="font-size: 0.75rem; margin: 0; opacity: 0.8;">A unified Power BI environment featuring automated ETL pipelines, drill-down financial KPIs, and stakeholder-ready visual reports tailored for SMB agility.</p>
+                    <p style="font-size: 0.75rem; margin: 0; opacity: 0.8;">A unified Power BI environment featuring automated ETL pipelines and stakeholder-ready reports.</p>
                 </div>
 
                 <div class="price-box" style="color: #fff;">$1.8K - $2.5K</div>
@@ -259,13 +288,7 @@
             </iframe>
         </div>
         <div style="text-align: center;">
-            <a href="https://www.canva.com/design/DAHCeFLjI5I/m0-1P1sza8PIG5_szSMYkQ/view?utm_content=DAHCeFLjI5I&utm_campaign=designshare&utm_medium=embeds&utm_source=link" 
-               target="_blank" 
-               rel="noopener" 
-               class="btn btn-cta" 
-               style="display: inline-block; min-width: 250px;">
-                  OPEN_INSIGHTS_FULLSCREEN
-            </a>
+            <a href="https://www.canva.com/design/DAHCeFLjI5I/m0-1P1sza8PIG5_szSMYkQ/view" target="_blank" rel="noopener" class="btn btn-cta" style="display: inline-block; min-width: 250px;">OPEN_INSIGHTS_FULLSCREEN</a>
         </div>
     </div>
 
@@ -274,27 +297,24 @@
         <div class="video-wrapper">
             <iframe src="https://www.youtube.com/embed/qHwgrgWFl98?autoplay=1&mute=1&loop=1&playlist=qHwgrgWFl98&controls=0&modestbranding=1" style="position:absolute; top:0; left:0; width:100%; height:100%; border:none;" allow="autoplay; encrypted-media" title="Data Visualization Showcase"></iframe>
         </div>
+        
         <div class="meeting-container" id="meeting-box">
             <div class="meeting-header">
                 <span>NODE: Strategy-Room</span>
                 <span style="color: var(--accent-green);"><span class="status-dot"></span> GATEWAY_READY</span>
             </div>
-            <div id="jaas-container" style="flex-grow:1; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:30px; position:relative;">
-                <div id="mobile-cta" style="display:none; width: 100%;">
-                    <div style="background: rgba(88, 166, 255, 0.05); padding: 30px; border-radius: 12px; border: 1px solid var(--border);">
-                        <img src="https://jitsi.org/wp-content/uploads/2017/07/jitsi-logo-81.png" alt="Jitsi" style="width:60px; margin-bottom:15px; filter: drop-shadow(0 0 5px var(--accent-cyan));">
-                        
-                        <h4 style="margin: 0 0 10px 0; font-family:'Fira Code'; color:#fff; font-size: 1rem;">MAREC_STRATEGIC_CONSULTING</h4>
-                        <p style="font-family:'Inter'; font-size:0.8rem; margin-bottom:25px; opacity:0.8;">Secure encrypted session. Join directly via browser for the best experience.</p>
-                        
-                        <button onclick="launchMobileMeeting()" class="btn btn-cta" style="width:100%; margin-bottom: 10px;">JOIN_IN_BROWSER</button>
-                        
-                        <p style="font-size: 0.65rem; font-family: 'Fira Code'; opacity: 0.6;">
-                            Prefer the app? <a href="https://apps.apple.com/us/app/jitsi-meet/id1165103905" target="_blank" style="color: var(--accent-cyan);">Download here</a>
-                        </p>
+            
+            <div class="jitsi-viewport">
+                <div class="jitsi-mask"></div>
+                
+                <div id="jaas-container">
+                    <div id="mobile-cta" style="display:none; width: 100%; text-align: center; padding: 40px; background: var(--bg-dark); height: 100%; position: absolute; z-index: 50;">
+                        <img src="https://jitsi.org/wp-content/uploads/2017/07/jitsi-logo-81.png" alt="Jitsi" style="width:60px; margin-bottom:15px;">
+                        <h4 style="font-family:'Fira Code'; color:#fff;">MAREC_CONSULTING_NODE</h4>
+                        <button onclick="launchMobileMeeting()" class="btn btn-cta" style="width:100%;">JOIN_VIA_BROWSER</button>
                     </div>
+                    <div id="desktop-loading" style="display: flex; justify-content: center; align-items: center; height: 100%; color: var(--accent-cyan); font-family: 'Fira Code'; font-size: 0.7rem;">CONNECTING_SECURE_GATEWAY...</div>
                 </div>
-                <div id="desktop-loading" style="font-family:'Fira Code'; font-size:0.7rem; color: var(--accent-cyan);">INITIALIZING_SECURE_NODE...</div>
             </div>
         </div>
     </div>
@@ -305,13 +325,13 @@
             <p style="font-size: 1.15rem; color: #fff; margin-bottom: 15px; line-height: 1.4; font-weight: 700;">
                 Ready to find the <span style="color: var(--accent-cyan);">story</span> in your data?
             </p>
-            <p style="font-size: 0.95rem; opacity: 0.9; margin-bottom: 25px; line-height: 1.6;">
-                Whether you are scaling for <b>profit</b> or driving a <b>nonprofit mission</b>, I’m here to help you find clarity. Let's have a friendly, strategic chat about making your information work <i>for</i> you.
+            <p style="font-size: 0.95rem; opacity: 0.9; margin-bottom: 25px;">
+                Whether you are scaling for <b>profit</b> or driving a <b>nonprofit mission</b>, I’m here to help you find clarity.
             </p>
 
             <div style="margin: 20px 0;">
                 <a href="https://markreciopro.github.io/Portfolio/" target="_blank" class="contact-link-btn" aria-label="View Data Portfolio">> VIEW_DATA_WORK</a>
-                <a href="https://www.linkedin.com/in/marecio/" target="_blank" class="contact-link-btn" aria-label="Connect on LinkedIn">> SAY_HELLO_ON_LINKEDIN</a>
+                <a href="https://www.linkedin.com/in/marecio/" target="_blank" class="contact-link-btn" aria-label="Connect on LinkedIn">> LINKEDIN</a>
             </div>
             <address style="font-style: normal; font-size:0.8rem; opacity:0.8; font-family: 'Fira Code';">
                 <b>Email:</b> mar@marec.site<br>
@@ -320,12 +340,10 @@
             </address>
         </div>
         <form action="https://formspree.io/f/mreaeden" method="POST">
-            <div style="margin-bottom: 15px; font-family: 'Fira Code'; font-size: 0.75rem; color: var(--accent-green); font-weight: bold;">
-                // I'D LOVE TO HEAR FROM YOU:
-            </div>
-            <input type="text" name="name" placeholder="Your Name or Organization" required aria-label="Organization Name">
-            <input type="email" name="email" placeholder="Best Email to Reach You" required aria-label="Professional Email">
-            <textarea name="message" rows="3" placeholder="Tell me about your goals or the data challenges you're facing..." required aria-label="Project Message"></textarea>
+            <div style="margin-bottom: 15px; font-family: 'Fira Code'; font-size: 0.75rem; color: var(--accent-green); font-weight: bold;">// INQUIRY_NODE:</div>
+            <input type="text" name="name" placeholder="Your Name or Organization" required>
+            <input type="email" name="email" placeholder="Best Email to Reach You" required>
+            <textarea name="message" rows="3" placeholder="Tell me about your goals or data challenges..." required></textarea>
             <button type="submit" class="btn btn-cta" style="width: 100%;">START_THE_ROADMAP</button>
         </form>
     </div>
@@ -361,13 +379,10 @@
                 activeSteps = index + 1;
             }
         });
-        if(roadmapLine) {
-            roadmapLine.style.height = (activeSteps / roadmapSteps.length) * 100 + "%";
-        }
+        if(roadmapLine) roadmapLine.style.height = (activeSteps / roadmapSteps.length) * 100 + "%";
     }
 
     function launchMobileMeeting() {
-        // config.disableDeepLinking=true ensures it stays in the browser and doesn't force an app switch
         const roomUrl = "https://8x8.vc/vpaas-magic-cookie-0df9147ea04144c194c704c4538286ea/StrategicConsultationRoom#config.disableDeepLinking=true&interfaceConfig.MOBILE_APP_PROMO=false";
         window.open(roomUrl, '_blank');
     }
@@ -382,7 +397,6 @@
             if(desktopLoading) desktopLoading.style.display = 'none';
         } else if (window.JitsiMeetExternalAPI) {
             if(desktopLoading) desktopLoading.style.display = 'none';
-            
             const options = {
                 roomName: "vpaas-magic-cookie-0df9147ea04144c194c704c4538286ea/StrategicConsultationRoom",
                 parentNode: document.querySelector('#jaas-container'),
@@ -392,14 +406,24 @@
                     startWithAudioMuted: true,
                     startWithVideoMuted: true,
                     prejoinPageEnabled: false,
-                    disableDeepLinking: true
+                    disableDeepLinking: true,
+                    // EXTRA STEP: Inject CSS to hide the local avatar specifically
+                    customStyles: {
+                        'avatar': {
+                            'display': 'none !important'
+                        }
+                    }
                 },
                 interfaceConfigOverwrite: {
-                    TILE_VIEW_MAX_COLUMNS: 2,
-                    MOBILE_APP_PROMO: false
+                    TILE_VIEW_MAX_COLUMNS: 1,
+                    MOBILE_APP_PROMO: false,
+                    SHOW_JITSI_WATERMARK: false,
+                    SHOW_BRAND_WATERMARK: false,
+                    SHOW_PROMOTIONAL_CLOSE_PAGE: false,
+                    DEFAULT_REMOTE_DISPLAY_NAME: 'Consultant',
+                    DEFAULT_LOCAL_DISPLAY_NAME: 'Partner'
                 }
             };
-            
             new JitsiMeetExternalAPI("8x8.vc", options);
         } else { setTimeout(initJitsi, 500); }
     }
